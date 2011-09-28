@@ -7,11 +7,18 @@
   <title>pfpgame</title>
   <meta name="generator" content="Studio 3 http://aptana.com/">
   <meta name="author" content="Neo">
+  <script src="../lib/core/util.js" type="text/jscript"></script>
   <script src="../lib/core/image.js" type="text/javascript"></script>
   <script src="../lib/core/sprite.js" type="text/javascript"></script>
   <script type="text/javascript">
-    var megaman = new Sprite('img/megaman.png', 25, 25);
-    var bg = new pfImage('img/orange_ocean.jpg');
+    var megaman = new Sprite('img/mario.png', {
+      frameWidth: 115,
+      frameHeight: 130,
+      frameOffsetX: 1,
+      frameOffsetY: 2
+    });
+    
+    var bg = new pfImage('img/Forest_blue.jpg');
 
     var frame = 0;
     
@@ -19,8 +26,9 @@
     {     
       var w = document.getElementById('gameWindow');
       var cxt = w.getContext('2d');
-      cxt.putImageData(bg.slice(), 0, 0);
+      cxt.drawImage(bg.slice(), 0, 0);
       
+      megaman.move(0, 350);
       setInterval("animate();", 100);
       //animate();
     }
@@ -29,51 +37,31 @@
     {
       if(frame > 2)
        frame = 0;
-       
-      if((megaman.posCurrent.x + megaman.frameWidth) > bg.width())
+      
+      if(megaman.posCurrent.x + 3 > bg.width())
         megaman.move(-bg.width(), 0);
       else
         megaman.move(3, 0);
       
       megaman.setFrame(frame, 0);
-       
-      var newBGSlice = bg.slice(
-        megaman.posCurrent.x, megaman.posCurrent.y,
-        megaman.frameWidth, megaman.frameHeight
-      );
       
       var oldBGSlice = bg.slice(
         megaman.posPrevious.x, megaman.posPrevious.y,
-        megaman.frameWidth, megaman.frameHeight
+        megaman.frameWidth(), megaman.frameHeight()
       );
             
       var mCurrent = megaman.getCurrentFrame();
       
-      for(var p = 0; p < mCurrent.data.length; p += 4)
-      {
-        if(mCurrent.data[p + 3] == 0)
-        {
-          mCurrent.data[p] = newBGSlice.data[p];
-          mCurrent.data[p + 1] = newBGSlice.data[p + 1];
-          mCurrent.data[p + 2] = newBGSlice.data[p + 2];
-          mCurrent.data[p + 3] = newBGSlice.data[p + 3];
-        }
-      }
-      
       var w = document.getElementById('gameWindow');
       var cxt = w.getContext('2d');
       
-      //megaman.posCurrent.x = megaman.posCurrent.x + 1;
-      
-      cxt.putImageData(oldBGSlice,
+      cxt.drawImage(oldBGSlice,
         megaman.posPrevious.x, megaman.posPrevious.y
       );
       
-      cxt.putImageData(mCurrent, 
+      cxt.drawImage(mCurrent,
         megaman.posCurrent.x, megaman.posCurrent.y
       );
-      
-      //megaman.draw(cxt);
       
       frame = frame + 1;
     }
