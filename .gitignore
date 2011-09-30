@@ -21,3 +21,6 @@ xcuserdata
 config/deploy.rb
 
 Capfile
+
+#Apatan 3 project file
+*.project
