@@ -7,6 +7,10 @@
   <title>pfpgame</title>
   <meta name="generator" content="Studio 3 http://aptana.com/">
   <meta name="author" content="Neo">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+  <meta http-equiv="cache-control" content="no-store">
+  <meta http-equiv="cache-control" content="no-cache">
   <script src="../lib/pfplay.js" type="text/jscript"></script>
   <script type="text/javascript">
     PFPlay.addGameFile('game.js');
@@ -14,7 +18,10 @@
   </script>
 </head>
 <body onload="gameGo();">
-
+  <div id="debug">
+    Time: <span id="time"></span>
+     Frame: <span id="frame"></span>
+  </div>
   <canvas id="gameWindow" width="640" height="480"/>
 
 </body>
