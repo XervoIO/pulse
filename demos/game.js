@@ -1,21 +1,14 @@
-var megaman = new PFPlay.Sprite('img/mario.png', {
-  frameWidth: 115,
-  frameHeight: 130,
-  frameOffsetX: 1,
-  frameOffsetY: 2
-});
+var megaman = new PFPlay.Sprite('img/mario.png');
 
 var bg = new PFPlay.Image('img/Forest_blue.jpg');
 
-var frame = 0;
 var time = 0;
 
 var test = new PFPlay.Animation(
   "test", 
-  new Point(10, 10),
-  new Point(30, 30),
-  [5,3,1,4,9,4,6],
-  200 
+  new Point(125, 125),
+  4,
+  400
 );
 
 function gameGo()
@@ -23,6 +16,18 @@ function gameGo()
   var w = document.getElementById('gameWindow');
   var cxt = w.getContext('2d');
   cxt.drawImage(bg.slice(), 0, 0);
+  
+  megaman.addAnimation(test);
+  megaman.addAnimation({
+    'name': 'a1',
+    'size': new Point(125, 125),
+    'frames': 4,
+    'frameRate': 100,
+    'offset': new Point(0, 2)
+  });
+  
+  megaman.setAnimation('a1');
+  megaman.getAnimation('a1').start();
   
   megaman.move(0, 350);
   
@@ -33,19 +38,18 @@ function gameGo()
 
 function animate()
 {
-  if(frame > 2)
-   frame = 0;
-  
+  megaman.update();
+    
   if(megaman.posCurrent.x + 3 > bg.width())
     megaman.move(-bg.width(), 0);
   else
     megaman.move(3, 0);
   
-  megaman.setFrame(frame, 0);
+  var prevFrame = megaman.getPreviousFrame();
   
   var oldBGSlice = bg.slice(
     megaman.posPrevious.x, megaman.posPrevious.y,
-    megaman.frameWidth(), megaman.frameHeight()
+    prevFrame.width, prevFrame.height
   );
         
   var mCurrent = megaman.getCurrentFrame();
@@ -65,17 +69,4 @@ function animate()
   
   var debugTime = document.getElementById('time');
   debugTime.innerText = time;
-  
-  test.update();
-  
-  if(test.updated == true)
-  {
-    var testFrame = test.getFrame();
-    var debugFrame = document.getElementById('frame');
-    debugFrame.innerText = 
-      testFrame.fx + "|" + testFrame.fy + "|" +
-      testFrame.width + "|" + testFrame.height;
-  }
-  
-  frame = frame + 1;
 }
