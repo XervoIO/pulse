@@ -1,4 +1,4 @@
-var megaman = new PFPlay.Sprite('img/mario.png');
+var megaman = new PFPlay.Sprite('img/mario.png', 'mario');
 
 var bg = new PFPlay.Image('img/Forest_blue.jpg');
 
@@ -22,7 +22,7 @@ function gameGo()
     'name': 'a1',
     'size': new Point(125, 125),
     'frames': 4,
-    'frameRate': 100,
+    'frameRate': 500,
     'offset': new Point(0, 2)
   });
   
@@ -40,10 +40,10 @@ function animate()
 {
   megaman.update();
     
-  if(megaman.posCurrent.x + 3 > bg.width())
-    megaman.move(-bg.width(), 0);
-  else
-    megaman.move(3, 0);
+  // if(megaman.posCurrent.x + 3 > bg.width())
+    // megaman.move(-bg.width(), 0);
+  // else
+    // megaman.move(3, 0);
   
   var prevFrame = megaman.getPreviousFrame();
   
