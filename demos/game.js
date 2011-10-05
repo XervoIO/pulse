@@ -1,69 +1,70 @@
-var megaman = new PFPlay.Sprite('img/mario.png', 'mario');
+var mario = new PFPlay.Sprite('img/mario.png', 'mario');
+var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
 
-var bg = new PFPlay.Image('img/Forest_blue.jpg');
+var world = new PFPlay.Layer(640, 480, 0, 0);
+
+var bg = document.createElement('canvas');
+bg.width = 640;
+bg.height = 480;
+var bgcxt = bg.getContext('2d');
+var bgimg = new Image();
+bgimg.src = 'img/Forest_blue.jpg';
+bgcxt.drawImage(bgimg, 0, 0);
 
 var time = 0;
 
-var test = new PFPlay.Animation(
-  "test", 
-  new Point(125, 125),
-  4,
-  400
+var mAni = new PFPlay.Animation(
+  "ma1", new Point(125, 125), 4, 50
 );
 
 function gameGo()
 {     
-  var w = document.getElementById('gameWindow');
-  var cxt = w.getContext('2d');
-  cxt.drawImage(bg.slice(), 0, 0);
-  
-  megaman.addAnimation(test);
-  megaman.addAnimation({
-    'name': 'a1',
+  world.addObject(mario);
+  world.addObject(luigi);
+    
+  world.getSprite('mario').addAnimation(mAni);
+  world.getSprite('luigi').addAnimation({
+    'name': 'la1',
     'size': new Point(125, 125),
     'frames': 4,
-    'frameRate': 500,
+    'frameRate': 100,
     'offset': new Point(0, 2)
   });
   
-  megaman.setAnimation('a1');
-  megaman.getAnimation('a1').start();
+  world.getSprite('mario').getAnimation('ma1').start();
+  world.getSprite('luigi').getAnimation('la1').start();
   
-  megaman.move(0, 350);
+  world.getSprite('mario').move(0, 200);
+  world.getSprite('mario').zindex = 2;
+  world.getSprite('luigi').move(300, 0);
+  
   
   PFPlay.tick = 50;
-  setInterval("animate();", PFPlay.tick);
+  setInterval("loop();", PFPlay.tick);
   //animate();
 }
 
-function animate()
+function loop()
 {
-  megaman.update();
+  world.getSprite('mario').move(10, 0);
+  world.getSprite('luigi').move(0, 10);
+  
+  if(world.getSprite('mario').posPrevious.x > 640)
+    world.getSprite('mario').move(-630, 0);
     
-  // if(megaman.posCurrent.x + 3 > bg.width())
-    // megaman.move(-bg.width(), 0);
-  // else
-    // megaman.move(3, 0);
+  if(world.getSprite('luigi').posPrevious.y > 480)
+    world.getSprite('luigi').move(0, -470);
+ 
+  world.update();
   
-  var prevFrame = megaman.getPreviousFrame();
+  var gWindow = document.getElementById('gameWindow');
   
-  var oldBGSlice = bg.slice(
-    megaman.posPrevious.x, megaman.posPrevious.y,
-    prevFrame.width, prevFrame.height
-  );
-        
-  var mCurrent = megaman.getCurrentFrame();
+  while (gWindow.hasChildNodes()) {
+    gWindow.removeChild(gWindow.lastChild);
+  }
   
-  var w = document.getElementById('gameWindow');
-  var cxt = w.getContext('2d');
-  
-  cxt.drawImage(oldBGSlice,
-    megaman.posPrevious.x, megaman.posPrevious.y
-  );
-  
-  cxt.drawImage(mCurrent,
-    megaman.posCurrent.x, megaman.posCurrent.y
-  );
+  gWindow.appendChild(bg);
+  gWindow.appendChild(world.getCanvas());
   
   time = time + PFPlay.tick;
   
