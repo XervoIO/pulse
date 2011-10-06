@@ -11,14 +11,14 @@ var bgimg = new Image();
 bgimg.src = 'img/Forest_blue.jpg';
 bgcxt.drawImage(bgimg, 0, 0);
 
-var time = 0;
+var start = new Date().getTime();
 
 var mAni = new PFPlay.Animation(
   "ma1", new Point(125, 125), 4, 50
 );
 
 function gameGo()
-{     
+{
   world.addObject(mario);
   world.addObject(luigi);
     
@@ -66,8 +66,8 @@ function loop()
   gWindow.appendChild(bg);
   gWindow.appendChild(world.getCanvas());
   
-  time = time + PFPlay.tick;
+  PFPlay.masterTime = new Date().getTime() - start;
   
   var debugTime = document.getElementById('time');
-  debugTime.innerText = time;
+  debugTime.innerText = PFPlay.masterTime;
 }
