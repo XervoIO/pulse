@@ -23,13 +23,10 @@ function gameGo()
   world.addObject(luigi);
     
   world.getSprite('mario').addAnimation(mAni);
-  world.getSprite('luigi').addAnimation({
-    'name': 'la1',
-    'size': new Point(125, 125),
-    'frames': 4,
-    'frameRate': 100,
-    'offset': new Point(0, 2)
-  });
+  world.getSprite('luigi').addAnimation(
+    'la1', new Point(125, 125), 4, 100,
+    {'offset': new Point(0, 2) }
+  );
   
   world.getSprite('mario').getAnimation('ma1').start();
   world.getSprite('luigi').getAnimation('la1').start();
