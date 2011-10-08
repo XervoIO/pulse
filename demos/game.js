@@ -49,13 +49,13 @@ function loop()
   world.getSprite('luigi').move(0, 10);
   world.getSprite('cat').move(10, 0);
   
-  if(world.getSprite('mario').posPrevious.x > 640)
+  if(world.getSprite('mario').position.x > 640)
     world.getSprite('mario').move(-630, 0);
     
-  if(world.getSprite('luigi').posPrevious.y > 480)
+  if(world.getSprite('luigi').position.y > 480)
     world.getSprite('luigi').move(0, -470);
   
-  var catPos = world.getSprite('cat').posPrevious.x;
+  var catPos = world.getSprite('cat').position.x;
   
   if(catPos > 640)
     world.getSprite('cat').move(-630, 0);
