@@ -1,5 +1,6 @@
 var mario = new PFPlay.Sprite('img/mario.png', 'mario');
 var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
+var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
 
 var world = new PFPlay.Layer(640, 480, 0, 0);
 
@@ -21,6 +22,7 @@ function gameGo()
 {
   world.addObject(mario);
   world.addObject(luigi);
+  world.addObject(cat);
     
   world.getSprite('mario').addAnimation(mAni);
   world.getSprite('luigi').addAnimation(
@@ -45,12 +47,23 @@ function loop()
 {
   world.getSprite('mario').move(10, 0);
   world.getSprite('luigi').move(0, 10);
+  world.getSprite('cat').move(10, 0);
   
   if(world.getSprite('mario').posPrevious.x > 640)
     world.getSprite('mario').move(-630, 0);
     
   if(world.getSprite('luigi').posPrevious.y > 480)
     world.getSprite('luigi').move(0, -470);
+  
+  var catPos = world.getSprite('cat').posPrevious.x;
+  
+  if(catPos > 640)
+    world.getSprite('cat').move(-630, 0);
+    
+  if((catPos > 100 && catPos < 200) || (catPos > 300 && catPos < 400))
+    world.getSprite('cat').visible = true;
+  else
+    world.getSprite('cat').visible = false;
  
   world.update();
   
