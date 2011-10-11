@@ -15,7 +15,7 @@ bgcxt.drawImage(bgimg, 0, 0);
 var start = new Date().getTime();
 
 var mAni = new PFPlay.Animation(
-  "ma1", new Point(125, 125), 4, 50
+  "ma1", {x:125, y:125}, 4, 50
 );
 
 function gameGo()
@@ -26,8 +26,8 @@ function gameGo()
     
   world.getSprite('mario').addAnimation(mAni);
   world.getSprite('luigi').addAnimation(
-    'la1', new Point(125, 125), 4, 100,
-    {'offset': new Point(0, 2) }
+    'la1', {x:125, y:125}, 4, 100,
+    {'offset': {x:0, y:2}}
   );
   
   world.getSprite('mario').getAnimation('ma1').start();
