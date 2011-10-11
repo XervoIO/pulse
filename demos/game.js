@@ -24,18 +24,18 @@ function gameGo()
   world.addObject(luigi);
   world.addObject(cat);
     
-  world.getSprite('mario').addAnimation(mAni);
-  world.getSprite('luigi').addAnimation(
+  world.getObject('mario').addAnimation(mAni);
+  world.getObject('luigi').addAnimation(
     'la1', {x:125, y:125}, 4, 100,
     {'offset': {x:0, y:2}}
   );
   
-  world.getSprite('mario').getAnimation('ma1').start();
-  world.getSprite('luigi').getAnimation('la1').start();
+  world.getObject('mario').getAnimation('ma1').start();
+  world.getObject('luigi').getAnimation('la1').start();
   
-  world.getSprite('mario').move(0, 200);
-  world.getSprite('mario').zindex = 2;
-  world.getSprite('luigi').move(300, 0);
+  world.getObject('mario').move(0, 200);
+  world.getObject('mario').zindex = 2;
+  world.getObject('luigi').move(300, 0);
   
   
   PFPlay.tick = 50;
@@ -45,25 +45,25 @@ function gameGo()
 
 function loop()
 {
-  world.getSprite('mario').move(10, 0);
-  world.getSprite('luigi').move(0, 10);
-  world.getSprite('cat').move(10, 0);
+  world.getObject('mario').move(10, 0);
+  world.getObject('luigi').move(0, 10);
+  world.getObject('cat').move(10, 0);
   
-  if(world.getSprite('mario').position.x > 640)
-    world.getSprite('mario').move(-630, 0);
+  if(world.getObject('mario').position.x > 640)
+    world.getObject('mario').move(-630, 0);
     
-  if(world.getSprite('luigi').position.y > 480)
-    world.getSprite('luigi').move(0, -470);
+  if(world.getObject('luigi').position.y > 480)
+    world.getObject('luigi').move(0, -470);
   
-  var catPos = world.getSprite('cat').position.x;
+  var catPos = world.getObject('cat').position.x;
   
   if(catPos > 640)
-    world.getSprite('cat').move(-630, 0);
+    world.getObject('cat').move(-630, 0);
     
   if((catPos > 100 && catPos < 200) || (catPos > 300 && catPos < 400))
-    world.getSprite('cat').visible = true;
+    world.getObject('cat').visible = true;
   else
-    world.getSprite('cat').visible = false;
+    world.getObject('cat').visible = false;
  
   world.update();
   
