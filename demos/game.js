@@ -18,8 +18,16 @@ var mAni = new PFPlay.Animation(
   "ma1", {x:125, y:125}, 4, 50
 );
 
+var scene = document.getElementById('sceneCan');
+var sceneCxt = scene.getContext('2d');
+
+window.addEventListener('click', windowClick, false);
+
 function gameGo()
 {
+  mario.bind('click', function() { alert('clicked on mario!'); });
+  mario.bind('click', function() { alert('clicked on mario, round 2!'); });
+  
   world.addObject(mario);
   world.addObject(luigi);
   world.addObject(cat);
@@ -36,7 +44,6 @@ function gameGo()
   world.getObject('mario').move(0, 200);
   world.getObject('mario').zindex = 2;
   world.getObject('luigi').move(300, 0);
-  
   
   PFPlay.tick = 50;
   setInterval("loop();", PFPlay.tick);
@@ -66,18 +73,36 @@ function loop()
     world.getObject('cat').visible = false;
  
   world.update();
-  
-  var gWindow = document.getElementById('gameWindow');
-  
-  while (gWindow.hasChildNodes()) {
-    gWindow.removeChild(gWindow.lastChild);
-  }
-  
-  gWindow.appendChild(bg);
-  gWindow.appendChild(world.getCanvas());
+    
+  //gWindow.appendChild(bg);
+  sceneCxt.clearRect(0, 0, scene.width, scene.height);
+  sceneCxt.drawImage(world.getCanvas(), 0, 0);
   
   PFPlay.masterTime = new Date().getTime() - start;
   
   var debugTime = document.getElementById('time');
   debugTime.innerText = PFPlay.masterTime;
+}
+
+function windowClick(evt)
+{
+  var offX = scene.offsetLeft;
+  var offY = scene.offsetTop;
+  
+  if(scene.offsetParent)
+  {
+    var parent = scene.offsetParent;
+    do {
+        offX += parent.offsetLeft;
+        offY += parent.offsetTop;
+    } while (parent = parent.offsetParent);
+  }
+  
+  var x = evt.clientX - offX;
+  var y = evt.clientY - offY;
+  
+  if(x >= 0 && x < scene.width && y >= 0 && y < scene.height)
+    world.raiseEvent('click', {x: x, y: y});
+  else
+    alert('im over here!');
 }
