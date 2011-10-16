@@ -2,15 +2,13 @@ var mario = new PFPlay.Sprite('img/mario.png', 'mario');
 var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
 var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
 
-var world = new PFPlay.Layer(640, 480, 0, 0);
+var world = new PFPlay.Layer('myLayer', 0, 0, 640, 480);
+world.zindex = 2;
 
-var bg = document.createElement('canvas');
-bg.width = 640;
-bg.height = 480;
-var bgcxt = bg.getContext('2d');
-var bgimg = new Image();
-bgimg.src = 'img/Forest_blue.jpg';
-bgcxt.drawImage(bgimg, 0, 0);
+var bg = new PFPlay.Layer('bg', 0, 0, 640, 480);
+var bgs = new PFPlay.Sprite('img/Forest_blue.jpg', 'bg');
+bg.addObject(bgs);
+bg.zindex = 1;
 
 var start = new Date().getTime();
 
@@ -18,65 +16,64 @@ var mAni = new PFPlay.Animation(
   "ma1", {x:125, y:125}, 4, 50
 );
 
-var scene = document.getElementById('sceneCan');
-var sceneCxt = scene.getContext('2d');
-
 window.addEventListener('click', windowClick, false);
+
+var cybertron =  new PFPlay.Scene('Cybertron');
 
 function gameGo()
 {
   mario.bind('click', function() { alert('clicked on mario!'); });
   mario.bind('click', function() { alert('clicked on mario, round 2!'); });
+  mario.addAnimation(mAni);
+  mario.getAnimation('ma1').start();
+  mario.move(0, 200);
+  mario.zindex = 2;
+  
+  luigi.addAnimation(
+    'la1', {x:125, y:125}, 4, 100,
+    {'offset': {x:0, y:2}}
+  );
+  luigi.getAnimation('la1').start();
+  luigi.move(300, 0);
   
   world.addObject(mario);
   world.addObject(luigi);
   world.addObject(cat);
-    
-  world.getObject('mario').addAnimation(mAni);
-  world.getObject('luigi').addAnimation(
-    'la1', {x:125, y:125}, 4, 100,
-    {'offset': {x:0, y:2}}
-  );
   
-  world.getObject('mario').getAnimation('ma1').start();
-  world.getObject('luigi').getAnimation('la1').start();
+  cybertron.addLayer(world);
+  cybertron.addLayer(bg);
   
-  world.getObject('mario').move(0, 200);
-  world.getObject('mario').zindex = 2;
-  world.getObject('luigi').move(300, 0);
+  document.getElementById('gameWindow').appendChild(cybertron.getScene());
   
   PFPlay.tick = 50;
   setInterval("loop();", PFPlay.tick);
-  //animate();
 }
 
 function loop()
 {
-  world.getObject('mario').move(10, 0);
-  world.getObject('luigi').move(0, 10);
-  world.getObject('cat').move(10, 0);
+  var wLayer = cybertron.getLayer('myLayer');
   
-  if(world.getObject('mario').position.x > 640)
-    world.getObject('mario').move(-630, 0);
+  wLayer.getObject('mario').move(10, 0);
+  wLayer.getObject('luigi').move(0, 10);
+  wLayer.getObject('cat').move(10, 0);
+  
+  if(wLayer.getObject('mario').position.x > 640)
+    wLayer.getObject('mario').move(-630, 0);
     
-  if(world.getObject('luigi').position.y > 480)
-    world.getObject('luigi').move(0, -470);
+  if(wLayer.getObject('luigi').position.y > 480)
+    wLayer.getObject('luigi').move(0, -470);
   
-  var catPos = world.getObject('cat').position.x;
+  var catPos = wLayer.getObject('cat').position.x;
   
   if(catPos > 640)
-    world.getObject('cat').move(-630, 0);
+    wLayer.getObject('cat').move(-630, 0);
     
   if((catPos > 100 && catPos < 200) || (catPos > 300 && catPos < 400))
-    world.getObject('cat').visible = true;
+    wLayer.getObject('cat').visible = true;
   else
-    world.getObject('cat').visible = false;
+    wLayer.getObject('cat').visible = false;
  
-  world.update();
-    
-  //gWindow.appendChild(bg);
-  sceneCxt.clearRect(0, 0, scene.width, scene.height);
-  sceneCxt.drawImage(world.getCanvas(), 0, 0);
+  cybertron.update();
   
   PFPlay.masterTime = new Date().getTime() - start;
   
