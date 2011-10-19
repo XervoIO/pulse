@@ -1,5 +1,3 @@
-PFPlay.gameWindow = document.getElementById('gameWindow');
-
 var mario = new PFPlay.Sprite('img/mario.png', 'mario');
 var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
 var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
@@ -20,7 +18,7 @@ var mAni = new PFPlay.Animation(
 
 var cybertron =  new PFPlay.Scene('Cybertron');
 
-var myEngine = new PFPlay.Engine();
+var myEngine = new PFPlay.Engine('gameWindow');
 
 function loop(sceneManager)
 {
