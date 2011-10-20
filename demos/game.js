@@ -4,6 +4,12 @@ var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
 
 var world = new PFPlay.Layer('myLayer', 0, 0, 640, 480);
 world.zindex = 2;
+world.events.bind('mousemove', 
+  function(evt) 
+  { 
+    var debugFrame = document.getElementById('mousep');
+    debugFrame.innerText = evt.x + ', ' + evt.y;
+});
 
 var bg = new PFPlay.Layer('bg', 0, 0, 640, 480);
 var bgs = new PFPlay.Sprite('img/Forest_blue.jpg', 'bg');
@@ -50,13 +56,13 @@ function loop(sceneManager)
 
 function gameGo()
 {
-  mario.bind('click', function() { alert('clicked on mario!'); });
+  mario.events.bind('click', function() { alert('clicked on mario!'); });
   mario.addAnimation(mAni);
   mario.getAnimation('ma1').start();
   mario.move(0, 200);
   mario.zindex = 2;
   
-  luigi.bind('click', function() { alert('clicked on luigi!'); });
+  luigi.events.bind('click', function() { alert('clicked on luigi!'); });
   luigi.addAnimation(
     'la1', {x:125, y:125}, 4, 100,
     {'offset': {x:0, y:2}}
@@ -64,7 +70,7 @@ function gameGo()
   luigi.getAnimation('la1').start();
   luigi.move(300, 0);
   
-  cat.bind('click', function() { alert('clicked on cat!'); });
+  cat.events.bind('click', function() { alert('clicked on cat!'); });
   
   world.addObject(mario);
   world.addObject(luigi);
