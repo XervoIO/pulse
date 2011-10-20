@@ -16,8 +16,6 @@ var bgs = new PFPlay.Sprite('img/Forest_blue.jpg', 'bg');
 bg.addObject(bgs);
 bg.zindex = 1;
 
-var start = new Date().getTime();
-
 var mAni = new PFPlay.Animation(
   "ma1", {x:125, y:125}, 4, 50
 );
