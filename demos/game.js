@@ -7,8 +7,13 @@ world.zindex = 2;
 world.events.bind('mousemove', 
   function(evt) 
   { 
-    var debugFrame = document.getElementById('mousep');
-    debugFrame.innerText = evt.x + ', ' + evt.y;
+    var debugPos = document.getElementById('mousep');
+    debugPos.innerText = evt.x + ', ' + evt.y;
+});
+
+world.events.bind('keydown', function(evt) {
+  var debugKey = document.getElementById('kdown');
+  debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
 var bg = new PFPlay.Layer('bg', 0, 0, 640, 480);
