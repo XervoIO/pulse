@@ -1,8 +1,22 @@
-var mario = new PFPlay.Sprite('img/mario.png', 'mario');
-var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
-var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
+var mario = new PFPlay.Sprite(
+  {
+    src: 'img/mario.png', 
+    name: 'mario'
+});
 
-var world = new PFPlay.Layer('myLayer');
+var luigi = new PFPlay.Sprite(
+  {
+    src: 'img/luigi.png', 
+    name: 'luigi'
+});
+
+var cat = new PFPlay.Sprite(
+  {
+    src: 'img/cat.jpg', 
+    name: 'cat'
+});
+
+var world = new PFPlay.Layer({name: 'myLayer'});
 world.zindex = 2;
 world.events.bind('mousemove', 
   function(evt) 
@@ -16,18 +30,27 @@ world.events.bind('keydown', function(evt) {
   debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
-var bg = new PFPlay.Layer('bg');
-var bgs = new PFPlay.Sprite('img/Forest_blue.jpg', 'bg');
+var bg = new PFPlay.Layer({name: 'bg'});
+var bgs = new PFPlay.Sprite(
+  {
+    src: 'img/Forest_blue.jpg', 
+    name: 'bg'
+});
+
 bg.addObject(bgs);
 bg.zindex = 1;
 
 var mAni = new PFPlay.Animation(
-  "ma1", {x:125, y:125}, 4, 50
-);
+{
+  name: 'ma1', 
+  size: {x:125, y:125}, 
+  frames: 4, 
+  frameRate: 50
+});
 
-var cybertron =  new PFPlay.Scene('Cybertron');
+var cybertron =  new PFPlay.Scene({name: 'Cybertron'});
 
-var myEngine = new PFPlay.Engine('gameWindow');
+var myEngine = new PFPlay.Engine();
 
 function loop(sceneManager)
 {
@@ -67,9 +90,13 @@ function gameGo()
   
   luigi.events.bind('click', function() { alert('clicked on luigi!'); });
   luigi.addAnimation(
-    'la1', {x:125, y:125}, 4, 100,
-    {'offset': {x:0, y:2}}
-  );
+  {
+    name: 'la1', 
+    size: {x:125, y:125}, 
+    frames: 4, 
+    frameRate: 100,
+    offset: {x:0, y:2}
+  });
   luigi.getAnimation('la1').start();
   luigi.move(300, 0);
   
