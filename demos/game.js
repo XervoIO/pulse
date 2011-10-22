@@ -2,7 +2,7 @@ var mario = new PFPlay.Sprite('img/mario.png', 'mario');
 var luigi = new PFPlay.Sprite('img/luigi.png', 'luigi');
 var cat = new PFPlay.Sprite('img/cat.jpg', 'cat');
 
-var world = new PFPlay.Layer('myLayer', 0, 0, 640, 480);
+var world = new PFPlay.Layer('myLayer');
 world.zindex = 2;
 world.events.bind('mousemove', 
   function(evt) 
@@ -16,7 +16,7 @@ world.events.bind('keydown', function(evt) {
   debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
-var bg = new PFPlay.Layer('bg', 0, 0, 640, 480);
+var bg = new PFPlay.Layer('bg');
 var bgs = new PFPlay.Sprite('img/Forest_blue.jpg', 'bg');
 bg.addObject(bgs);
 bg.zindex = 1;
