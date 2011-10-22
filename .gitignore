@@ -26,3 +26,5 @@ Capfile
 *.project
 
 demos/Isometric/iso.html~
+
+demos/Isometric/game.js~
