@@ -1,5 +1,3 @@
-PFPlay.gameWindow = document.getElementById('gameWindow');
-
 function initGame() {
   
   var rows = 5;
@@ -14,7 +12,7 @@ function initGame() {
   var offsetX = width - (tileWidth * columns) - (tileWidth / 2);
   var offsetY = ((height - (tileHeight * rows)) / 2) + ((tileHeight * rows) / 2) - (tileHeight / 2);
   
-  var engine = new PFPlay.Engine();
+  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow' });
   var scene = new PFPlay.Scene();
   var layer = new PFPlay.Layer({width: 640, height: 480});
   
