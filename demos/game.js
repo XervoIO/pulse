@@ -110,7 +110,7 @@ function gameGo()
   cybertron.addLayer(bg);
   
   myEngine.scenes.add(cybertron);
-  myEngine.scenes.activate('Cybertron');
+  myEngine.scenes.activate(cybertron);
   
   myEngine.go(50, loop);
 }
