@@ -77,7 +77,7 @@ function loop(sceneManager)
     wLayer.getObject('cat').visible = false;
   
   var debugTime = document.getElementById('time');
-  debugTime.innerText = PFPlay.masterTime;
+  debugTime.innerText = myEngine.masterTime;
 }
 
 function gameGo()
