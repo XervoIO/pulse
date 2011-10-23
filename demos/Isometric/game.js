@@ -3,18 +3,17 @@ function initGame() {
   var rows = 25;
   var columns = 25;
   
-  var tileWidth = 20;
-  var tileHeight = 10;
+  var tileWidth = 30;
+  var tileHeight = 15;
   
-  var width = 640;
+  var width = 760;
   var height = 480;
   
-  var offsetX = width - (tileWidth * columns) - (tileWidth / 2);
-  var offsetY = ((height - (tileHeight * rows)) / 2) + ((tileHeight * rows) / 2) - (tileHeight / 2);
-  
-  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow' });
+  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
   var scene = new PFPlay.Scene();
-  var layer = new PFPlay.Layer({width: 640, height: 480});
+  var layer = new PFPlay.Layer({width: 760, height: 480, y: 50});
+  
+  var offsetY = rows * tileHeight;
   
   var tiles = { };
   
@@ -24,8 +23,8 @@ function initGame() {
       
       var tile = new GameTile();
       
-      var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2)) + offsetX;
-      var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + offsetY;
+      var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2));
+      var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + (offsetY / 2);
 
       tile.setWorldCoords(x, y);
       
@@ -61,8 +60,8 @@ function initGame() {
     });
   
   function worldToIso(posX, posY) {
-    dx = posX - offsetX - tileWidth;
-    dy = posY - offsetY + (tileHeight / 2);
+    dx = posX - tileWidth;
+    dy = posY + (tileHeight / 2) - (offsetY / 2);
     isoY = Math.floor((dy + dx / 2) * (2 / 2) / (tileWidth / 2)); 
     isoX = -Math.floor((dy - dx / 2) * (2 / 2) / (tileWidth / 2)) + 1;
     return {x:isoX, y:isoY};
