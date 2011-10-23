@@ -45,7 +45,7 @@ var mAni = new PFPlay.Animation(
   name: 'ma1', 
   size: {x:125, y:125}, 
   frames: 4, 
-  frameRate: 50
+  frameRate: 5
 });
 
 var cybertron =  new PFPlay.Scene({name: 'Cybertron'});
@@ -56,20 +56,20 @@ function loop(sceneManager)
 {
   var wLayer = sceneManager.getScene('Cybertron').getLayer('myLayer');
   
-  wLayer.getObject('mario').move(10, 0);
-  wLayer.getObject('luigi').move(0, 10);
-  wLayer.getObject('cat').move(10, 0);
+  //wLayer.getObject('mario').move(10, 0);
+  //wLayer.getObject('luigi').move(0, 10);
+  //wLayer.getObject('cat').move(10, 0);
   
   if(wLayer.getObject('mario').position.x > 640)
-    wLayer.getObject('mario').move(-630, 0);
+    //wLayer.getObject('mario').move(-630, 0);
     
   if(wLayer.getObject('luigi').position.y > 480)
-    wLayer.getObject('luigi').move(0, -470);
+    //wLayer.getObject('luigi').move(0, -470);
   
   var catPos = wLayer.getObject('cat').position.x;
   
   if(catPos > 640)
-    wLayer.getObject('cat').move(-630, 0);
+    //wLayer.getObject('cat').move(-630, 0);
     
   if((catPos > 100 && catPos < 200) || (catPos > 300 && catPos < 400))
     wLayer.getObject('cat').visible = true;
@@ -94,7 +94,7 @@ function gameGo()
     name: 'la1', 
     size: {x:125, y:125}, 
     frames: 4, 
-    frameRate: 100,
+    frameRate: 5,
     offset: {x:0, y:2}
   });
   luigi.getAnimation('la1').start();
@@ -112,5 +112,5 @@ function gameGo()
   myEngine.scenes.add(cybertron);
   myEngine.scenes.activate(cybertron);
   
-  myEngine.go(50, loop);
+  myEngine.go(100, loop);
 }
