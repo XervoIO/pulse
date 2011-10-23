@@ -1,10 +1,10 @@
 function initGame() {
   
-  var rows = 50;
-  var columns = 50;
+  var rows = 25;
+  var columns = 25;
   
-  var tileWidth = 10;
-  var tileHeight = 5;
+  var tileWidth = 20;
+  var tileHeight = 10;
   
   var width = 640;
   var height = 480;
