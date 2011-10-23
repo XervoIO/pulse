@@ -14,13 +14,11 @@ GameTile = function() {
   }
   
   this.mouseenter = function() {
-    console.log('mouseenter ' + this.gridX + ", " + this.gridY);
     this.overSprite.visible = true;
     this.normalSprite.visible = false;
   }
   
   this.mouseleave = function() {
-    console.log('mouseleave ' + this.gridX + ", " + this.gridY);
     this.overSprite.visible = false;
     this.normalSprite.visible = true;
   }

@@ -11,7 +11,9 @@ function initGame() {
   
   var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
   var scene = new PFPlay.Scene();
-  var layer = new PFPlay.Layer({width: 760, height: 480, y: 50});
+  var layer = new PFPlay.Layer({y: 50});
+  
+  var uiLayer = new PFPlay.Layer({width: 500, height:100, x:130,  y:350});
   
   var offsetY = rows * tileHeight;
   
@@ -39,6 +41,27 @@ function initGame() {
       layer.addObject(tile.overSprite);
     }
   }
+  
+  // Create UI.
+  var creepA = new PFPlay.Sprite({ src: 'creepA.png' });
+  var creepB = new PFPlay.Sprite({ src: 'creepB.png' });
+  var creepC = new PFPlay.Sprite({ src: 'creepC.png' });
+  var creepD = new PFPlay.Sprite({ src: 'creepD.png' });
+  
+  creepA.position = { x: 10, y: 25 };
+  creepB.position = { x: 70, y: 25 };
+  creepC.position = { x: 130, y: 25 };
+  creepD.position = { x: 190, y: 25 };
+  
+  creepA.events.bind('click',
+    function() {
+      console.log('Creep A clicked');
+    });
+  
+  uiLayer.addObject(creepA);
+  uiLayer.addObject(creepB);
+  uiLayer.addObject(creepC);
+  uiLayer.addObject(creepD);
   
   var hoveredTile = null;
   
@@ -69,6 +92,7 @@ function initGame() {
   
   var go = function() {
     scene.addLayer(layer);
+    scene.addLayer(uiLayer);
     engine.scenes.add(scene);
     engine.scenes.activate(scene);
     engine.go(50, loop);
