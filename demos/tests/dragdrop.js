@@ -1,4 +1,4 @@
-var myEngine = new PFPlay.Engine();
+var engine = new PFPlay.Engine();
 var cybertron = new PFPlay.Scene({name: 'Cybertron'});
 
 var world = new PFPlay.Layer({name: 'layer'});
@@ -13,15 +13,24 @@ world.events.bind('keydown', function(evt) {
   debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
-var dragBox = new PFPlay.Sprite({src: '../img/blue_square.png'});
 var dropArea = new PFPlay.Sprite({src: '../img/grid.png'});
+var dragBox = new PFPlay.Sprite({src: '../img/blue_square.png'});
+dragBox.dragDropEnabled = true;
+dragBox.events.bind('dragstart', function(evt) {
+  var console = document.getElementById('console');
+  console.innerText = "Drag Start: " + evt.x + " " + evt.y;
+});
+dragBox.events.bind('dragdrop', function(evt) {
+  var console = document.getElementById('console');
+  console.innerText = "Drag Drop: " + evt.x + " " + evt.y;
+});
 var dragAccept = new PFPlay.Sprite({src: '../img/green_square.png'});
 var dragRevoke = new PFPlay.Sprite({src: '../img/red_square.png'});
 
 function loop(sceneManager)
 { 
   var debugTime = document.getElementById('time');
-  debugTime.innerText = PFPlay.masterTime;
+  debugTime.innerText = engine.masterTime;
 }
 
 function gameGo()
@@ -31,15 +40,15 @@ function gameGo()
   dragAccept.visible = false;
   dragRevoke.visible = false;
 
-  world.addObject(dragBox);
   world.addObject(dropArea);
+  world.addObject(dragBox);
   world.addObject(dragAccept);
   world.addObject(dragRevoke);
   
   cybertron.addLayer(world);
   
-  myEngine.scenes.add(cybertron);
-  myEngine.scenes.activate(cybertron);
+  engine.scenes.add(cybertron);
+  engine.scenes.activate(cybertron);
   
-  myEngine.go(50, loop);
+  engine.go(50, loop);
 }
