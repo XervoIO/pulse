@@ -14,16 +14,31 @@ world.events.bind('keydown', function(evt) {
 });
 
 var dropArea = new PFPlay.Sprite({src: '../img/grid.png'});
+dropArea.dropAcceptEnabled = true;
+dropArea.events.bind('dragenter', function(evt) {
+  var console = document.getElementById('console2');
+  console.innerText = "Drag Enter - " + evt.x + " " + evt.y;
+});
+dropArea.events.bind('dragover', function(evt) {
+  var console = document.getElementById('console2');
+  console.innerText = "Drag Over - " + evt.x + " " + evt.y;
+});
+dropArea.events.bind('dragexit', function(evt) {
+  var console = document.getElementById('console2');
+  console.innerText = "Drag Exit - " + evt.x + " " + evt.y;
+});
+
 var dragBox = new PFPlay.Sprite({src: '../img/blue_square.png'});
 dragBox.dragDropEnabled = true;
 dragBox.events.bind('dragstart', function(evt) {
   var console = document.getElementById('console');
-  console.innerText = "Drag Start: " + evt.x + " " + evt.y;
+  console.innerText = "Drag Start - " + evt.x + " " + evt.y;
 });
 dragBox.events.bind('dragdrop', function(evt) {
   var console = document.getElementById('console');
-  console.innerText = "Drag Drop: " + evt.x + " " + evt.y;
+  console.innerText = "Drag Drop - " + evt.x + " " + evt.y;
 });
+
 var dragAccept = new PFPlay.Sprite({src: '../img/green_square.png'});
 var dragRevoke = new PFPlay.Sprite({src: '../img/red_square.png'});
 
