@@ -55,26 +55,36 @@ var myEngine = new PFPlay.Engine();
 function loop(sceneManager)
 {
   var wLayer = sceneManager.getScene('Cybertron').getLayer('myLayer');
+  var mario = wLayer.getObject('mario');
+  var luigi = wLayer.getObject('luigi');
+  var cat = wLayer.getObject('cat');
   
-  //wLayer.getObject('mario').move(10, 0);
-  //wLayer.getObject('luigi').move(0, 10);
-  //wLayer.getObject('cat').move(10, 0);
+  mario.move(10, 0);
+  luigi.move(0, 10);
+  cat.move(10, 0);
   
-  if(wLayer.getObject('mario').position.x > 640)
-    //wLayer.getObject('mario').move(-630, 0);
+  luigi.scaleX = luigi.scaleX + 0.1;
+  luigi.scaleY = luigi.scaleY - 0.01;
+  
+  if(mario.position.x > 640)
+    mario.move(-630, 0);
     
-  if(wLayer.getObject('luigi').position.y > 480)
-    //wLayer.getObject('luigi').move(0, -470);
+  if(luigi.position.y > 480)
+  {
+    luigi.move(0, -470);
+    luigi.scaleX = 1;
+    luigi.scaleY = 1;
+  }
   
-  var catPos = wLayer.getObject('cat').position.x;
+  var catPos = cat.position.x;
   
   if(catPos > 640)
-    //wLayer.getObject('cat').move(-630, 0);
+    cat.move(-630, 0);
     
   if((catPos > 100 && catPos < 200) || (catPos > 300 && catPos < 400))
-    wLayer.getObject('cat').visible = true;
+    cat.visible = true;
   else
-    wLayer.getObject('cat').visible = false;
+    cat.visible = false;
   
   var debugTime = document.getElementById('time');
   debugTime.innerText = myEngine.masterTime;
