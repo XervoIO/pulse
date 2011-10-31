@@ -85,7 +85,7 @@ function loop(sceneManager)
     cat.visible = true;
   else
     cat.visible = false;
-  
+
   var debugTime = document.getElementById('time');
   debugTime.innerText = myEngine.masterTime;
 }
