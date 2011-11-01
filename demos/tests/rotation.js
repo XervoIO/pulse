@@ -30,21 +30,27 @@ var cybertron = new PFPlay.Scene({name: 'cybertron'});
 var engine = new PFPlay.Engine();
 
 var s = new PFPlay.Sprite({src: seconds});
-s.move(320 - 75, 240 - 75);
+s.move(320, 240);
 world.addObject(s);
 
 var m = new PFPlay.Sprite({src: minutes});
-m.move(320 - 31, 85);
+m.anchor = {x:0.5, y:2.0};
+m.move(320, 240);
 world.addObject(m);
 
 var h = new PFPlay.Sprite({src: hours});
-h.move(320 - 22, 45);
+h.anchor = {x: 0.5, y:5.3};
+h.move(320, 240);
 world.addObject(h);
 
 function loop(sceneManager)
 { 
   var debugTime = document.getElementById('time');
   debugTime.innerText = engine.masterTime;
+
+   s.rotation += (6/10);
+   m.rotation += (6/60);
+   h.rotation += (6/3600);
 }
 
 function gameGo()
@@ -55,5 +61,5 @@ function gameGo()
   engine.scenes.add(cybertron);
   engine.scenes.activate(cybertron);
   
-  engine.go(50, loop);
+  engine.go(16.67, loop);
 }
