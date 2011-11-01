@@ -11,14 +11,14 @@
   <meta http-equiv="Expires" content="-1">
   <meta http-equiv="cache-control" content="no-store">
   <meta http-equiv="cache-control" content="no-cache">
-  <script src="../lib/pfplay.js" type="text/javascript"></script>
-  <link href="demo.css" type="text/css" rel="stylesheet" />
+  <script src="../../lib/pfplay.js" type="text/javascript"></script>
+  <link href="../demo.css" type="text/css" rel="stylesheet" />
   <script type="text/javascript">
-    PFPlay.addGameFile('game.js');
-    PFPlay.init('../lib');
+    PFPlay.addGameFile('rotation.js');
+    PFPlay.init('../../lib');
   </script>
 </head>
-<body onload="gameGo();">
+<body onload="setTimeout(gameGo, 1000)">
   <div id="debug">
     <div>Time: <span id="time"></span></div>
     <div>Relative Mouse Position: <span id="mousep"></span></div>
