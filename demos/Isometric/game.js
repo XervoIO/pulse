@@ -11,7 +11,7 @@ function initGame() {
   
   var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
   var scene = new PFPlay.Scene();
-  var layer = new PFPlay.Layer({y: 50});
+  var layer = new Board({y: 50});
   
   var uiLayer = new PFPlay.Layer({width: 500, height:100, x:130,  y:350});
   
@@ -23,22 +23,14 @@ function initGame() {
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
       
-      var tile = new GameTile();
+      var tile = new PFPlay.Sprite({ src: 'tile.png' });
       
       var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2));
       var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + (offsetY / 2);
 
-      tile.setWorldCoords(x, y);
-      
-      tile.gridX = colIdx;
-      tile.gridY = rowIdx;
-      
-      if(!tiles[rowIdx])
-        tiles[rowIdx] = {};
-      tiles[rowIdx][colIdx] = tile;
-      
-      layer.addObject(tile.normalSprite);
-      layer.addObject(tile.overSprite);
+      tile.move(x, y);
+          
+      layer.addObject(tile);
     }
   }
   
@@ -65,6 +57,7 @@ function initGame() {
   
   var hoveredTile = null;
   
+  /*
   layer.events.bind('mousemove', 
     function(pos) {
       var isoPos = worldToIso(pos.x, pos.y);
@@ -81,6 +74,7 @@ function initGame() {
         }
       }
     });
+    */
   
   function worldToIso(posX, posY) {
     dx = posX - tileWidth;
