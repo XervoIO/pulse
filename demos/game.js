@@ -59,12 +59,12 @@ function loop(sceneManager)
   var luigi = wLayer.getObject('luigi');
   var cat = wLayer.getObject('cat');
   
-  mario.move(10, 0);
-  luigi.move(0, 10);
+  //mario.move(10, 0);
+  //luigi.move(0, 10);
   cat.move(10, 0);
   
-  luigi.scaleX = luigi.scaleX + 0.1;
-  luigi.scaleY = luigi.scaleY - 0.01;
+  //luigi.scaleX = luigi.scaleX + 0.1;
+  //luigi.scaleY = luigi.scaleY - 0.01;
   
   if(mario.position.x > 640)
     mario.move(-630, 0);
@@ -110,6 +110,7 @@ function gameGo()
   luigi.getAnimation('la1').start();
   luigi.move(300, 0);
   
+  cat.alpha = 35;
   cat.events.bind('click', function() { alert('clicked on cat!'); });
   
   world.addObject(mario);
