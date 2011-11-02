@@ -50,9 +50,9 @@ function loop(sceneManager)
 
 function gameGo()
 {
-  dragBox.position = {x: 10, y: 300};
+  dragBox.position = {x: 35, y: 325};
   dragBox.dragMoveEnabled = true;
-  dropArea.position = {x: 200, y: 50};
+  dropArea.position = {x: 400, y: 150};
   dragAccept.visible = false;
   dragRevoke.visible = false;
 
