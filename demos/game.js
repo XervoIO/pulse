@@ -1,28 +1,23 @@
-var mario = new PFPlay.Sprite(
-  {
-    src: 'img/mario.png', 
-    name: 'mario'
+var mario = new PFPlay.Sprite({
+  src: 'img/mario.png', 
+  name: 'mario'
 });
 
-var luigi = new PFPlay.Sprite(
-  {
-    src: 'img/luigi.png', 
-    name: 'luigi'
+var luigi = new PFPlay.Sprite({
+  src: 'img/luigi.png', 
+  name: 'luigi'
 });
 
-var cat = new PFPlay.Sprite(
-  {
-    src: 'img/cat.jpg', 
-    name: 'cat'
+var cat = new PFPlay.Sprite({
+  src: 'img/cat.jpg', 
+  name: 'cat'
 });
 
 var world = new PFPlay.Layer({name: 'myLayer'});
 world.zindex = 2;
-world.events.bind('mousemove', 
-  function(evt) 
-  { 
-    var debugPos = document.getElementById('mousep');
-    debugPos.innerText = evt.world.x + ', ' + evt.world.y;
+world.events.bind('mousemove', function(evt) { 
+  var debugPos = document.getElementById('mousep');
+  debugPos.innerText = evt.world.x + ', ' + evt.world.y;
 });
 
 world.events.bind('keydown', function(evt) {
@@ -31,17 +26,15 @@ world.events.bind('keydown', function(evt) {
 });
 
 var bg = new PFPlay.Layer({name: 'bg'});
-var bgs = new PFPlay.Sprite(
-  {
-    src: 'img/Forest_blue.jpg', 
-    name: 'bg'
+var bgs = new PFPlay.Sprite({
+  src: 'img/Forest_blue.jpg', 
+  name: 'bg'
 });
 
 bg.addObject(bgs);
 bg.zindex = 1;
 
-var mAni = new PFPlay.Animation(
-{
+var mAni = new PFPlay.Animation({
   name: 'ma1', 
   size: {x:125, y:125}, 
   frames: 4, 
@@ -59,19 +52,19 @@ function loop(sceneManager)
   var luigi = wLayer.getObject('luigi');
   var cat = wLayer.getObject('cat');
   
-  //mario.move(10, 0);
-  //luigi.move(0, 10);
+  mario.move(10, 0);
+  luigi.move(0, 10);
   cat.move(10, 0);
   
-  //luigi.scaleX = luigi.scaleX + 0.1;
-  //luigi.scaleY = luigi.scaleY - 0.01;
+  luigi.scaleX = luigi.scaleX + 0.1;
+  luigi.scaleY = luigi.scaleY - 0.01;
   
   if(mario.position.x > 640)
     mario.move(-630, 0);
     
   if(luigi.position.y > 480)
   {
-    luigi.move(0, -470);
+    luigi.move(0, -430);
     luigi.scaleX = 1;
     luigi.scaleY = 1;
   }
@@ -95,12 +88,11 @@ function gameGo()
   mario.events.bind('click', function() { alert('clicked on mario!'); });
   mario.addAnimation(mAni);
   mario.getAnimation('ma1').start();
-  mario.move(0, 200);
+  mario.move(100, 200);
   mario.zindex = 2;
   
   luigi.events.bind('click', function() { alert('clicked on luigi!'); });
-  luigi.addAnimation(
-  {
+  luigi.addAnimation({
     name: 'la1', 
     size: {x:125, y:125}, 
     frames: 4, 
@@ -108,9 +100,10 @@ function gameGo()
     offset: {x:0, y:2}
   });
   luigi.getAnimation('la1').start();
-  luigi.move(300, 0);
+  luigi.move(300, 60);
   
   cat.alpha = 35;
+  cat.move(25, 25);
   cat.events.bind('click', function() { alert('clicked on cat!'); });
   
   world.addObject(mario);

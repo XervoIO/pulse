@@ -8,7 +8,7 @@ world.events.bind('mousemove',
   function(evt) 
   { 
     var debugPos = document.getElementById('mousep');
-    debugPos.innerText = evt.x + ', ' + evt.y;
+    debugPos.innerText = evt.world.x + ', ' + evt.world.y;
 });
 
 world.events.bind('keydown', function(evt) {
