@@ -39,6 +39,7 @@ function initGame() {
   var creepB = new PFPlay.Sprite({ src: 'creepB.png' });
   var creepC = new PFPlay.Sprite({ src: 'creepC.png' });
   var creepD = new PFPlay.Sprite({ src: 'creepD.png' });
+  creepD.alpha = 50;
   
   creepA.position = { x: 10, y: 25 };
   creepB.position = { x: 70, y: 25 };
