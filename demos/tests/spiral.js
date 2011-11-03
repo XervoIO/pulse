@@ -59,5 +59,5 @@ function gameGo()
   engine.scenes.add(cybertron);
   engine.scenes.activate(cybertron);
   
-  engine.go(16.67, loop);
+  engine.go(33, loop);
 }

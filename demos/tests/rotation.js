@@ -48,9 +48,9 @@ function loop(sceneManager)
   var debugTime = document.getElementById('time');
   debugTime.innerText = engine.masterTime;
 
-   s.rotation += (6/10);
-   m.rotation += (6/60);
-   h.rotation += (6/3600);
+   s.rotation += (36/20);
+   m.rotation += (6/20);
+   h.rotation += (.1/20);
 }
 
 function gameGo()
@@ -61,5 +61,5 @@ function gameGo()
   engine.scenes.add(cybertron);
   engine.scenes.activate(cybertron);
   
-  engine.go(16.67, loop);
+  engine.go(50, loop);
 }
