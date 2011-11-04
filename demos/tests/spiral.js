@@ -46,7 +46,7 @@ function gameGo()
   {
     p = stars[Math.floor(Math.random() * 5)];
     s = new PFPlay.Sprite({src: p});
-    y = i / max * ye / p.height() + 1.0;
+    y = i / max * ye / p.height() + 1.2;
     s.rotation = i * 18;
     s.anchor = {x: Math.random(), y: y};
     s.position = {x: 320, y: 240};
