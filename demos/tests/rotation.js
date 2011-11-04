@@ -21,6 +21,7 @@ var bgs = new PFPlay.Sprite({
   src: '../img/yellow_bg.jpg', 
   name: 'bg'
 });
+bgs.position = {x: 320, y: 240};
 
 bg.addObject(bgs);
 bg.zindex = 1;
@@ -48,9 +49,9 @@ function loop(sceneManager)
   var debugTime = document.getElementById('time');
   debugTime.innerText = engine.masterTime;
 
-   s.rotation += (36/20);
-   m.rotation += (6/20);
-   h.rotation += (.1/20);
+  s.rotation += (36/20);
+  m.rotation += (6/20);
+  h.rotation += (.1/20);
 }
 
 function gameGo()

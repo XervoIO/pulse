@@ -13,6 +13,7 @@ var bgs = new PFPlay.Sprite({
   src: '../img/gray_bg.jpg', 
   name: 'bg'
 });
+bgs.position = {x: 320, y: 240};
 
 bg.addObject(bgs);
 bg.zindex = 1;

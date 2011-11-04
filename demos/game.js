@@ -30,6 +30,7 @@ var bgs = new PFPlay.Sprite({
   src: 'img/Forest_blue.jpg', 
   name: 'bg'
 });
+bgs.position = {x: 320, y: 240};
 
 bg.addObject(bgs);
 bg.zindex = 1;
