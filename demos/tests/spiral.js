@@ -5,10 +5,10 @@ stars.push(new PFPlay.Image({src:'../img/star_3.png'}));
 stars.push(new PFPlay.Image({src:'../img/star_4.png'}));
 stars.push(new PFPlay.Image({src:'../img/star_5.png'}));
 
-var world = new PFPlay.Layer({name: 'layer'});
+var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
 world.zindex = 2;
 
-var bg = new PFPlay.Layer({name: 'bg'});
+var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
 var bgs = new PFPlay.Sprite({
   src: '../img/gray_bg.jpg', 
   name: 'bg'

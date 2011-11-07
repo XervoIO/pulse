@@ -2,7 +2,7 @@ var seconds = new PFPlay.Image({src:'../img/hex_rounded.png'});
 var minutes = new PFPlay.Image({src:'../img/diamond.png'});
 var hours = new PFPlay.Image({src:'../img/triangle_rounded.png'});
 
-var world = new PFPlay.Layer({name: 'layer'});
+var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
 world.zindex = 2;
 world.events.bind('mousemove', 
   function(evt) 
@@ -16,7 +16,7 @@ world.events.bind('keydown', function(evt) {
   debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
-var bg = new PFPlay.Layer({name: 'bg'});
+var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
 var bgs = new PFPlay.Sprite({
   src: '../img/yellow_bg.jpg', 
   name: 'bg'

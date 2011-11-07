@@ -23,7 +23,7 @@ var cat = new PFPlay.Sprite({
   name: 'cat'
 });
 
-var world = new PFPlay.Layer({name: 'myLayer'});
+var world = new PFPlay.Layer({name: 'myLayer', x : 320, y : 240});
 world.zindex = 2;
 world.events.bind('mousemove', function(evt) { 
   var debugPos = document.getElementById('mousep');
@@ -35,7 +35,7 @@ world.events.bind('keydown', function(evt) {
   debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
 });
 
-var bg = new PFPlay.Layer({name: 'bg'});
+var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
 var bgs = new PFPlay.Sprite({
   src: 'img/Forest_blue.jpg', 
   name: 'bg'
