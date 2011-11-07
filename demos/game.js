@@ -6,6 +6,8 @@ var mario = new PFPlay.Sprite({
     height : 125
   }
 });
+mario.scale = {x : 1.5, y : 0.75};
+mario.rotation = 45;
 
 var luigi = new PFPlay.Sprite({
   src: 'img/luigi.png', 
