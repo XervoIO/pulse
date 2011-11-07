@@ -1,11 +1,19 @@
 var mario = new PFPlay.Sprite({
-  src: 'img/mario.png', 
-  name: 'mario'
+  src : 'img/mario.png', 
+  name : 'mario',
+  size : {
+    width : 125,
+    height : 125
+  }
 });
 
 var luigi = new PFPlay.Sprite({
   src: 'img/luigi.png', 
-  name: 'luigi'
+  name: 'luigi',
+  size : {
+    width : 125,
+    height : 125
+  }
 });
 
 var cat = new PFPlay.Sprite({
@@ -35,9 +43,9 @@ bgs.position = {x: 320, y: 240};
 bg.addObject(bgs);
 bg.zindex = 1;
 
-var mAni = new PFPlay.Animation({
+var mAni = new PFPlay.AnimateAction({
   name: 'ma1', 
-  size: {x:125, y:125}, 
+  size: {width:125, height:125}, 
   frames: 4, 
   frameRate: 5
 });
@@ -87,20 +95,20 @@ function loop(sceneManager)
 function gameGo()
 {
   mario.events.bind('click', function() { alert('clicked on mario!'); });
-  mario.addAnimation(mAni);
-  mario.getAnimation('ma1').start();
+  mario.addAction(mAni);
+  mario.runAction('ma1');
   mario.move(100, 200);
   mario.zindex = 2;
   
   luigi.events.bind('click', function() { alert('clicked on luigi!'); });
-  luigi.addAnimation({
+  luigi.addAction({
     name: 'la1', 
-    size: {x:125, y:125}, 
+    size: {width:125, height:125}, 
     frames: 4, 
     frameRate: 5,
     offset: {x:0, y:2}
   });
-  luigi.getAnimation('la1').start();
+  luigi.getAction('la1').start();
   luigi.move(300, 60);
   
   cat.alpha = 35;
