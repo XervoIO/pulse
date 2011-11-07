@@ -1,7 +1,7 @@
 var engine = new PFPlay.Engine();
 var cybertron = new PFPlay.Scene({name: 'Cybertron'});
 
-var world = new PFPlay.Layer({name: 'layer'});
+var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
 world.zindex = 2;
 world.events.bind('mousemove', function(evt) { 
   var debugPos = document.getElementById('mousep');
