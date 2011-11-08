@@ -17,7 +17,7 @@ var bgs = new PFPlay.Sprite({
 });
 bgs.position = {x: 320, y: 240};
 
-bg.addObject(bgs);
+bg.addNode(bgs);
 bg.zindex = 1;
 
 var cybertron = new PFPlay.Scene({name: 'cybertron'});
@@ -41,7 +41,7 @@ function gameGo()
       var console = document.getElementById('console');
       console.innerText = "box clicked " + Math.floor(Math.random() * 42);
     });
-    world.addObject(s);
+    world.addNode(s);
   }
 
   for(var j = 0; j < 4; j++) {
@@ -52,7 +52,7 @@ function gameGo()
       var console = document.getElementById('console');
       console.innerText = "box clicked " + Math.floor(Math.random() * 42);
     });
-    world.addObject(s);
+    world.addNode(s);
   }
 
   PFPlay.DEBUG = true;

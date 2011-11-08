@@ -10,7 +10,7 @@ var bgs = new PFPlay.Sprite({
 });
 bgs.position = {x: 320, y: 240};
 
-bg.addObject(bgs);
+bg.addNode(bgs);
 bg.zindex = 1;
 
 var cybertron = new PFPlay.Scene({name: 'cybertron'});
@@ -29,7 +29,7 @@ function gameGo()
 {
   var s = new PFPlay.Sprite({src: texture});
   s.position = {x: 320, y: 240};
-  world.addObject(s);
+  world.addNode(s);
 
   cybertron.addLayer(world);
   cybertron.addLayer(bg);

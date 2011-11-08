@@ -56,10 +56,10 @@ function gameGo()
   dragAccept.visible = false;
   dragRevoke.visible = false;
 
-  world.addObject(dropArea);
-  world.addObject(dragBox);
-  world.addObject(dragAccept);
-  world.addObject(dragRevoke);
+  world.addNode(dropArea);
+  world.addNode(dragBox);
+  world.addNode(dragAccept);
+  world.addNode(dragRevoke);
   
   cybertron.addLayer(world);
   

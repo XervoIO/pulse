@@ -23,7 +23,7 @@ var bgs = new PFPlay.Sprite({
 });
 bgs.position = {x: 320, y: 240};
 
-bg.addObject(bgs);
+bg.addNode(bgs);
 bg.zindex = 1;
 
 var cybertron = new PFPlay.Scene({name: 'cybertron'});
@@ -32,17 +32,17 @@ var engine = new PFPlay.Engine();
 
 var s = new PFPlay.Sprite({src: seconds});
 s.move(320, 240);
-world.addObject(s);
+world.addNode(s);
 
 var m = new PFPlay.Sprite({src: minutes});
 m.anchor = {x:0.5, y:2.0};
 m.move(320, 240);
-world.addObject(m);
+world.addNode(m);
 
 var h = new PFPlay.Sprite({src: hours});
 h.anchor = {x: 0.5, y:5.3};
 h.move(320, 240);
-world.addObject(h);
+world.addNode(h);
 
 function loop(sceneManager)
 { 

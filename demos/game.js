@@ -117,9 +117,9 @@ function gameGo()
   cat.move(25, 25);
   cat.events.bind('click', function() { alert('clicked on cat!'); });
   
-  world.addObject(mario);
-  world.addObject(luigi);
-  world.addObject(cat);
+  world.addNode(mario);
+  world.addNode(luigi);
+  world.addNode(cat);
   
   cybertron.addLayer(world);
   cybertron.addLayer(bg);

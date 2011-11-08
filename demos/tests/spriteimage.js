@@ -22,7 +22,7 @@ var bgs = new PFPlay.Sprite( {
 });
 bgs.position = {x: 320, y: 240};
 
-bg.addObject(bgs);
+bg.addNode(bgs);
 bg.zindex = 1;
 
 var cybertron = new PFPlay.Scene({name: 'Cybertron'});
@@ -44,7 +44,7 @@ function gameGo()
     s = new PFPlay.Sprite({src: tileImg});
     s.move(Math.floor(Math.random() * 610) + 15, Math.floor(Math.random() * 450) + 15);
     s.zindex = i;
-    world.addObject(s);
+    world.addNode(s);
   }
   
   cybertron.addLayer(world);
