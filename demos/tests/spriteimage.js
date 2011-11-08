@@ -50,8 +50,8 @@ function gameGo()
   cybertron.addLayer(world);
   cybertron.addLayer(bg);
   
-  myEngine.scenes.add(cybertron);
-  myEngine.scenes.activate(cybertron);
+  myEngine.scenes.addScene(cybertron);
+  myEngine.scenes.activateScene(cybertron);
   
   myEngine.go(50, loop);
 }

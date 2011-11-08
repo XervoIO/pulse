@@ -42,7 +42,7 @@ var bgs = new PFPlay.Sprite({
 });
 bgs.position = {x: 320, y: 240};
 
-bg.addObject(bgs);
+bg.addNode(bgs);
 bg.zindex = 1;
 
 var mAni = new PFPlay.AnimateAction({
@@ -124,8 +124,8 @@ function gameGo()
   cybertron.addLayer(world);
   cybertron.addLayer(bg);
   
-  myEngine.scenes.add(cybertron);
-  myEngine.scenes.activate(cybertron);
+  myEngine.scenes.addScene(cybertron);
+  myEngine.scenes.activateScene(cybertron);
   
   myEngine.go(100, loop);
 }

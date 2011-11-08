@@ -30,7 +30,7 @@ function initGame() {
 
       tile.move(x, y);
           
-      layer.addObject(tile);
+      layer.addNode(tile);
     }
   }
   
@@ -51,10 +51,10 @@ function initGame() {
       console.log('Creep A clicked');
     });
   
-  uiLayer.addObject(creepA);
-  uiLayer.addObject(creepB);
-  uiLayer.addObject(creepC);
-  uiLayer.addObject(creepD);
+  uiLayer.addNode(creepA);
+  uiLayer.addNode(creepB);
+  uiLayer.addNode(creepC);
+  uiLayer.addNode(creepD);
   
   var hoveredTile = null;
   
@@ -88,8 +88,8 @@ function initGame() {
   var go = function() {
     scene.addLayer(layer);
     scene.addLayer(uiLayer);
-    engine.scenes.add(scene);
-    engine.scenes.activate(scene);
+    engine.scenes.addScene(scene);
+    engine.scenes.activateScene(scene);
     engine.go(50, loop);
   }
   
