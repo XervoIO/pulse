@@ -54,7 +54,7 @@ var mAni = new PFPlay.AnimateAction({
 
 var cybertron =  new PFPlay.Scene({name: 'Cybertron'});
 
-var myEngine = new PFPlay.Engine();
+var myEngine = null;
 
 function loop(sceneManager)
 {
@@ -96,6 +96,8 @@ function loop(sceneManager)
 
 function gameGo()
 {
+  myEngine = new PFPlay.Engine();
+
   mario.events.bind('click', function() { alert('clicked on mario!'); });
   mario.addAction(mAni);
   mario.runAction('ma1');
