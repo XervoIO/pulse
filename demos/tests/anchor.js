@@ -37,9 +37,9 @@ function gameGo()
     s = new PFPlay.Sprite({src: textures[i%3]});
     s.anchor = {x: i % 3 * 0.5, y: Math.floor(i / 3) * 0.5};
     s.position = {x: 106 + (i % 3 * 213), y: 35 + Math.floor(i / 3) * 120};
-    s.events.bind('click', function(){
+    s.events.bind('click', function(e){
       var console = document.getElementById('console');
-      console.innerText = "box clicked " + Math.floor(Math.random() * 42);
+      console.innerText = e.sender.name + " box clicked " + Math.floor(Math.random() * 42);
     });
     world.addNode(s);
   }
@@ -48,9 +48,9 @@ function gameGo()
     s = new PFPlay.Sprite({src: textures[j%3]});
     s.anchor = {x: j % 2 * 0.5 + 0.25, y: Math.floor(j / 2) * 0.5 + 0.25};
     s.position = {x: 60 + (j % 4 * 160), y: 400};
-    s.events.bind('click', function(){
+    s.events.bind('click', function(e){
       var console = document.getElementById('console');
-      console.innerText = "box clicked " + Math.floor(Math.random() * 42);
+      console.innerText = e.sender.name + " box clicked " + Math.floor(Math.random() * 42);
     });
     world.addNode(s);
   }

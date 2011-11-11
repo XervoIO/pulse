@@ -44,14 +44,14 @@ h.anchor = {x: 0.5, y:5.3};
 h.move(320, 240);
 world.addNode(h);
 
-function loop(sceneManager)
+function loop(sceneManager, elapsed)
 { 
   var debugTime = document.getElementById('time');
   debugTime.innerText = engine.masterTime;
 
-  s.rotation += (36/20);
-  m.rotation += (6/20);
-  h.rotation += (.1/20);
+  s.rotation += 36 * (elapsed / 1000);
+  m.rotation += 6 * (elapsed / 1000);
+  h.rotation += .1 * (elapsed / 1000);
 }
 
 function gameGo()
