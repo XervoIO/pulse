@@ -7,15 +7,13 @@ function initGame() {
   score.position.x = 300;
   score.position.y = 200;
   
-  for(var i = 0; i < 5000; i++) {
-    var ball = new Ball({ src: 'ball.png', size: {width: 16, height: 16} });
-    ball.position.x = 300;
-    ball.position.y = 200;
-    ball.velocity.x = (Math.random() * .1) - 0.05;
-    ball.velocity.y = (Math.random() * .1) - 0.05;
-    ball.score = score;
-    layer.addNode(ball);
-  }
+  var ball = new Ball({ src: 'ball.png', size: {width: 16, height: 16} });
+  ball.position.x = 300;
+  ball.position.y = 200;
+  ball.velocity.x = .25;
+  ball.velocity.y = .25;
+  ball.score = score;
+  layer.addNode(ball);
   
   var paddle = new Paddle({ src: 'paddle.png' });
   paddle.ball = ball;
@@ -28,8 +26,8 @@ function initGame() {
   aiPaddle.position.y = 150;
   aiPaddle.auto = true;
   
-  //layer.addNode(paddle);
-  //layer.addNode(aiPaddle);
+  layer.addNode(paddle);
+  layer.addNode(aiPaddle);
   layer.addNode(score);
   
   layer.anchor.x = 0;

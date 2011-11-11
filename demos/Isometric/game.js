@@ -9,28 +9,36 @@ function initGame() {
   var width = 760;
   var height = 480;
   
-  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
+  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', iframe: true, width: 760, height: 480 });
   var scene = new PFPlay.Scene();
   var layer = new Board({y: 50});
+  layer.anchor = { x: 0, y: 0 };
   
   var uiLayer = new PFPlay.Layer({width: 500, height:100, x:130,  y:350});
   
   var offsetY = rows * tileHeight;
   
-  var tiles = { };
+  var tiles = [ ];
   
+  var normalTexture = new PFPlay.Image( { src: 'tile.png' });
+  var selectedTexture = new PFPlay.Image( { src: 'selected.png '})
+;  
   // Create and layout tiles.
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
       
-      var tile = new PFPlay.Sprite({ src: 'tile.png' });
+      var tile = new PFPlay.Sprite({ src: normalTexture });
       
       var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2));
       var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + (offsetY / 2);
 
       tile.move(x, y);
+      tile.row = rowIdx;
+      tile.col = colIdx;
           
       layer.addNode(tile);
+      
+      tiles.push(tile);
     }
   }
   
@@ -58,24 +66,15 @@ function initGame() {
   
   var hoveredTile = null;
   
-  /*
   layer.events.bind('mousemove', 
     function(pos) {
-      var isoPos = worldToIso(pos.x, pos.y);
-      if(tiles[isoPos.x] && tiles[isoPos.x][isoPos.y]) {
-        var tile = tiles[isoPos.x][isoPos.y];
-
-        if(tile != hoveredTile) {
-          tile.mouseenter();
-          if(hoveredTile) {
-            hoveredTile.mouseleave();
+      var isoPos = worldToIso(pos.position.x, pos.position.y);
+        for(var idx in tiles) {
+          if(tiles[idx].row == isoPos.x && tiles[idx].col == isoPos.y) {
+            tiles[idx].texture = selectedTexture;
           }
-          
-          hoveredTile = tile;
         }
-      }
-    });
-    */
+      });
   
   function worldToIso(posX, posY) {
     dx = posX - tileWidth;
