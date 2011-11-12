@@ -1,5 +1,7 @@
 PFPlay.ready(function initGame() {
   
+  //PFPlay.DEBUG = true;
+  
   var rows = 25;
   var columns = 25;
   
@@ -15,6 +17,9 @@ PFPlay.ready(function initGame() {
   layer.anchor = { x: 0, y: 0 };
   
   var uiLayer = new PFPlay.Layer({width: 500, height:100, x:130,  y:350});
+  uiLayer.anchor = {x: 0, y: 0 };
+  uiLayer.position = {x: 130, y: 350};
+  uiLayer.name = "UILayer"
   
   var offsetY = rows * tileHeight;
   
@@ -28,6 +33,7 @@ PFPlay.ready(function initGame() {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
       
       var tile = new PFPlay.Sprite({ src: normalTexture });
+      tile.anchor = { x: 0, y: 0 };
       
       var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2));
       var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + (offsetY / 2);
@@ -69,6 +75,8 @@ PFPlay.ready(function initGame() {
   layer.events.bind('mousemove', 
     function(pos) {
       var isoPos = worldToIso(pos.position.x, pos.position.y);
+      console.log(pos.position.x, pos.position.y);
+      console.log(isoPos.x + "," + isoPos.y);
         for(var idx in tiles) {
           if(tiles[idx].row == isoPos.x && tiles[idx].col == isoPos.y) {
             tiles[idx].texture = selectedTexture;
