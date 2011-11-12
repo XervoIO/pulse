@@ -1,5 +1,4 @@
-function gameGo()
-{
+PFPlay.ready(function() {
   var gw = document.getElementById('game');
   var engine = new PFPlay.Engine({gameWindow: gw});
   var cybertron = new PFPlay.Scene({name: 'cybertron'});
@@ -57,4 +56,4 @@ function gameGo()
   }
   
   engine.go(50, loop);
-}
+});

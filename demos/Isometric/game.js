@@ -1,4 +1,4 @@
-function initGame() {
+PFPlay.ready(function initGame() {
   
   var rows = 25;
   var columns = 25;
@@ -9,7 +9,7 @@ function initGame() {
   var width = 760;
   var height = 480;
   
-  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', iframe: true, width: 760, height: 480 });
+  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', iframe: false, width: 760, height: 480 });
   var scene = new PFPlay.Scene();
   var layer = new Board({y: 50});
   layer.anchor = { x: 0, y: 0 };
@@ -21,8 +21,8 @@ function initGame() {
   var tiles = [ ];
   
   var normalTexture = new PFPlay.Image( { src: 'tile.png' });
-  var selectedTexture = new PFPlay.Image( { src: 'selected.png '})
-;  
+  var selectedTexture = new PFPlay.Image( { src: 'selected.png '});
+    
   // Create and layout tiles.
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
@@ -93,7 +93,7 @@ function initGame() {
   }
   
   window.setTimeout(go, 500);
-}
+});
 
 function loop(sceneManager) {
   var debugTime = document.getElementById('time');
