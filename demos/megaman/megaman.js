@@ -22,11 +22,9 @@ PFPlay.ready(function(){
   var level = new mm.Level({ width: 6000, height: 800, world: world });
   level.anchor = { x: 0, y: 0 };
   level.position.y = -400;
-
   var manLayer = new PFPlay.Layer({ width: 6000, height: 800});
   manLayer.anchor = { x: 0, y: 0 };
   manLayer.position.y = -400;
-  
   var bg1Texture = new PFPlay.Image( { src: 'mountain.png' });
   var bg2Texture = new PFPlay.Image( { src: 'clouds.png' });
   
@@ -49,7 +47,7 @@ PFPlay.ready(function(){
     b2world : world,
     position : {
       x : 300,
-      y : 100
+      y : 550
     }
   });
   manLayer.addNode(man);
@@ -69,11 +67,21 @@ PFPlay.ready(function(){
   
   var speed = .15;
 
-  function updateCamera(dist) {
-    level.position.x -= dist.x;
-    manLayer.position.x -= dist.x;
-    bg1.position.x -= dist.x / 2;
-    bg2.position.x -= dist.x / 3;
+  function updateCamera() {
+    var nx = 300 - man.position.x;
+    var dx = level.position.x - nx;
+    var ny = 200 - Math.min(man.position.y, 600);
+    var dy = level.position.y - ny;
+
+    level.position.x -= dx;
+    manLayer.position.x -= dx;
+    bg1.position.x -= dx / 2;
+    bg2.position.x -= dx / 3;
+
+    level.position.y -= dy;
+    manLayer.position.y -= dy;
+    bg1.position.y -= dy / 2;
+    bg2.position.y -= dy / 3;
   }
   
   function update(sceneManager, elapsed) {
@@ -102,14 +110,7 @@ PFPlay.ready(function(){
       man.b2body.SetLinearVelocity(new b2Vec2(2, man.b2body.GetLinearVelocity().y));
     }
 
-    if(man.state == mm.Megaman.State.Running ||
-       man.state == mm.Megaman.State.Jumping) {
-      var dist = {
-        x : (man.b2body.m_xf.position.x / mm.Box2DFactor) - man.positionPrevious.x,
-        y : (man.b2body.m_xf.position.y / mm.Box2DFactor) - man.positionPrevious.y
-      };
-      updateCamera(dist);
-    }
+    updateCamera();
 
     if(!arrowLeft && !arrowRight) {
       if(man.state == mm.Megaman.State.Running) {
@@ -165,5 +166,5 @@ PFPlay.ready(function(){
     }
   });
   
-  engine.go(30, update);
+  engine.go(20, update);
 });

@@ -48,7 +48,7 @@ mm.Megaman = PFPlay.Sprite.extend({
     var introAction = new PFPlay.AnimateAction({
       name : 'intro', 
       size : {width:55, height:60}, 
-      frames : [22,22,22,22,23,24,25,26,27,28,29], 
+      frames : [22,22,22,22,22,22,22,22,22,22,22,23,24,25,26,27,28,29], 
       frameRate : animationFrameRate,
       plays : 1
     });
@@ -132,7 +132,9 @@ mm.Megaman = PFPlay.Sprite.extend({
 
     if(this.b2body.GetLinearVelocity().y > 0.01 ||
        this.b2body.GetLinearVelocity().y < -0.01) {
-      this.state = mm.Megaman.State.Jumping;
+      if(this.state != mm.Megaman.State.Intro) {
+        this.state = mm.Megaman.State.Jumping;
+      }
     } else {
       this.b2body.SetLinearVelocity(new b2Vec2(this.b2body.GetLinearVelocity().x, 0));
       if(this.state == mm.Megaman.State.Jumping) {
