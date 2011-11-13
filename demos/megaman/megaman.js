@@ -68,7 +68,7 @@ PFPlay.ready(function(){
   var speed = .15;
 
   function updateCamera() {
-    var nx = 300 - man.position.x;
+    var nx = 300 - Math.max(man.position.x, 300);
     var dx = level.position.x - nx;
     var ny = 200 - Math.min(man.position.y, 600);
     var dy = level.position.y - ny;
