@@ -25,6 +25,9 @@ PFPlay.ready(function(){
   var manLayer = new PFPlay.Layer({ width: 6000, height: 800});
   manLayer.anchor = { x: 0, y: 0 };
   manLayer.position.y = -400;
+  var uiLayer = new PFPlay.Layer({width : 600, height: 400});
+  uiLayer.position = {x: 300, y: 200};
+
   var bg1Texture = new PFPlay.Image( { src: 'mountain.png' });
   var bg2Texture = new PFPlay.Image( { src: 'clouds.png' });
   
@@ -52,10 +55,19 @@ PFPlay.ready(function(){
   });
   manLayer.addNode(man);
   
+
+  // Setup ui
+  var font = new PFPlay.BitmapFont({filename:'eboots.fnt'});
+  var l = new PFPlay.BitmapLabel({font: font, text: 'Built With Pulse'});
+  l.position = {x: 5, y: 5};
+  l.anchor = {x: 0, y: 0};
+  uiLayer.addNode(l);
+
   scene.addLayer(bg2);
   scene.addLayer(bg1);
   scene.addLayer(level);
   scene.addLayer(manLayer);
+  scene.addLayer(uiLayer);
   
   engine.scenes.addScene(scene);
   engine.scenes.activateScene(scene);
