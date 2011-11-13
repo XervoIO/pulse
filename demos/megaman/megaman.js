@@ -1,18 +1,17 @@
 var mm = mm || { };
 
-pulse.ready(function(){
-  
+var bodyLoaded = function() {
   mm.Box2DFactor = .01;
-  
+
   var worldAABB = new b2AABB();
   worldAABB.lowerBound.Set(-10000.0, -10000.0);
   worldAABB.upperBound.Set(10000.0, 10000.0);
   var gravity = new b2Vec2(0.0, 7);
   var world = new b2World(worldAABB, gravity, true);
-  
+
   var engine = new pulse.Engine( { gameWindow: 'gameWindow', width: 600, height: 400 });
   var scene = new pulse.Scene();
-  
+
   var bg1 = new pulse.Layer({ width: 6000, height: 300 });
   bg1.anchor = { x: 0, y: 0 };
   bg1.position.y = 250;
@@ -30,7 +29,7 @@ pulse.ready(function(){
 
   var bg1Texture = new pulse.Image( { src: 'mountain.png' });
   var bg2Texture = new pulse.Image( { src: 'clouds.png' });
-  
+
   for(var i = 0; i < 10; i++) {
     var bgTile = new pulse.Sprite( { src: bg1Texture } );
     bgTile.anchor = { x: 0, y: 0 };
@@ -44,7 +43,7 @@ pulse.ready(function(){
     
     bg2.addNode(bgTile);
   }
-  
+
   // Create test man.
   var man = new mm.Megaman({
     b2world : world,
@@ -54,7 +53,7 @@ pulse.ready(function(){
     }
   });
   manLayer.addNode(man);
-  
+
 
   // Setup ui
   var font = new pulse.BitmapFont({filename:'eboots.fnt'});
@@ -68,15 +67,15 @@ pulse.ready(function(){
   scene.addLayer(level);
   scene.addLayer(manLayer);
   scene.addLayer(uiLayer);
-  
+
   engine.scenes.addScene(scene);
   engine.scenes.activateScene(scene);
-  
+
   var arrowLeft = false;
   var arrowRight = false;
   var arrowUp = false;
   var arrowDown = false;
-  
+
   var speed = .15;
 
   function updateCamera() {
@@ -95,7 +94,7 @@ pulse.ready(function(){
     bg1.position.y -= dy / 2;
     bg2.position.y -= dy / 3;
   }
-  
+
   function update(sceneManager, elapsed) {
     
     world.Step(elapsed / 1000, 10);
@@ -139,7 +138,7 @@ pulse.ready(function(){
 
 
   }
-  
+
   scene.events.bind('keydown', function(e) {
     if(e.keyCode == 37) {
       arrowLeft = true;
@@ -169,7 +168,7 @@ pulse.ready(function(){
       }
     }
   });
-  
+
   scene.events.bind('keyup', function(e) {
     if(e.keyCode == 37) {
       man.b2body.SetLinearVelocity(new b2Vec2(0, man.b2body.GetLinearVelocity().y));
@@ -186,6 +185,6 @@ pulse.ready(function(){
       arrowDown = false;
     }
   });
-  
+
   engine.go(20, update);
-});
+}
