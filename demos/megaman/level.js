@@ -1,10 +1,25 @@
 var mm = mm || {};
 
 mm.Brick = PFPlay.Sprite.extend({
-  init: function(texture) {
+  init: function(texture, layer) {
+    this.layer = layer;
     this._super( { src: texture });
-    this.anchor = { x: 0, y: 0 };
     this.size = { width: mm.Brick.Size.width, height: mm.Brick.Size.height };
+  },
+  createBody: function() {
+    var bodyDef = new b2BodyDef();
+    bodyDef.position.Set(this.position.x * mm.Box2DFactor, this.position.y * mm.Box2DFactor);
+    var body = this.layer.world.CreateBody(bodyDef);
+    var shapeDef = new b2PolygonDef();
+    shapeDef.restitution = 0.0;
+    shapeDef.friction = 0.0;
+    shapeDef.density = 2.0;
+    body.w = mm.Brick.Size.width * mm.Box2DFactor;
+    body.h = mm.Brick.Size.height * mm.Box2DFactor;
+    shapeDef.SetAsBox(body.w / 2, body.h / 2);
+    body.CreateShape(shapeDef);
+    body.SynchronizeShapes();
+    this.body = body;
   }
 });
 
@@ -17,6 +32,9 @@ mm.Brick.Size = { width: 25, height: 25 };
 
 mm.Level = PFPlay.Layer.extend({
   init: function(params) {
+    
+    this.world = params.world;
+    
     this._super(params);
     
     for(var idx in mm.Level.Layout) {
@@ -42,9 +60,10 @@ mm.Platform = function(params, layer) {
       texture = mm.Brick.PlatformTextureRight;
     }
     
-    var brick = new mm.Brick(texture);
-    brick.position.x = mm.Brick.Size.width * params.x + i * mm.Brick.Size.width;
+    var brick = new mm.Brick(texture, layer);
+    brick.position.x = mm.Brick.Size.width * params.x + i * (mm.Brick.Size.width - 1);
     brick.position.y = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height;
+    brick.createBody();
     layer.addNode(brick);
   }
 };
@@ -53,13 +72,14 @@ mm.Chunk = function(params, layer) {
   for(var rowIdx = 0; rowIdx < params.width; rowIdx++) {
     for(var colIdx = 0; colIdx < params.height; colIdx++) {
       var top = colIdx == params.height - 1;
-      var brick = new mm.Brick(top ? mm.Brick.GroundTopTexture : mm.Brick.GroundTexture);
+      var brick = new mm.Brick(top ? mm.Brick.GroundTopTexture : mm.Brick.GroundTexture, layer);
       brick.position.y = 
         layer.size.height -
-        colIdx * mm.Brick.Size.height - 
+        colIdx * (mm.Brick.Size.height - 1) - 
         mm.Brick.Size.height;
-      brick.position.x = mm.Brick.Size.width * (params.x + rowIdx);
+      brick.position.x = (mm.Brick.Size.width - 1) * (params.x + rowIdx);
       layer.addNode(brick);
+      brick.createBody();
     }
   }
 }
