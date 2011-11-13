@@ -22,6 +22,10 @@ PFPlay.ready(function(){
   var level = new mm.Level({ width: 6000, height: 800, world: world });
   level.anchor = { x: 0, y: 0 };
   level.position.y = -400;
+
+  var manLayer = new PFPlay.Layer({ width: 6000, height: 800});
+  manLayer.anchor = { x: 0, y: 0 };
+  manLayer.position.y = -400;
   
   var bg1Texture = new PFPlay.Image( { src: 'mountain.png' });
   var bg2Texture = new PFPlay.Image( { src: 'clouds.png' });
@@ -41,12 +45,19 @@ PFPlay.ready(function(){
   }
   
   // Create test man.
-  var man = new mm.TestMan(world);
-  level.addNode(man);
+  var man = new mm.Megaman({
+    b2world : world,
+    position : {
+      x : 300,
+      y : 100
+    }
+  });
+  manLayer.addNode(man);
   
   scene.addLayer(bg2);
   scene.addLayer(bg1);
   scene.addLayer(level);
+  scene.addLayer(manLayer);
   
   engine.scenes.addScene(scene);
   engine.scenes.activateScene(scene);
@@ -57,36 +68,53 @@ PFPlay.ready(function(){
   var arrowDown = false;
   
   var speed = .15;
+
+  function updateCamera(dist) {
+    level.position.x -= dist.x;
+    manLayer.position.x -= dist.x;
+    bg1.position.x -= dist.x / 2;
+    bg2.position.x -= dist.x / 3;
+  }
   
   function update(sceneManager, elapsed) {
     
     world.Step(elapsed / 1000, 10);
     
     if(arrowLeft) {
-      man.body.WakeUp();
-      man.body.SetLinearVelocity(new b2Vec2(-1, man.body.GetLinearVelocity().y));
-      //level.position.x += speed * elapsed;
-      //bg1.position.x += (speed / 2) * elapsed;
-      //bg2.position.x += (speed / 3) * elapsed;
+      if(man.direction == mm.Megaman.Direction.Right) {
+        man.direction = mm.Megaman.Direction.Left;
+      }
+      if(man.state != mm.Megaman.State.Jumping) {
+        man.state = mm.Megaman.State.Running;
+      }
+      man.b2body.WakeUp();
+      man.b2body.SetLinearVelocity(new b2Vec2(-2, man.b2body.GetLinearVelocity().y));
     }
     
     if(arrowRight) {
-      man.body.WakeUp();
-      man.body.SetLinearVelocity(new b2Vec2(1, man.body.GetLinearVelocity().y));
-      //level.position.x -= speed * elapsed;
-      //bg1.position.x -= (speed / 2) * elapsed;
-      //bg2.position.x -= (speed / 3) * elapsed;
+      if(man.direction == mm.Megaman.Direction.Left) {
+        man.direction = mm.Megaman.Direction.Right;
+      }
+      if(man.state != mm.Megaman.State.Jumping) {
+        man.state = mm.Megaman.State.Running;
+      }
+      man.b2body.WakeUp();
+      man.b2body.SetLinearVelocity(new b2Vec2(2, man.b2body.GetLinearVelocity().y));
     }
-    
-    if(arrowUp) {
-      level.position.y += speed * elapsed;
-      bg1.position.y += (speed / 2) * elapsed;
-      bg2.position.y += (speed / 3) * elapsed;
+
+    if(man.state == mm.Megaman.State.Running ||
+       man.state == mm.Megaman.State.Jumping) {
+      var dist = {
+        x : (man.b2body.m_xf.position.x / mm.Box2DFactor) - man.positionPrevious.x,
+        y : (man.b2body.m_xf.position.y / mm.Box2DFactor) - man.positionPrevious.y
+      };
+      updateCamera(dist);
     }
-    if(arrowDown) {
-      level.position.y -= speed * elapsed;
-      bg1.position.y -= (speed / 2) * elapsed;
-      bg2.position.y -= (speed / 3) * elapsed;
+
+    if(!arrowLeft && !arrowRight) {
+      if(man.state == mm.Megaman.State.Running) {
+        man.state = mm.Megaman.State.Idle;
+      } 
     }
   }
   
@@ -103,15 +131,30 @@ PFPlay.ready(function(){
     if(e.keyCode == 40) {
       arrowDown = true;
     }
+    if(e.keyCode == 13) {
+      man.state = mm.Megaman.State.Intro;
+    }
+    if(e.keyCode == 73) {
+      man.state = mm.Megaman.State.Idle;
+    }
+    if(e.keyCode == 83) {
+      man.state = mm.Megaman.State.Smile;
+    }
+    if(e.keyCode == 32) {
+      if(man.state != mm.Megaman.State.Jumping) {
+        man.state = mm.Megaman.State.Jumping;
+        man.b2body.ApplyImpulse(new b2Vec2(0, -8), man.b2body.GetPosition());
+      }
+    }
   });
   
   scene.events.bind('keyup', function(e) {
     if(e.keyCode == 37) {
-      man.body.SetLinearVelocity(new b2Vec2(0, man.body.GetLinearVelocity().y));
+      man.b2body.SetLinearVelocity(new b2Vec2(0, man.b2body.GetLinearVelocity().y));
       arrowLeft = false;
     }
     if(e.keyCode == 39) {
-      man.body.SetLinearVelocity(new b2Vec2(0, man.body.GetLinearVelocity().y));
+      man.b2body.SetLinearVelocity(new b2Vec2(0, man.b2body.GetLinearVelocity().y));
       arrowRight = false;
     }
     if(e.keyCode == 38) {

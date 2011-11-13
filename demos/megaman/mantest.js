@@ -40,7 +40,6 @@ PFPlay.ready(function(){
       y : 100
     }
   });
-  man.position = {x: 300, y : 200};
   manlayer.addNode(man);
   
   var arrowLeft = false;
