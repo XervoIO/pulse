@@ -126,8 +126,8 @@ mm.Megaman = PFPlay.Sprite.extend({
   update : function(elapsed) {
 
     this.position = {
-      x : Math.round(this.b2body.m_xf.position.x / mm.Box2DFactor),
-      y : Math.round((this.b2body.m_xf.position.y + this.b2body.h / 2) / mm.Box2DFactor) + 1
+      x : Math.round(this.b2body.GetPosition().x / mm.Box2DFactor),
+      y : Math.round((this.b2body.GetPosition().y + this.b2body.h / 2) / mm.Box2DFactor) + 1
     };
 
     if(this.b2body.GetLinearVelocity().y > 0.01 ||
@@ -142,8 +142,6 @@ mm.Megaman = PFPlay.Sprite.extend({
       }
     }
 
-    this._super(elapsed);
-
     if(this.state != this._private.statePrevious) {
       this.updateState(this.state);
       this._private.statePrevious = this.state;
@@ -153,6 +151,8 @@ mm.Megaman = PFPlay.Sprite.extend({
       this.scale.x = this.direction;
       this._private.directionPrevious = this.direction;
     }
+
+    this._super(elapsed);
   },
 
   calculateProperties : function() {
