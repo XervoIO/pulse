@@ -1,7 +1,7 @@
 function initGame() {
-  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
-  var scene = new PFPlay.Scene(); 
-  var layer = new PFPlay.Layer();
+  var engine = new pulse.Engine({ gameWindow: 'gameWindow', width: 760, height: 480 });
+  var scene = new pulse.Scene(); 
+  var layer = new pulse.Layer();
   
   var score = new Score( { text: "0 | 0" } );
   score.position.x = 300;

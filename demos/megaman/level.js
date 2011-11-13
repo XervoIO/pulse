@@ -1,6 +1,6 @@
 var mm = mm || {};
 
-mm.Brick = PFPlay.Sprite.extend({
+mm.Brick = pulse.Sprite.extend({
   init: function(texture, layer) {
     this.layer = layer;
     this._super( { src: texture });
@@ -17,16 +17,16 @@ mm.Brick = PFPlay.Sprite.extend({
   }
 });
 
-mm.Brick.GroundTextureLeft = new PFPlay.Image( { src: 'brick_ground_left.png'} );
-mm.Brick.GroundTextureRight = new PFPlay.Image( { src: 'brick_ground_right.png'} );
-mm.Brick.PlatformTexture = new PFPlay.Image( { src: 'brick_platform.png'} );
-mm.Brick.PlatformTextureLeft = new PFPlay.Image( { src: 'brick_platform_left.png'} );
-mm.Brick.PlatformTextureRight = new PFPlay.Image( { src: 'brick_platform_right.png'} );
-mm.Brick.GroundTexture = new PFPlay.Image( { src: 'brick_ground.png'} );
-mm.Brick.GroundTopTexture = new PFPlay.Image( { src: 'ground_top.png'} );
+mm.Brick.GroundTextureLeft = new pulse.Image( { src: 'brick_ground_left.png'} );
+mm.Brick.GroundTextureRight = new pulse.Image( { src: 'brick_ground_right.png'} );
+mm.Brick.PlatformTexture = new pulse.Image( { src: 'brick_platform.png'} );
+mm.Brick.PlatformTextureLeft = new pulse.Image( { src: 'brick_platform_left.png'} );
+mm.Brick.PlatformTextureRight = new pulse.Image( { src: 'brick_platform_right.png'} );
+mm.Brick.GroundTexture = new pulse.Image( { src: 'brick_ground.png'} );
+mm.Brick.GroundTopTexture = new pulse.Image( { src: 'ground_top.png'} );
 mm.Brick.Size = { width: 25, height: 25 };
 
-mm.Level = PFPlay.Layer.extend({
+mm.Level = pulse.Layer.extend({
   init: function(params) {
     
     this.world = params.world;

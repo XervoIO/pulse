@@ -1,6 +1,6 @@
 var mm = mm || { };
 
-PFPlay.ready(function(){
+pulse.ready(function(){
   
   mm.Box2DFactor = .01;
   
@@ -10,35 +10,35 @@ PFPlay.ready(function(){
   var gravity = new b2Vec2(0.0, 7);
   var world = new b2World(worldAABB, gravity, true);
   
-  var engine = new PFPlay.Engine( { gameWindow: 'gameWindow', width: 600, height: 400 });
-  var scene = new PFPlay.Scene();
+  var engine = new pulse.Engine( { gameWindow: 'gameWindow', width: 600, height: 400 });
+  var scene = new pulse.Scene();
   
-  var bg1 = new PFPlay.Layer({ width: 6000, height: 300 });
+  var bg1 = new pulse.Layer({ width: 6000, height: 300 });
   bg1.anchor = { x: 0, y: 0 };
   bg1.position.y = 250;
-  var bg2 = new PFPlay.Layer({ width: 6000, height: 600 });
+  var bg2 = new pulse.Layer({ width: 6000, height: 600 });
   bg2.anchor = { x: 0, y: 0 };
   bg2.position.y = -200;
   var level = new mm.Level({ width: 6000, height: 800, world: world });
   level.anchor = { x: 0, y: 0 };
   level.position.y = -400;
-  var manLayer = new PFPlay.Layer({ width: 6000, height: 800});
+  var manLayer = new pulse.Layer({ width: 6000, height: 800});
   manLayer.anchor = { x: 0, y: 0 };
   manLayer.position.y = -400;
-  var uiLayer = new PFPlay.Layer({width : 600, height: 400});
+  var uiLayer = new pulse.Layer({width : 600, height: 400});
   uiLayer.position = {x: 300, y: 200};
 
-  var bg1Texture = new PFPlay.Image( { src: 'mountain.png' });
-  var bg2Texture = new PFPlay.Image( { src: 'clouds.png' });
+  var bg1Texture = new pulse.Image( { src: 'mountain.png' });
+  var bg2Texture = new pulse.Image( { src: 'clouds.png' });
   
   for(var i = 0; i < 10; i++) {
-    var bgTile = new PFPlay.Sprite( { src: bg1Texture } );
+    var bgTile = new pulse.Sprite( { src: bg1Texture } );
     bgTile.anchor = { x: 0, y: 0 };
     bgTile.position.x = 700 * i - 1;
     
     bg1.addNode(bgTile);
     
-    bgTile = new PFPlay.Sprite( { src: bg2Texture } );
+    bgTile = new pulse.Sprite( { src: bg2Texture } );
     bgTile.anchor = { x: 0, y: 0 };
     bgTile.position.x = 600 * i;
     
@@ -57,8 +57,8 @@ PFPlay.ready(function(){
   
 
   // Setup ui
-  var font = new PFPlay.BitmapFont({filename:'eboots.fnt'});
-  var l = new PFPlay.BitmapLabel({font: font, text: 'Built With Pulse'});
+  var font = new pulse.BitmapFont({filename:'eboots.fnt'});
+  var l = new pulse.BitmapLabel({font: font, text: 'Built With Pulse'});
   l.position = {x: 5, y: 5};
   l.anchor = {x: 0, y: 0};
   uiLayer.addNode(l);

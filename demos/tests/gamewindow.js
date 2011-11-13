@@ -1,11 +1,11 @@
-PFPlay.ready(function() {
-  var texture = new PFPlay.Image({src:'../img/green_square.png'});
+pulse.ready(function() {
+  var texture = new pulse.Image({src:'../img/green_square.png'});
   
-  var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
   
-  var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
-  var bgs = new PFPlay.Sprite({
+  var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
+  var bgs = new pulse.Sprite({
     src: '../img/gray_bg.jpg', 
     name: 'bg'
   });
@@ -14,11 +14,11 @@ PFPlay.ready(function() {
   bg.addNode(bgs);
   bg.zindex = 1;
   
-  var cybertron = new PFPlay.Scene({name: 'cybertron'});
+  var cybertron = new pulse.Scene({name: 'cybertron'});
   
   // pass in object to engine
   var gw = document.getElementById('game');
-  var engine = new PFPlay.Engine({gameWindow: gw});
+  var engine = new pulse.Engine({gameWindow: gw});
   
   function loop(sceneManager)
   { 
@@ -28,7 +28,7 @@ PFPlay.ready(function() {
   
   function gameGo()
   {
-    var s = new PFPlay.Sprite({src: texture});
+    var s = new pulse.Sprite({src: texture});
     s.position = {x: 320, y: 240};
     world.addNode(s);
   

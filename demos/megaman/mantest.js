@@ -1,4 +1,4 @@
-PFPlay.ready(function(){
+pulse.ready(function(){
 
   mm.Box2DFactor = 0.01;
 
@@ -22,10 +22,10 @@ PFPlay.ready(function(){
   groundBody.CreateShape(groundShapeDef);
   groundBody.SynchronizeShapes();
   
-  var engine = new PFPlay.Engine({gameWindow: 'gameWindow', width: 600, height: 400 });
-  var scene = new PFPlay.Scene();
+  var engine = new pulse.Engine({gameWindow: 'gameWindow', width: 600, height: 400 });
+  var scene = new pulse.Scene();
   
-  var manlayer = new PFPlay.Layer({width: 600, height: 400});
+  var manlayer = new pulse.Layer({width: 600, height: 400});
   manlayer.anchor = { x: 0, y: 0 };
 
   scene.addLayer(manlayer);

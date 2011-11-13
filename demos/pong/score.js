@@ -1,4 +1,4 @@
-var Score = PFPlay.CanvasLabel.extend({
+var Score = pulse.CanvasLabel.extend({
   init: function(params) {
     this._super(params);
     

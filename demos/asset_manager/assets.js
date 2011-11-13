@@ -1,19 +1,19 @@
-var myEngine = new PFPlay.Engine();
-var myManager = new PFPlay.AssetManager();
-var myBundle = new PFPlay.AssetBundle();
-var myBundleToo = new PFPlay.AssetBundle();
+var myEngine = new pulse.Engine();
+var myManager = new pulse.AssetManager();
+var myBundle = new pulse.AssetBundle();
+var myBundleToo = new pulse.AssetBundle();
 
 var textures = new Array();
 for(var t = 0; t < 320; t++)
 {
-  myBundle.addAsset(new PFPlay.Texture({ 
+  myBundle.addAsset(new pulse.Texture({ 
     filename: 'http://placehold.it/' + 
       Math.floor(t + 400 * Math.random()) + 'x' +
       Math.floor(t + 400 * Math.random()) ,
     autoLoad: false
   }));
   
-  myBundleToo.addAsset(new PFPlay.Texture({ 
+  myBundleToo.addAsset(new pulse.Texture({ 
     filename: 'http://placehold.it/' + 
       Math.floor(t + 400 * Math.random()) + 'x' +
       Math.floor(t + 400 * Math.random()) ,

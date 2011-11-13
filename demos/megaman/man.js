@@ -1,6 +1,6 @@
 var mm = mm || {};
 
-mm.Megaman = PFPlay.Sprite.extend({
+mm.Megaman = pulse.Sprite.extend({
   init : function(params) {
     if(!params) {
       params = {};
@@ -45,7 +45,7 @@ mm.Megaman = PFPlay.Sprite.extend({
 
     this._private.directionPrevious = mm.Megaman.Direction.Right;
 
-    var introAction = new PFPlay.AnimateAction({
+    var introAction = new pulse.AnimateAction({
       name : 'intro', 
       size : {width:55, height:60}, 
       frames : [22,22,22,22,22,22,22,22,22,22,22,23,24,25,26,27,28,29], 
@@ -58,7 +58,7 @@ mm.Megaman = PFPlay.Sprite.extend({
 
     this.addAction(introAction);
 
-    var runningAction = new PFPlay.AnimateAction({
+    var runningAction = new pulse.AnimateAction({
       name : 'running', 
       size : {width:55, height:60}, 
       frames : [7,8,9,10,11,12,13,14,15,16], 
@@ -67,7 +67,7 @@ mm.Megaman = PFPlay.Sprite.extend({
 
     this.addAction(runningAction);
 
-    var jumpAction = new PFPlay.AnimateAction({
+    var jumpAction = new pulse.AnimateAction({
       name : 'jumping', 
       size : {width:55, height:60}, 
       frames : [17,18,19,20,21], 
@@ -77,7 +77,7 @@ mm.Megaman = PFPlay.Sprite.extend({
 
     this.addAction(jumpAction);
 
-    var smileAction = new PFPlay.AnimateAction({
+    var smileAction = new pulse.AnimateAction({
       name : 'smile', 
       size : {width:55, height:60}, 
       frames : [1,2,3,4,5,6], 
@@ -195,4 +195,4 @@ mm.Megaman.Direction = {};
 mm.Megaman.Direction.Right = 1;
 mm.Megaman.Direction.Left = -1;
 
-mm.Megaman.texture = new PFPlay.Image({src: 'man.png'});
+mm.Megaman.texture = new pulse.Image({src: 'man.png'});

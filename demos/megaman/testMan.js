@@ -1,6 +1,6 @@
 var mm = mm || {};
 
-mm.TestMan = PFPlay.Sprite.extend({
+mm.TestMan = pulse.Sprite.extend({
   init : function(world) {
     this.world = world;
     this._super( { src: 'brick_ground.png' });

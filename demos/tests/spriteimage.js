@@ -1,7 +1,7 @@
-PFPlay.ready(function() {
-  var tileImg = new PFPlay.Image({src:'../Isometric/tile.png'});
+pulse.ready(function() {
+  var tileImg = new pulse.Image({src:'../Isometric/tile.png'});
   
-  var world = new PFPlay.Layer({name: 'myLayer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'myLayer', x : 320, y : 240});
   world.zindex = 2;
   world.events.bind('mousemove', 
     function(evt) 
@@ -15,9 +15,9 @@ PFPlay.ready(function() {
     debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
   });
   
-  var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
+  var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
   
-  var bgs = new PFPlay.Sprite( {
+  var bgs = new pulse.Sprite( {
     src: '../img/Forest_blue.jpg', 
     name: 'bg'
   });
@@ -26,23 +26,23 @@ PFPlay.ready(function() {
   bg.addNode(bgs);
   bg.zindex = 1;
   
-  var cybertron = new PFPlay.Scene({name: 'Cybertron'});
+  var cybertron = new pulse.Scene({name: 'Cybertron'});
   
-  var myEngine = new PFPlay.Engine();
+  var myEngine = new pulse.Engine();
   
   var testSprites = [];
   
   function loop(sceneManager)
   { 
     var debugTime = document.getElementById('time');
-    debugTime.innerText = PFPlay.masterTime;
+    debugTime.innerText = pulse.masterTime;
   }
   
   function gameGo()
   {
     var s;
     for(var i = 0; i < 550; i++) {
-      s = new PFPlay.Sprite({src: tileImg});
+      s = new pulse.Sprite({src: tileImg});
       s.move(Math.floor(Math.random() * 610) + 15, Math.floor(Math.random() * 450) + 15);
       s.zindex = i;
       world.addNode(s);

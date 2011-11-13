@@ -2,17 +2,17 @@ console.log = function(e) {
   // do nothing
 };
 
-PFPlay.ready(function() {
+pulse.ready(function() {
   var textures = [];
-  textures.push(new PFPlay.Image({src:'../img/green_square.png'}));
-  textures.push(new PFPlay.Image({src:'../img/blue_square.png'}));
-  textures.push(new PFPlay.Image({src:'../img/red_square.png'}));
+  textures.push(new pulse.Image({src:'../img/green_square.png'}));
+  textures.push(new pulse.Image({src:'../img/blue_square.png'}));
+  textures.push(new pulse.Image({src:'../img/red_square.png'}));
   
-  var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
   
-  var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
-  var bgs = new PFPlay.Sprite({
+  var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
+  var bgs = new pulse.Sprite({
     src: '../img/gray_bg.jpg', 
     name: 'bg'
   });
@@ -21,9 +21,9 @@ PFPlay.ready(function() {
   bg.addNode(bgs);
   bg.zindex = 1;
   
-  var cybertron = new PFPlay.Scene({name: 'cybertron'});
+  var cybertron = new pulse.Scene({name: 'cybertron'});
   
-  var engine = new PFPlay.Engine();
+  var engine = new pulse.Engine();
   
   function loop(sceneManager)
   { 
@@ -35,7 +35,7 @@ PFPlay.ready(function() {
   {
     var s;
     for(var i = 0; i < 9; i++) {
-      s = new PFPlay.Sprite({src: textures[i%3]});
+      s = new pulse.Sprite({src: textures[i%3]});
       s.anchor = {x: i % 3 * 0.5, y: Math.floor(i / 3) * 0.5};
       s.position = {x: 106 + (i % 3 * 213), y: 35 + Math.floor(i / 3) * 120};
       s.events.bind('click', function(e){
@@ -46,7 +46,7 @@ PFPlay.ready(function() {
     }
   
     for(var j = 0; j < 4; j++) {
-      s = new PFPlay.Sprite({src: textures[j%3]});
+      s = new pulse.Sprite({src: textures[j%3]});
       s.anchor = {x: j % 2 * 0.5 + 0.25, y: Math.floor(j / 2) * 0.5 + 0.25};
       s.position = {x: 60 + (j % 4 * 160), y: 400};
       s.events.bind('click', function(e){
@@ -56,7 +56,7 @@ PFPlay.ready(function() {
       world.addNode(s);
     }
   
-    PFPlay.DEBUG = true;
+    pulse.DEBUG = true;
   
     cybertron.addLayer(world);
     cybertron.addLayer(bg);
