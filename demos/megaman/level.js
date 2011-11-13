@@ -17,6 +17,8 @@ mm.Brick = PFPlay.Sprite.extend({
   }
 });
 
+mm.Brick.GroundTextureLeft = new PFPlay.Image( { src: 'brick_ground_left.png'} );
+mm.Brick.GroundTextureRight = new PFPlay.Image( { src: 'brick_ground_right.png'} );
 mm.Brick.PlatformTexture = new PFPlay.Image( { src: 'brick_platform.png'} );
 mm.Brick.PlatformTextureLeft = new PFPlay.Image( { src: 'brick_platform_left.png'} );
 mm.Brick.PlatformTextureRight = new PFPlay.Image( { src: 'brick_platform_right.png'} );
@@ -73,7 +75,17 @@ mm.Chunk = function(params, layer) {
   for(var rowIdx = 0; rowIdx < params.width; rowIdx++) {
     for(var colIdx = 0; colIdx < params.height; colIdx++) {
       var top = colIdx == params.height - 1;
-      var brick = new mm.Brick(top ? mm.Brick.GroundTopTexture : mm.Brick.GroundTexture, layer);
+      var texture = mm.Brick.GroundTexture;
+      if(top) {
+        texture = mm.Brick.GroundTopTexture;
+      }
+      else if(rowIdx == 0) {
+        texture = mm.Brick.GroundTextureLeft;
+      }
+      else if(rowIdx == params.width - 1) {
+        texture = mm.Brick.GroundTextureRight;
+      }
+      var brick = new mm.Brick(texture, layer);
       brick.position.y = 
         layer.size.height -
         colIdx * (mm.Brick.Size.height - 1) - 
@@ -94,7 +106,6 @@ mm.Chunk = function(params, layer) {
 };
 
 mm.createBody = function(params, world) {
-  console.log(params.x + "," + params.y + "," + params.width + "," + params.height);
   var bodyDef = new b2BodyDef();
   bodyDef.position.Set(params.x * mm.Box2DFactor, params.y * mm.Box2DFactor);
   var body = world.CreateBody(bodyDef);
@@ -120,15 +131,29 @@ mm.Level.Layout = [
  { c: { width: 4, height: 4, x: 30}}, // E
  { c: { width: 4, height: 3, x: 34}}, // F
  { c: { width: 4, height: 2, x: 38}}, // G
- { c: { width: 4, height: 15, x: 54}}, // H
+ { c: { width: 4, height: 15, x: 60}}, // H
+ { c: { width: 6, height: 17, x: 64}}, // I
+ { c: { width: 4, height: 13, x: 70}}, // J
+ { c: { width: 30, height: 2, x: 96}}, // K
+ { c: { width: 8, height: 23, x: 138}}, // L
+ 
  
  // Platforms
  { p: { width: 4, x: 6, y: 5}},    // a
  { p: { width: 2, x: 13, y: 7}},   // b
  { p: { width: 2, x: 19, y: 6}},   // c
- { p: { width: 4, x: 42, y: 4}},   // d
- { p: { width: 4, x: 49, y: 6}},   // e
- { p: { width: 4, x: 42, y: 9}},   // f
- { p: { width: 2, x: 46, y: 13}},  // g
- { p: { width: 2, x: 50, y: 16}},  // h
+ { p: { width: 4, x: 46, y: 4}},   // d
+ { p: { width: 4, x: 53, y: 6}},   // e
+ { p: { width: 4, x: 46, y: 9}},   // f
+ { p: { width: 2, x: 50, y: 13}},  // g
+ { p: { width: 2, x: 56, y: 16}},  // h
+ { p: { width: 2, x: 34, y: 7}},   // i
+ { p: { width: 2, x: 82, y: 11}},  // j
+ { p: { width: 2, x: 90, y: 5}},   // k
+ { p: { width: 2, x: 86, y: 8}},   // l
+ { p: { width: 4, x: 128, y: 5}},   // m
+ { p: { width: 4, x: 120, y: 9}},   // n
+ { p: { width: 4, x: 112, y: 13}},   // o
+ { p: { width: 4, x: 120, y: 17}},   // p
+ { p: { width: 4, x: 128, y: 21}},   // q
 ];

@@ -31,7 +31,7 @@ mm.TestMan = PFPlay.Sprite.extend({
     
     this.events.bind('keydown', function(e) {
       if(e.keyCode == 32) {
-          e.sender.body.ApplyImpulse(new b2Vec2(0, -8), e.sender.body.GetPosition());
+          e.sender.body.ApplyImpulse(new b2Vec2(0, -10), e.sender.body.GetPosition());
       }
     });
   },
