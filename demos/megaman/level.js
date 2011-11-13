@@ -4,22 +4,16 @@ mm.Brick = PFPlay.Sprite.extend({
   init: function(texture, layer) {
     this.layer = layer;
     this._super( { src: texture });
+    this.anchor = { x: 0, y: 0 };
     this.size = { width: mm.Brick.Size.width, height: mm.Brick.Size.height };
   },
   createBody: function() {
-    var bodyDef = new b2BodyDef();
-    bodyDef.position.Set(this.position.x * mm.Box2DFactor, this.position.y * mm.Box2DFactor);
-    var body = this.layer.world.CreateBody(bodyDef);
-    var shapeDef = new b2PolygonDef();
-    shapeDef.restitution = 0.0;
-    shapeDef.friction = 0.0;
-    shapeDef.density = 2.0;
-    body.w = mm.Brick.Size.width * mm.Box2DFactor;
-    body.h = mm.Brick.Size.height * mm.Box2DFactor;
-    shapeDef.SetAsBox(body.w / 2, body.h / 2);
-    body.CreateShape(shapeDef);
-    body.SynchronizeShapes();
-    this.body = body;
+    this.body = mm.createBody(
+      { x: this.position.x, 
+        y: this.position.y,
+        width: mm.Brick.Size.width,
+        height: mm.Brick.Size.height },
+        this.layer.world)
   }
 });
 
@@ -61,11 +55,18 @@ mm.Platform = function(params, layer) {
     }
     
     var brick = new mm.Brick(texture, layer);
-    brick.position.x = mm.Brick.Size.width * params.x + i * (mm.Brick.Size.width - 1);
+    brick.position.x = (mm.Brick.Size.width - 1) * params.x + i * (mm.Brick.Size.width - 1);
     brick.position.y = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height;
-    brick.createBody();
     layer.addNode(brick);
   }
+  
+  var width = (mm.Brick.Size.width - 1) * params.width;
+  var height = (mm.Brick.Size.height - 1);
+  var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
+  var yPos = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height + height / 2;
+
+  // Create a single body to represent the chunk.
+  mm.createBody({ x: xPos, y: yPos, width: width, height: height }, layer.world);
 };
 
 mm.Chunk = function(params, layer) {
@@ -79,9 +80,35 @@ mm.Chunk = function(params, layer) {
         mm.Brick.Size.height;
       brick.position.x = (mm.Brick.Size.width - 1) * (params.x + rowIdx);
       layer.addNode(brick);
-      brick.createBody();
+      //brick.createBody();
     }
   }
+  
+  var width = (mm.Brick.Size.width - 1) * params.width;
+  var height = (mm.Brick.Size.height - 1) * params.height;
+  var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
+  var yPos = layer.size.height - ((params.height) * (mm.Brick.Size.height - 1)) + height / 2;
+  
+  // Create a single body to represent the chunk.
+  mm.createBody({ x: xPos, y: yPos, width: width, height: height }, layer.world);
+};
+
+mm.createBody = function(params, world) {
+  console.log(params.x + "," + params.y + "," + params.width + "," + params.height);
+  var bodyDef = new b2BodyDef();
+  bodyDef.position.Set(params.x * mm.Box2DFactor, params.y * mm.Box2DFactor);
+  var body = world.CreateBody(bodyDef);
+  var shapeDef = new b2PolygonDef();
+  shapeDef.restitution = 0.0;
+  shapeDef.friction = 0.0;
+  shapeDef.density = 2.0;
+  shapeDef.SetAsBox(
+    (params.width * mm.Box2DFactor) / 2, 
+    (params.height * mm.Box2DFactor) / 2);
+  body.CreateShape(shapeDef);
+  //body.SynchronizeShapes();
+  
+  return body;
 }
 
 mm.Level.Layout = [
