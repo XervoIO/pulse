@@ -112,9 +112,9 @@ PFPlay.ready(function(){
 
     updateCamera();
 
-    if(man.position.y > 1000) {
+    if(man.position.y > 2000) {
       man.b2body.WakeUp();
-      man.b2body.SetXForm(new b2Vec2(50 * mm.Box2DFactor, 550 * mm.Box2DFactor), 0);
+      man.b2body.SetXForm(new b2Vec2(50 * mm.Box2DFactor, 600 * mm.Box2DFactor), 0);
       man.b2body.SetLinearVelocity(new b2Vec2(0, 0));
       man.state = mm.Megaman.State.Intro;
     }
