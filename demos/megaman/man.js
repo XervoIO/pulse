@@ -2,7 +2,9 @@ var mm = mm || {};
 
 mm.Megaman = PFPlay.Sprite.extend({
   init : function(params) {
-    params = {};
+    if(!params) {
+      params = {};
+    }
     params.src = mm.Megaman.texture;
     
     this._super(params);
@@ -15,6 +17,11 @@ mm.Megaman = PFPlay.Sprite.extend({
     this.size = {
       width : 55,
       height : 60
+    }
+
+    this.position = {
+      x : params.position.x || 0,
+      y : params.position.y || 0
     }
 
     var animationFrameRate = 20;
@@ -82,6 +89,31 @@ mm.Megaman = PFPlay.Sprite.extend({
     });
 
     this.addAction(smileAction);
+
+    // setup physics body
+    this._private.b2world = params.b2world;
+
+    var bodyDef = new b2BodyDef();
+    var bw = Math.floor(.636363636 * this.size.width) * mm.Box2DFactor;
+    var bh = Math.floor(.716666667 * this.size.height) * mm.Box2DFactor;
+    bodyDef.position.Set(
+      this.position.x * mm.Box2DFactor, 
+      this.position.y * mm.Box2DFactor + bw / 2
+    );
+
+    this.b2body = this._private.b2world.CreateBody(bodyDef);
+    this.b2body.w = bw;
+    this.b2body.h = bh;
+    
+    var shapeDef = new b2PolygonDef();
+    shapeDef.SetAsBox(bw / 2, bh / 2);
+    shapeDef.restitution = 0.0;
+    shapeDef.density = 2.0;
+    shapeDef.friction = 0.9;
+
+    this.b2body.CreateShape(shapeDef);
+    this.b2body.SetMassFromShapes();
+    //this.b2body.SetFixedRotation(true);
   },
 
   reset : function() {
@@ -91,6 +123,22 @@ mm.Megaman = PFPlay.Sprite.extend({
   },
 
   update : function(elapsed) {
+
+    this.position = {
+      x : Math.round(this.b2body.m_xf.position.x / mm.Box2DFactor),
+      y : Math.round((this.b2body.m_xf.position.y + this.b2body.h / 2) / mm.Box2DFactor)
+    };
+
+    if(this.b2body.GetLinearVelocity().y > 0.01 ||
+       this.b2body.GetLinearVelocity().y < -0.01) {
+      this.state = mm.Megaman.State.Jumping;
+    } else {
+      this.b2body.SetLinearVelocity(new b2Vec2(this.b2body.GetLinearVelocity().x, 0));
+      if(this.state == mm.Megaman.State.Jumping) {
+        this.state = mm.Megaman.State.Idle; 
+      }
+    }
+
     this._super(elapsed);
 
     if(this.state != this._private.statePrevious) {
@@ -102,6 +150,10 @@ mm.Megaman = PFPlay.Sprite.extend({
       this.scale.x = this.direction;
       this._private.directionPrevious = this.direction;
     }
+  },
+
+  calculateProperties : function() {
+    this._super();
   },
 
   updateState : function(state) {
@@ -120,6 +172,7 @@ mm.Megaman = PFPlay.Sprite.extend({
         break;
       case mm.Megaman.State.Jumping:
         this.runAction('jumping');
+        //this.b2body.ApplyForce({ x: 0, y: -this.b2body.GetMass() * 1010}, this.b2body.GetPosition());
         break;
       case mm.Megaman.State.Smile:
         this.runAction('smile', this._private.oframe);
