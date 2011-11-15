@@ -11,21 +11,18 @@
   <meta http-equiv="Expires" content="-1">
   <meta http-equiv="cache-control" content="no-store">
   <meta http-equiv="cache-control" content="no-cache">
+  <script src="../../lib/other/stats.js"></script>
   <script src="../../lib/other/require.js"></script>
   <script src="../../lib/pulse.js" type="text/javascript"></script>
   <script type="text/javascript">
-    pulse.addGameFile('score.js');
     pulse.addGameFile('ball.js');
-    pulse.addGameFile('paddle.js');
-    pulse.addGameFile('game.js');
+    pulse.addGameFile('performance.js');
     pulse.init('../../lib');
   </script>
 </head>
 <body>
-  <div id="debug">
-    Time: <span id="time"></span>
-     Frame: <span id="frame"></span>
-  </div>
   <div style="width: 760px; height: 480px;" id="gameWindow"></div>
+  <div id="debug">
+  </div>
 </body>
 </html>

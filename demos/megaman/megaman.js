@@ -56,11 +56,11 @@ var bodyLoaded = function() {
 
 
   // Setup ui
-  var font = new pulse.BitmapFont({filename:'eboots.fnt'});
-  var l = new pulse.BitmapLabel({font: font, text: 'Built With Pulse'});
-  l.position = {x: 5, y: 5};
-  l.anchor = {x: 0, y: 0};
-  uiLayer.addNode(l);
+  //var font = new pulse.BitmapFont({filename:'eboots.fnt'});
+  //var l = new pulse.BitmapLabel({font: font, text: 'Built With Pulse'});
+  //l.position = {x: 5, y: 5};
+  //l.anchor = {x: 0, y: 0};
+  //uiLayer.addNode(l);
 
   scene.addLayer(bg2);
   scene.addLayer(bg1);
