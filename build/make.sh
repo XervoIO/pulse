@@ -24,3 +24,5 @@ java -jar compiler.jar \
 --js=../lib/core/scenemanager.js \
 --js=../lib/core/engine.js \
 --js_output_file=../bin/pulse.js
+
+java -jar jsdoc/jsrun.jar jsdoc/app/run.js -c=jsdoc/pulse.conf
