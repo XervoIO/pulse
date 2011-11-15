@@ -1,5 +1,5 @@
-PFPlay.ready(function(){
-  var mario = new PFPlay.Sprite({
+pulse.ready(function(){
+  var mario = new pulse.Sprite({
     src : 'img/mario.png', 
     name : 'mario',
     size : {
@@ -10,7 +10,7 @@ PFPlay.ready(function(){
   mario.scale = {x : 1.5, y : 0.75};
   mario.rotation = 45;
   
-  var luigi = new PFPlay.Sprite({
+  var luigi = new pulse.Sprite({
     src: 'img/luigi.png', 
     name: 'luigi',
     size : {
@@ -19,12 +19,12 @@ PFPlay.ready(function(){
     }
   });
   
-  var cat = new PFPlay.Sprite({
+  var cat = new pulse.Sprite({
     src: 'img/cat.jpg', 
     name: 'cat'
   });
   
-  var world = new PFPlay.Layer({name: 'myLayer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'myLayer', x : 320, y : 240});
   world.zindex = 2;
   world.events.bind('mousemove', function(evt) { 
     var debugPos = document.getElementById('mousep');
@@ -36,8 +36,8 @@ PFPlay.ready(function(){
     debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
   });
   
-  var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
-  var bgs = new PFPlay.Sprite({
+  var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
+  var bgs = new pulse.Sprite({
     src: 'img/Forest_blue.jpg', 
     name: 'bg'
   });
@@ -46,14 +46,14 @@ PFPlay.ready(function(){
   bg.addNode(bgs);
   bg.zindex = 1;
   
-  var mAni = new PFPlay.AnimateAction({
+  var mAni = new pulse.AnimateAction({
     name: 'ma1', 
     size: {width:125, height:125}, 
     frames: 4, 
     frameRate: 5
   });
   
-  var cybertron =  new PFPlay.Scene({name: 'Cybertron'});
+  var cybertron =  new pulse.Scene({name: 'Cybertron'});
   
   var myEngine = null;
   
@@ -97,7 +97,7 @@ PFPlay.ready(function(){
   
   function gameGo()
   {
-    myEngine = new PFPlay.Engine();
+    myEngine = new pulse.Engine();
   
     mario.events.bind('click', function() { alert('clicked on mario!'); });
     mario.addAction(mAni);

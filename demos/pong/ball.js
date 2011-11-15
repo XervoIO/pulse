@@ -1,4 +1,4 @@
-var Ball = PFPlay.Sprite.extend({
+var Ball = pulse.Sprite.extend({
   
   init: function(params) {
     this._super(params);

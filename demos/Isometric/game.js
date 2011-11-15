@@ -1,4 +1,6 @@
-PFPlay.ready(function initGame() {
+pulse.ready(function initGame() {
+  
+  //pulse.DEBUG = true;
   
   var rows = 25;
   var columns = 25;
@@ -9,25 +11,29 @@ PFPlay.ready(function initGame() {
   var width = 760;
   var height = 480;
   
-  var engine = new PFPlay.Engine({ gameWindow: 'gameWindow', iframe: false, width: 760, height: 480 });
-  var scene = new PFPlay.Scene();
+  var engine = new pulse.Engine({ gameWindow: 'gameWindow', iframe: false, width: 760, height: 480 });
+  var scene = new pulse.Scene();
   var layer = new Board({y: 50});
   layer.anchor = { x: 0, y: 0 };
   
-  var uiLayer = new PFPlay.Layer({width: 500, height:100, x:130,  y:350});
+  var uiLayer = new pulse.Layer({width: 500, height:100, x:130,  y:350});
+  uiLayer.anchor = {x: 0, y: 0 };
+  uiLayer.position = {x: 130, y: 350};
+  uiLayer.name = "UILayer"
   
   var offsetY = rows * tileHeight;
   
   var tiles = [ ];
   
-  var normalTexture = new PFPlay.Image( { src: 'tile.png' });
-  var selectedTexture = new PFPlay.Image( { src: 'selected.png '});
+  var normalTexture = new pulse.Image( { src: 'tile.png' });
+  var selectedTexture = new pulse.Image( { src: 'selected.png '});
     
   // Create and layout tiles.
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
       
-      var tile = new PFPlay.Sprite({ src: normalTexture });
+      var tile = new pulse.Sprite({ src: normalTexture });
+      tile.anchor = { x: 0, y: 0 };
       
       var x = colIdx * (tileWidth / 2) + (rowIdx * (tileWidth / 2));
       var y = colIdx * (tileHeight / 2) - (rowIdx * (tileHeight / 2)) + (offsetY / 2);
@@ -43,10 +49,10 @@ PFPlay.ready(function initGame() {
   }
   
   // Create UI.
-  var creepA = new PFPlay.Sprite({ src: 'creepA.png' });
-  var creepB = new PFPlay.Sprite({ src: 'creepB.png' });
-  var creepC = new PFPlay.Sprite({ src: 'creepC.png' });
-  var creepD = new PFPlay.Sprite({ src: 'creepD.png' });
+  var creepA = new pulse.Sprite({ src: 'creepA.png' });
+  var creepB = new pulse.Sprite({ src: 'creepB.png' });
+  var creepC = new pulse.Sprite({ src: 'creepC.png' });
+  var creepD = new pulse.Sprite({ src: 'creepD.png' });
   creepD.alpha = 50;
   
   creepA.position = { x: 10, y: 25 };
@@ -69,6 +75,8 @@ PFPlay.ready(function initGame() {
   layer.events.bind('mousemove', 
     function(pos) {
       var isoPos = worldToIso(pos.position.x, pos.position.y);
+      console.log(pos.position.x, pos.position.y);
+      console.log(isoPos.x + "," + isoPos.y);
         for(var idx in tiles) {
           if(tiles[idx].row == isoPos.x && tiles[idx].col == isoPos.y) {
             tiles[idx].texture = selectedTexture;
@@ -97,5 +105,5 @@ PFPlay.ready(function initGame() {
 
 function loop(sceneManager) {
   var debugTime = document.getElementById('time');
-  debugTime.innerText = PFPlay.masterTime;
+  debugTime.innerText = pulse.masterTime;
 }

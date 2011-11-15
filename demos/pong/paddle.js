@@ -1,4 +1,4 @@
-var Paddle = PFPlay.Sprite.extend({
+var Paddle = pulse.Sprite.extend({
   init: function(params) {
     this._super(params);
     

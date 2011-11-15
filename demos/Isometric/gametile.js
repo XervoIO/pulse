@@ -3,9 +3,9 @@ GameTile = function() {
   this.gridX = 0;
   this.gridY = 0;
   
-  this.normalSprite = new PFPlay.Sprite({src: 'tile.png'});
+  this.normalSprite = new pulse.Sprite({src: 'tile.png'});
   
-  this.overSprite = new PFPlay.Sprite({src: 'selected.png'});
+  this.overSprite = new pulse.Sprite({src: 'selected.png'});
   this.overSprite.visible = false;
   
   this.setWorldCoords = function(x, y) {

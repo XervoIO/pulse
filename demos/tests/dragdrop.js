@@ -1,8 +1,8 @@
-PFPlay.ready(function(){
-  var engine = new PFPlay.Engine();
-  var cybertron = new PFPlay.Scene({name: 'Cybertron'});
+pulse.ready(function(){
+  var engine = new pulse.Engine();
+  var cybertron = new pulse.Scene({name: 'Cybertron'});
   
-  var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
   world.events.bind('mousemove', function(evt) { 
     var debugPos = document.getElementById('mousep');
@@ -14,7 +14,7 @@ PFPlay.ready(function(){
     debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
   });
   
-  var dropArea = new PFPlay.Sprite({src: '../img/grid.png'});
+  var dropArea = new pulse.Sprite({src: '../img/grid.png'});
   dropArea.dropAcceptEnabled = true;
   dropArea.events.bind('dragenter', function(evt) {
     var console = document.getElementById('console2');
@@ -29,7 +29,7 @@ PFPlay.ready(function(){
     console.innerText = "Drag Exit - " + evt.world.x + " " + evt.world.y;
   });
   
-  var dragBox = new PFPlay.Sprite({src: '../img/blue_square.png'});
+  var dragBox = new pulse.Sprite({src: '../img/blue_square.png'});
   dragBox.dragDropEnabled = true;
   dragBox.events.bind('dragstart', function(evt) {
     var console = document.getElementById('console');
@@ -40,8 +40,8 @@ PFPlay.ready(function(){
     console.innerText = "Drag Drop - " + evt.world.x + " " + evt.world.y;
   });
   
-  var dragAccept = new PFPlay.Sprite({src: '../img/green_square.png'});
-  var dragRevoke = new PFPlay.Sprite({src: '../img/red_square.png'});
+  var dragAccept = new pulse.Sprite({src: '../img/green_square.png'});
+  var dragRevoke = new pulse.Sprite({src: '../img/red_square.png'});
   
   function loop(sceneManager)
   { 

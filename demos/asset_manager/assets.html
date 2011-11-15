@@ -11,17 +11,16 @@
   <meta http-equiv="Expires" content="-1">
   <meta http-equiv="cache-control" content="no-store">
   <meta http-equiv="cache-control" content="no-cache">
-  <script src="../../lib/pfplay.js" type="text/javascript"></script>
+   <script src="../../lib/other/require.js"></script>
+  <script src="../../lib/pulse.js" type="text/javascript"></script>
   <script type="text/javascript">
-    PFPlay.addGameFile('assets.js');
-    PFPlay.init('../../lib');
+    pulse.addGameFile('assets.js');
+    pulse.init('../../lib');
   </script>
 </head>
-<body onload="gameGo();">
+<body>
   <div id="debug">
-    <div>Loaded: <span id="loaded"></span></div>
-    <div>Relative Mouse Position: <span id="mousep"></span></div>
-    <div>Last Key Down: <span id="kdown"></span></div>
+    <div><span id="loaded"></span></div>
   </div>
   <div id="gameWindow"></div>
 </body>

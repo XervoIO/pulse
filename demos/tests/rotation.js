@@ -1,9 +1,9 @@
-PFPlay.ready(function() {
-  var seconds = new PFPlay.Image({src:'../img/hex_rounded.png'});
-  var minutes = new PFPlay.Image({src:'../img/diamond.png'});
-  var hours = new PFPlay.Image({src:'../img/triangle_rounded.png'});
+pulse.ready(function() {
+  var seconds = new pulse.Image({src:'../img/hex_rounded.png'});
+  var minutes = new pulse.Image({src:'../img/diamond.png'});
+  var hours = new pulse.Image({src:'../img/triangle_rounded.png'});
   
-  var world = new PFPlay.Layer({name: 'layer', x : 320, y : 240});
+  var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
   world.events.bind('mousemove', 
     function(evt) 
@@ -17,8 +17,8 @@ PFPlay.ready(function() {
     debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
   });
   
-  var bg = new PFPlay.Layer({name: 'bg', x : 320, y : 240});
-  var bgs = new PFPlay.Sprite({
+  var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
+  var bgs = new pulse.Sprite({
     src: '../img/yellow_bg.jpg', 
     name: 'bg'
   });
@@ -27,20 +27,20 @@ PFPlay.ready(function() {
   bg.addNode(bgs);
   bg.zindex = 1;
   
-  var cybertron = new PFPlay.Scene({name: 'cybertron'});
+  var cybertron = new pulse.Scene({name: 'cybertron'});
   
-  var engine = new PFPlay.Engine();
+  var engine = new pulse.Engine();
   
-  var s = new PFPlay.Sprite({src: seconds});
+  var s = new pulse.Sprite({src: seconds});
   s.move(320, 240);
   world.addNode(s);
   
-  var m = new PFPlay.Sprite({src: minutes});
+  var m = new pulse.Sprite({src: minutes});
   m.anchor = {x:0.5, y:2.0};
   m.move(320, 240);
   world.addNode(m);
   
-  var h = new PFPlay.Sprite({src: hours});
+  var h = new pulse.Sprite({src: hours});
   h.anchor = {x: 0.5, y:5.3};
   h.move(320, 240);
   world.addNode(h);
