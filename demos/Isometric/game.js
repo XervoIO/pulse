@@ -25,8 +25,8 @@ pulse.ready(function initGame() {
   
   var tiles = [ ];
   
-  var normalTexture = new pulse.Image( { src: 'tile.png' });
-  var selectedTexture = new pulse.Image( { src: 'selected.png '});
+  var normalTexture = new pulse.Texture( { filename: 'tile.png' });
+  var selectedTexture = new pulse.Texture( { filename: 'selected.png '});
     
   // Create and layout tiles.
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {

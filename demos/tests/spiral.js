@@ -1,10 +1,10 @@
 pulse.ready(function() {
   var stars = [];
-  stars.push(new pulse.Image({src:'../img/star_1.png'}));
-  stars.push(new pulse.Image({src:'../img/star_2.png'}));
-  stars.push(new pulse.Image({src:'../img/star_3.png'}));
-  stars.push(new pulse.Image({src:'../img/star_4.png'}));
-  stars.push(new pulse.Image({src:'../img/star_5.png'}));
+  stars.push(new pulse.Texture({filename:'../img/star_1.png'}));
+  stars.push(new pulse.Texture({filename:'../img/star_2.png'}));
+  stars.push(new pulse.Texture({filename:'../img/star_3.png'}));
+  stars.push(new pulse.Texture({filename:'../img/star_4.png'}));
+  stars.push(new pulse.Texture({filename:'../img/star_5.png'}));
   
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;

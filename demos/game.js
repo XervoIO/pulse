@@ -1,6 +1,6 @@
 pulse.ready(function(){
   var mario = new pulse.Sprite({
-    src : 'img/mario.png', 
+    src: 'img/mario.png', 
     name : 'mario',
     size : {
       width : 125,

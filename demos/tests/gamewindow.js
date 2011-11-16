@@ -1,5 +1,5 @@
 pulse.ready(function() {
-  var texture = new pulse.Image({src:'../img/green_square.png'});
+  var texture = new pulse.Texture({filename:'../img/green_square.png'});
   
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;

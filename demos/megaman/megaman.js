@@ -27,8 +27,8 @@ var bodyLoaded = function() {
   var uiLayer = new pulse.Layer({width : 600, height: 400});
   uiLayer.position = {x: 300, y: 200};
 
-  var bg1Texture = new pulse.Image( { src: 'mountain.png' });
-  var bg2Texture = new pulse.Image( { src: 'clouds.png' });
+  var bg1Texture = new pulse.Texture( { filename: 'mountain.png' });
+  var bg2Texture = new pulse.Texture( { filename: 'clouds.png' });
 
   for(var i = 0; i < 10; i++) {
     var bgTile = new pulse.Sprite( { src: bg1Texture } );

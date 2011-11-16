@@ -17,13 +17,13 @@ mm.Brick = pulse.Sprite.extend({
   }
 });
 
-mm.Brick.GroundTextureLeft = new pulse.Image( { src: 'brick_ground_left.png'} );
-mm.Brick.GroundTextureRight = new pulse.Image( { src: 'brick_ground_right.png'} );
-mm.Brick.PlatformTexture = new pulse.Image( { src: 'brick_platform.png'} );
-mm.Brick.PlatformTextureLeft = new pulse.Image( { src: 'brick_platform_left.png'} );
-mm.Brick.PlatformTextureRight = new pulse.Image( { src: 'brick_platform_right.png'} );
-mm.Brick.GroundTexture = new pulse.Image( { src: 'brick_ground.png'} );
-mm.Brick.GroundTopTexture = new pulse.Image( { src: 'ground_top.png'} );
+mm.Brick.GroundTextureLeft = new pulse.Texture( { filename: 'brick_ground_left.png'} );
+mm.Brick.GroundTextureRight = new pulse.Texture( { filename: 'brick_ground_right.png'} );
+mm.Brick.PlatformTexture = new pulse.Texture( { filename: 'brick_platform.png'} );
+mm.Brick.PlatformTextureLeft = new pulse.Texture( { filename: 'brick_platform_left.png'} );
+mm.Brick.PlatformTextureRight = new pulse.Texture( { filename: 'brick_platform_right.png'} );
+mm.Brick.GroundTexture = new pulse.Texture( { filename: 'brick_ground.png'} );
+mm.Brick.GroundTopTexture = new pulse.Texture( { filename: 'ground_top.png'} );
 mm.Brick.Size = { width: 25, height: 25 };
 
 mm.Level = pulse.Layer.extend({

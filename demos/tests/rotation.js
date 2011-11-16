@@ -1,7 +1,7 @@
 pulse.ready(function() {
-  var seconds = new pulse.Image({src:'../img/hex_rounded.png'});
-  var minutes = new pulse.Image({src:'../img/diamond.png'});
-  var hours = new pulse.Image({src:'../img/triangle_rounded.png'});
+  var seconds = new pulse.Texture({filename:'../img/hex_rounded.png'});
+  var minutes = new pulse.Texture({filename:'../img/diamond.png'});
+  var hours = new pulse.Texture({filename:'../img/triangle_rounded.png'});
   
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;

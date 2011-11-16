@@ -4,9 +4,9 @@ console.log = function(e) {
 
 pulse.ready(function() {
   var textures = [];
-  textures.push(new pulse.Image({src:'../img/green_square.png'}));
-  textures.push(new pulse.Image({src:'../img/blue_square.png'}));
-  textures.push(new pulse.Image({src:'../img/red_square.png'}));
+  textures.push(new pulse.Texture({filename:'../img/green_square.png'}));
+  textures.push(new pulse.Texture({filename:'../img/blue_square.png'}));
+  textures.push(new pulse.Texture({filename:'../img/red_square.png'}));
   
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
