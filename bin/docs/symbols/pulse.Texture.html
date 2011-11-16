@@ -257,7 +257,7 @@ ul.inheritsList
 				Basic 2d image
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/asset/texture.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core\asset\texture.js&gt;.
 				
 			</p>
 
@@ -278,7 +278,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Texture.html#constructor">pulse.Texture</a></b>(filename)
 							</div>
-							<div class="description">Raw 2d image.</div>
+							<div class="description">Raw 2d image, represented as a canvas object.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -286,6 +286,64 @@ ul.inheritsList
 			
 
 <!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Texture.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.Texture.html#alpha">alpha</a></b>
+								</div>
+								<div class="description">The transparency of the image, on a scale from 0 to 100, 100 beingcompletely opaque.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.Texture.html#rotation">rotation</a></b>
+								</div>
+								<div class="description">The rotation of the image.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.Texture.html#scaleX">scaleX</a></b>
+								</div>
+								<div class="description">The x-axis scale factor.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.Texture.html#scaleY">scaleY</a></b>
+								</div>
+								<div class="description">The y-axis scale factor.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
 			
 
 <!-- ============================== methods summary ======================== -->
@@ -305,9 +363,36 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Texture.html#height">height</a></b>()
+								</div>
+								<div class="description">Get the calculated height of the raw image.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Texture.html#load">load</a></b>()
 								</div>
 								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Texture.html#slice">slice</a></b>(x, y, width, height)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Texture.html#width">width</a></b>()
+								</div>
+								<div class="description">Get the calculated width of the raw image.</div>
 							</td>
 						</tr>
 					
@@ -332,7 +417,7 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Raw 2d image.
+					Raw 2d image, represented as a canvas object.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -363,12 +448,137 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="alpha"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>alpha</b>
+					
+					</div>
+					<div class="description">
+						The transparency of the image, on a scale from 0 to 100, 100 beingcompletely opaque.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="rotation"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>rotation</b>
+					
+					</div>
+					<div class="description">
+						The rotation of the image. 360 represents a full rotation.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="scaleX"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>scaleX</b>
+					
+					</div>
+					<div class="description">
+						The x-axis scale factor. 1 represents normal scale.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="scaleY"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>scaleY</b>
+					
+					</div>
+					<div class="description">
+						The y-axis scale factor. 1 represents normal scale.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
+			
 
 <!-- ============================== method details ========================= -->		
 			
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="height"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>height</b>()
+					
+					</div>
+					<div class="description">
+						Get the calculated height of the raw image.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{number}</span> The height of the raw image</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
 				
 					<a name="load"> </a>
 					<div class="fixedFont">
@@ -393,6 +603,92 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name="slice"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>slice</b>(x, y, width, height)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>x</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>y</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>width</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>height</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="width"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{number}</span>
+					<b>width</b>()
+					
+					</div>
+					<div class="description">
+						Get the calculated width of the raw image.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{number}</span> The width of the raw image</dd>
+							
+							</dl>
+						
+						
+						
+
 					
 				
 			
@@ -407,7 +703,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2011<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Nov 15 2011 10:58:18 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Nov 15 2011 18:56:04 GMT-0700 (MST)
 		</div>
 	</body>
 </html>
