@@ -70,42 +70,55 @@ html {
 body, select, input, textarea {color: #111;}
 
 body {
-	background: url('../img/bg.jpg') no-repeat 50% 50%;
+	background: #000 url('../img/bg.jpg') no-repeat 50% 0;
 	background-size: cover;
 	min-height: 100%;
 	overflow: hidden;
 }
 
 body p {
-	color: #F5F5F5;
-	font-size: 16px;
+	color: #F9F9F9;
+	font-size: 14px;
 	text-shadow: 1px 1px 0px #111111;
 }
 
 .wrapper {
-	padding: 100px 0 0;
+	padding: 45px 0 0;
 }
 
 h1 {
 	font-size: 50px;
-	width: 438px;
-	height: 64px;
+	width: 450px;
+	height: 245px;
+	margin: 0 auto -30px;
 	text-indent: -9999px;
 	background: url('../img/pulse_header.png') no-repeat;
 }
 
-h1#thanks {
-	width: 299px;
-	height: 65px;
-	background: url('../img/thanks_header.png') no-repeat;
+.center {
+	width: 600px;
+	margin: 0 auto 5px;
+	font-size: 12px;
 }
 
-.hoverbox {
+.topbox {
+	width: 570px;
+	min-height: 140px;
+	margin: 0 auto 50px;
+	padding: 50px 20px 0;
+	background: url('../img/topbox_bg.png') repeat-x 0 100%;
+}
+
+.topbox p {
+	padding: 10px 0 10px;
+}
+
+.game {
 	width: 600px;
 	padding: 5px;
 	overflow: hidden;
-	margin: 0 auto 50px;
-	background: url('../img/hoverbox_bg.png') repeat;
+	margin: 0 auto 5px;
+	background: #515151;
 	-webkit-box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
 	-moz-box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
 	box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
@@ -114,12 +127,8 @@ h1#thanks {
 	border-radius: 3px;
 }
 
-.hoverbox p {
-	padding: 10px 10px 10px;
-}
-
 #signup-form {
-	padding: 10px 10px 10px;
+	padding: 10px 0 10px;
 	overflow: hidden;
 }
 
@@ -128,28 +137,24 @@ h1#thanks {
 }
 
 .signup-email {
-	width: 300px;
-	height: 36px;
+	width: 430px;
+	height: 30px;
 	padding: 1px 5px;
-	border: 1px solid #787878;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+	border: 1px solid #111;
 	margin-right: 20px;
 }
 
 .fancy-submit {
-	width: 140px;
-	height: 40px;
+	width: 105px;
+	height: 34px;
 	background: url('../img/signup_btn.png') no-repeat;
 	text-indent: -9999px;
 	border: 0;
 }
 
 footer {
-	position: absolute;
-	right: 5px;
-	bottom: 5px;
+	margin: 30px 10px 0;
+	text-align: right;
 	font-size: 10px;
 }
 
