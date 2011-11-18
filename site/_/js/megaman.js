@@ -27,8 +27,8 @@ var bodyLoaded = function() {
   var uiLayer = new pulse.Layer({width : 600, height: 400});
   uiLayer.position = {x: 300, y: 200};
 
-  var bg1Texture = new pulse.Image( { src: '_/img/mountain.png' });
-  var bg2Texture = new pulse.Image( { src: '_/img/clouds.png' });
+  var bg1Texture = new pulse.Texture( { filename: '_/img/mountain.png' });
+  var bg2Texture = new pulse.Texture( { filename: '_/img/clouds.png' });
 
   for(var i = 0; i < 10; i++) {
     var bgTile = new pulse.Sprite( { src: bg1Texture } );
@@ -56,11 +56,11 @@ var bodyLoaded = function() {
 
 
   // Setup ui
-  // var font = new pulse.BitmapFont({filename:'_/img/eboots.fnt'});
-  // var l = new pulse.BitmapLabel({font: font, text: 'Built With Pulse'});
-  // l.position = {x: 5, y: 5};
-  // l.anchor = {x: 0, y: 0};
-  // uiLayer.addNode(l);
+  var font = new pulse.BitmapFont({filename:'_/img/eboots.fnt'});
+  var l = new pulse.BitmapLabel({font: font, text: 'Built With Pulse'});
+  l.position = {x: 5, y: 5};
+  l.anchor = {x: 0, y: 0};
+  uiLayer.addNode(l);
 
   scene.addLayer(bg2);
   scene.addLayer(bg1);

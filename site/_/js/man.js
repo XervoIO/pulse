@@ -195,4 +195,4 @@ mm.Megaman.Direction = {};
 mm.Megaman.Direction.Right = 1;
 mm.Megaman.Direction.Left = -1;
 
-mm.Megaman.texture = new pulse.Image({src: '_/img/man.png'});
+mm.Megaman.texture = new pulse.Texture({filename: '_/img/man.png'});

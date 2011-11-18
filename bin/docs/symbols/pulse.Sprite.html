@@ -259,7 +259,7 @@ ul.inheritsList
 				The sprite object.
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core\sprite.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/sprite.js&gt;.
 				
 			</p>
 
@@ -280,7 +280,8 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Sprite.html#constructor">pulse.Sprite</a></b>(params)
 							</div>
-							<div class="description">Sprites are the basic object for moving, animated graphics onthe screen.</div>
+							<div class="description">Sprites are the basic object for moving, animated graphics on
+the screen.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -515,7 +516,17 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#inCurrentBounds">inCurrentBounds</a></b>(x, y)
 								</div>
-								<div class="description">Checks if the x and y position passed in is a point inside of this sprite.</div>
+								<div class="description">Checks if the x and y position passed in is a point inside 
+of this sprite.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#killDrag">killDrag</a></b>(evt)
+								</div>
+								<div class="description">Ends dragging for this sprite.</div>
 							</td>
 						</tr>
 					
@@ -533,7 +544,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#rectInCurrentBounds">rectInCurrentBounds</a></b>(rectangle)
 								</div>
-								<div class="description">Returns whether the passed in rectangular dimensionsare inside this sprite.</div>
+								<div class="description">Returns whether the passed in rectangular dimensions
+are inside this sprite.</div>
 							</td>
 						</tr>
 					
@@ -551,7 +563,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#update">update</a></b>(time)
 								</div>
-								<div class="description">Sprite's update function calculates the size based on currentimage or animation and then calls the super update.</div>
+								<div class="description">Sprite's update function calculates the size based on current
+image or animation and then calls the super update.</div>
 							</td>
 						</tr>
 					
@@ -580,7 +593,10 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Sprites are the basic object for moving, animated graphics onthe screen. They have an image, the sprite sheet, which is acollection of "frames" that can be played in succession to produce an animation.
+					Sprites are the basic object for moving, animated graphics on
+the screen. They have an image, the sprite sheet, which is a
+collection of "frames" that can be played in succession to 
+produce an animation.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -595,13 +611,15 @@ ul.inheritsList
 								<span class="light fixedFont">{object}</span>  <b>params</b>
 								
 							</dt>
-								<dd>parameters that can be set as initialized optionson the node</dd>
+								<dd>parameters that can be set as initialized options
+on the node</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string|<a href="../symbols/pulse.Texture.html">pulse.Texture</a>}</span>  <b>params.src</b>
 								
 							</dt>
-								<dd>the texture filename to use or a pulse.Texture to use</dd>
+								<dd>the texture filename to use or a 
+pulse.Texture to use</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string}</span>  <b>params.name</b>
@@ -935,7 +953,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Adds an action to this sprite. The params passed in must either be an Action or the constructor params for an AnimateAction. See the AnimateAction object for more information.
+						Adds an action to this sprite. The params passed in must either be 
+an Action or the constructor params for an AnimateAction. 
+See the AnimateAction object for more information.
 						
 						
 					</div>
@@ -1011,7 +1031,8 @@ ul.inheritsList
 									<span class="light fixedFont">{CanvasRenderingContext2D}</span> <b>ctx</b>
 									
 								</dt>
-								<dd>the context in which to draw this visual on</dd>
+								<dd>the context in which to draw this 
+visual on</dd>
 							
 							</dl>
 						
@@ -1032,7 +1053,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Handles all events sent to this object. If event is mousedown then a potential drag and drop action is handled.
+						Handles all events sent to this object. If event is mousedown then a 
+potential drag and drop action is handled.
 						
 						
 					</div>
@@ -1149,7 +1171,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Checks if the x and y position passed in is a point inside of this sprite.
+						Checks if the x and y position passed in is a point inside 
+of this sprite.
 						
 						
 					</div>
@@ -1184,6 +1207,42 @@ ul.inheritsList
 								<dd><span class="light fixedFont">{boolean}</span> true if point passed is inside this sprite</dd>
 							
 							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name="killDrag"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>killDrag</b>(evt)
+					
+					</div>
+					<div class="description">
+						Ends dragging for this sprite.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{HTMLEvent}</span> <b>evt</b>
+									
+								</dt>
+								<dd>the raw event from the browser</dd>
+							
+							</dl>
+						
+						
+						
+						
 						
 						
 						
@@ -1230,7 +1289,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Returns whether the passed in rectangular dimensionsare inside this sprite.
+						Returns whether the passed in rectangular dimensions
+are inside this sprite.
 						
 						
 					</div>
@@ -1273,7 +1333,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Starts and returns an action. Setting the target of the action to this sprite.
+						Starts and returns an action. Setting the target of the action to 
+this sprite.
 						
 						
 					</div>
@@ -1322,7 +1383,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Sprite's update function calculates the size based on currentimage or animation and then calls the super update.
+						Sprite's update function calculates the size based on current
+image or animation and then calls the super update.
 						
 						
 					</div>
@@ -1362,7 +1424,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2011<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Nov 15 2011 18:56:04 GMT-0700 (MST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Fri Nov 18 2011 14:23:16 GMT-0500 (EST)
 		</div>
 	</body>
 </html>

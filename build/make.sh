@@ -13,7 +13,6 @@ java -jar compiler.jar \
 --js=../lib/core/asset/assetbundle.js \
 --js=../lib/core/asset/assetmanager.js \
 --js=../lib/core/visual.js \
---js=../lib/core/image.js \
 --js=../lib/core/action/action.js \
 --js=../lib/core/action/animateaction.js \
 --js=../lib/core/sprite.js \
