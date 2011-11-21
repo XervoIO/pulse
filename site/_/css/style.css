@@ -152,6 +152,14 @@ h1 {
 	border: 0;
 }
 
+#back-button {
+	display: block;
+	width: 105px;
+	height: 34px;
+	background: url('../img/back_btn.png') no-repeat;
+	text-indent: -9999px;
+}
+
 footer {
 	margin: 30px 10px 0;
 	text-align: right;
