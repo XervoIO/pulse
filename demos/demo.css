@@ -1,0 +1,9 @@
+#gameWindow {
+  border: 2px solid #000;
+  width: 640px;
+  height: 480px;
+}
+
+#gameWindow canvas {
+  position: absolute;
+}

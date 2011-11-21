@@ -1,0 +1,172 @@
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+	
+	Eric Meyer					:: http://ericmeyer.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+	
+-------------------------------------------------------------------------------*/
+
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}									
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+/* Responsive images and other embedded objects
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+   If this default setting for images is causing issues, you might want to replace it with a .responsive class instead. */
+img,
+object,
+embed {max-width: 100%;}
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+/* Accessible focus treatment
+	people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active {outline: none;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label, 
+input[type=button], 
+input[type=submit], 
+button {cursor: pointer;}
+
+/* new Linux- and Windows-friendly sans-serif font stack: http://mky.be/fontstack */
+body {font: 13px "Helvetica Neue", Helvetica, Arial, sans-serif}
+
+a {color: #03f;}
+a:hover {color: #69f;}
+
+/* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
+::-moz-selection{background: #fcd700; color: #fff; text-shadow: none;}
+::selection {background: #fcd700; color: #fff; text-shadow: none;} 
+
+/*	j.mp/webkit-tap-highlight-color */
+a:link {-webkit-tap-highlight-color: #fcd700;} 
+
+html {
+	height: 100%;
+}
+
+body, select, input, textarea {color: #111;}
+
+body {
+	background: #000 url('../img/bg.jpg') no-repeat 50% 0;
+	background-size: cover;
+	min-height: 100%;
+	overflow: hidden;
+}
+
+body p {
+	color: #F9F9F9;
+	font-size: 14px;
+	text-shadow: 1px 1px 0px #111111;
+}
+
+.wrapper {
+	padding: 45px 0 0;
+}
+
+h1 {
+	font-size: 50px;
+	width: 450px;
+	height: 245px;
+	margin: 0 auto -30px;
+	text-indent: -9999px;
+	background: url('../img/pulse_header.png') no-repeat;
+}
+
+.center {
+	width: 600px;
+	margin: 0 auto 5px;
+	font-size: 12px;
+}
+
+.topbox {
+	width: 570px;
+	min-height: 140px;
+	margin: 0 auto 50px;
+	padding: 50px 20px 0;
+	background: url('../img/topbox_bg.png') repeat-x 0 100%;
+}
+
+.topbox p {
+	padding: 10px 0 10px;
+}
+
+.game {
+	width: 600px;
+	padding: 5px;
+	overflow: hidden;
+	margin: 0 auto 5px;
+	background: #515151;
+	-webkit-box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
+	-moz-box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
+	box-shadow: 2px 5px 10px 3px rgba(0, 0, 0, .75);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+#signup-form {
+	padding: 10px 0 10px;
+	overflow: hidden;
+}
+
+#signup-form input {
+	float: left;
+}
+
+.signup-email {
+	width: 430px;
+	height: 30px;
+	padding: 1px 5px;
+	border: 1px solid #111;
+	margin-right: 20px;
+}
+
+.fancy-submit {
+	width: 105px;
+	height: 34px;
+	background: url('../img/signup_btn.png') no-repeat;
+	text-indent: -9999px;
+	border: 0;
+}
+
+#back-button {
+	display: block;
+	width: 105px;
+	height: 34px;
+	background: url('../img/back_btn.png') no-repeat;
+	text-indent: -9999px;
+}
+
+footer {
+	margin: 30px 10px 0;
+	text-align: right;
+	font-size: 10px;
+}
+
+footer a {
+	color: #555;
+	text-decoration: none;
+}

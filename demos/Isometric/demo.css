@@ -1,0 +1,9 @@
+#gameWindow div {
+  position: absolute;
+  border: 1px solid #000;
+}
+
+#gameWindow canvas {
+  position: absolute;
+  border: 1px solid #FF0000;
+}

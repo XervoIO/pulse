@@ -1,0 +1,42 @@
+# Exclude the build directory
+build/*
+ 
+# Exclude temp nibs and swap files
+*~.nib
+*.swp
+ 
+# Exclude OS X folder attributes
+.DS_Store
+ 
+# Exclude user-specific XCode 3 and 4 files
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+
+config/deploy.rb
+
+Capfile
+
+#Apatan 3 project file
+*.project
+
+demos/Isometric/iso.html~
+
+demos/Isometric/game.js~
+
+lib/core/layer.js~
+
+lib/core/image.js~
+
+lib/core/sprite.js~
+
+lib/core/scene.js~
+
+lib/core/engine.js~
+
+demos/Isometric/demo.css~
