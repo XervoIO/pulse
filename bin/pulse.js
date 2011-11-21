@@ -1,3 +1,8 @@
+/* 
+Pulse Engine 
+Copyright Paranoid Ferret 2011
+version 0.1-a1
+*/
 window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)}}();
 (function(){var a=false,c=/xyz/.test(function(){})?/\b_super\b/:/.*/;this.PClass=function(){};PClass.extend=function(g){function f(){!a&&this.init&&this.init.apply(this,arguments)}var h=this.prototype;a=true;var i=new this;a=false;for(var j in g)i[j]=typeof g[j]=="function"&&typeof h[j]=="function"&&c.test(g[j])?function(a,c){return function(){var g=this._super;this._super=h[a];var f=c.apply(this,arguments);this._super=g;return f}}(j,g[j]):g[j];f.prototype=i;f.prototype.constructor=f;f.extend=arguments.callee;
 return f}})();typeof pulse=="undefined"&&(pulse={events:{mousedown:"mouse",mouseup:"mouse",click:"mouse",mousemove:"mouse",mousewheel:"mouse",keyup:"keyboard",keydown:"keyboard",keypress:"keyboard"},customevents:{dragstart:"drag",dragdrop:"drag",dragenter:"drag",dragover:"drag",dragexit:"drag",complete:"action",finished:"audio"}});pulse.DEBUG=false;/*
