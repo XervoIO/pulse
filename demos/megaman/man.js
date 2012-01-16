@@ -17,12 +17,12 @@ mm.Megaman = pulse.Sprite.extend({
     this.size = {
       width : 55,
       height : 60
-    }
+    };
 
     this.position = {
       x : params.position.x || 0,
       y : params.position.y || 0
-    }
+    };
 
     var animationFrameRate = 20;
     var _self = this;
@@ -46,9 +46,9 @@ mm.Megaman = pulse.Sprite.extend({
     this._private.directionPrevious = mm.Megaman.Direction.Right;
 
     var introAction = new pulse.AnimateAction({
-      name : 'intro', 
-      size : {width:55, height:60}, 
-      frames : [22,22,22,22,22,22,22,22,22,22,22,23,24,25,26,27,28,29], 
+      name : 'intro',
+      size : {width:55, height:60},
+      frames : [22,22,22,22,22,22,22,22,22,22,22,23,24,25,26,27,28,29],
       frameRate : animationFrameRate,
       plays : 1
     });
@@ -59,18 +59,18 @@ mm.Megaman = pulse.Sprite.extend({
     this.addAction(introAction);
 
     var runningAction = new pulse.AnimateAction({
-      name : 'running', 
-      size : {width:55, height:60}, 
-      frames : [7,8,9,10,11,12,13,14,15,16], 
+      name : 'running',
+      size : {width:55, height:60},
+      frames : [7,8,9,10,11,12,13,14,15,16],
       frameRate : animationFrameRate
     });
 
     this.addAction(runningAction);
 
     var jumpAction = new pulse.AnimateAction({
-      name : 'jumping', 
-      size : {width:55, height:60}, 
-      frames : [17,18,19,20,21], 
+      name : 'jumping',
+      size : {width:55, height:60},
+      frames : [17,18,19,20,21],
       frameRate : animationFrameRate,
       plays : 1
     });
@@ -78,9 +78,9 @@ mm.Megaman = pulse.Sprite.extend({
     this.addAction(jumpAction);
 
     var smileAction = new pulse.AnimateAction({
-      name : 'smile', 
-      size : {width:55, height:60}, 
-      frames : [1,2,3,4,5,6], 
+      name : 'smile',
+      size : {width:55, height:60},
+      frames : [1,2,3,4,5,6],
       frameRate : animationFrameRate,
       plays : 1
     });
@@ -94,15 +94,15 @@ mm.Megaman = pulse.Sprite.extend({
     this._private.b2world = params.b2world;
 
     var bodyDef = new b2BodyDef();
-    var bw = Math.floor(.636363636 * this.size.width) * mm.Box2DFactor;
-    var bh = Math.floor(.716666667 * this.size.height) * mm.Box2DFactor;
+    var bw = Math.floor(0.636363636 * this.size.width) * mm.Box2DFactor;
+    var bh = Math.floor(0.716666667 * this.size.height) * mm.Box2DFactor;
     bodyDef.position.Set(
-      this.position.x * mm.Box2DFactor, 
+      this.position.x * mm.Box2DFactor,
       this.position.y * mm.Box2DFactor + bw / 2
     );
     bodyDef.massData.mass = 2.0;
     bodyDef.massData.center.SetZero();
-    bodyDef.massData.I = Number.POSITIVE_INFINITY; 
+    bodyDef.massData.I = Number.POSITIVE_INFINITY;
 
     this.b2body = this._private.b2world.CreateBody(bodyDef);
     this.b2body.w = bw;
@@ -138,7 +138,7 @@ mm.Megaman = pulse.Sprite.extend({
     } else {
       this.b2body.SetLinearVelocity(new b2Vec2(this.b2body.GetLinearVelocity().x, 0));
       if(this.state == mm.Megaman.State.Jumping) {
-        this.state = mm.Megaman.State.Idle; 
+        this.state = mm.Megaman.State.Idle;
       }
     }
 

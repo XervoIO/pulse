@@ -45,7 +45,7 @@ pulse.ready(function(){
   var arrowLeft = false;
   var arrowRight = false;
   
-  var speed = .15;
+  var speed = 0.15;
   
   function update(sceneManager, elapsed) {
     if(arrowRight) {
@@ -70,7 +70,7 @@ pulse.ready(function(){
     } else {
       if(man.state == mm.Megaman.State.Running) {
         man.state = mm.Megaman.State.Idle;
-      } 
+      }
     }
 
     // physics stuff
@@ -83,7 +83,7 @@ pulse.ready(function(){
     }
     else if(e.keyCode == 39) {
       arrowRight = true;
-    } 
+    }
     else if(e.keyCode == 13) {
       man.state = mm.Megaman.State.Intro;
     }else if(e.keyCode == 73) {

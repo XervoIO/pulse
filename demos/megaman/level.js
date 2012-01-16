@@ -9,11 +9,11 @@ mm.Brick = pulse.Sprite.extend({
   },
   createBody: function() {
     this.body = mm.createBody(
-      { x: this.position.x, 
+      { x: this.position.x,
         y: this.position.y,
         width: mm.Brick.Size.width,
         height: mm.Brick.Size.height },
-        this.layer.world)
+        this.layer.world);
   }
 });
 
@@ -49,7 +49,7 @@ mm.Level = pulse.Layer.extend({
 mm.Platform = function(params, layer) {
   for(var i = 0; i < params.width; i++) {
     var texture = mm.Brick.PlatformTexture;
-    if(i == 0) {
+    if(i === 0) {
       texture = mm.Brick.PlatformTextureLeft;
     }
     else if (i == params.width - 1) {
@@ -79,16 +79,16 @@ mm.Chunk = function(params, layer) {
       if(top) {
         texture = mm.Brick.GroundTopTexture;
       }
-      else if(rowIdx == 0) {
+      else if(rowIdx === 0) {
         texture = mm.Brick.GroundTextureLeft;
       }
       else if(rowIdx == params.width - 1) {
         texture = mm.Brick.GroundTextureRight;
       }
       var brick = new mm.Brick(texture, layer);
-      brick.position.y = 
+      brick.position.y =
         layer.size.height -
-        colIdx * (mm.Brick.Size.height - 1) - 
+        colIdx * (mm.Brick.Size.height - 1) -
         mm.Brick.Size.height;
       brick.position.x = (mm.Brick.Size.width - 1) * (params.x + rowIdx);
       layer.addNode(brick);
@@ -114,13 +114,13 @@ mm.createBody = function(params, world) {
   shapeDef.friction = 0.0;
   shapeDef.density = 2.0;
   shapeDef.SetAsBox(
-    (params.width * mm.Box2DFactor) / 2, 
+    (params.width * mm.Box2DFactor) / 2,
     (params.height * mm.Box2DFactor) / 2);
   body.CreateShape(shapeDef);
   //body.SynchronizeShapes();
   
   return body;
-}
+};
 
 mm.Level.Layout = [
  // Chunks - the ground
@@ -155,5 +155,5 @@ mm.Level.Layout = [
  { p: { width: 4, x: 120, y: 9}},   // n
  { p: { width: 4, x: 112, y: 13}},   // o
  { p: { width: 4, x: 120, y: 17}},   // p
- { p: { width: 4, x: 128, y: 21}},   // q
+ { p: { width: 4, x: 128, y: 21}}   // q
 ];
