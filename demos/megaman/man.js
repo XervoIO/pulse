@@ -1,6 +1,14 @@
+// Namespace declaration
 var mm = mm || {};
 
+/**
+ * Megaman class that handles moving and animating the man
+ */
 mm.Megaman = pulse.Sprite.extend({
+  /**
+   * Initializes the man
+   * @param  {object} params parameters for the man
+   */
   init : function(params) {
     if(!params) {
       params = {};
@@ -9,6 +17,7 @@ mm.Megaman = pulse.Sprite.extend({
     
     this._super(params);
 
+    // Initialize the anchor to bottom center
     this.anchor = {
       x : 0.5,
       y : 1.0
@@ -24,12 +33,14 @@ mm.Megaman = pulse.Sprite.extend({
       y : params.position.y || 0
     };
 
+    // Set a frame rate for animations
     var animationFrameRate = 20;
     var _self = this;
 
     this.textureFrame.width = 55;
     this.textureFrame.height = 60;
 
+    // Save the original frame
     this._private.oframe = {
       x: 0,
       y: 0,
@@ -37,14 +48,14 @@ mm.Megaman = pulse.Sprite.extend({
       height : 60
     };
 
+    //Init states
     this.state = mm.Megaman.State.Idle;
-
     this._private.statePrevious = mm.Megaman.State.Idle;
 
     this.direction = mm.Megaman.Direction.Right;
-
     this._private.directionPrevious = mm.Megaman.Direction.Right;
 
+    // Create animation for the beaming in intro
     var introAction = new pulse.AnimateAction({
       name : 'intro',
       size : {width:55, height:60},
@@ -52,12 +63,16 @@ mm.Megaman = pulse.Sprite.extend({
       frameRate : animationFrameRate,
       plays : 1
     });
+    
+    // When animation is complete set state back to Idle
     introAction.events.bind('complete', function(){
       _self.state = mm.Megaman.State.Idle;
     });
 
+    // Add the animation
     this.addAction(introAction);
 
+    // Create animation for running
     var runningAction = new pulse.AnimateAction({
       name : 'running',
       size : {width:55, height:60},
@@ -65,8 +80,10 @@ mm.Megaman = pulse.Sprite.extend({
       frameRate : animationFrameRate
     });
 
+    // Add the animation
     this.addAction(runningAction);
 
+    // Create animation for jumping
     var jumpAction = new pulse.AnimateAction({
       name : 'jumping',
       size : {width:55, height:60},
@@ -75,8 +92,10 @@ mm.Megaman = pulse.Sprite.extend({
       plays : 1
     });
 
+    // Add the animation
     this.addAction(jumpAction);
 
+    // Create animation for the head twitch smile thingy
     var smileAction = new pulse.AnimateAction({
       name : 'smile',
       size : {width:55, height:60},
@@ -84,10 +103,13 @@ mm.Megaman = pulse.Sprite.extend({
       frameRate : animationFrameRate,
       plays : 1
     });
+
+    // When animation is complete set state back to Idle
     smileAction.events.bind('complete', function(){
       _self.state = mm.Megaman.State.Idle;
     });
 
+    // Add the animation
     this.addAction(smileAction);
 
     // setup physics body
@@ -117,36 +139,50 @@ mm.Megaman = pulse.Sprite.extend({
     this.b2body.CreateShape(shapeDef);
   },
 
+  /**
+   * Resets all animations on the man
+   */
   reset : function() {
     for(var n in this.runningActions) {
       this.runningActions[n].stop();
     }
   },
 
+  /**
+   * Update function that runs on every update loop, we updated positions and
+   * check for any change in state to react to it
+   * @param  {number} elapsed the time elapsed since last update
+   */
   update : function(elapsed) {
 
+    // Set position based on the Box2D body position
     this.position = {
       x : Math.round(this.b2body.GetPosition().x / mm.Box2DFactor),
       y : Math.round((this.b2body.GetPosition().y + this.b2body.h / 2) / mm.Box2DFactor) + 1
     };
 
+    // If the man is jumping make sure the correct state is set
     if(this.b2body.GetLinearVelocity().y > 0.01 ||
        this.b2body.GetLinearVelocity().y < -0.01) {
       if(this.state != mm.Megaman.State.Intro) {
         this.state = mm.Megaman.State.Jumping;
       }
     } else {
+      // Jump complete or wasn't jumping, check if was jumping and update
+      // state accordingly
       this.b2body.SetLinearVelocity(new b2Vec2(this.b2body.GetLinearVelocity().x, 0));
       if(this.state == mm.Megaman.State.Jumping) {
         this.state = mm.Megaman.State.Idle;
       }
     }
 
+    // Check if man has changed state
     if(this.state != this._private.statePrevious) {
       this.updateState(this.state);
       this._private.statePrevious = this.state;
     }
 
+    // Check if man is pointed in a new direction
     if(this.direction != this._private.directionPrevious) {
       this.scale.x = this.direction;
       this._private.directionPrevious = this.direction;
@@ -155,10 +191,10 @@ mm.Megaman = pulse.Sprite.extend({
     this._super(elapsed);
   },
 
-  calculateProperties : function() {
-    this._super();
-  },
-
+  /**
+   * Updating animations based on change in state
+   * @param  {string} state The new state
+   */
   updateState : function(state) {
     this.reset();
 
@@ -184,6 +220,7 @@ mm.Megaman = pulse.Sprite.extend({
 
 });
 
+// Static member to hold possible states
 mm.Megaman.State = {};
 mm.Megaman.State.Idle = 'idle';
 mm.Megaman.State.Intro = 'intro';
@@ -191,8 +228,10 @@ mm.Megaman.State.Running = 'running';
 mm.Megaman.State.Jumping = 'jumping';
 mm.Megaman.State.Smile = 'smiling';
 
+// Static member to hold possible directions
 mm.Megaman.Direction = {};
 mm.Megaman.Direction.Right = 1;
 mm.Megaman.Direction.Left = -1;
 
+// Static member to hold texture atlas for the man
 mm.Megaman.texture = new pulse.Texture({filename: 'man.png'});
