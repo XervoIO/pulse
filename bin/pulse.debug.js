@@ -1456,7 +1456,7 @@ pulse.error = {DuplicateName:function(name) {
   throw"There is already an object with the name " + name + " on this layer.";
 }};
 pulse.util = {find:function(collection, name) {
-  var found = [];
+  var found = Array();
   if(collection instanceof Array) {
     for(var o = 0;o < collection.length;o++) {
       if(typeof collection[o] == "function" && typeof collection[o].name == "function" && collection[o].name == name) {
@@ -1465,9 +1465,9 @@ pulse.util = {find:function(collection, name) {
     }
   }else {
     if(typeof collection == "object") {
-      for(var obj in collection) {
-        if(obj == name) {
-          found.push(collection[obj])
+      for(var o in collection) {
+        if(o == name) {
+          found.push(collection[o])
         }
       }
     }
@@ -1493,7 +1493,7 @@ pulse.util = {find:function(collection, name) {
     }
   }
 }, checkValue:function(variable, vDefault) {
-  if(variable === null) {
+  if(variable == null) {
     variable = vDefault
   }
   return variable
@@ -1501,16 +1501,16 @@ pulse.util = {find:function(collection, name) {
   if(typeof obj == "undefined") {
     obj = {}
   }
-  if(!obj.hasOwnProperty(prop) || obj[prop] === null) {
+  if(!obj.hasOwnProperty(prop) || obj[prop] == null) {
     obj[prop] = propDefault
   }
   return obj
 }, checkParams:function(params, defaults) {
-  if(typeof params == "undefined" || params === null || typeof params != "object") {
+  if(typeof params == "undefined" || params == null || typeof params != "object") {
     params = {}
   }
   for(var p in defaults) {
-    if(!params.hasOwnProperty(p) || params[p] === null) {
+    if(!params.hasOwnProperty(p) || params[p] == null) {
       params[p] = defaults[p]
     }
   }
@@ -1540,21 +1540,21 @@ pulse.util = {find:function(collection, name) {
   }
   return 0
 }, getOrderedKeys:function(objects) {
-  var ordered = [];
+  var ordered = new Array;
   for(var o in objects) {
     if(objects[o].hasOwnProperty("name")) {
       ordered.push(objects[o])
     }
   }
   ordered.sort(pulse.util.compareZIndexes);
-  var keys = [];
-  for(var obj = 0;obj < ordered.length;obj++) {
-    keys.push(ordered[obj].name)
+  var keys = new Array;
+  for(var o = 0;o < ordered.length;o++) {
+    keys.push(ordered[o].name)
   }
   return keys
 }, getIFrame:function(parentElement) {
   var iframe = document.createElement("iframe");
-  if(parentElement === null) {
+  if(parentElement == null) {
     parentElement = document.body
   }
   parentElement.appendChild(iframe);
@@ -1570,7 +1570,7 @@ pulse.util = {find:function(collection, name) {
       }
     }
   }
-  if(iframe.doc === null) {
+  if(iframe.doc == null) {
     throw"Document not found, append the parent element to the DOM before creating the IFrame";
   }
   iframe.doc.open();
