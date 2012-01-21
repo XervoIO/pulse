@@ -2,10 +2,10 @@
 var mm = mm || { };
 
 /**
- * HTML body on load callback function, makes sure HTML content is loaded
- * before any game engine components are loaded
+ * Pulse ready callback, makes sure the HTML content is loaded before starting
+ * the game.
  */
-var bodyLoaded = function() {
+pulse.ready(function() {
   // Ratio of Box2D physics to pulse
   mm.Box2DFactor = 0.01;
 
@@ -251,4 +251,4 @@ var bodyLoaded = function() {
 
   // Start the game engine and tell it run at 50fps if possible
   engine.go(20, update);
-};
+});
