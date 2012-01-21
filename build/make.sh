@@ -49,6 +49,7 @@ java -jar compiler.jar \
 --js=../lib/core/scenemanager.js \
 --js=../lib/core/engine.js \
 --js_output_file=../bin/pulse.debug.js \
+--compilation_level WHITESPACE_ONLY \
 --formatting PRETTY_PRINT
 
 java -jar jsdoc/jsrun.jar jsdoc/app/run.js -c=jsdoc/pulse.conf
