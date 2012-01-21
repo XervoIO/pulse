@@ -4,12 +4,26 @@ pulse.ready(function() {
 	var scene = new pulse.Scene();
 	var layer = new pulse.physics.Layer();
 
+  var running = true;
   layer.events.bind('click', function(e) {
-    // Create sprite.
-    var sprite = new pulse.physics.Sprite( { src: '../img/physics_circle.png ', shape: 'circle'});
-      sprite.position = e.position;
-      layer.addNode(sprite);
+    running = !running;
   });
+
+  var addSprite = function() {
+    // Create sprite.
+    var sprite = null;
+
+    if(/*count++ % 2 == 0*/true) {
+      sprite = new pulse.physics.Sprite( { src: '../img/physics_circle.png ', shape: 'circle'});
+    }
+    else {
+      sprite = new pulse.physics.Sprite( { src: '../img/physics_square.png' });
+    }
+
+    sprite.size = { width: 12, height: 12 };
+    sprite.position = { x: Math.random() * 100 + 150, y: 100 };
+    layer.addNode(sprite);
+  };
 
   var ground = new pulse.physics.Sprite( { src: '../img/physics_ground.png ', isStatic: true });
   ground.position = { x: 280, y: 300 };
@@ -29,5 +43,20 @@ pulse.ready(function() {
 	scene.addLayer(layer);
 	engine.scenes.addScene(scene);
 	engine.scenes.activateScene(scene);
-	engine.go(30);
+
+  var total = 0;
+  var update = function(sceneManager, elapsed) {
+    if(!running) {
+      return;
+    }
+
+    total += elapsed;
+
+    if(total > 100) {
+      addSprite();
+      total = 0;
+    }
+  };
+
+	engine.go(30, update);
 });
