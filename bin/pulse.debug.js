@@ -2358,11 +2358,11 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   if(newBounds == undefined || newBounds == null) {
     return this._private.bounds
   }
-  if(newBounds.x <= 0) {
-    newBounds.x = 1
+  if(newBounds.width <= 0) {
+    newBounds.width = 1
   }
-  if(newBounds.y <= 0) {
-    newBounds.y = 1
+  if(newBounds.height <= 0) {
+    newBounds.height = 1
   }
   this._private.bounds = newBounds
 }, getFrame:function(index) {
@@ -2372,13 +2372,13 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   }
   var x = (frame + this._private.offset.x) * this.size.width;
   var y = this._private.offset.y;
-  while(x >= this._private.bounds.x) {
-    x = x - this._private.bounds.x;
+  while(x >= this._private.bounds.width) {
+    x = x - this._private.bounds.width;
     y++
   }
   y = y * this.size.height;
-  if(y >= this._private.bounds.y) {
-    y = this._private.bounds.y - this.size.height
+  if(y >= this._private.bounds.height) {
+    y = this._private.bounds.height - this.size.height
   }
   return{x:x, y:y, width:this.size.width, height:this.size.height}
 }, start:function(oframe) {

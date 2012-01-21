@@ -59,6 +59,7 @@ mm.Megaman = pulse.Sprite.extend({
     var introAction = new pulse.AnimateAction({
       name : 'intro',
       size : {width:55, height:60},
+      bounds : {x: 2000, y: 60},
       frames : [22,22,22,22,22,22,22,22,22,22,22,23,24,25,26,27,28,29],
       frameRate : animationFrameRate,
       plays : 1
@@ -76,6 +77,7 @@ mm.Megaman = pulse.Sprite.extend({
     var runningAction = new pulse.AnimateAction({
       name : 'running',
       size : {width:55, height:60},
+      bounds : {x: 2000, y: 60},
       frames : [7,8,9,10,11,12,13,14,15,16],
       frameRate : animationFrameRate
     });
@@ -87,6 +89,7 @@ mm.Megaman = pulse.Sprite.extend({
     var jumpAction = new pulse.AnimateAction({
       name : 'jumping',
       size : {width:55, height:60},
+      bounds : {x: 2000, y: 60},
       frames : [17,18,19,20,21],
       frameRate : animationFrameRate,
       plays : 1
@@ -99,6 +102,7 @@ mm.Megaman = pulse.Sprite.extend({
     var smileAction = new pulse.AnimateAction({
       name : 'smile',
       size : {width:55, height:60},
+      bounds : {x: 2000, y: 60},
       frames : [1,2,3,4,5,6],
       frameRate : animationFrameRate,
       plays : 1
