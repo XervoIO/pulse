@@ -1,6 +1,8 @@
 # Exclude the build directory
-build/*
- 
+build/jsdoc/*
+build/compiler.jar
+build/make.sh
+
 # Exclude temp nibs and swap files
 *~.nib
 *.swp
