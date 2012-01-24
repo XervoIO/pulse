@@ -1,7 +1,11 @@
+# Exclude gradle directory
+.gradle
+
 # Exclude the build directory
 build/jsdoc/*
 build/compiler.jar
 build/make.sh
+build/build
 
 # Exclude temp nibs and swap files
 *~.nib
