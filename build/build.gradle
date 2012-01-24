@@ -53,7 +53,7 @@ task minifyProd(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
   compilationLevel = 'SIMPLE_OPTIMIZATIONS'
 }
 
-task jshintz(type: Exec, description: 'runs jshint on core lib files') {
+task jshintz(type: Exec) {
   outputs.upToDateWhen { false }
 
   ignoreExitValue = true
@@ -65,6 +65,16 @@ task jshintz(type: Exec, description: 'runs jshint on core lib files') {
   standardOutput = new BufferedOutputStream(new FileOutputStream("bin/jshint.xml"))
 }
 
+task jsdoc(type: Exec) {
+  outputs.upToDateWhen { false }
+
+  ignoreExitValue = true
+
+  inputs.files fileTree(dir: "../lib/core", include: "**/*.js")
+  outputs.dir("../bin/docs")
+
+  commandLine = ["java", "-jar", "jsdoc/jsrun.jar", "jsdoc/app/run.js", "-c=jsdoc/pulse.conf"]
+}
 
 //jsdoc {
 //  inputs.file filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
