@@ -34,9 +34,15 @@ def fileu = fileTree(dir: "../lib/core", includes: ['scene.js'])
 def filev = fileTree(dir: "../lib/core", includes: ['scenemanager.js'])
 def filew = fileTree(dir: "../lib/core", includes: ['engine.js'])
 
-js {
-  inputs.file filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
-  outputs.file file("../bin/pulse-debug.js")
+combineJs {
+  inputs.files filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
+  outputs.file file("../bin/pulse.combined.js")
+}
+
+minifyJs {
+  dependsOn << 'combineJs'
+  inputs.file file("../bin/pulse.combined.js")
+  outputs.file file("../bin/pulse.debug.js")
   compilationLevel = 'WHITESPACE_ONLY'
 }
 
