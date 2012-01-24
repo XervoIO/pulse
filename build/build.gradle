@@ -39,11 +39,18 @@ combineJs {
   outputs.file file("../bin/pulse.combined.js")
 }
 
-minifyJs {
+task minifyDev(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
   dependsOn << 'combineJs'
   inputs.file file("../bin/pulse.combined.js")
   outputs.file file("../bin/pulse.debug.js")
   compilationLevel = 'WHITESPACE_ONLY'
+}
+
+task minifyProd(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+  dependsOn << 'combineJs'
+  inputs.file file("../bin/pulse.combined.js")
+  outputs.file file("../bin/pulse.min.js")
+  compilationLevel = 'SIMPLE_OPTIMIZATIONS'
 }
 
 task jshintz(type: Exec, description: 'runs jshint on core lib files') {
