@@ -46,3 +46,7 @@ lib/core/scene.js~
 lib/core/engine.js~
 
 demos/Isometric/demo.css~
+
+bin/pulse.combined.js
+
+bin/pulse.min.js
