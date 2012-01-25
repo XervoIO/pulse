@@ -59,10 +59,10 @@ task jshintz(type: Exec) {
   ignoreExitValue = true
 
   inputs.file fileTree(dir: "../lib/core", include: "**/*.js")
-  outputs.file file("../bin/jshint.xml")
+  outputs.file file("../jshint.xml")
 
   commandLine = ["jshint", "../lib/core", "--config", 'jshint.json', "--jslint-reporter"]
-  standardOutput = new BufferedOutputStream(new FileOutputStream("bin/jshint.xml"))
+  standardOutput = new BufferedOutputStream(new FileOutputStream("jshint.xml"))
 }
 
 task jsdoc(type: Exec) {
@@ -75,14 +75,3 @@ task jsdoc(type: Exec) {
 
   commandLine = ["java", "-jar", "jsdoc/jsrun.jar", "jsdoc/app/run.js", "-c=jsdoc/pulse.conf"]
 }
-
-//jsdoc {
-//  inputs.file filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
-//  outputs.file file("../bin/jdoc/index.html")
-//}
-
-//js {
-//  inputs.file filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
-//  outputs.file file("../bin/pulse-min.js")
-//  compilationLevel = 'SIMPLE_OPTIMIZATIONS'
-//}
