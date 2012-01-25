@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jslint>
+	<file name="../lib/core/action/action.js">
+		<issue line="20" char="true" reason="Trailing whitespace." evidence="   */ " />
+		<issue line="24" char="22" reason="Use &apos;===&apos; to compare with &apos;&apos;." evidence="    if(params.target == &quot;&quot;) {" />
+		<issue line="30" char="true" reason="Trailing whitespace." evidence="     * @type {pulse.Node} " />
+		<issue line="13" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Action = pulse.Node.extend(" />
+		<issue line="13" char="16" reason="&apos;pulse&apos; is not defined." evidence="pulse.Action = pulse.Node.extend(" />
+		<issue line="50" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager();" />
+		<issue line="57" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="71" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="81" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="94" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+	</file>
+	<file name="../lib/core/action/animateaction.js">
+		<issue line="9" char="true" reason="Trailing whitespace." evidence=" * @config {object} [size] a point object that represents the size of the " />
+		<issue line="15" char="true" reason="Trailing whitespace." evidence=" * @config {point} [offset] the pixel offset of the animation in respect to the " />
+		<issue line="18" char="true" reason="Trailing whitespace." evidence=" * @config {number} [plays] the number of times the animation should loop, if " />
+		<issue line="29" char="true" reason="Trailing whitespace." evidence="  /** @constructs */ " />
+		<issue line="34" char="true" reason="Trailing whitespace." evidence="    // Check the params " />
+		<issue line="46" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="52" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="64" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="85" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="128" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="133" char="true" reason="Trailing whitespace." evidence="   * @return {object} the current bounds of the animation " />
+		<issue line="137" char="18" reason="Use &apos;===&apos; to compare with &apos;undefined&apos;." evidence="    if(newBounds == undefined || newBounds == null)" />
+		<issue line="137" char="44" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(newBounds == undefined || newBounds == null)" />
+		<issue line="138" char="7" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="      return this._private.bounds;" />
+		<issue line="143" char="7" reason="Expected &apos;{&apos; and instead saw &apos;newBounds&apos;." evidence="      newBounds.width = 1;" />
+		<issue line="146" char="7" reason="Expected &apos;{&apos; and instead saw &apos;newBounds&apos;." evidence="      newBounds.height = 1;" />
+		<issue line="157" char="true" reason="Trailing whitespace." evidence="  getFrame : function(index) " />
+		<issue line="231" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="232" char="true" reason="Trailing whitespace." evidence="   * This is the master update function for the animation. This will " />
+		<issue line="234" char="true" reason="Trailing whitespace." evidence="   * @param {number} elapsed the elapsed time since last update call in " />
+		<issue line="235" char="true" reason="Trailing whitespace." evidence="   * milliseconds " />
+		<issue line="241" char="21" reason="Use &apos;===&apos; to compare with &apos;false&apos;." evidence="    if(this.running == false)" />
+		<issue line="259" char="true" reason="Trailing whitespace." evidence="        if(this._private.plays &gt; 0 &amp;&amp; " />
+		<issue line="26" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.AnimateAction = pulse.Action.extend(" />
+		<issue line="26" char="23" reason="&apos;pulse&apos; is not defined." evidence="pulse.AnimateAction = pulse.Action.extend(" />
+		<issue line="35" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params," />
+		<issue line="159" char="17" reason="&apos;pulse&apos; is not defined." evidence="    var frame = pulse.util.checkValue(index, this._private.currentFrame);" />
+	</file>
+	<file name="../lib/core/asset/asset.js">
+		<issue line="3" char="true" reason="Trailing whitespace." evidence=" * " />
+		<issue line="54" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="10" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Asset = pulse.Node.extend(" />
+		<issue line="10" char="15" reason="&apos;pulse&apos; is not defined." evidence="pulse.Asset = pulse.Node.extend(" />
+		<issue line="19" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="46" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager();" />
+	</file>
+	<file name="../lib/core/asset/assetbundle.js">
+		<issue line="19" char="28" reason="Use the array literal notation []." evidence="    this.assets = new Array();" />
+		<issue line="27" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="34" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="41" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="44" char="true" reason="Trailing whitespace." evidence="     */ " />
+		<issue line="63" char="11" reason="Expected &apos;{&apos; and instead saw &apos;_self&apos;." evidence="          _self.events.raiseEvent(&apos;complete&apos;, {});" />
+		<issue line="78" char="true" reason="Trailing whitespace." evidence="        return this.assets[a]; " />
+		<issue line="78" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return this.assets[a]; " />
+		<issue line="89" char="7" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="      this.assets[a].load();" />
+		<issue line="97" char="true" reason="Trailing whitespace." evidence="    this.percentLoaded = " />
+		<issue line="9" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.AssetBundle = PClass.extend(" />
+		<issue line="9" char="21" reason="&apos;PClass&apos; is not defined." evidence="pulse.AssetBundle = PClass.extend(" />
+		<issue line="25" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager();" />
+		<issue line="53" char="25" reason="&apos;pulse&apos; is not defined." evidence="    if(asset instanceof pulse.Asset)" />
+	</file>
+	<file name="../lib/core/asset/assetmanager.js">
+		<issue line="25" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="32" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="41" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="44" char="true" reason="Trailing whitespace." evidence="     */ " />
+		<issue line="61" char="true" reason="Trailing whitespace." evidence="    if(bundle instanceof pulse.AssetBundle " />
+		<issue line="62" char="7" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="      &amp;&amp; !this.bundles.hasOwnProperty(name))" />
+		<issue line="73" char="11" reason="Expected &apos;{&apos; and instead saw &apos;_self&apos;." evidence="          _self.events.raiseEvent(&apos;complete&apos;, {});" />
+		<issue line="93" char="11" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="          this.addBundle(new pulse.AssetBundle(), bundle);" />
+		<issue line="98" char="11" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="          this.loadedBundles--;" />
+		<issue line="124" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return this.bundles[bundle].getAsset(name);" />
+		<issue line="134" char="7" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="      this.bundles[b].load();" />
+		<issue line="146" char="7" reason="Expected &apos;{&apos; and instead saw &apos;percent&apos;." evidence="      percent = percent + this.bundles[b].percentLoaded;" />
+		<issue line="9" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.AssetManager = PClass.extend(" />
+		<issue line="9" char="22" reason="&apos;PClass&apos; is not defined." evidence="pulse.AssetManager = PClass.extend(" />
+		<issue line="22" char="24" reason="&apos;pulse&apos; is not defined." evidence="    this.addBundle(new pulse.AssetBundle(), &apos;global&apos;);" />
+		<issue line="51" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager();" />
+		<issue line="61" char="26" reason="&apos;pulse&apos; is not defined." evidence="    if(bundle instanceof pulse.AssetBundle " />
+		<issue line="88" char="25" reason="&apos;pulse&apos; is not defined." evidence="    if(asset instanceof pulse.Asset)" />
+		<issue line="93" char="30" reason="&apos;pulse&apos; is not defined." evidence="          this.addBundle(new pulse.AssetBundle(), bundle);" />
+		<issue line="142" char="24" reason="&apos;pulse&apos; is not defined." evidence="    var totalPercent = pulse.util.getLength(this.bundles) * 100;" />
+	</file>
+	<file name="../lib/core/asset/bitmapfont.js">
+		<issue line="20" char="6" reason="Missing semicolon." evidence="    }" />
+		<issue line="144" char="true" reason="Trailing whitespace." evidence="      if (fntFile.readyState === 4) {  " />
+		<issue line="145" char="true" reason="Trailing whitespace." evidence="        if (fntFile.status === 200) {  " />
+		<issue line="146" char="true" reason="Trailing whitespace." evidence="          var allText = fntFile.responseText; " />
+		<issue line="147" char="true" reason="Trailing whitespace." evidence="          var lines = fntFile.responseText.split(&quot;\n&quot;); " />
+		<issue line="152" char="6" reason="Missing semicolon." evidence="    }" />
+		<issue line="164" char="33" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="      if(line.indexOf(&quot;common&quot;) == 0) {" />
+		<issue line="171" char="35" reason="Missing radix parameter." evidence="                this.lineHeight = parseInt(keyval[1]);" />
+		<issue line="174" char="29" reason="Missing radix parameter." evidence="                this.base = parseInt(keyval[1]);" />
+		<issue line="177" char="35" reason="Missing radix parameter." evidence="                this.size.width = parseInt(keyval[1]);" />
+		<issue line="180" char="36" reason="Missing radix parameter." evidence="                this.size.height = parseInt(keyval[1]);" />
+		<issue line="186" char="36" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="      else if(line.indexOf(&quot;page&quot;) == 0) {" />
+		<issue line="196" char="38" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="      } else if(line.indexOf(&quot;char&quot;) == 0) {" />
+		<issue line="207" char="40" reason="Missing radix parameter." evidence="                character.position.x = parseInt(keyval[1]);" />
+		<issue line="210" char="40" reason="Missing radix parameter." evidence="                character.position.y = parseInt(keyval[1]);" />
+		<issue line="213" char="40" reason="Missing radix parameter." evidence="                character.size.width = parseInt(keyval[1]);" />
+		<issue line="216" char="41" reason="Missing radix parameter." evidence="                character.size.height = parseInt(keyval[1]);" />
+		<issue line="219" char="38" reason="Missing radix parameter." evidence="                character.offset.x = parseInt(keyval[1]);" />
+		<issue line="222" char="38" reason="Missing radix parameter." evidence="                character.offset.y = parseInt(keyval[1]);" />
+		<issue line="225" char="38" reason="Missing radix parameter." evidence="                character.xAdvance = parseInt(keyval[1]);" />
+		<issue line="228" char="34" reason="Missing radix parameter." evidence="                character.page = parseInt(keyval[1]);" />
+		<issue line="234" char="true" reason="Trailing whitespace." evidence="    } " />
+		<issue line="8" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.BitmapChar = PClass.extend(" />
+		<issue line="8" char="20" reason="&apos;PClass&apos; is not defined." evidence="pulse.BitmapChar = PClass.extend(" />
+		<issue line="65" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.BitmapFont = pulse.Asset.extend(" />
+		<issue line="65" char="20" reason="&apos;pulse&apos; is not defined." evidence="pulse.BitmapFont = pulse.Asset.extend(" />
+		<issue line="197" char="29" reason="&apos;pulse&apos; is not defined." evidence="        var character = new pulse.BitmapChar();" />
+	</file>
+	<file name="../lib/core/asset/sound.js">
+		<issue line="6" char="true" reason="Trailing whitespace." evidence=" * the file extension is not needed because files must be available in .mp3 and " />
+		<issue line="8" char="true" reason="Trailing whitespace." evidence=" * @config {string} [type] the type of audio player to use for this file, " />
+		<issue line="11" char="true" reason="Trailing whitespace." evidence=" * @class Sound " />
+		<issue line="29" char="true" reason="Trailing whitespace." evidence="     * The type of audio player to use for this sound. The valid types are " />
+		<issue line="35" char="true" reason="Trailing whitespace." evidence="    // Init the flash player " />
+		<issue line="77" char="true" reason="Trailing whitespace." evidence="    var _self = this; " />
+		<issue line="92" char="true" reason="Trailing whitespace." evidence="          }, " />
+		<issue line="103" char="true" reason="Trailing whitespace." evidence="          if(!!audio.canPlayType &amp;&amp; " />
+		<issue line="104" char="17" reason="Use &apos;!==&apos; to compare with &apos;&apos;." evidence="             &quot;&quot; != audio.canPlayType(&apos;audio/mpeg&apos;)) {" />
+		<issue line="106" char="true" reason="Trailing whitespace." evidence="          } else if(!!audio.canPlayType &amp;&amp; " />
+		<issue line="107" char="24" reason="Use &apos;!==&apos; to compare with &apos;&apos;." evidence="                    &quot;&quot; != audio.canPlayType(&apos;audio/ogg; codecs=&quot;vorbis&quot;&apos;)) {" />
+		<issue line="218" char="37" reason="Use &apos;===&apos; to compare with &apos;false&apos;." evidence="    if(pulse.Sound.FlashInitialized == false) {" />
+		<issue line="233" char="38" reason="Use &apos;===&apos; to compare with &apos;false&apos;." evidence="    } else if(pulse.Sound.FlashReady == false){" />
+		<issue line="15" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sound = pulse.Asset.extend(" />
+		<issue line="15" char="15" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sound = pulse.Asset.extend(" />
+		<issue line="22" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="68" char="41" reason="&apos;pulse&apos; is not defined." evidence="      (this._private.type == &apos;flash&apos; &amp;&amp; pulse.Sound.FlashReady))) {" />
+		<issue line="81" char="31" reason="&apos;soundManager&apos; is not defined." evidence="        this._private.audio = soundManager.createSound({" />
+		<issue line="99" char="9" reason="&apos;audio&apos; is not defined." evidence="        audio = document.createElement(&apos;audio&apos;);" />
+		<issue line="100" char="13" reason="&apos;audio&apos; is not defined." evidence="        if (audio.canPlayType) {" />
+		<issue line="102" char="11" reason="&apos;audio&apos; is not defined." evidence="          audio.setAttribute(&apos;preload&apos;, &apos;auto&apos;);" />
+		<issue line="103" char="16" reason="&apos;audio&apos; is not defined." evidence="          if(!!audio.canPlayType &amp;&amp; " />
+		<issue line="104" char="20" reason="&apos;audio&apos; is not defined." evidence="             &quot;&quot; != audio.canPlayType(&apos;audio/mpeg&apos;)) {" />
+		<issue line="105" char="13" reason="&apos;audio&apos; is not defined." evidence="            audio.setAttribute(&apos;src&apos;, this.filename + &apos;.mp3&apos;);" />
+		<issue line="106" char="23" reason="&apos;audio&apos; is not defined." evidence="          } else if(!!audio.canPlayType &amp;&amp; " />
+		<issue line="107" char="27" reason="&apos;audio&apos; is not defined." evidence="                    &quot;&quot; != audio.canPlayType(&apos;audio/ogg; codecs=&quot;vorbis&quot;&apos;)) {" />
+		<issue line="108" char="13" reason="&apos;audio&apos; is not defined." evidence="            audio.setAttribute(&apos;src&apos;, this.filename + &apos;.ogg&apos;);" />
+		<issue line="110" char="11" reason="&apos;audio&apos; is not defined." evidence="          audio.addEventListener(&apos;progress&apos;, function(e) {" />
+		<issue line="111" char="35" reason="&apos;audio&apos; is not defined." evidence="            _self.percentLoaded = audio.buffered.end(0) / audio.duration * 100;" />
+		<issue line="111" char="59" reason="&apos;audio&apos; is not defined." evidence="            _self.percentLoaded = audio.buffered.end(0) / audio.duration * 100;" />
+		<issue line="117" char="11" reason="&apos;audio&apos; is not defined." evidence="          audio.addEventListener(&apos;ended&apos;, function() {" />
+		<issue line="121" char="11" reason="&apos;audio&apos; is not defined." evidence="          audio = null;" />
+		<issue line="123" char="31" reason="&apos;audio&apos; is not defined." evidence="        this._private.audio = audio;" />
+		<issue line="218" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.Sound.FlashInitialized == false) {" />
+		<issue line="219" char="7" reason="&apos;pulse&apos; is not defined." evidence="      pulse.Sound.FlashInitialized = true;" />
+		<issue line="220" char="33" reason="&apos;SoundManager&apos; is not defined." evidence="      window.soundManager = new SoundManager(pulse.libsrc + &apos;/other/&apos;);" />
+		<issue line="220" char="46" reason="&apos;pulse&apos; is not defined." evidence="      window.soundManager = new SoundManager(pulse.libsrc + &apos;/other/&apos;);" />
+		<issue line="221" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.beginDelayedInit();" />
+		<issue line="222" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.flashVersion = 8;" />
+		<issue line="223" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.useFlashBlock = false;" />
+		<issue line="224" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.onready(function() {" />
+		<issue line="225" char="9" reason="&apos;pulse&apos; is not defined." evidence="        pulse.Sound.FlashReady = true;" />
+		<issue line="230" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.ontimeout(function() {" />
+		<issue line="231" char="21" reason="&apos;e&apos; is not defined." evidence="        console.log(e);" />
+		<issue line="233" char="15" reason="&apos;pulse&apos; is not defined." evidence="    } else if(pulse.Sound.FlashReady == false){" />
+		<issue line="234" char="7" reason="&apos;soundManager&apos; is not defined." evidence="      soundManager.onready(function() {" />
+		<issue line="243" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sound.FlashInitialized = false;" />
+		<issue line="244" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sound.FlashReady = false;" />
+	</file>
+	<file name="../lib/core/asset/texture.js">
+		<issue line="19" char="24" reason="Use &apos;===&apos; to compare with &apos;&apos;." evidence="    if(params.filename == &apos;&apos;)" />
+		<issue line="20" char="7" reason="Expected &apos;{&apos; and instead saw &apos;throw&apos;." evidence="      throw &quot;Invalid source for pulse image.&quot;;" />
+		<issue line="36" char="22" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="    if(this.autoLoad == true)" />
+		<issue line="37" char="7" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="      this._private.image.src = this.filename;" />
+		<issue line="74" char="true" reason="Trailing whitespace." evidence="     * This sets the loaded bit and percent loaded when the image has " />
+		<issue line="83" char="43" reason="Missing semicolon." evidence="      _self.events.raiseEvent(&apos;load&apos;, evt)" />
+		<issue line="88" char="true" reason="Trailing whitespace." evidence="      _self._private.lastSlice = {x: -1, y: -1, " />
+		<issue line="89" char="true" reason="Trailing whitespace." evidence="        width: _self._private.image.width * _self.scaleX, " />
+		<issue line="105" char="22" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="    if(this.autoLoad == true)" />
+		<issue line="106" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return;" />
+		<issue line="111" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="113" char="true" reason="Trailing whitespace." evidence="   * @return {number} The width of the raw image " />
+		<issue line="119" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="121" char="true" reason="Trailing whitespace." evidence="   * @return {number} The height of the raw image " />
+		<issue line="136" char="7" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="      return null;" />
+		<issue line="138" char="true" reason="Trailing whitespace." evidence="    if(x == this._private.lastSlice.x " />
+		<issue line="139" char="true" reason="Trailing whitespace." evidence="       &amp;&amp; y == this._private.lastSlice.y " />
+		<issue line="139" char="8" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="       &amp;&amp; y == this._private.lastSlice.y " />
+		<issue line="140" char="true" reason="Trailing whitespace." evidence="       &amp;&amp; width == this._private.lastSlice.width " />
+		<issue line="140" char="8" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="       &amp;&amp; width == this._private.lastSlice.width " />
+		<issue line="141" char="8" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="       &amp;&amp; height == this._private.lastSlice.height" />
+		<issue line="142" char="true" reason="Trailing whitespace." evidence="       &amp;&amp; this.rotation == this._private.lastSlice.rotation " />
+		<issue line="142" char="8" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="       &amp;&amp; this.rotation == this._private.lastSlice.rotation " />
+		<issue line="143" char="true" reason="Trailing whitespace." evidence="       &amp;&amp; this.alpha == this._private.lastSlice.alpha) " />
+		<issue line="143" char="8" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="       &amp;&amp; this.alpha == this._private.lastSlice.alpha) " />
+		<issue line="148" char="true" reason="Trailing whitespace." evidence="    this._private.lastSlice = {x: x, y: y, " />
+		<issue line="149" char="true" reason="Trailing whitespace." evidence="          width: width * this.scaleX, height: height * this.scaleY, " />
+		<issue line="150" char="true" reason="Trailing whitespace." evidence="          rotation: this.rotation, alpha: this.alpha}; " />
+		<issue line="152" char="10" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(x == null || x &lt; 0)" />
+		<issue line="153" char="7" reason="Expected &apos;{&apos; and instead saw &apos;x&apos;." evidence="      x = 0;" />
+		<issue line="156" char="7" reason="Expected &apos;{&apos; and instead saw &apos;x&apos;." evidence="      x = this._private.image.width;" />
+		<issue line="158" char="10" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(y == null || y &lt; 0)" />
+		<issue line="159" char="7" reason="Expected &apos;{&apos; and instead saw &apos;y&apos;." evidence="      y = 0;" />
+		<issue line="162" char="7" reason="Expected &apos;{&apos; and instead saw &apos;y&apos;." evidence="      y = height;" />
+		<issue line="164" char="14" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(width == null || width &gt; this._private.image.width)" />
+		<issue line="165" char="7" reason="Expected &apos;{&apos; and instead saw &apos;width&apos;." evidence="      width = this._private.image.width;" />
+		<issue line="167" char="true" reason="Trailing whitespace." evidence="    //Trying to slice an area outside the image bounds  " />
+		<issue line="169" char="7" reason="Expected &apos;{&apos; and instead saw &apos;width&apos;." evidence="      width = this._private.image.width - x;" />
+		<issue line="171" char="15" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(height == null || height &gt; this._private.image.height)" />
+		<issue line="172" char="7" reason="Expected &apos;{&apos; and instead saw &apos;height&apos;." evidence="      height = this._private.image.height;" />
+		<issue line="174" char="true" reason="Trailing whitespace." evidence="    //Trying to slice an area outside the image bounds  " />
+		<issue line="176" char="7" reason="Expected &apos;{&apos; and instead saw &apos;height&apos;." evidence="      height = this._private.image.height - y;" />
+		<issue line="190" char="28" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="    if(this.rotation % 360 != 0)" />
+		<issue line="193" char="true" reason="Trailing whitespace." evidence="      cWidth = iWidth * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + " />
+		<issue line="196" char="true" reason="Trailing whitespace." evidence="      cHeight = iHeight * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + " />
+		<issue line="210" char="28" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="    if(this.rotation % 360 != 0)" />
+		<issue line="222" char="true" reason="Trailing whitespace." evidence="    ctx.drawImage(this._private.image, " />
+		<issue line="232" char="true" reason="Trailing whitespace." evidence="        this._private.imgCanvas.width / 2, " />
+		<issue line="233" char="true" reason="Trailing whitespace." evidence="        this._private.imgCanvas.height / 2, " />
+		<issue line="9" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Texture = pulse.Asset.extend(" />
+		<issue line="9" char="17" reason="&apos;pulse&apos; is not defined." evidence="pulse.Texture = pulse.Asset.extend(" />
+		<issue line="227" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="241" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+	</file>
+	<file name="../lib/core/bitmaplabel.js">
+		<issue line="5" char="true" reason="Trailing whitespace." evidence=" * @config {string|pulse.BitmapFont} font the font filename to use or a " />
+		<issue line="70" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="72" char="true" reason="Trailing whitespace." evidence="   * @return {boolean} Whether the font has been loaded " />
+		<issue line="80" char="true" reason="Trailing whitespace." evidence="   * @param {number} time elapsed since last update call in milliseconds " />
+		<issue line="103" char="true" reason="Trailing whitespace." evidence="   * @param {CanvasRenderingContext2D} ctx the context in which to draw this " />
+		<issue line="108" char="true" reason="Trailing whitespace." evidence="    if(!this.loaded() || " />
+		<issue line="109" char="24" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="       this.size.width == 0 ||" />
+		<issue line="110" char="25" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="       this.size.height == 0) {" />
+		<issue line="116" char="true" reason="Trailing whitespace." evidence="      0, 0, " />
+		<issue line="125" char="26" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="      if(vert.size.width != 0 &amp;&amp; vert.size.height != 0) {" />
+		<issue line="125" char="51" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="      if(vert.size.width != 0 &amp;&amp; vert.size.height != 0) {" />
+		<issue line="129" char="true" reason="Trailing whitespace." evidence="          vert.size.width, vert.size.height, " />
+		<issue line="130" char="true" reason="Trailing whitespace." evidence="          cursor, 0, " />
+		<issue line="135" char="6" reason="Unnecessary semicolon." evidence="    };" />
+		<issue line="15" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.BitmapLabel = pulse.Visual.extend(" />
+		<issue line="15" char="21" reason="&apos;pulse&apos; is not defined." evidence="pulse.BitmapLabel = pulse.Visual.extend(" />
+		<issue line="24" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="64" char="23" reason="&apos;pulse&apos; is not defined." evidence="      this.font = new pulse.BitmapFont({" />
+	</file>
+	<file name="../lib/core/canvaslabel.js">
+		<issue line="131" char="true" reason="Trailing whitespace." evidence="     * are &quot;top&quot;, &quot;hanging&quot;, &quot;middle&quot;, &quot;alphabetic&quot;, " />
+		<issue line="144" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="146" char="true" reason="Trailing whitespace." evidence="   * @return {boolean} Whether the font has been loaded " />
+		<issue line="155" char="true" reason="Trailing whitespace." evidence="   * @param {number} time elapsed since last update call in milliseconds " />
+		<issue line="224" char="64" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="      if(this.strokeColor != &quot;transparent&quot; &amp;&amp; this.strokeWidth != 0) {" />
+		<issue line="243" char="true" reason="Trailing whitespace." evidence="   * @param {CanvasRenderingContext2D} ctx the context in which to draw this " />
+		<issue line="248" char="24" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.size.width == 0 || this.size.height == 0) {" />
+		<issue line="248" char="49" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.size.width == 0 || this.size.height == 0) {" />
+		<issue line="254" char="true" reason="Trailing whitespace." evidence="      0, 0, " />
+		<issue line="276" char="62" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="    if(this.strokeColor != &quot;transparent&quot; &amp;&amp; this.strokeWidth != 0) {" />
+		<issue line="15" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.CanvasLabel = pulse.Visual.extend(" />
+		<issue line="15" char="21" reason="&apos;pulse&apos; is not defined." evidence="pulse.CanvasLabel = pulse.Visual.extend(" />
+		<issue line="24" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+	</file>
+	<file name="../lib/core/debug/debugmanager.js">
+		<issue line="7" char="3" reason="Expected &apos;}&apos; to match &apos;{&apos; from line 2 and instead saw &apos;logWarning&apos;." evidence="  logWarning : function() {" />
+		<issue line="7" char="14" reason="Expected &apos;)&apos; and instead saw &apos;:&apos;." evidence="  logWarning : function() {" />
+		<issue line="7" char="15" reason="Missing semicolon." evidence="  logWarning : function() {" />
+		<issue line="7" char="24" reason="Missing name in function declaration." evidence="  logWarning : function() {" />
+		<issue line="9" char="4" reason="Expected an identifier and instead saw &apos;,&apos;." evidence="  }," />
+		<issue line="11" char="3" reason="Cannot read property &apos;id&apos; of undefined" evidence="" />
+	</file>
+	<file name="../lib/core/debug/debugpanel.js">
+		<issue line="5" char="true" reason="Trailing whitespace." evidence="  } " />
+		<issue line="1" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.debug.debugpanel = PClass.extend(" />
+		<issue line="1" char="26" reason="&apos;PClass&apos; is not defined." evidence="pulse.debug.debugpanel = PClass.extend(" />
+	</file>
+	<file name="../lib/core/engine.js">
+		<issue line="2" char="true" reason="Trailing whitespace." evidence=" * Engine handles starting the game, generating the game loop and " />
+		<issue line="41" char="true" reason="Trailing whitespace." evidence="    //Create game window " />
+		<issue line="48" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="57" char="19" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.width == 0 || this.height == 0) {" />
+		<issue line="57" char="39" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.width == 0 || this.height == 0) {" />
+		<issue line="59" char="27" reason="Missing radix parameter." evidence="        var parentWidth = parseInt(this.gameWindow.style.width);" />
+		<issue line="60" char="28" reason="Missing radix parameter." evidence="        var parentHeight = parseInt(this.gameWindow.style.height);" />
+		<issue line="73" char="24" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.size.width == 0) {" />
+		<issue line="78" char="25" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.size.height == 0) {" />
+		<issue line="82" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="134" char="true" reason="Trailing whitespace." evidence="     * Master time of the engine. This holds how long the engine has been " />
+		<issue line="200" char="true" reason="Trailing whitespace." evidence="      var wnd = this._private.useIFrame ? " />
+		<issue line="203" char="true" reason="Trailing whitespace." evidence="      wnd.addEventListener(e, function(evt) { " />
+		<issue line="204" char="true" reason="Trailing whitespace." evidence="        eng.windowEvent.call(eng, evt) " />
+		<issue line="204" char="39" reason="Missing semicolon." evidence="        eng.windowEvent.call(eng, evt) " />
+		<issue line="210" char="true" reason="Trailing whitespace." evidence="        wnd.addEventListener(&apos;DOMMouseScroll&apos;, function(evt) { " />
+		<issue line="211" char="true" reason="Trailing whitespace." evidence="          eng.windowEvent.call(eng, evt) " />
+		<issue line="211" char="41" reason="Missing semicolon." evidence="          eng.windowEvent.call(eng, evt) " />
+		<issue line="254" char="7" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="      this.loopLogic(this.scenes, elapsed);" />
+		<issue line="270" char="true" reason="Trailing whitespace." evidence="   * Main event handler for all events for an engine. " />
+		<issue line="274" char="true" reason="Trailing whitespace." evidence="  {    " />
+		<issue line="286" char="27" reason="Use &apos;!==&apos; to compare with &apos;undefined&apos;." evidence="    if(window.pageXOffset != undefined &amp;&amp; window.pageYOffset != undefined) {" />
+		<issue line="286" char="62" reason="Use &apos;!==&apos; to compare with &apos;undefined&apos;." evidence="    if(window.pageXOffset != undefined &amp;&amp; window.pageYOffset != undefined) {" />
+		<issue line="305" char="true" reason="Trailing whitespace." evidence="    if(x &gt; 0 &amp;&amp; x &lt; parseInt(this._private.mainDiv.style.width) " />
+		<issue line="305" char="21" reason="Missing radix parameter." evidence="    if(x &gt; 0 &amp;&amp; x &lt; parseInt(this._private.mainDiv.style.width) " />
+		<issue line="306" char="7" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="      &amp;&amp; y &gt; 0 &amp;&amp; y &lt; parseInt(this._private.mainDiv.style.height)) {" />
+		<issue line="306" char="23" reason="Missing radix parameter." evidence="      &amp;&amp; y &gt; 0 &amp;&amp; y &lt; parseInt(this._private.mainDiv.style.height)) {" />
+		<issue line="334" char="true" reason="Trailing whitespace." evidence="      if(rawEvt.type.toLowerCase() == &quot;mousewheel&quot; || " />
+		<issue line="338" char="true" reason="Trailing whitespace." evidence="        if (rawEvt.wheelDelta) { " />
+		<issue line="340" char="true" reason="Trailing whitespace." evidence="        } else if (rawEvt.detail) { " />
+		<issue line="350" char="29" reason="Expected &apos;{&apos; and instead saw &apos;code&apos;." evidence="        if(rawEvt.charCode) code = rawEvt.charCode;" />
+		<issue line="351" char="34" reason="Expected &apos;{&apos; and instead saw &apos;code&apos;." evidence="        else if (rawEvt.keyCode) code = rawEvt.keyCode;" />
+		<issue line="352" char="32" reason="Expected &apos;{&apos; and instead saw &apos;code&apos;." evidence="        else if (rawEvt.which) code = rawEvt.which;" />
+		<issue line="367" char="33" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="        if(di.indexOf(&apos;sprite&apos;) == 0) {" />
+		<issue line="18" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Engine = PClass.extend(" />
+		<issue line="18" char="16" reason="&apos;PClass&apos; is not defined." evidence="pulse.Engine = PClass.extend(" />
+		<issue line="24" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params," />
+		<issue line="112" char="34" reason="&apos;pulse&apos; is not defined." evidence="      this._private.innerFrame = pulse.util.getIFrame(this.gameWindow);" />
+		<issue line="129" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.scenes = new pulse.SceneManager({" />
+		<issue line="196" char="18" reason="&apos;pulse&apos; is not defined." evidence="    for(var e in pulse.events)" />
+		<issue line="233" char="5" reason="&apos;requestAnimFrame&apos; is not defined." evidence="    requestAnimFrame(function(){eng.loop.call(eng);}, this._private.mainDiv);" />
+		<issue line="243" char="5" reason="&apos;requestAnimFrame&apos; is not defined." evidence="    requestAnimFrame(function(){eng.loop.call(eng);}, this._private.mainDiv);" />
+		<issue line="298" char="24" reason="&apos;pulse&apos; is not defined." evidence="    var evtProps = new pulse.MouseEvent();" />
+		<issue line="348" char="10" reason="&apos;pulse&apos; is not defined." evidence="      if(pulse.events[rawEvt.type] == &apos;keyboard&apos;) {" />
+		<issue line="366" char="21" reason="&apos;pulse&apos; is not defined." evidence="      for(var di in pulse.EventManager.DraggedItems) {" />
+		<issue line="368" char="11" reason="&apos;pulse&apos; is not defined." evidence="          pulse.EventManager.DraggedItems[di].killDrag(evtProps);" />
+	</file>
+	<file name="../lib/core/error.js">
+		<issue line="7" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.error = {" />
+	</file>
+	<file name="../lib/core/event/eventmanager.js">
+		<issue line="31" char="true" reason="Trailing whitespace." evidence="     * The master callback for this event manager. This function will be " />
+		<issue line="37" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="54" char="true" reason="Trailing whitespace." evidence="   * Binds a callback to an event type. " />
+		<issue line="57" char="true" reason="Trailing whitespace." evidence="   */  " />
+		<issue line="59" char="true" reason="Trailing whitespace." evidence="    if(!this._private.events.hasOwnProperty(type)) { " />
+		<issue line="60" char="45" reason="Use the array literal notation []." evidence="      this._private.events[type] = new Array();" />
+		<issue line="70" char="true" reason="Trailing whitespace." evidence="   */  " />
+		<issue line="13" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.EventManager = PClass.extend(" />
+		<issue line="13" char="22" reason="&apos;PClass&apos; is not defined." evidence="pulse.EventManager = PClass.extend(" />
+		<issue line="19" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="118" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.EventManager.DraggedItems = {};" />
+	</file>
+	<file name="../lib/core/event/eventproperties.js">
+		<issue line="12" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="7" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Event = PClass.extend(" />
+		<issue line="7" char="15" reason="&apos;PClass&apos; is not defined." evidence="pulse.Event = PClass.extend(" />
+		<issue line="26" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.MouseEvent = pulse.Event.extend(" />
+		<issue line="26" char="20" reason="&apos;pulse&apos; is not defined." evidence="pulse.MouseEvent = pulse.Event.extend(" />
+	</file>
+	<file name="../lib/core/layer.js">
+		<issue line="10" char="true" reason="Trailing whitespace." evidence=" * @config (number) [x] the horizontal position of the layer, relative to the " />
+		<issue line="57" char="42" reason="Use the array literal notation []." evidence="    this._private.orderedKeys = new Array();" />
+		<issue line="70" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="80" char="9" reason="Expected &apos;{&apos; and instead saw &apos;pulse&apos;." evidence="        pulse.error.DuplicateName(obj.name);" />
+		<issue line="93" char="true" reason="Trailing whitespace." evidence="          clear.x, clear.y, " />
+		<issue line="101" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="113" char="true" reason="Trailing whitespace." evidence="   * @return {object} associative array of objects " />
+		<issue line="120" char="9" reason="Expected &apos;{&apos; and instead saw &apos;ret&apos;." evidence="        ret[o] = this.objects[o];" />
+		<issue line="128" char="true" reason="Trailing whitespace." evidence="   * @param {number} elapsed time elapsed since last update call in " />
+		<issue line="129" char="true" reason="Trailing whitespace." evidence="   * milliseconds " />
+		<issue line="136" char="37" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="        if(this.objects[s].shuffled == true) {" />
+		<issue line="144" char="11" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="          this.updated = true;" />
+		<issue line="155" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="158" char="true" reason="Trailing whitespace." evidence="   * @param {CanvasRenderingContext2D} ctx the context in which to draw this " />
+		<issue line="195" char="true" reason="Trailing whitespace." evidence="  pointInBounds : function(point) {    " />
+		<issue line="196" char="true" reason="Trailing whitespace." evidence="    return point.x &gt; this.bounds.x &amp;&amp; " />
+		<issue line="197" char="true" reason="Trailing whitespace." evidence="      point.x &lt; (this.bounds.x + this.bounds.width) &amp;&amp; " />
+		<issue line="198" char="true" reason="Trailing whitespace." evidence="      point.y &gt; this.bounds.y &amp;&amp; " />
+		<issue line="224" char="true" reason="Trailing whitespace." evidence="        if(sprite.handleAllEvents || " />
+		<issue line="20" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Layer = pulse.Visual.extend(" />
+		<issue line="20" char="15" reason="&apos;pulse&apos; is not defined." evidence="pulse.Layer = pulse.Visual.extend(" />
+		<issue line="29" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="64" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager({" />
+		<issue line="75" char="23" reason="&apos;pulse&apos; is not defined." evidence="    if(obj instanceof pulse.Visual) {" />
+		<issue line="78" char="37" reason="&apos;pulse&apos; is not defined." evidence="        this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects);" />
+		<issue line="80" char="9" reason="&apos;pulse&apos; is not defined." evidence="        pulse.error.DuplicateName(obj.name);" />
+		<issue line="90" char="40" reason="&apos;pulse&apos; is not defined." evidence="      if(this.objects[name] instanceof pulse.Sprite) {" />
+		<issue line="135" char="37" reason="&apos;pulse&apos; is not defined." evidence="      if(this.objects[s] instanceof pulse.Visual) {" />
+		<issue line="149" char="35" reason="&apos;pulse&apos; is not defined." evidence="      this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects);" />
+		<issue line="180" char="27" reason="&apos;pulse&apos; is not defined." evidence="        if(obj instanceof pulse.Visual) {" />
+		<issue line="213" char="41" reason="&apos;pulse&apos; is not defined." evidence="    var sprites = this.getObjectsByType(pulse.Sprite);" />
+		<issue line="217" char="10" reason="&apos;pulse&apos; is not defined." evidence="      if(pulse.events[type] == &apos;mouse&apos;) {" />
+		<issue line="230" char="25" reason="&apos;pulse&apos; is not defined." evidence="          for(var id in pulse.EventManager.DraggedItems) {" />
+		<issue line="231" char="23" reason="&apos;pulse&apos; is not defined." evidence="            var obj = pulse.EventManager.DraggedItems[id];" />
+	</file>
+	<file name="../lib/core/main.js">
+		<issue line="5" char="true" reason="Trailing whitespace." evidence="  return  window.requestAnimationFrame       || " />
+		<issue line="6" char="true" reason="Trailing whitespace." evidence="          window.webkitRequestAnimationFrame || " />
+		<issue line="7" char="true" reason="Trailing whitespace." evidence="          window.mozRequestAnimationFrame    || " />
+		<issue line="8" char="true" reason="Trailing whitespace." evidence="          window.oRequestAnimationFrame      || " />
+		<issue line="9" char="true" reason="Trailing whitespace." evidence="          window.msRequestAnimationFrame     || " />
+		<issue line="32" char="25" reason="A constructor name should start with an uppercase letter." evidence="    var prototype = new this();" />
+		<issue line="38" char="true" reason="Trailing whitespace." evidence="      prototype[name] = typeof prop[name] == &quot;function&quot; &amp;&amp; " />
+		<issue line="50" char="true" reason="Trailing whitespace." evidence="            var ret = fn.apply(this, arguments);        " />
+		<issue line="63" char="9" reason="Expected &apos;{&apos; and instead saw &apos;this&apos;." evidence="        this.init.apply(this, arguments);" />
+		<issue line="146" char="true" reason="Trailing whitespace." evidence="// Hook the various DOM loaded events.  " />
+		<issue line="21" char="60" reason="&apos;xyz&apos; is not defined." evidence="  var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;" />
+		<issue line="26" char="3" reason="&apos;PClass&apos; is not defined." evidence="  PClass.extend = function(prop) {" />
+		<issue line="89" char="3" reason="&apos;pulse&apos; is not defined." evidence="  pulse = {" />
+		<issue line="114" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.readyCallbacks = [];" />
+		<issue line="115" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.isReady = false;" />
+		<issue line="121" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.ready = function(callback) {" />
+		<issue line="124" char="6" reason="&apos;pulse&apos; is not defined." evidence="  if(pulse.isReady) {" />
+		<issue line="127" char="3" reason="&apos;pulse&apos; is not defined." evidence="  pulse.readyCallbacks.push(callback);" />
+		<issue line="133" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.DOMContentLoaded = function() {" />
+		<issue line="135" char="6" reason="&apos;pulse&apos; is not defined." evidence="  if(pulse.isReady) {" />
+		<issue line="139" char="3" reason="&apos;pulse&apos; is not defined." evidence="  pulse.isReady = true;" />
+		<issue line="141" char="23" reason="&apos;pulse&apos; is not defined." evidence="  for(var readyIdx in pulse.readyCallbacks) {" />
+		<issue line="142" char="5" reason="&apos;pulse&apos; is not defined." evidence="    pulse.readyCallbacks[readyIdx]();" />
+		<issue line="149" char="49" reason="&apos;pulse&apos; is not defined." evidence="  document.addEventListener(&quot;DOMContentLoaded&quot;, pulse.DOMContentLoaded, false);" />
+		<issue line="150" char="35" reason="&apos;pulse&apos; is not defined." evidence="  window.addEventListener(&quot;load&quot;, pulse.DOMContentLoaded, false);" />
+		<issue line="153" char="46" reason="&apos;DOMContentLoaded&apos; is not defined." evidence="  document.attachEvent(&quot;onreadystatechange&quot;, DOMContentLoaded);" />
+		<issue line="154" char="32" reason="&apos;pulse&apos; is not defined." evidence="  window.attachEvent(&quot;onload&quot;, pulse.DOMContentLoaded);" />
+		<issue line="157" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.DEBUG = false;" />
+	</file>
+	<file name="../lib/core/node.js">
+		<issue line="27" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="37" char="true" reason="Trailing whitespace." evidence="   * @param {number} elapsed the elapsed time since last call in " />
+		<issue line="11" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Node = PClass.extend(" />
+		<issue line="11" char="14" reason="&apos;PClass&apos; is not defined." evidence="pulse.Node = PClass.extend(" />
+		<issue line="17" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="18" char="23" reason="&apos;pulse&apos; is not defined." evidence="      name : &quot;Node&quot; + pulse.Node.nodeIdx++" />
+		<issue line="42" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="51" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Node.nodeIdx = 0;" />
+	</file>
+	<file name="../lib/core/scene.js">
+		<issue line="29" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="96" char="true" reason="Trailing whitespace." evidence="    if(layer instanceof pulse.Layer &amp;&amp; " />
+		<issue line="132" char="true" reason="Trailing whitespace." evidence="      return this.layers[name]; " />
+		<issue line="134" char="true" reason="Trailing whitespace." evidence="    return null; " />
+		<issue line="139" char="true" reason="Trailing whitespace." evidence="   * @param {string} name the name of the layer " />
+		<issue line="182" char="true" reason="Trailing whitespace." evidence="   * @param {number} elapsed time elapsed since last update call in " />
+		<issue line="183" char="true" reason="Trailing whitespace." evidence="   * milliseconds " />
+		<issue line="194" char="34" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="      if(this.layers[l].shuffled == true) {" />
+		<issue line="195" char="true" reason="Trailing whitespace." evidence="        reorder = true; " />
+		<issue line="199" char="16" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="    if(reorder == true) {" />
+		<issue line="200" char="true" reason="Trailing whitespace." evidence="      this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers); " />
+		<issue line="235" char="true" reason="Trailing whitespace." evidence="        var lBounds = this.layers[l].bounds;          " />
+		<issue line="14" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Scene = pulse.Node.extend(" />
+		<issue line="14" char="15" reason="&apos;pulse&apos; is not defined." evidence="pulse.Scene = pulse.Node.extend(" />
+		<issue line="63" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager({" />
+		<issue line="96" char="25" reason="&apos;pulse&apos; is not defined." evidence="    if(layer instanceof pulse.Layer &amp;&amp; " />
+		<issue line="112" char="35" reason="&apos;pulse&apos; is not defined." evidence="      this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers);" />
+		<issue line="122" char="14" reason="&apos;_layers&apos; is not defined." evidence="      delete _layers[name];" />
+		<issue line="200" char="35" reason="&apos;pulse&apos; is not defined." evidence="      this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers); " />
+		<issue line="234" char="10" reason="&apos;pulse&apos; is not defined." evidence="      if(pulse.events[type] == &apos;mouse&apos;) {" />
+	</file>
+	<file name="../lib/core/scenemanager.js">
+		<issue line="27" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="39" char="true" reason="Trailing whitespace." evidence="    if(scene instanceof pulse.Scene &amp;&amp; " />
+		<issue line="43" char="true" reason="Trailing whitespace." evidence="        this.gameWindow.clientWidth, " />
+		<issue line="60" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="76" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="97" char="true" reason="Trailing whitespace." evidence="  getScene : function(name) { " />
+		<issue line="98" char="true" reason="Trailing whitespace." evidence="    return this.scenes[name]; " />
+		<issue line="111" char="17" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="      if(active == true) {" />
+		<issue line="112" char="34" reason="Use &apos;===&apos; to compare with &apos;true&apos;." evidence="        if(this.scenes[s].active == true)" />
+		<issue line="113" char="11" reason="Expected &apos;{&apos; and instead saw &apos;scenes&apos;." evidence="          scenes.push(this.scenes[s]);" />
+		<issue line="11" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.SceneManager = PClass.extend(" />
+		<issue line="11" char="22" reason="&apos;PClass&apos; is not defined." evidence="pulse.SceneManager = PClass.extend(" />
+		<issue line="17" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="39" char="25" reason="&apos;pulse&apos; is not defined." evidence="    if(scene instanceof pulse.Scene &amp;&amp; " />
+		<issue line="65" char="24" reason="&apos;pulse&apos; is not defined." evidence="    if(name instanceof pulse.Scene) {" />
+		<issue line="81" char="24" reason="&apos;pulse&apos; is not defined." evidence="    if(name instanceof pulse.Scene) {" />
+	</file>
+	<file name="../lib/core/sprite.js">
+		<issue line="4" char="true" reason="Trailing whitespace." evidence=" * collection of &quot;frames&quot; that can be played in succession to " />
+		<issue line="8" char="true" reason="Trailing whitespace." evidence=" * @config {string|pulse.Texture} src the texture filename to use or a " />
+		<issue line="149" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="151" char="true" reason="Trailing whitespace." evidence="   * @return {boolean} Whether image has been loaded " />
+		<issue line="157" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="167" char="true" reason="Trailing whitespace." evidence="   * Starts and returns an action. Setting the target of the action to " />
+		<issue line="169" char="true" reason="Trailing whitespace." evidence="   * @param {string} name The name of the action to start " />
+		<issue line="177" char="true" reason="Trailing whitespace." evidence="    action.start(oframe); " />
+		<issue line="181" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="182" char="true" reason="Trailing whitespace." evidence="   * Adds an action to this sprite. The params passed in must either be " />
+		<issue line="183" char="true" reason="Trailing whitespace." evidence="   * an Action or the constructor params for an AnimateAction. " />
+		<issue line="214" char="true" reason="Trailing whitespace." evidence="   * Checks if the x and y position passed in is a point inside " />
+		<issue line="218" char="true" reason="Trailing whitespace." evidence="   * @return {boolean} true if point passed is inside this sprite " />
+		<issue line="221" char="true" reason="Trailing whitespace." evidence="    if(x &gt; this.bounds.x &amp;&amp; x &lt; (this.bounds.x + this.bounds.width) &amp;&amp; " />
+		<issue line="236" char="true" reason="Trailing whitespace." evidence="    if(rect.x &gt; this.bounds.x &amp;&amp; " />
+		<issue line="237" char="true" reason="Trailing whitespace." evidence="      (rect.x + rect.width) &lt; (this.bounds.x + this.bounds.width) &amp;&amp; " />
+		<issue line="238" char="true" reason="Trailing whitespace." evidence="      rect.y &gt; this.bounds.y &amp;&amp; " />
+		<issue line="246" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="248" char="true" reason="Trailing whitespace." evidence="   * @return {object} the frame. " />
+		<issue line="256" char="32" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="    if(this.textureFrame.width != 0) {" />
+		<issue line="261" char="33" reason="Use &apos;!==&apos; to compare with &apos;0&apos;." evidence="    if(this.textureFrame.height != 0) {" />
+		<issue line="269" char="true" reason="Trailing whitespace." evidence="      th  " />
+		<issue line="276" char="true" reason="Trailing whitespace." evidence="   * @param {number} time elapsed since last update call in milliseconds " />
+		<issue line="287" char="20" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="      if(this.size == null) {" />
+		<issue line="307" char="true" reason="Trailing whitespace." evidence="      this.updated = true; " />
+		<issue line="319" char="true" reason="Trailing whitespace." evidence="   * @param {CanvasRenderingContext2D} ctx the context in which to draw this " />
+		<issue line="325" char="true" reason="Trailing whitespace." evidence="    if(this.texture.percentLoaded &lt; 100 || " />
+		<issue line="326" char="true" reason="Trailing whitespace." evidence="       this.size.width == 0 || " />
+		<issue line="326" char="24" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="       this.size.width == 0 || " />
+		<issue line="327" char="25" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="       this.size.height == 0) {" />
+		<issue line="335" char="true" reason="Trailing whitespace." evidence="        0, 0, " />
+		<issue line="343" char="true" reason="Trailing whitespace." evidence="        slice, " />
+		<issue line="344" char="true" reason="Trailing whitespace." evidence="        0, 0, " />
+		<issue line="377" char="true" reason="Trailing whitespace." evidence="   * Handles all events sent to this object. If event is mousedown then a " />
+		<issue line="18" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sprite = pulse.Visual.extend(" />
+		<issue line="18" char="16" reason="&apos;pulse&apos; is not defined." evidence="pulse.Sprite = pulse.Visual.extend(" />
+		<issue line="79" char="14" reason="&apos;pulse&apos; is not defined." evidence="    params = pulse.util.checkParams(params, {" />
+		<issue line="90" char="26" reason="&apos;pulse&apos; is not defined." evidence="      this.texture = new pulse.Texture({" />
+		<issue line="143" char="23" reason="&apos;pulse&apos; is not defined." evidence="    this.events = new pulse.EventManager({" />
+		<issue line="190" char="26" reason="&apos;pulse&apos; is not defined." evidence="    if(params instanceof pulse.Action) {" />
+		<issue line="195" char="23" reason="&apos;pulse&apos; is not defined." evidence="      newAction = new pulse.AnimateAction({" />
+		<issue line="372" char="14" reason="&apos;pulse&apos; is not defined." evidence="      delete pulse.EventManager.DraggedItems[&apos;sprite:&apos; + this.name];" />
+		<issue line="392" char="7" reason="&apos;pulse&apos; is not defined." evidence="      pulse.EventManager.DraggedItems[&apos;sprite:&apos; + this.name] = this;" />
+	</file>
+	<file name="../lib/core/util.js">
+		<issue line="7" char="true" reason="Trailing whitespace." evidence="pulse.util = " />
+		<issue line="11" char="22" reason="Use the array literal notation []." evidence="    var found = Array();" />
+		<issue line="11" char="17" reason="Missing &apos;new&apos; prefix when invoking a constructor." evidence="    var found = Array();" />
+		<issue line="17" char="true" reason="Trailing whitespace." evidence="        if(typeof collection[o] == &apos;function&apos; " />
+		<issue line="18" char="11" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="          &amp;&amp; typeof collection[o].name == &apos;function&apos;" />
+		<issue line="19" char="11" reason="Bad line breaking before &apos;&amp;&amp;&apos;." evidence="          &amp;&amp; collection[o].name == name)" />
+		<issue line="31" char="11" reason="Expected &apos;{&apos; and instead saw &apos;found&apos;." evidence="          found.push(collection[o]);" />
+		<issue line="47" char="true" reason="Trailing whitespace." evidence="    /** Loop through each point and determine if it " />
+		<issue line="48" char="true" reason="Trailing whitespace." evidence="     * falls within the other box&apos;s footprint. */ " />
+		<issue line="55" char="11" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="          return true;" />
+		<issue line="67" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return true;" />
+		<issue line="69" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return false;" />
+		<issue line="73" char="true" reason="Trailing whitespace." evidence="  /** " />
+		<issue line="81" char="17" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(variable == null)" />
+		<issue line="82" char="7" reason="Expected &apos;{&apos; and instead saw &apos;variable&apos;." evidence="      variable = vDefault;" />
+		<issue line="97" char="7" reason="Expected &apos;{&apos; and instead saw &apos;obj&apos;." evidence="      obj = {};" />
+		<issue line="99" char="47" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(!obj.hasOwnProperty(prop) || obj[prop] == null)" />
+		<issue line="100" char="7" reason="Expected &apos;{&apos; and instead saw &apos;obj&apos;." evidence="      obj[prop] = propDefault;" />
+		<issue line="107" char="true" reason="Trailing whitespace." evidence="    if(typeof params == &apos;undefined&apos; " />
+		<issue line="108" char="true" reason="Trailing whitespace." evidence="      || params == null " />
+		<issue line="108" char="7" reason="Bad line breaking before &apos;||&apos;." evidence="      || params == null " />
+		<issue line="108" char="17" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="      || params == null " />
+		<issue line="109" char="7" reason="Bad line breaking before &apos;||&apos;." evidence="      || typeof params != &apos;object&apos;)" />
+		<issue line="116" char="49" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="      if(!params.hasOwnProperty(p) || params[p] == null)" />
+		<issue line="117" char="9" reason="Expected &apos;{&apos; and instead saw &apos;params&apos;." evidence="        params[p] = defaults[p];" />
+		<issue line="126" char="38" reason="Expected &apos;{&apos; and instead saw &apos;size&apos;." evidence="        if (obj.hasOwnProperty(key)) size++;" />
+		<issue line="135" char="9" reason="Expected &apos;{&apos; and instead saw &apos;za&apos;." evidence="        za = objA.zindex;" />
+		<issue line="139" char="9" reason="Expected &apos;{&apos; and instead saw &apos;zb&apos;." evidence="        zb = objB.zindex;" />
+		<issue line="142" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return -1;" />
+		<issue line="145" char="9" reason="Expected &apos;{&apos; and instead saw &apos;return&apos;." evidence="        return 1;" />
+		<issue line="152" char="28" reason="Use the array literal notation []." evidence="    var ordered = new Array();" />
+		<issue line="164" char="25" reason="Use the array literal notation []." evidence="    var keys = new Array();" />
+		<issue line="167" char="7" reason="Expected &apos;{&apos; and instead saw &apos;keys&apos;." evidence="      keys.push(ordered[o].name);" />
+		<issue line="178" char="22" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(parentElement == null)" />
+		<issue line="179" char="7" reason="Expected &apos;{&apos; and instead saw &apos;parentElement&apos;." evidence="      parentElement = document.body;" />
+		<issue line="192" char="7" reason="Expected &apos;{&apos; and instead saw &apos;iframe&apos;." evidence="      iframe.doc = iframe.contentDocument;" />
+		<issue line="195" char="7" reason="Expected &apos;{&apos; and instead saw &apos;iframe&apos;." evidence="      iframe.doc = iframe.contentWindow.document;" />
+		<issue line="198" char="7" reason="Expected &apos;{&apos; and instead saw &apos;iframe&apos;." evidence="      iframe.doc = iframe.document;" />
+		<issue line="201" char="19" reason="Use &apos;===&apos; to compare with &apos;null&apos;." evidence="    if(iframe.doc == null)" />
+		<issue line="202" char="7" reason="Expected &apos;{&apos; and instead saw &apos;throw&apos;." evidence="      throw &quot;Document not found, append the parent element to the DOM before creating the IFrame&quot;;" />
+		<issue line="7" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.util = " />
+		<issue line="64" char="24" reason="&apos;Point&apos; is not defined." evidence="    if(obj1 instanceof Point &amp;&amp; obj2 instanceof Point)" />
+		<issue line="64" char="49" reason="&apos;Point&apos; is not defined." evidence="    if(obj1 instanceof Point &amp;&amp; obj2 instanceof Point)" />
+		<issue line="133" char="5" reason="&apos;za&apos; is not defined." evidence="    za = 0;" />
+		<issue line="135" char="9" reason="&apos;za&apos; is not defined." evidence="        za = objA.zindex;" />
+		<issue line="137" char="5" reason="&apos;zb&apos; is not defined." evidence="    zb = 0;" />
+		<issue line="139" char="9" reason="&apos;zb&apos; is not defined." evidence="        zb = objB.zindex;" />
+		<issue line="141" char="8" reason="&apos;za&apos; is not defined." evidence="    if(za &lt; zb)" />
+		<issue line="141" char="13" reason="&apos;zb&apos; is not defined." evidence="    if(za &lt; zb)" />
+		<issue line="144" char="8" reason="&apos;za&apos; is not defined." evidence="    if(za &gt; zb)" />
+		<issue line="144" char="13" reason="&apos;zb&apos; is not defined." evidence="    if(za &gt; zb)" />
+		<issue line="162" char="18" reason="&apos;pulse&apos; is not defined." evidence="    ordered.sort(pulse.util.compareZIndexes);" />
+	</file>
+	<file name="../lib/core/visual.js">
+		<issue line="25" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="31" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="37" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="41" char="true" reason="Trailing whitespace." evidence="    this.position = { " />
+		<issue line="42" char="true" reason="Trailing whitespace." evidence="      x : 0, " />
+		<issue line="46" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="56" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="65" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="98" char="true" reason="Trailing whitespace." evidence="     * The current position anchor of the visual node, the position on the " />
+		<issue line="108" char="true" reason="Trailing whitespace." evidence="     * The previous position anchor of the visual node, previous anchor gets " />
+		<issue line="129" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="138" char="true" reason="Trailing whitespace." evidence="    /** " />
+		<issue line="155" char="true" reason="Trailing whitespace." evidence="     * The previous rotation of the visual node, in degrees. This is updated in " />
+		<issue line="162" char="true" reason="Trailing whitespace." evidence="     * The position of the upper left of the visual node based on the " />
+		<issue line="182" char="true" reason="Trailing whitespace." evidence="     * This signifies whether the visual node needs to have certain size " />
+		<issue line="196" char="true" reason="Trailing whitespace." evidence="     * The previous zindex of the visual node. Higher zindex means the " />
+		<issue line="228" char="true" reason="Trailing whitespace." evidence="     * The previous state of visible, this value is updated in the " />
+		<issue line="242" char="true" reason="Trailing whitespace." evidence="   * Moves the visual node by adding passed in parameters to the " />
+		<issue line="255" char="true" reason="Trailing whitespace." evidence="   * Updates visual node properities by checking to see if they have " />
+		<issue line="257" char="true" reason="Trailing whitespace." evidence="   * @param {number} elapsed time elapsed since last update call in " />
+		<issue line="258" char="true" reason="Trailing whitespace." evidence="   * milliseconds " />
+		<issue line="273" char="true" reason="Trailing whitespace." evidence="      this.invalidProperties = true; " />
+		<issue line="280" char="true" reason="Trailing whitespace." evidence="      this.invalidProperties = true; " />
+		<issue line="320" char="true" reason="Trailing whitespace." evidence="      this.updated = true; " />
+		<issue line="328" char="true" reason="Trailing whitespace." evidence="   * @param {CanvasRenderingContext2D} ctx the context in which to draw " />
+		<issue line="336" char="26" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.canvas.width == 0 || this.canvas.height == 0) {" />
+		<issue line="336" char="53" reason="Use &apos;===&apos; to compare with &apos;0&apos;." evidence="    if(this.canvas.width == 0 || this.canvas.height == 0) {" />
+		<issue line="337" char="true" reason="Trailing whitespace." evidence="      return; " />
+		<issue line="347" char="true" reason="Trailing whitespace." evidence="        this.positionTopLeft.x + this.canvas.width / 2, " />
+		<issue line="348" char="true" reason="Trailing whitespace." evidence="        this.positionTopLeft.y + this.canvas.height / 2, " />
+		<issue line="354" char="true" reason="Trailing whitespace." evidence="    } " />
+		<issue line="359" char="true" reason="Trailing whitespace." evidence="        this.positionTopLeft.x, this.positionTopLeft.y, " />
+		<issue line="369" char="true" reason="Trailing whitespace." evidence="      var rotationX = this.positionTopLeft.x + " />
+		<issue line="371" char="true" reason="Trailing whitespace." evidence="      var rotationY = this.positionTopLeft.y + " />
+		<issue line="401" char="true" reason="Trailing whitespace." evidence="        this.positionTopLeft.x / Math.abs(this.scale.x), " />
+		<issue line="403" char="true" reason="Trailing whitespace." evidence="        this.size.width, " />
+		<issue line="406" char="true" reason="Trailing whitespace." evidence="    }  " />
+		<issue line="423" char="true" reason="Trailing whitespace." evidence="   * Calculates new anchor radius and angle based on the size of the " />
+		<issue line="426" char="true" reason="Trailing whitespace." evidence="   * the rotation of this node and position. Lastly, it sets the " />
+		<issue line="448" char="true" reason="Trailing whitespace." evidence="    var xpos = this.position.x - " />
+		<issue line="449" char="true" reason="Trailing whitespace." evidence="               Math.sin(Math.PI * -(this.rotation + this.anchorAngle) / 180) * " />
+		<issue line="451" char="true" reason="Trailing whitespace." evidence="    var ypos = this.position.y - " />
+		<issue line="452" char="true" reason="Trailing whitespace." evidence="               Math.cos(Math.PI * -(this.rotation + this.anchorAngle) / 180) * " />
+		<issue line="456" char="true" reason="Trailing whitespace." evidence="      x : xpos, " />
+		<issue line="12" char="1" reason="&apos;pulse&apos; is not defined." evidence="pulse.Visual = pulse.Node.extend(" />
+		<issue line="12" char="16" reason="&apos;pulse&apos; is not defined." evidence="pulse.Visual = pulse.Node.extend(" />
+		<issue line="332" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="342" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="356" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="398" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+		<issue line="409" char="8" reason="&apos;pulse&apos; is not defined." evidence="    if(pulse.DEBUG) {" />
+	</file>
+</jslint>
