@@ -6,7 +6,7 @@ buildscript {
   dependencies {
     classpath 'com.eriwen:gradle-js-plugin:0.2'
   }
-} 
+}
 
 apply plugin: 'js'
 
@@ -73,7 +73,7 @@ task jasmine(type: Exec) {
   inputs.files fileTree(dir: "../tests/spec", include: "**/*.js")
   outputs.dir("../tests/results")
 
-  commandLine = ["DISPLAY=:0", "phantomjs", "../tests/phantomjs_jasminexml_runner.js", "../tests/test_runner.html", "../tests/results"]
+  commandLine = ["/usr/bin/env", "DISPLAY=:0", "phantomjs", "../tests/phantomjs_jasminexml_runner.js", "../tests/test_runner.html", "../tests/results"]
 }
 
 task jsdoc(type: Exec) {
