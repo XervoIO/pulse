@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.1.0/jasmine.css">
   <script type="text/javascript" src="lib/jasmine-1.1.0/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.1.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="lib/jasmine-reporters/jasmine.phantomjs-reporter.js"></script>
 
   <!-- include source files here... -->
   <script type="text/javascript" src="../lib/pulse.js"></script>
@@ -30,6 +31,8 @@
       jasmineEnv.specFilter = function(spec) {
         return trivialReporter.specFilter(spec);
       };
+
+      jasmineEnv.addReporter(new jasmine.PhantomJSReporter());
 
       var currentWindowOnload = window.onload;
 
