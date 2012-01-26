@@ -95,6 +95,13 @@ h1 {
 	background: url('../img/pulse_header.png') no-repeat;
 }
 
+h2 {
+	font-size: 30px;
+	color: #FFF;
+	text-shadow: -1px -1px 0px #111111;
+	margin: 0 0 10px;
+}
+
 .center {
 	width: 600px;
 	margin: 0 auto 5px;
@@ -111,6 +118,34 @@ h1 {
 
 .topbox p {
 	padding: 10px 0 10px;
+}
+
+.download {
+	width: 570px;
+	margin: 0 auto 50px;
+	padding: 20px 20px 10px;
+	overflow: hidden;
+	background: url('../img/download_bg.png') repeat-x 0 100%;
+}
+
+.download p {
+	margin: 0 0 10px;
+}
+
+#download-btn {
+	display: block;
+	float: left;
+	width: 105px;
+	height: 34px;
+	text-indent: -9999px;
+	margin: 0 10px 0 0;
+	background: url('../img/download_btn.png');
+}
+
+.info {
+	color: #FFF;
+	display: block;
+	padding: 18px 0 0;
 }
 
 .game {
