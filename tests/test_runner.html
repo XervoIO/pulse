@@ -13,10 +13,17 @@
   <script type="text/javascript" src="lib/jasmine-dom-fixtures.js"></script>
   <script type="text/javascript" src="lib/jasmine-dom-matchers.js"></script>
 
-  <!-- include source files here... -->
+  <!-- require.js initialization -->
   <script type="text/javascript" src="../lib/other/require.js"></script>
+  <script type="text/javascript">
+    requirejs.config({paths:{ order: "../lib/other/order" }});
+  </script>
+
+  <!-- include source files here... -->
   <script type="text/javascript" src="../lib/pulse.js"></script>
-  <script type="text/javascript">pulse.init('../lib');</script>
+  <script type="text/javascript">
+    pulse.init('../lib');
+  </script>
 
   <!-- include spec files here... -->
   <script type="text/javascript">
@@ -53,9 +60,7 @@
 
     })();
   </script>
-
 </head>
-
 <body>
 </body>
 </html>
