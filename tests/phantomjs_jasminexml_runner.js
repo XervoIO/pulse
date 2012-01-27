@@ -30,7 +30,7 @@ if ( phantom.args.length !== 2 ) {
 
                 // Save the result of the tests in files
                 var f = null;
-                if(typeof suitesResults.length !== 'undefined') {
+                if(typeof suitesResults !== 'undefined') {
                     for ( var i = 0, len = suitesResults.length; i < len; ++i ) {
                         try {
                             f = fs.open(resultdir + '/' + suitesResults[i]["xmlfilename"], "w");
