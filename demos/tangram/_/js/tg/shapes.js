@@ -15,6 +15,9 @@ tg.pieces.TriangleLarge = tg.MaskedSprite.extend({
     ctx.lineTo(0,152);
     ctx.lineTo(0,0);
     ctx.fill();
+
+    this.hitTestType = pulse.Sprite.HIT_TEST_CONVEX;
+    this.hitTestPoints = [{x: 0, y: 0}, {x: 76, y: 76}, {x: 0, y: 152}];
   }
 });
 
@@ -32,6 +35,9 @@ tg.pieces.TriangleMedium = tg.MaskedSprite.extend({
     ctx.lineTo(0,76);
     ctx.lineTo(0,0);
     ctx.fill();
+
+    this.hitTestType = pulse.Sprite.HIT_TEST_CONVEX;
+    this.hitTestPoints = [{x: 0, y: 0}, {x: 76, y: 76}, {x: 0, y: 76}];
   }
 });
 
@@ -49,6 +55,9 @@ tg.pieces.TriangleSmall = tg.MaskedSprite.extend({
     ctx.lineTo(0,76);
     ctx.lineTo(0,0);
     ctx.fill();
+
+    this.hitTestType = pulse.Sprite.HIT_TEST_CONVEX;
+    this.hitTestPoints = [{x: 0, y: 0}, {x: 38, y: 38}, {x: 0, y: 76}];
   }
 });
 
@@ -67,6 +76,9 @@ tg.pieces.Square = tg.MaskedSprite.extend({
     ctx.lineTo(0,38);
     ctx.lineTo(38,0);
     ctx.fill();
+
+    this.hitTestType = pulse.Sprite.HIT_TEST_CONVEX;
+    this.hitTestPoints = [{x: 38, y: 0}, {x: 76, y: 38}, {x: 38, y: 76}, {x: 0, y: 38}];
   }
 });
 
@@ -85,5 +97,8 @@ tg.pieces.Trapezoid = tg.MaskedSprite.extend({
     ctx.lineTo(0,38);
     ctx.lineTo(38,0);
     ctx.fill();
+
+    this.hitTestType = pulse.Sprite.HIT_TEST_CONVEX;
+    this.hitTestPoints = [{x: 38, y: 0}, {x: 38, y: 76}, {x: 0, y: 114}, {x: 0, y: 38}];
   }
 });

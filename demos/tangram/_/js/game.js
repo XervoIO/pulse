@@ -3,6 +3,8 @@ var tg = tg || { };
 
 pulse.ready(function(){
 
+  //pulse.DEBUG = true;
+
   var skin = new pulse.Texture({filename: '_/img/skin.png'});
 
   var gameManager = new tg.GameManager();
@@ -38,8 +40,8 @@ pulse.ready(function(){
   gamePlayArea.events.bind('itemdropped', function(e) {
     // handle item snap here
     var piece = e.sender;
-    piece.position.x = round5(piece.position.x);
-    piece.position.y = round5(piece.position.y);
+    piece.position.x = round2(piece.position.x);
+    piece.position.y = round2(piece.position.y);
   });
   gameLayer.addNode(gamePlayArea);
 
@@ -123,6 +125,10 @@ pulse.ready(function(){
 
   function round5(x) {
     return (x % 5) >= 2.5 ? parseInt(x / 5, 10) * 5 + 5 : parseInt(x / 5, 10) * 5;
+  }
+
+  function round2(x) {
+    return (x % 2) >= 1 ? parseInt(x / 2, 10) * 2 + 2 : parseInt(x / 2, 10) * 2;
   }
 
 });
