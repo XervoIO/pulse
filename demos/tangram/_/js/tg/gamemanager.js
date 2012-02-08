@@ -4,6 +4,7 @@ tg.GameManager = PClass.extend(
 {
   init: function() {
     this.selectedPiece = null;
+    this.pieces = [];
   },
 
   rotateSelectedPiece: function(val) {
