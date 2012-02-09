@@ -59,9 +59,6 @@ pulse.ready(function(){
     var min = 400;
     var pradius = 22500;
 
-    sender.position.x = parseInt(sender.position.x, 10);
-    sender.position.y = parseInt(sender.position.y, 10);
-
     for(var i = 0; i < gameManager.pieces.length; i++) {
       p = gameManager.pieces[i];
       // if same piece skip
@@ -247,7 +244,7 @@ pulse.ready(function(){
     }
 
     var dx = 0, dy = 0;
-    var max = 16;
+    var max = 32;
     var dist = 0;
     var cpt = {};
     var poly = [];
