@@ -10,6 +10,9 @@ tg.GameManager = PClass.extend(
   rotateSelectedPiece: function(val) {
     if(this.selectedPiece) {
       this.selectedPiece.rotation += val;
+      if(this.selectedPiece.rotation < 0) {
+        this.selectedPiece.rotation = 360 + this.selectedPiece.rotation;
+      }
     }
   }
 });

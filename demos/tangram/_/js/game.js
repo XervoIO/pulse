@@ -7,6 +7,15 @@ pulse.ready(function(){
 
   tg.skins = {};
   tg.skins.test = new pulse.Texture({filename: '_/img/skin.png'});
+  tg.skins.blue = new pulse.Texture({filename: '_/img/skin_blue.png'});
+  tg.skins.burgundy = new pulse.Texture({filename: '_/img/skin_burgundy.png'});
+  tg.skins.orange = new pulse.Texture({filename: '_/img/skin_orange.png'});
+  tg.skins.green = new pulse.Texture({filename: '_/img/skin_green.png'});
+  tg.skins.red = new pulse.Texture({filename: '_/img/skin_red.png'});
+  tg.skins.purple = new pulse.Texture({filename: '_/img/skin_purple.png'});
+  tg.skins.yellow = new pulse.Texture({filename: '_/img/skin_yellow.png'});
+
+  var level = eval('(' + '[[{"x" : 145, "y" : 220}, {"x" : 38, "y" : 220}, {"x" : 38, "y" : 113}], [{"x" : 37, "y" : 220}, {"x" : 145, "y" : 220}, {"x" : 145, "y" : 327}], [{"x" : 66, "y" : 252}, {"x" : 142, "y" : 328}, {"x" : 66, "y" : 328}], [{"x" : 0, "y" : 0}, {"x" : 38, "y" : 38}, {"x" : 0, "y" : 76}], [{"x" : 76, "y" : 75}, {"x" : 38, "y" : 37}, {"x" : 76, "y" : -1}], [{"x" : 38, "y" : 37}, {"x" : 76, "y" : 75}, {"x" : 38, "y" : 113}, {"x" : 0, "y" : 75}], [{"x" : 119, "y" : 194}, {"x" : 119, "y" : 118}, {"x" : 157, "y" : 80}, {"x" : 157, "y" : 156}]]' + ')');
 
   var gameManager = new tg.GameManager();
 
@@ -93,9 +102,12 @@ pulse.ready(function(){
 
       sender.position.x += dx;
       sender.position.y += dy;
+      sender.calculateProperties();
     }
 
-
+    // check win conditions
+    checkWinConditions();
+    //calculateSilhoutte();
   });
   gameLayer.addNode(gamePlayArea);
 
@@ -109,7 +121,7 @@ pulse.ready(function(){
   gameLayer.addNode(drawerBg);
 
   var tlPiece1 = new tg.pieces.TriangleLarge({
-    src: tg.skins.test,
+    src: tg.skins.green,
     gameManager: gameManager
   });
   tlPiece1.position = {x: 90, y: 550};
@@ -118,7 +130,7 @@ pulse.ready(function(){
   gameManager.pieces.push(tlPiece1);
 
   var tlPiece2 = new tg.pieces.TriangleLarge({
-    src: tg.skins.test,
+    src: tg.skins.orange,
     gameManager: gameManager
   });
   tlPiece2.position = {x: 670, y: 550};
@@ -127,7 +139,7 @@ pulse.ready(function(){
   gameManager.pieces.push(tlPiece2);
 
   var tmPiece1 = new tg.pieces.TriangleMedium({
-    src: tg.skins.test,
+    src: tg.skins.red,
     gameManager: gameManager
   });
   tmPiece1.position = {x: 220, y: 550};
@@ -135,7 +147,7 @@ pulse.ready(function(){
   gameManager.pieces.push(tmPiece1);
 
   var tsPiece1 = new tg.pieces.TriangleSmall({
-    src: tg.skins.test,
+    src: tg.skins.purple,
     gameManager: gameManager
   });
   tsPiece1.position = {x: 290, y: 550};
@@ -143,7 +155,7 @@ pulse.ready(function(){
   gameManager.pieces.push(tsPiece1);
 
   var tsPiece2 = new tg.pieces.TriangleSmall({
-    src: tg.skins.test,
+    src: tg.skins.burgundy,
     gameManager: gameManager
   });
   tsPiece2.position = {x: 560, y: 550};
@@ -152,7 +164,7 @@ pulse.ready(function(){
   gameManager.pieces.push(tsPiece2);
 
   var sqPiece1 = new tg.pieces.Square({
-    src: tg.skins.test,
+    src: tg.skins.yellow,
     gameManager: gameManager
   });
   sqPiece1.position = {x: 490, y: 550};
@@ -160,7 +172,7 @@ pulse.ready(function(){
   gameManager.pieces.push(sqPiece1);
 
   var tpPiece1 = new tg.pieces.Trapezoid({
-    src: tg.skins.test,
+    src: tg.skins.blue,
     gameManager: gameManager
   });
   tpPiece1.position = {x: 380, y: 550};
@@ -184,12 +196,181 @@ pulse.ready(function(){
   engine.scenes.activateScene(scene);
   engine.go(50, loop);
 
-  function round5(x) {
-    return (x % 5) >= 2.5 ? parseInt(x / 5, 10) * 5 + 5 : parseInt(x / 5, 10) * 5;
+  function checkWinConditions() {
+    var p = null;
+    var bl = {x: 10000, y: 10000};
+    var list = [];
+    var item = null;
+    var pt = {};
+
+    for(var i = 0; i < gameManager.pieces.length; i++) {
+      p = gameManager.pieces[i];
+      item = [];
+      for(var j = 0; j < p.hitTestPoints.length; j++) {
+        pt = p.hitTestPoints[j];
+        pt = p.convertPointLocalToGlobal(pt.x, pt.y);
+        if(pt.y < bl.y && pt.x < bl.x) {
+          bl.x = pt.x;
+          bl.y = pt.y;
+        }
+        item.push(pt);
+      }
+
+      list.push(item);
+    }
+
+    var inside = false;
+    var outside = [];
+    var lp = 0;
+
+    for(var k = 0; k < list.length; k++) {
+      item = list[k];
+      for(var l = 0; l < item.length; l++) {
+        inside = false;
+        pt = item[l];
+        npt = {};
+        pt.x -= bl.x;
+        pt.y -= bl.y;
+        pt.x = Math.round(pt.x);
+        pt.y = Math.round(pt.y);
+
+        // check to see if point is inside any of the polys
+        for(lp = 0; lp < level.length; lp++) {
+          if(checkPointInPoly(pt.x, pt.y, level[lp])) {
+            inside = true;
+          }
+        }
+        if(!inside && !pointInArray(pt, outside)) {
+          outside.push(pt);
+        }
+      }
+    }
+
+    var dx = 0, dy = 0;
+    var max = 16;
+    var dist = 0;
+    var cpt = {};
+    var poly = [];
+    var cont = false;
+
+    // check outside points see if they are within 2 pixels of level verts
+    for(var oi = outside.length - 1; oi >= 0; oi--) {
+      pt = outside[oi];
+      cont = false;
+      for(lp = 0; lp < level.length; lp++) {
+        poly = level[lp];
+        for(var vi = 0; vi < poly.length; vi++) {
+          cpt = poly[vi];
+          dx = pt.x - cpt.x;
+          dy = pt.y - cpt.y;
+          dist = dx * dx + dy * dy;
+          if(dist < max) {
+            cont = true;
+            break;
+          }
+        }
+        if(cont) {
+          outside.splice(oi, 1);
+          break;
+        }
+      }
+    }
+
+
+    if(outside.length === 0) {
+      console.log('level complete');
+    }
   }
 
-  function round2(x) {
-    return (x % 2) >= 1 ? parseInt(x / 2, 10) * 2 + 2 : parseInt(x / 2, 10) * 2;
+  function pointInArray(pt, points) {
+    var cpt = {};
+    for(var i in points) {
+      cpt = points[i];
+      if(cpt.x === pt.x && cpt.y === pt.y) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function checkPointInPoly(x, y, verts) {
+    var pcount = verts.length;
+    var retval = false;
+    var vert1 = {};
+    var vert2 = {};
+
+    if(pcount < 3) {
+      return false;
+    }
+
+    // Check if point is in polygon
+    for(var i = 0, j = pcount - 1; i < pcount; j = i++) {
+      vert1 = verts[i];
+      vert2 = verts[j];
+      if(((vert1.y > y) != (vert2.y > y)) &&
+         (x < (vert2.x - vert1.x) * (y - vert1.y) / (vert2.y - vert1.y) + vert1.x)) {
+        retval = !retval;
+      }
+    }
+
+    return retval;
+  }
+
+  function calculateSilhoutte() {
+    var p = null;
+    var bl = {x: 10000, y: 10000};
+    var list = [];
+    var item = null;
+    var pt = {};
+
+    for(var i = 0; i < gameManager.pieces.length; i++) {
+      p = gameManager.pieces[i];
+
+      item  = [];
+
+      for(var j = 0; j < p.hitTestPoints.length; j++) {
+        pt = p.hitTestPoints[j];
+        pt = p.convertPointLocalToGlobal(pt.x, pt.y);
+        if(pt.y < bl.y && pt.x < bl.x) {
+          bl.x = pt.x;
+          bl.y = pt.y;
+        }
+        item.push(pt);
+      }
+
+      list.push(item);
+    }
+
+    var str = "[";
+
+    for(var k = 0; k < list.length; k++) {
+      item = list[k];
+
+      if(k === 0) {
+        str += "[";
+      } else {
+        str += ", [";
+      }
+
+      for(var l = 0; l < item.length; l++) {
+        pt = item[l];
+        pt.x -= bl.x;
+        pt.y -= bl.y;
+        pt.x = Math.round(pt.x);
+        pt.y = Math.round(pt.y);
+        if(l === 0) {
+          str += '{"x" : ' + pt.x + ', "y" : ' + pt.y + '}';
+        } else {
+          str += ',  {"x" : ' + pt.x + ', "y" : ' + pt.y + '}';
+        }
+      }
+      str += "]";
+    }
+
+    str += "]";
+
+    console.dir(list);
+    console.log(str);
   }
 
 });
