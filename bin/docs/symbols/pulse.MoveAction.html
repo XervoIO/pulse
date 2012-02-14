@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - pulse.AnimateAction</title>
+		<title>JsDoc Reference - pulse.MoveAction</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -266,7 +266,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class pulse.AnimateAction
+				Class pulse.MoveAction
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -276,16 +276,16 @@ ul.inheritsList
 					<a href="../symbols/pulse.Action.html">pulse.Action</a>.<br />
 				
 			
-				animation action
+				move action
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/action/animateaction.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/action/moveaction.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.AnimateAction.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.MoveAction.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -298,11 +298,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/pulse.AnimateAction.html#constructor">pulse.AnimateAction</a></b>(params)
+								<b><a href="../symbols/pulse.MoveAction.html#constructor">pulse.MoveAction</a></b>(params)
 							</div>
-							<div class="description">Animations are a collection of rectangles that represent pieces of
-a larger rectangle, which change at a given rate, IE the frame
-changes at a given interval.</div>
+							<div class="description">Animates a move of an object to new position over a period of time.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -313,7 +311,7 @@ changes at a given interval.</div>
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.AnimateAction.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.MoveAction.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -327,9 +325,29 @@ changes at a given interval.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.AnimateAction.html#size">size</a></b>
+								<b><a href="../symbols/pulse.MoveAction.html#duration">duration</a></b>
 								</div>
-								<div class="description">The size of the frame for the animation.</div>
+								<div class="description">The duration of the move animation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MoveAction.html#easingFunction">easingFunction</a></b>
+								</div>
+								<div class="description">The easing function to use for position movement.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MoveAction.html#position">position</a></b>
+								</div>
+								<div class="description">The position the target is going to be moved to.</div>
 							</td>
 						</tr>
 					
@@ -348,7 +366,7 @@ changes at a given interval.</div>
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.AnimateAction.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.MoveAction.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -361,16 +379,7 @@ changes at a given interval.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#bounds">bounds</a></b>(newBounds)
-								</div>
-								<div class="description">Gets or Sets the current outer bounds for the animation.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#complete">complete</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#complete">complete</a></b>()
 								</div>
 								<div class="description">Complete handler when the animation is complete.</div>
 							</td>
@@ -379,17 +388,7 @@ changes at a given interval.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#getFrame">getFrame</a></b>(index)
-								</div>
-								<div class="description">Gets a frame of the animation based on the passed in index or
-the current frame.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#pause">pause</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#pause">pause</a></b>()
 								</div>
 								<div class="description">Pauses the animation.</div>
 							</td>
@@ -398,7 +397,7 @@ the current frame.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#start">start</a></b>(oframe)
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#start">start</a></b>(oframe)
 								</div>
 								<div class="description">Starts the animation.</div>
 							</td>
@@ -407,7 +406,7 @@ the current frame.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#stop">stop</a></b>()
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#stop">stop</a></b>()
 								</div>
 								<div class="description">Stops the animation.</div>
 							</td>
@@ -416,7 +415,7 @@ the current frame.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction.html#update">update</a></b>(elapsed)
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#update">update</a></b>(elapsed)
 								</div>
 								<div class="description">This is the master update function for the animation.</div>
 							</td>
@@ -452,13 +451,11 @@ the current frame.</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>pulse.AnimateAction</b>(params)
+						<b>pulse.MoveAction</b>(params)
 				</div>
 				
 				<div class="description">
-					Animations are a collection of rectangles that represent pieces of
-a larger rectangle, which change at a given rate, IE the frame
-changes at a given interval.
+					Animates a move of an object to new position over a period of time.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -489,45 +486,17 @@ on the node</dd>
 								<dd>name of the node</dd>
 						
 							<dt>
-								<span class="light fixedFont">{object}</span>  <b>params.size</b>
-								<i>Optional</i>
+								<span class="light fixedFont">{object}</span>  <b>params.position</b>
+								
 							</dt>
-								<dd>a point object that represents the size of the
-animation frames</dd>
+								<dd>the new position to move the target to, in
+milliseconds</dd>
 						
 							<dt>
-								<span class="light fixedFont">{number|array}</span>  <b>params.frames</b>
-								<i>Optional</i>
+								<span class="light fixedFont">{number}</span>  <b>params.duration</b>
+								
 							</dt>
-								<dd>a number representing the number of frames
-or an array of frames representing the sequence in which to play the
-frames</dd>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>params.frameRate</b>
-								<i>Optional</i>
-							</dt>
-								<dd>the number of frames per second</dd>
-						
-							<dt>
-								<span class="light fixedFont">{point}</span>  <b>params.offset</b>
-								<i>Optional</i>
-							</dt>
-								<dd>the pixel offset of the animation in respect to the
-sprite sheet</dd>
-						
-							<dt>
-								<span class="light fixedFont">{size}</span>  <b>params.bounds</b>
-								<i>Optional</i>
-							</dt>
-								<dd>the phyiscal bounds in which all frames must lie</dd>
-						
-							<dt>
-								<span class="light fixedFont">{number}</span>  <b>params.plays</b>
-								<i>Optional</i>
-							</dt>
-								<dd>the number of times the animation should loop, if
-less than 0 it will loop continuously</dd>
+								<dd>the length of time to animate over</dd>
 						
 						</dl>
 					
@@ -547,15 +516,59 @@ less than 0 it will loop continuously</dd>
 					Field Detail
 				</div>
 				
-					<a name="size"> </a>
+					<a name="duration"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>size</b>
+					<b>duration</b>
 					
 					</div>
 					<div class="description">
-						The size of the frame for the animation.
+						The duration of the move animation. Shouldn't be changed once started.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="easingFunction"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>easingFunction</b>
+					
+					</div>
+					<div class="description">
+						The easing function to use for position movement.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="position"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>position</b>
+					
+					</div>
+					<div class="description">
+						The position the target is going to be moved to.
 						
 						
 					</div>
@@ -577,51 +590,6 @@ less than 0 it will loop continuously</dd>
 					Method Detail
 				</div>
 				
-					<a name="bounds"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{object}</span>
-					<b>bounds</b>(newBounds)
-					
-					</div>
-					<div class="description">
-						Gets or Sets the current outer bounds for the animation. The bounds
-determine when to wrap frames to the next "line." Frames will always be
-forced to lie without the set bounds.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{object}</span> <b>newBounds</b>
-									
-								</dt>
-								<dd>the new bounds of the animation</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{object}</span> the current bounds of the animation</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
 					<a name="complete"> </a>
 					<div class="fixedFont">
 					
@@ -641,50 +609,6 @@ forced to lie without the set bounds.
 						
 						
 						
-						
-						
-						
-
-					<hr />
-				
-					<a name="getFrame"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{object}</span>
-					<b>getFrame</b>(index)
-					
-					</div>
-					<div class="description">
-						Gets a frame of the animation based on the passed in index or
-the current frame.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{number}</span> <b>index</b>
-									
-								</dt>
-								<dd>the frame to retrieve</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{object}</span> a rectangle that represents the frame</dd>
-							
-							</dl>
 						
 						
 						
@@ -786,7 +710,7 @@ the current frame.
 					</div>
 					<div class="description">
 						This is the master update function for the animation. This will
-update the target's texture with the correct frame.
+update the target's position with the correct position.
 						
 						
 					</div>

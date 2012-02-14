@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - pulse.SceneManager</title>
+		<title>JsDoc Reference - pulse.TextFile</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -266,7 +266,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class pulse.SceneManager
+				Class pulse.TextFile
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -274,16 +274,16 @@ ul.inheritsList
 				
 				
 			
-				scene manager class
+				Text File
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/scenemanager.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/asset/textfile.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.SceneManager.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.TextFile.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -296,9 +296,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/pulse.SceneManager.html#constructor">pulse.SceneManager</a></b>(params)
+								<b><a href="../symbols/pulse.TextFile.html#constructor">pulse.TextFile</a></b>(params)
 							</div>
-							<div class="description">Scene manager for adding, activating, and deactivating scenes.</div>
+							<div class="description">Text file asset type, downloads a file as text and stores it.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -309,7 +309,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.SceneManager.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.TextFile.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -323,19 +323,9 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.SceneManager.html#gameWindow">gameWindow</a></b>
+								<b><a href="../symbols/pulse.TextFile.html#text">text</a></b>
 								</div>
-								<div class="description">The game window element in the html dom.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.SceneManager.html#scenes">scenes</a></b>
-								</div>
-								<div class="description">Associative array (object) of scenes available.</div>
+								<div class="description">The text that is in the text file downloaded.</div>
 							</td>
 						</tr>
 					
@@ -350,7 +340,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.SceneManager.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.TextFile.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -363,54 +353,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#activateScene">activateScene</a></b>(name)
+								<div class="fixedFont"><b><a href="../symbols/pulse.TextFile.html#load">load</a></b>()
 								</div>
-								<div class="description">Activates a scene in this scene manager by name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#addScene">addScene</a></b>(scene)
-								</div>
-								<div class="description">Adds a scene to the scene manager.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#deactivateScene">deactivateScene</a></b>(name)
-								</div>
-								<div class="description">Deactivate a scene in this scene manager by name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#getScene">getScene</a></b>(name)
-								</div>
-								<div class="description">Returns a scene from the scene manager by name.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#getScenes">getScenes</a></b>(active)
-								</div>
-								<div class="description">Gets scenes from the scene manager by whether they are active.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager.html#removeScene">removeScene</a></b>(name)
-								</div>
-								<div class="description">Removes a scene from this scene manager by name.</div>
+								<div class="description">Begins loading the text file</div>
 							</td>
 						</tr>
 					
@@ -431,11 +376,11 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>pulse.SceneManager</b>(params)
+						<b>pulse.TextFile</b>(params)
 				</div>
 				
 				<div class="description">
-					Scene manager for adding, activating, and deactivating scenes.
+					Text file asset type, downloads a file as text and stores it.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -448,16 +393,16 @@ ul.inheritsList
 						
 							<dt>
 								<span class="light fixedFont">{object}</span>  <b>params</b>
-								<i>Optional</i>
+								
 							</dt>
 								<dd>parameters that can be set as initialized options
 on the node</dd>
 						
 							<dt>
-								<span class="light fixedFont">{DOMElement}</span>  <b>params.gameWindow</b>
-								<i>Optional</i>
+								<span class="light fixedFont">{string}</span>  <b>params.filename</b>
+								
 							</dt>
-								<dd>the game window element to use</dd>
+								<dd>the name of the file to download</dd>
 						
 						</dl>
 					
@@ -477,37 +422,15 @@ on the node</dd>
 					Field Detail
 				</div>
 				
-					<a name="gameWindow"> </a>
+					<a name="text"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>gameWindow</b>
+					<b>text</b>
 					
 					</div>
 					<div class="description">
-						The game window element in the html dom.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="scenes"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>scenes</b>
-					
-					</div>
-					<div class="description">
-						Associative array (object) of scenes available.
+						The text that is in the text file downloaded.
 						
 						
 					</div>
@@ -529,226 +452,21 @@ on the node</dd>
 					Method Detail
 				</div>
 				
-					<a name="activateScene"> </a>
+					<a name="load"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>activateScene</b>(name)
+					<b>load</b>()
 					
 					</div>
 					<div class="description">
-						Activates a scene in this scene manager by name.
+						Begins loading the text file
 						
 						
 					</div>
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									
-								</dt>
-								<dd>the scene name</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="addScene"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>addScene</b>(scene)
-					
-					</div>
-					<div class="description">
-						Adds a scene to the scene manager.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>}</span> <b>scene</b>
-									
-								</dt>
-								<dd>the scene to add</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="deactivateScene"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>deactivateScene</b>(name)
-					
-					</div>
-					<div class="description">
-						Deactivate a scene in this scene manager by name.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									
-								</dt>
-								<dd>the scene name</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="getScene"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>}</span>
-					<b>getScene</b>(name)
-					
-					</div>
-					<div class="description">
-						Returns a scene from the scene manager by name.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									
-								</dt>
-								<dd>the scene name</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>}</span> scene from the scenes object by name</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="getScenes"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{array}</span>
-					<b>getScenes</b>(active)
-					
-					</div>
-					<div class="description">
-						Gets scenes from the scene manager by whether they are active.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>active</b>
-									
-								</dt>
-								<dd>the active state to retrieve</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{array}</span> array of the active scenes</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="removeScene"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>removeScene</b>(name)
-					
-					</div>
-					<div class="description">
-						Removes a scene from this scene manager by name.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									
-								</dt>
-								<dd>the scene name</dd>
-							
-							</dl>
 						
 						
 						
