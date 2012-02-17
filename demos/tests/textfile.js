@@ -1,6 +1,6 @@
 pulse.ready(function() {
 
-  var font = new pulse.BitmapFont({filename:'../font/exotica.fnt'});
+  var textfile = new pulse.TextFile({filename:'../text/list.txt'});
 
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
@@ -17,28 +17,25 @@ pulse.ready(function() {
 
   var cybertron = new pulse.Scene({name: 'cybertron'});
 
+  var printed = false;
+
   // pass in object to engine
-  var gw = document.getElementById('game');
+  var gw = document.getElementById('gameWindow');
   var engine = new pulse.Engine({gameWindow: gw});
 
   function loop(sceneManager)
   {
     var debugTime = document.getElementById('time');
     debugTime.innerText = engine.masterTime;
+
+    if(textfile.percentLoaded === 100 && printed === false) {
+      console.log(textfile.text);
+      printed = true;
+    }
   }
 
   function gameGo()
   {
-    var l = new pulse.BitmapLabel({font: font, text: 'hello'});
-    l.position = {x: 320, y: 240};
-    l.rotation = 45;
-    world.addNode(l);
-
-    var gui = new dat.GUI();
-    gui.add(l, 'text');
-    gui.add(l, 'rotation', 0, 360);
-    gui.add(l, 'alpha', 0, 100);
-
     cybertron.addLayer(world);
     cybertron.addLayer(bg);
 
