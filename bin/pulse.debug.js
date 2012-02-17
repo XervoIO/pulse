@@ -1667,6 +1667,7 @@ var pulse = pulse || {};
 pulse.Node = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {name:"Node" + pulse.Node.nodeIdx++});
   this.name = params.name;
+  this.parent = null;
   this._private = {}
 }, update:function(elapsed) {
   if(pulse.DEBUG) {
@@ -2709,6 +2710,7 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
     this.updated = true
   }
   if(this.font !== this.fontPrevious && this.loaded()) {
+    this.fontPrevious = this.font;
     this.updated = true
   }
   this._super(elapsed)
@@ -2863,22 +2865,24 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
     }
     if(!this.objects.hasOwnProperty(obj.name)) {
       this.objects[obj.name] = obj;
+      obj.parent = this;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
     }else {
       pulse.error.DuplicateName(obj.name)
     }
   }
-}, removeObject:function(name) {
+}, removeNode:function(name) {
   if(this.objects.hasOwnProperty(name)) {
     if(this.objects[name] instanceof pulse.Sprite) {
       var clear = this.objects[name].boundsPrevious;
       this._private.context.clearRect(clear.x, clear.y, clear.width, clear.height)
     }
+    this.objects[name].parent = null;
     delete this.objects[name]
   }
-}, getObject:function(name) {
+}, getNode:function(name) {
   return this.objects[name]
-}, getObjectsByType:function(type) {
+}, getNodesByType:function(type) {
   var ret = {};
   for(var o in this.objects) {
     if(this.objects[o] instanceof type) {
@@ -2931,7 +2935,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   }
   evt.parent.x = evt.position.x;
   evt.parent.y = evt.position.y;
-  var sprites = this.getObjectsByType(pulse.Sprite);
+  var sprites = this.getNodesByType(pulse.Sprite);
   var sprite;
   for(var s in sprites) {
     sprite = sprites[s];
@@ -2975,6 +2979,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 var pulse = pulse || {};
 pulse.Scene = pulse.Node.extend({init:function(params) {
   this._super(params);
+  this.container = null;
   this.layers = {};
   this._private.liveLayers = {};
   this._private.orderedKeys = [];
@@ -3023,24 +3028,26 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   }
   return null
 }, getSceneContainer:function() {
-  var container = document.createElement("div");
-  container.style.position = "absolute";
-  container.id = this.name;
-  for(var l = 0;l < this._private.orderedKeys.length;l++) {
-    if(!this.layers[this._private.orderedKeys[l]]) {
-      continue
+  if(!this.container) {
+    this.container = document.createElement("div");
+    this.container.style.position = "absolute";
+    this.container.id = this.name;
+    for(var l = 0;l < this._private.orderedKeys.length;l++) {
+      if(!this.layers[this._private.orderedKeys[l]]) {
+        continue
+      }
+      var layer = this.layers[this._private.orderedKeys[l]];
+      var liveCanvas = document.createElement("canvas");
+      liveCanvas.width = this._private.defaultSize.width;
+      liveCanvas.height = this._private.defaultSize.height;
+      liveCanvas.style.position = "absolute";
+      liveCanvas.id = "live:" + layer.name;
+      var ctx = liveCanvas.getContext("2d");
+      this._private.liveLayers[layer.name] = {canvas:liveCanvas, context:ctx};
+      this.container.appendChild(liveCanvas)
     }
-    var layer = this.layers[this._private.orderedKeys[l]];
-    var liveCanvas = document.createElement("canvas");
-    liveCanvas.width = this._private.defaultSize.width;
-    liveCanvas.height = this._private.defaultSize.height;
-    liveCanvas.style.position = "absolute";
-    liveCanvas.id = "live:" + layer.name;
-    var ctx = liveCanvas.getContext("2d");
-    this._private.liveLayers[layer.name] = {canvas:liveCanvas, context:ctx};
-    container.appendChild(liveCanvas)
   }
-  return container
+  return this.container
 }, update:function(elapsed) {
   this._super(elapsed);
   var reorder = false;
