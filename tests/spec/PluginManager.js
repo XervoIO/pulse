@@ -5,7 +5,7 @@ describe("Plugin Manager", function() {
     var thrown = false;
 
     try {
-      var pluginManager = new pulse.PluginManager();
+      var pluginManager = new pulse.plugin.PluginManager();
     }
     catch(e) {
       thrown = true;
@@ -14,13 +14,13 @@ describe("Plugin Manager", function() {
     expect(thrown).toEqual(false);
   });
 
-  it("should be able subscribe init callback", function() {
+  it("should be able to subscribe init callback", function() {
 
     var exceptionThrown = false;
 
     try {
-      var pluginManager = new pulse.PluginManager();
-      pluginManager.subscribe(pulse.Sprite, 'init', pulse.plugin.callbackTypes.onEnter, function() { });
+      var pluginManager = new pulse.plugin.PluginManager();
+      pluginManager.subscribe(pulse.Sprite, 'init', pulse.plugin.PluginCallbackTypes.onEnter, function() { });
 
     }
     catch(e) {
@@ -35,10 +35,10 @@ describe("Plugin Manager", function() {
 
     var callbackInvoked = false;
 
-    var pluginManager = new pulse.PluginManager();
-    pulse.plugin = pluginManager;
+    var pluginManager = new pulse.plugin.PluginManager();
+    pulse.plugin.pluginManager = pluginManager;
     pluginManager.subscribe(pulse.Sprite, 'init', 
-      pulse.plugin.callbackTypes.onEnter, function() { callbackInvoked = true; });
+      pulse.plugin.PluginCallbackTypes.onEnter, function() { callbackInvoked = true; });
 
     var sprite = new pulse.Sprite({ src: 'dummy/path.png'});
 
@@ -49,10 +49,10 @@ describe("Plugin Manager", function() {
 
     var callbackInvoked = false;
 
-    var pluginManager = new pulse.PluginManager();
-    pulse.plugin = pluginManager;
+    var pluginManager = new pulse.plugin.PluginManager();
+    pulse.plugin.pluginManager = pluginManager;
     pluginManager.subscribe(pulse.Sprite, 'init', 
-      pulse.plugin.callbackTypes.onEnter, 
+      pulse.plugin.PluginCallbackTypes.onEnter, 
       function(params) {
         expect(params.src).toEqual('dummy/path.png');
         callbackInvoked = true;
@@ -69,10 +69,10 @@ describe("Plugin Manager", function() {
 
     var sprite = null;
 
-    var pluginManager = new pulse.PluginManager();
-    pulse.plugin = pluginManager;
+    var pluginManager = new pulse.plugin.PluginManager();
+    pulse.plugin.pluginManager = pluginManager;
     pluginManager.subscribe(pulse.Sprite, 'init', 
-      pulse.plugin.callbackTypes.onEnter, 
+      pulse.plugin.PluginCallbackTypes.onEnter, 
       function(params) {
         // Can only do a != null here since the sprite
         // variable won't be assigned until the init completes.
@@ -83,5 +83,26 @@ describe("Plugin Manager", function() {
     sprite = new pulse.Sprite({ src: 'dummy/path.png'});
 
     expect(callbackInvoked).toEqual(true);
+  });
+
+  it("should be able to unsubscribe callback", function() {
+    var callbackInvokeCount = 0;
+
+    var pluginManager = new pulse.plugin.PluginManager();
+    pulse.plugin.pluginManager = pluginManager;
+    var callback = pluginManager.subscribe(pulse.Sprite, 'init', 
+      pulse.plugin.PluginCallbackTypes.onEnter, 
+      function(params) {
+        callbackInvokeCount++;
+      });
+
+
+    var sprite = new pulse.Sprite({ src: 'dummy/path.png'});
+
+    pulse.plugin.pluginManager.unsubscribe(callback);
+
+    sprite = new pulse.Sprite({ src: 'dummy/path.png'});
+
+    expect(callbackInvokeCount).toEqual(1);
   });
 });
