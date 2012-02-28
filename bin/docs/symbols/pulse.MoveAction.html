@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - pulse.MouseEvent</title>
+		<title>JsDoc Reference - pulse.MoveAction</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -266,24 +266,26 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class pulse.MouseEvent
+				Class pulse.MoveAction
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
+				<br />Extends
+					<a href="../symbols/pulse.Action.html">pulse.Action</a>.<br />
 				
 			
-				Mouse event properties
+				move action
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/event/eventproperties.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/action/moveaction.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.MouseEvent.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.MoveAction.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -296,9 +298,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#constructor">pulse.MouseEvent</a></b>()
+								<b><a href="../symbols/pulse.MoveAction.html#constructor">pulse.MoveAction</a></b>(params)
 							</div>
-							<div class="description">Simple class for holding properties for a mouse event</div>
+							<div class="description">Animates a move of an object to new position over a period of time.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -309,7 +311,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.MouseEvent.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.MoveAction.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -323,10 +325,9 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#parent">parent</a></b>
+								<b><a href="../symbols/pulse.MoveAction.html#duration">duration</a></b>
 								</div>
-								<div class="description">Event position relative to the parent of object which the event was
-raised from.</div>
+								<div class="description">The duration of the move animation.</div>
 							</td>
 						</tr>
 					
@@ -334,9 +335,9 @@ raised from.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#position">position</a></b>
+								<b><a href="../symbols/pulse.MoveAction.html#easingFunction">easingFunction</a></b>
 								</div>
-								<div class="description">Event position relative to the object in which the event was raised from.</div>
+								<div class="description">The easing function to use for position movement.</div>
 							</td>
 						</tr>
 					
@@ -344,29 +345,9 @@ raised from.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#scrollDelta">scrollDelta</a></b>
+								<b><a href="../symbols/pulse.MoveAction.html#position">position</a></b>
 								</div>
-								<div class="description">The scroll delta for mouse wheel.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#window">window</a></b>
-								</div>
-								<div class="description">Event position relative to the entire html window.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#world">world</a></b>
-								</div>
-								<div class="description">Event position relative to the game window.</div>
+								<div class="description">The position the target is going to be moved to.</div>
 							</td>
 						</tr>
 					
@@ -375,11 +356,91 @@ raised from.</div>
 				
 				
 				
+				<dl class="inheritsList">
+				<dt>Fields borrowed from class <a href="../symbols/pulse.Action.html">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action.html#events">events</a>, <a href="../symbols/pulse.Action.html#isComplete">isComplete</a>, <a href="../symbols/pulse.Action.html#isPaused">isPaused</a>, <a href="../symbols/pulse.Action.html#isRunning">isRunning</a>, <a href="../symbols/pulse.Action.html#target">target</a></dd><dt>Fields borrowed from class <a href="../symbols/pulse.Node.html">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node.html#name">name</a>, <a href="../symbols/pulse.Node.html#parent">parent</a></dd>
+				</dl>
+				
 			
 
 <!-- ============================== methods summary ======================== -->
 			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.MoveAction.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#complete">complete</a></b>()
+								</div>
+								<div class="description">Complete handler when the animation is complete.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#pause">pause</a></b>()
+								</div>
+								<div class="description">Pauses the animation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#start">start</a></b>(oframe)
+								</div>
+								<div class="description">Starts the animation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#stop">stop</a></b>()
+								</div>
+								<div class="description">Stops the animation.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.MoveAction.html#update">update</a></b>(elapsed)
+								</div>
+								<div class="description">This is the master update function for the animation.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+				<dl class="inheritsList">
+				
+				</dl>
+				
+			
 <!-- ============================== events summary ======================== -->
+			
+				
+				
+				
+				
+				<dl class="inheritsList">
+				<dt>Events borrowed from class <a href="../symbols/pulse.Action.html">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action.html#event:complete">complete</a></dd>
+				</dl>
+				
 			
 
 <!-- ============================== constructor details ==================== -->		
@@ -390,17 +451,54 @@ raised from.</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>pulse.MouseEvent</b>()
+						<b>pulse.MoveAction</b>(params)
 				</div>
 				
 				<div class="description">
-					Simple class for holding properties for a mouse event
+					Animates a move of an object to new position over a period of time.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{object}</span>  <b>params</b>
+								
+							</dt>
+								<dd>parameters that can be set as initialized options
+on the node</dd>
+						
+							<dt>
+								<span class="light fixedFont">{<a href="../symbols/pulse.Sprite.html">pulse.Sprite</a>}</span>  <b>params.target</b>
+								
+							</dt>
+								<dd>the sprite for the action to be performed on</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string}</span>  <b>params.name</b>
+								<i>Optional</i>
+							</dt>
+								<dd>name of the node</dd>
+						
+							<dt>
+								<span class="light fixedFont">{object}</span>  <b>params.position</b>
+								
+							</dt>
+								<dd>the new position to move the target to, in
+milliseconds</dd>
+						
+							<dt>
+								<span class="light fixedFont">{number}</span>  <b>params.duration</b>
+								
+							</dt>
+								<dd>the length of time to animate over</dd>
+						
+						</dl>
 					
 					
 					
@@ -418,16 +516,37 @@ raised from.</div>
 					Field Detail
 				</div>
 				
-					<a name="parent"> </a>
+					<a name="duration"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>parent</b>
+					<b>duration</b>
 					
 					</div>
 					<div class="description">
-						Event position relative to the parent of object which the event was
-raised from.
+						The duration of the move animation. Shouldn't be changed once started.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="easingFunction"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>easingFunction</b>
+					
+					</div>
+					<div class="description">
+						The easing function to use for position movement.
 						
 						
 					</div>
@@ -449,74 +568,7 @@ raised from.
 					
 					</div>
 					<div class="description">
-						Event position relative to the object in which the event was raised from.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="scrollDelta"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>scrollDelta</b>
-					
-					</div>
-					<div class="description">
-						The scroll delta for mouse wheel. This is only filled in for mousewheel
-events.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="window"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>window</b>
-					
-					</div>
-					<div class="description">
-						Event position relative to the entire html window.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="world"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>world</b>
-					
-					</div>
-					<div class="description">
-						Event position relative to the game window.
+						The position the target is going to be moved to.
 						
 						
 					</div>
@@ -533,6 +585,160 @@ events.
 			
 
 <!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name="complete"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>complete</b>()
+					
+					</div>
+					<div class="description">
+						Complete handler when the animation is complete.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="pause"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>pause</b>()
+					
+					</div>
+					<div class="description">
+						Pauses the animation.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="start"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>start</b>(oframe)
+					
+					</div>
+					<div class="description">
+						Starts the animation.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{rect}</span> <b>oframe</b>
+									<i>Optional</i>
+								</dt>
+								<dd>original frame to return to</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="stop"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>stop</b>()
+					
+					</div>
+					<div class="description">
+						Stops the animation.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="update"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>update</b>(elapsed)
+					
+					</div>
+					<div class="description">
+						This is the master update function for the animation. This will
+update the target's position with the correct position.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{number}</span> <b>elapsed</b>
+									
+								</dt>
+								<dd>the elapsed time since last update call in
+milliseconds</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
 			
 			
 <!-- ============================== event details ========================= -->		

@@ -1581,6 +1581,30 @@ pulse.util.getIFrame = function(parentElement) {
   iframe.doc.close();
   return iframe
 };
+pulse.util.easeLinear = function(t, b, c, d) {
+  return c * t / d + b
+};
+pulse.util.easeInQuad = function(t, b, c, d) {
+  t /= d;
+  return c * t * t + b
+};
+pulse.util.easeOutQuad = function(t, b, c, d) {
+  t /= d;
+  return-c * t * (t - 2) + b
+};
+pulse.util.easeInOutQuad = function(t, b, c, d) {
+  t /= d / 2;
+  if(t < 1) {
+    return c / 2 * t * t + b
+  }
+  t--;
+  return-c / 2 * (t * (t - 2) - 1) + b
+};
+pulse.util.easeOutCubic = function(t, b, c, d) {
+  t /= d;
+  t--;
+  return c * (t * t * t + 1) + b
+};
 var pulse = pulse || {};
 pulse.Event = PClass.extend({init:function() {
   this.sender = null
@@ -1611,6 +1635,14 @@ pulse.EventManager = PClass.extend({init:function(params) {
   if(this._private.events.hasOwnProperty(type)) {
     delete this._private.events[type]
   }
+}, unbindFunction:function(type, callback) {
+  if(this._private.events.hasOwnProperty(type)) {
+    for(var i = this._private.events[type].length - 1;i >= 0;i--) {
+      if(this._private.events[type][i] === callback) {
+        this._private.events[type].splice(i, 1)
+      }
+    }
+  }
 }, hasEvent:function(type) {
   if(this._private.events.hasOwnProperty(type)) {
     return true
@@ -1635,6 +1667,7 @@ var pulse = pulse || {};
 pulse.Node = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {name:"Node" + pulse.Node.nodeIdx++});
   this.name = params.name;
+  this.parent = null;
   this._private = {}
 }, update:function(elapsed) {
   if(pulse.DEBUG) {
@@ -1805,6 +1838,9 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
         var lines = fntFile.responseText.split("\n");
         _self.percentLoaded = 50;
         _self.parse(lines)
+      }else {
+        if(fntFile.status === 404) {
+        }
       }
     }
   };
@@ -2172,18 +2208,40 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.positionTopLeft = {x:0, y:0};
   this.positionTopLeftPrevious = {x:0, y:0};
   this.invalidProperties = true;
-  this.zindex = 0;
+  this.zindex = Number.NaN;
   this.zindexPrevious = 0;
   this.shuffled = false;
   this.alpha = 100;
   this.alphaPrevious = 100;
+  this.shadowEnabled = false;
+  this.shadowEnabledPrevious = false;
+  this.shadowOffsetX = 2;
+  this.shadowOffsetY = 2;
+  this.shadowBlur = 2;
+  this.shadowColor = "rgba(0, 0, 0, 0.5)";
   this.visible = true;
   this.visiblePrevious = true;
+  this.actions = {};
+  this.runningActions = {};
   this.updated = true
 }, move:function(x, y) {
   this.position = {x:this.position.x + x, y:this.position.y + y}
+}, getAction:function(name) {
+  return this.actions[name]
+}, runAction:function(name, oframe) {
+  oframe = oframe || null;
+  var action = this.getAction(name);
+  action.target = this;
+  action.start(oframe);
+  return action
+}, addAction:function(action) {
+  action.target = this;
+  this.actions[action.name] = action
 }, update:function(elapsed) {
   this._super(elapsed);
+  for(var n in this.runningActions) {
+    this.runningActions[n].update(elapsed)
+  }
   if(this._private.firstUpdate) {
     this._private.firstUpdate = false;
     this.invalidProperties = true
@@ -2225,6 +2283,10 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
     this.visiblePrevious = this.visible;
     this.updated = true
   }
+  if(this.shadowEnabled !== this.shadowEnabledPrevious) {
+    this.shadowEnabledPrevious = this.shadowEnabled;
+    this.updated = true
+  }
   if(this.invalidProperties) {
     this.calculateProperties();
     this.updated = true
@@ -2250,7 +2312,7 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
     ctx.strokeRect(this.positionTopLeft.x, this.positionTopLeft.y, this.size.width, this.size.height)
   }
   ctx.globalAlpha = this.alpha / 100;
-  if(this.rotation > 0) {
+  if(this.rotation !== 0) {
     var rotationX = this.positionTopLeft.x + this.size.width * Math.abs(this.scale.x) / 2;
     var rotationY = this.positionTopLeft.y + this.size.height * Math.abs(this.scale.y) / 2;
     ctx.translate(rotationX, rotationY);
@@ -2265,6 +2327,12 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   var py = this.positionTopLeft.y / this.scale.y;
   if(this.scale.y < 1) {
     py -= this.size.height
+  }
+  if(this.shadowEnabled) {
+    ctx.shadowOffsetX = this.shadowOffsetX;
+    ctx.shadowOffsetY = this.shadowOffsetY;
+    ctx.shadowBlur = this.shadowBlur;
+    ctx.shadowColor = this.shadowColor
   }
   ctx.drawImage(this.canvas, px, py);
   if(pulse.DEBUG) {
@@ -2317,6 +2385,7 @@ pulse.Action = pulse.Node.extend({init:function(params) {
   }
   this.target = params.target;
   this.isRunning = false;
+  this.isPaused = false;
   this.isComplete = false;
   this.events = new pulse.EventManager
 }, start:function() {
@@ -2327,12 +2396,14 @@ pulse.Action = pulse.Node.extend({init:function(params) {
     this.target.runningActions[this.name] = this
   }
   this.isComplete = false;
-  this.isRunning = true
+  this.isRunning = true;
+  this.isPaused = false
 }, pause:function() {
   if(pulse.DEBUG) {
     console.log("action paused")
   }
-  this.isRunning = false
+  this.isRunning = false;
+  this.isPaused = true
 }, stop:function() {
   if(pulse.DEBUG) {
     console.log("action stopped")
@@ -2340,7 +2411,8 @@ pulse.Action = pulse.Node.extend({init:function(params) {
   if(this.target.runningActions) {
     delete this.target.runningActions[this.name]
   }
-  this.isRunning = false
+  this.isRunning = false;
+  this.isPaused = false
 }, complete:function() {
   if(pulse.DEBUG) {
     console.log("action complete")
@@ -2450,8 +2522,6 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
 var pulse = pulse || {};
 pulse.Sprite = pulse.Visual.extend({init:function(params) {
   this._super(params);
-  this.actions = {};
-  this.runningActions = {};
   this.texture = null;
   this.texturePrevious = null;
   this.textureFrame = {x:0, y:0, width:0, height:0};
@@ -2466,22 +2536,21 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   }
   this._private.isDragging = false;
   this._private.dragPos = false;
+  this.hitTestType = pulse.Sprite.HIT_TEST_RECT;
+  this.hitTestPoints = null;
   this.dragDropEnabled = false;
   this.dragMoveEnabled = false;
   this.dropAcceptEnabled = false;
   this.draggedOverItems = {};
   this.handleAllEvents = false;
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback})
+  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
+  var self = this;
+  this.itemDroppedCallback = function(e) {
+    e.target = self;
+    self.events.raiseEvent("itemdropped", e)
+  }
 }, loaded:function() {
   return this.texture.loaded()
-}, getAction:function(name) {
-  return this.actions[name]
-}, runAction:function(name, oframe) {
-  oframe = oframe || null;
-  var action = this.getAction(name);
-  action.target = this;
-  action.start(oframe);
-  return action
 }, addAction:function(params) {
   var newAction;
   if(params instanceof pulse.Action) {
@@ -2493,13 +2562,45 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   newAction.bounds({x:this.texture.width(), y:this.texture.height()});
   this.actions[newAction.name] = newAction
 }, inCurrentBounds:function(x, y) {
-  if(x > this.bounds.x && x < this.bounds.x + this.bounds.width && y > this.bounds.y && y < this.bounds.y + this.bounds.height) {
-    return true
+  x -= this.bounds.x;
+  y -= this.bounds.y;
+  if(this.rotation !== 0) {
+    var ax = this.size.width / 2;
+    var ay = this.size.height / 2;
+    var dx = x - ax;
+    var dy = y - ay;
+    var r = Math.sqrt(dx * dx + dy * dy);
+    var angle = Math.atan2(dy, dx) + Math.PI / 2;
+    x = r * Math.sin(angle - this.rotation * Math.PI / 180) + ax;
+    y = ay - r * Math.cos(angle - this.rotation * Math.PI / 180)
   }
-  return false
-}, rectInCurrentBounds:function(rect) {
-  if(rect.x > this.bounds.x && rect.x + rect.width < this.bounds.x + this.bounds.width && rect.y > this.bounds.y && rect.y + rect.height < this.bounds.y + this.bounds.height) {
-    return true
+  if(this.hitTestType === pulse.Sprite.HIT_TEST_RECT) {
+    if(this.hitTestPoints && this.hitTestPoints.length > 0) {
+      if(x >= this.hitTestPoints[0].x && x <= this.hitTestPoints[1].x && y >= this.hitTestPoints[0].y && y <= this.hitTestPoints[1].y) {
+        return true
+      }
+    }else {
+      if(x >= 0 && x <= this.bounds.width && y >= 0 && y <= this.bounds.height) {
+        return true
+      }
+    }
+  }else {
+    if(this.hitTestType === pulse.Sprite.HIT_TEST_CONVEX) {
+      if(this.hitTestPoints && this.hitTestPoints.length >= 3) {
+        var pcount = this.hitTestPoints.length;
+        var retval = false;
+        var vert1 = {};
+        var vert2 = {};
+        for(var i = 0, j = pcount - 1;i < pcount;j = i++) {
+          vert1 = this.hitTestPoints[i];
+          vert2 = this.hitTestPoints[j];
+          if(vert1.y > y != vert2.y > y && x < (vert2.x - vert1.x) * (y - vert1.y) / (vert2.y - vert1.y) + vert1.x) {
+            retval = !retval
+          }
+        }
+        return retval
+      }
+    }
   }
   return false
 }, getCurrentFrame:function() {
@@ -2539,9 +2640,6 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this.textureFramePrevious.height = this.textureFrame.height;
     this.textureUpdated = true;
     this.updated = true
-  }
-  for(var n in this.runningActions) {
-    this.runningActions[n].update(elapsed)
   }
   this._super(elapsed)
 }, draw:function(ctx) {
@@ -2585,6 +2683,8 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this.killDrag(evt)
   }
 }});
+pulse.Sprite.HIT_TEST_RECT = "rect";
+pulse.Sprite.HIT_TEST_CONVEX = "convex";
 var pulse = pulse || {};
 pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
   this._super(params);
@@ -2610,6 +2710,7 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
     this.updated = true
   }
   if(this.font !== this.fontPrevious && this.loaded()) {
+    this.fontPrevious = this.font;
     this.updated = true
   }
   this._super(elapsed)
@@ -2759,24 +2860,29 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback})
 }, addNode:function(obj) {
   if(obj instanceof pulse.Visual) {
+    if(isNaN(obj.zindex)) {
+      obj.zindex = this._private.orderedKeys.length + 1
+    }
     if(!this.objects.hasOwnProperty(obj.name)) {
       this.objects[obj.name] = obj;
+      obj.parent = this;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
     }else {
       pulse.error.DuplicateName(obj.name)
     }
   }
-}, removeObject:function(name) {
+}, removeNode:function(name) {
   if(this.objects.hasOwnProperty(name)) {
     if(this.objects[name] instanceof pulse.Sprite) {
       var clear = this.objects[name].boundsPrevious;
       this._private.context.clearRect(clear.x, clear.y, clear.width, clear.height)
     }
+    this.objects[name].parent = null;
     delete this.objects[name]
   }
-}, getObject:function(name) {
+}, getNode:function(name) {
   return this.objects[name]
-}, getObjectsByType:function(type) {
+}, getNodesByType:function(type) {
   var ret = {};
   for(var o in this.objects) {
     if(this.objects[o] instanceof type) {
@@ -2824,9 +2930,12 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 }, pointInBounds:function(point) {
   return point.x > this.bounds.x && point.x < this.bounds.x + this.bounds.width && point.y > this.bounds.y && point.y < this.bounds.y + this.bounds.height
 }, eventsCallback:function(type, evt) {
+  if(typeof evt === "undefined") {
+    return
+  }
   evt.parent.x = evt.position.x;
   evt.parent.y = evt.position.y;
-  var sprites = this.getObjectsByType(pulse.Sprite);
+  var sprites = this.getNodesByType(pulse.Sprite);
   var sprite;
   for(var s in sprites) {
     sprite = sprites[s];
@@ -2845,6 +2954,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
             evt.target = obj;
             if(!sprite.draggedOverItems[id]) {
               sprite.draggedOverItems[id] = obj;
+              obj.events.bind("dragdrop", sprite.itemDroppedCallback);
               sprite.events.raiseEvent("dragenter", evt)
             }else {
               evt.sender = sprite;
@@ -2854,6 +2964,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
             if(sprite.draggedOverItems[id]) {
               delete sprite.draggedOverItems[id];
               evt.target = obj;
+              obj.events.unbindFunction("dragdrop", sprite.itemDroppedCallback);
               sprite.events.raiseEvent("dragexit", evt)
             }
           }
@@ -2868,6 +2979,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 var pulse = pulse || {};
 pulse.Scene = pulse.Node.extend({init:function(params) {
   this._super(params);
+  this.container = null;
   this.layers = {};
   this._private.liveLayers = {};
   this._private.orderedKeys = [];
@@ -2888,6 +3000,9 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   if(layer instanceof pulse.Layer && !this.layers.hasOwnProperty(layer.name)) {
     if(typeof zindex === "number") {
       layer.zindex = zindex
+    }
+    if(isNaN(layer.zindex)) {
+      layer.zindex = this._private.orderedKeys.length + 1
     }
     if(layer.size.width < 1) {
       layer.size.width = this._private.defaultSize.width
@@ -2913,24 +3028,26 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   }
   return null
 }, getSceneContainer:function() {
-  var container = document.createElement("div");
-  container.style.position = "absolute";
-  container.id = this.name;
-  for(var l = 0;l < this._private.orderedKeys.length;l++) {
-    if(!this.layers[this._private.orderedKeys[l]]) {
-      continue
+  if(!this.container) {
+    this.container = document.createElement("div");
+    this.container.style.position = "absolute";
+    this.container.id = this.name;
+    for(var l = 0;l < this._private.orderedKeys.length;l++) {
+      if(!this.layers[this._private.orderedKeys[l]]) {
+        continue
+      }
+      var layer = this.layers[this._private.orderedKeys[l]];
+      var liveCanvas = document.createElement("canvas");
+      liveCanvas.width = this._private.defaultSize.width;
+      liveCanvas.height = this._private.defaultSize.height;
+      liveCanvas.style.position = "absolute";
+      liveCanvas.id = "live:" + layer.name;
+      var ctx = liveCanvas.getContext("2d");
+      this._private.liveLayers[layer.name] = {canvas:liveCanvas, context:ctx};
+      this.container.appendChild(liveCanvas)
     }
-    var layer = this.layers[this._private.orderedKeys[l]];
-    var liveCanvas = document.createElement("canvas");
-    liveCanvas.width = this._private.defaultSize.width;
-    liveCanvas.height = this._private.defaultSize.height;
-    liveCanvas.style.position = "absolute";
-    liveCanvas.id = "live:" + layer.name;
-    var ctx = liveCanvas.getContext("2d");
-    this._private.liveLayers[layer.name] = {canvas:liveCanvas, context:ctx};
-    container.appendChild(liveCanvas)
   }
-  return container
+  return this.container
 }, update:function(elapsed) {
   this._super(elapsed);
   var reorder = false;
@@ -3115,18 +3232,22 @@ pulse.Engine = PClass.extend({init:function(params) {
   }, this._private.mainDiv);
   this._private.currentTime = (new Date).getTime();
   var elapsed = this._private.currentTime - this._private.lastTime;
-  if(elapsed < this.tick) {
-    return
+  var increments = Math.floor(elapsed / 30);
+  if(increments == 0) {
+    increments = 1
   }
-  if(this.loopLogic) {
-    this.loopLogic(this.scenes, elapsed)
+  elapsed /= increments;
+  for(var incrementIdx = 0;incrementIdx < increments;incrementIdx++) {
+    if(this.loopLogic) {
+      this.loopLogic(this.scenes, elapsed)
+    }
+    var activeScenes = this.scenes.getScenes(true);
+    for(var s = 0;s < activeScenes.length;s++) {
+      activeScenes[s].update(elapsed)
+    }
+    this.masterTime += elapsed
   }
-  var activeScenes = this.scenes.getScenes(true);
-  for(var s = 0;s < activeScenes.length;s++) {
-    activeScenes[s].update(elapsed)
-  }
-  this._private.lastTime = this._private.currentTime;
-  this.masterTime += elapsed
+  this._private.lastTime = this._private.currentTime
 }, windowEvent:function(rawEvt) {
   if(!rawEvt) {
     rawEvt = window.event
