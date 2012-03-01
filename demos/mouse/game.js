@@ -12,7 +12,7 @@ pulse.ready(function(){
   var layer = new pulse.Layer({
     name: 'layer', 
     x : 380, y : 240,
-    width: width, height: height
+    size: {width: width, height: height}
   });
   
   layer.events.bind('mouseover', function(evt){

@@ -24,8 +24,10 @@ mm.Brick = pulse.Sprite.extend({
     this.body = mm.createBody(
       { x: this.position.x,
         y: this.position.y,
-        width: mm.Brick.Size.width,
-        height: mm.Brick.Size.height },
+        size: {
+          width: mm.Brick.Size.width,
+          height: mm.Brick.Size.height }
+        },
         this.layer.world);
   }
 });
@@ -74,21 +76,21 @@ mm.Level = pulse.Layer.extend({
 /**
  * Static function for creating a platforms
  * @param  {object} params parameter object
- * @config {number} width The width of the platform to create
+ * @config {number} size The size, width and height, of the platform to create
  * @config {number} x The x position to start the platform
  * @config {number} y the y position to start the platform
  * @param {pulse.Layer} layer The layer to add the platform to
  */
 mm.Platform = function(params, layer) {
   // loop through the width of the platform
-  for(var i = 0; i < params.width; i++) {
+  for(var i = 0; i < params.size.width; i++) {
 
     // determine the texture based on the position in the platform
     var texture = mm.Brick.PlatformTexture;
     if(i === 0) {
       texture = mm.Brick.PlatformTextureLeft;
     }
-    else if (i == params.width - 1) {
+    else if (i == params.size.width - 1) {
       texture = mm.Brick.PlatformTextureRight;
     }
     
@@ -105,13 +107,13 @@ mm.Platform = function(params, layer) {
    * Calculate the width, height, x, and y position of the Box2D body that
    * needs to be created
    */
-  var width = (mm.Brick.Size.width - 1) * params.width;
+  var width = (mm.Brick.Size.width - 1) * params.size.width;
   var height = (mm.Brick.Size.height - 1);
   var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
   var yPos = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height + height / 2;
 
   // Create a single body to represent the platform
-  mm.createBody({ x: xPos, y: yPos, width: width, height: height }, layer.world);
+  mm.createBody({ x: xPos, y: yPos, size: {width: width, height: height}}, layer.world);
 };
 
 /**
@@ -125,11 +127,11 @@ mm.Platform = function(params, layer) {
  */
 mm.Chunk = function(params, layer) {
   // Loop through the width and height of the chunk to create all the bricks
-  for(var rowIdx = 0; rowIdx < params.width; rowIdx++) {
-    for(var colIdx = 0; colIdx < params.height; colIdx++) {
+  for(var rowIdx = 0; rowIdx < params.size.width; rowIdx++) {
+    for(var colIdx = 0; colIdx < params.size.height; colIdx++) {
 
       // Determine if the brick is on the top layer of the chunk
-      var top = colIdx == params.height - 1;
+      var top = colIdx == params.size.height - 1;
 
       // Determine the texture based on location of the brick
       var texture = mm.Brick.GroundTexture;
@@ -139,7 +141,7 @@ mm.Chunk = function(params, layer) {
       else if(rowIdx === 0) {
         texture = mm.Brick.GroundTextureLeft;
       }
-      else if(rowIdx == params.width - 1) {
+      else if(rowIdx == params.size.width - 1) {
         texture = mm.Brick.GroundTextureRight;
       }
 
@@ -160,13 +162,13 @@ mm.Chunk = function(params, layer) {
    * Calculate the width, height, x, and y position of the Box2D body that
    * needs to be created
    */
-  var width = (mm.Brick.Size.width - 1) * params.width;
-  var height = (mm.Brick.Size.height - 1) * params.height;
+  var width = (mm.Brick.Size.width - 1) * params.size.width;
+  var height = (mm.Brick.Size.height - 1) * params.size.height;
   var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
-  var yPos = layer.size.height - ((params.height) * (mm.Brick.Size.height - 1)) + height / 2;
+  var yPos = layer.size.height - ((params.size.height) * (mm.Brick.Size.height - 1)) + height / 2;
   
   // Create a single body to represent the chunk
-  mm.createBody({ x: xPos, y: yPos, width: width, height: height }, layer.world);
+  mm.createBody({ x: xPos, y: yPos, size: {width: width, height: height}}, layer.world);
 };
 
 /**
@@ -188,8 +190,8 @@ mm.createBody = function(params, world) {
   shapeDef.friction = 0.0;
   shapeDef.density = 2.0;
   shapeDef.SetAsBox(
-    (params.width * mm.Box2DFactor) / 2,
-    (params.height * mm.Box2DFactor) / 2);
+    (params.size.width * mm.Box2DFactor) / 2,
+    (params.size.height * mm.Box2DFactor) / 2);
   body.CreateShape(shapeDef);
 
   return body;
@@ -201,36 +203,36 @@ mm.createBody = function(params, world) {
  */
 mm.Level.Layout = [
  // Chunks - the ground
- { c: { width: 12, height: 2, x: 0}}, // A
- { c: { width: 4, height: 2, x: 16}}, // B
- { c: { width: 4, height: 3, x: 20}}, // C
- { c: { width: 4, height: 9, x: 24}}, // D
- { c: { width: 4, height: 4, x: 30}}, // E
- { c: { width: 4, height: 3, x: 34}}, // F
- { c: { width: 4, height: 2, x: 38}}, // G
- { c: { width: 4, height: 15, x: 60}}, // H
- { c: { width: 6, height: 17, x: 64}}, // I
- { c: { width: 4, height: 13, x: 70}}, // J
- { c: { width: 30, height: 2, x: 96}}, // K
- { c: { width: 8, height: 23, x: 138}}, // L
+ { c: { size: {width: 12, height: 2}, x: 0}}, // A
+ { c: { size: {width: 4, height: 2}, x: 16}}, // B
+ { c: { size: {width: 4, height: 3}, x: 20}}, // C
+ { c: { size: {width: 4, height: 9}, x: 24}}, // D
+ { c: { size: {width: 4, height: 4}, x: 30}}, // E
+ { c: { size: {width: 4, height: 3}, x: 34}}, // F
+ { c: { size: {width: 4, height: 2}, x: 38}}, // G
+ { c: { size: {width: 4, height: 15}, x: 60}}, // H
+ { c: { size: {width: 6, height: 17}, x: 64}}, // I
+ { c: { size: {width: 4, height: 13}, x: 70}}, // J
+ { c: { size: {width: 30, height: 2}, x: 96}}, // K
+ { c: { size: {width: 8, height: 23}, x: 138}}, // L
  
  
  // Platforms
- { p: { width: 4, x: 6, y: 5}},    // a
- { p: { width: 2, x: 13, y: 7}},   // b
- { p: { width: 2, x: 19, y: 6}},   // c
- { p: { width: 4, x: 46, y: 4}},   // d
- { p: { width: 4, x: 53, y: 6}},   // e
- { p: { width: 4, x: 46, y: 9}},   // f
- { p: { width: 2, x: 50, y: 13}},  // g
- { p: { width: 2, x: 56, y: 16}},  // h
- { p: { width: 2, x: 34, y: 7}},   // i
- { p: { width: 2, x: 82, y: 11}},  // j
- { p: { width: 2, x: 90, y: 5}},   // k
- { p: { width: 2, x: 86, y: 8}},   // l
- { p: { width: 4, x: 128, y: 5}},   // m
- { p: { width: 4, x: 120, y: 9}},   // n
- { p: { width: 4, x: 112, y: 13}},   // o
- { p: { width: 4, x: 120, y: 17}},   // p
- { p: { width: 4, x: 128, y: 21}}   // q
+ { p: { size: {width: 4}, x: 6, y: 5}},    // a
+ { p: { size: {width: 2}, x: 13, y: 7}},   // b
+ { p: { size: {width: 2}, x: 19, y: 6}},   // c
+ { p: { size: {width: 4}, x: 46, y: 4}},   // d
+ { p: { size: {width: 4}, x: 53, y: 6}},   // e
+ { p: { size: {width: 4}, x: 46, y: 9}},   // f
+ { p: { size: {width: 2}, x: 50, y: 13}},  // g
+ { p: { size: {width: 2}, x: 56, y: 16}},  // h
+ { p: { size: {width: 2}, x: 34, y: 7}},   // i
+ { p: { size: {width: 2}, x: 82, y: 11}},  // j
+ { p: { size: {width: 2}, x: 90, y: 5}},   // k
+ { p: { size: {width: 2}, x: 86, y: 8}},   // l
+ { p: { size: {width: 4}, x: 128, y: 5}},   // m
+ { p: { size: {width: 4}, x: 120, y: 9}},   // n
+ { p: { size: {width: 4}, x: 112, y: 13}},   // o
+ { p: { size: {width: 4}, x: 120, y: 17}},   // p
+ { p: { size: {width: 4}, x: 128, y: 21}}   // q
 ];

@@ -28,16 +28,16 @@ pulse.ready(function() {
   var scene = new pulse.Scene();
 
   // Parallax background layers
-  var bg1 = new pulse.Layer({ width: 6000, height: 300 });
+  var bg1 = new pulse.Layer({size: { width: 6000, height: 300 }});
   bg1.anchor = { x: 0, y: 0 };
   bg1.position.y = 250;
 
-  var bg2 = new pulse.Layer({ width: 6000, height: 600 });
+  var bg2 = new pulse.Layer({size: { width: 6000, height: 600 }});
   bg2.anchor = { x: 0, y: 0 };
   bg2.position.y = -200;
 
   // Level layer object extends from layer see layer.js
-  var level = new mm.Level({ width: 6000, height: 800, world: world });
+  var level = new mm.Level({size: {width: 6000, height: 800}, world: world });
   level.anchor = { x: 0, y: 0 };
   level.position.y = -400;
 
@@ -45,12 +45,12 @@ pulse.ready(function() {
    * The mm layer, he's on a seperate layer so we don't redraw everything
    * when he moves
    */
-  var manLayer = new pulse.Layer({ width: 6000, height: 800});
+  var manLayer = new pulse.Layer({size: {width: 6000, height: 800}});
   manLayer.anchor = { x: 0, y: 0 };
   manLayer.position.y = -400;
 
   // Layer for the UI, text
-  var uiLayer = new pulse.Layer({width : 600, height: 400});
+  var uiLayer = new pulse.Layer({size: {width : 600, height: 400}});
   uiLayer.position = {x: 300, y: 200};
 
   // Texture for the mountain and for the clouds

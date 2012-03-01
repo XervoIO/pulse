@@ -16,7 +16,7 @@ pulse.ready(function initGame() {
   var layer = new Board({y: 50});
   layer.anchor = { x: 0, y: 0 };
   
-  var uiLayer = new pulse.Layer({width: 500, height:100, x:130,  y:350});
+  var uiLayer = new pulse.Layer({size:{width: 500, height:100}, x:130,  y:350});
   uiLayer.anchor = {x: 0, y: 0 };
   uiLayer.position = {x: 130, y: 350};
   uiLayer.name = "UILayer"
