@@ -4,8 +4,7 @@ pulse.ready(function(){
   
   var engine = new pulse.Engine({ 
     gameWindow: 'gameWindow', 
-    width: 760,
-    height: 480 
+    size: {width: 760, height: 480} 
   });
   
   var scene = new pulse.Scene();

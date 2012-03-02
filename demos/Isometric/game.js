@@ -11,7 +11,10 @@ pulse.ready(function initGame() {
   var width = 760;
   var height = 480;
   
-  var engine = new pulse.Engine({ gameWindow: 'gameWindow', iframe: false, width: 760, height: 480 });
+  var engine = new pulse.Engine({ 
+    gameWindow: 'gameWindow', iframe: false, 
+    size: {width: 760, height: 480 }});
+    
   var scene = new pulse.Scene();
   var layer = new Board({y: 50});
   layer.anchor = { x: 0, y: 0 };

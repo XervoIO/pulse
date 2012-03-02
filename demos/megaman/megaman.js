@@ -22,7 +22,8 @@ pulse.ready(function() {
   var world = new b2World(worldAABB, gravity, true);
 
   // The base engine object for this demo with passed in id of game div
-  var engine = new pulse.Engine({ gameWindow: 'gameWindow', width: 600, height: 400 });
+  var engine = new pulse.Engine({ 
+    gameWindow: 'gameWindow', size: {width: 600, height: 400}});
 
   // The main scene for the demo
   var scene = new pulse.Scene();
