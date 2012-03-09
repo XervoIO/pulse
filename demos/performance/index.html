@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../../lib/other/require.js"></script>
+        <script type="text/javascript" src="../../lib/pulse.js"></script>
+        <script type="text/javascript">
+
+            pulse.init('../../lib');
+
+            var engine = null;
+            var sprites = [];
+
+            pulse.ready(function () {
+                engine = new pulse.Engine({ gameWindow: 'game' });
+
+                var scene = new pulse.Scene();
+
+                var layer = new pulse.Layer();
+                layer.anchor = { x: 0, y: 0 };
+
+                // Add 160 sprites to the screen.
+                for (var i = 0; i < 160; i++) {
+                    var sprite = new pulse.Sprite({ src: 'ball.png' });
+                    sprite.position = { x: i * 4, y: i * 4 };
+                    layer.addNode(sprite);
+                    sprites.push(sprite);
+                }
+
+                scene.addLayer(layer);
+                engine.scenes.addScene(scene);
+                engine.scenes.activateScene(scene);
+
+            });
+
+            var count = 0;
+            var iteration = 0;
+            var interval = null;
+            var startDate = null;
+
+            function loop() {
+                count++;
+
+                for (var key in sprites) {
+                    sprites[key].position.y = count;
+                }
+
+                engine.loop(false);
+
+                if (count > 480) {
+                    count = 0;
+                    iteration++;
+                    clearInterval(interval);
+                    document.getElementById('results').innerHTML +=
+                        'Iteration ' + iteration + ': ' + (new Date().getTime() - startDate) + 'ms <br />';
+                    if (iteration < 5) {
+                        runTest();
+                    }
+                }
+            }
+
+            function runTest() {
+                startDate = new Date().getTime();
+                interval = setInterval("loop()", 1);
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="game" style="width:460px;height:480px;"></div><br />
+        <button onclick="runTest()">Run Test</button>
+        <div id="results"></div>
+    </body>
+</html>
