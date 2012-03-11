@@ -1,6 +1,8 @@
 java -jar compiler.jar \
 --js=../lib/core/main.js \
 --js=../lib/other/soundmanager2.js \
+--js=../lib/core/plugin.js \
+--js=../lib/core/plugincollection.js \
 --js=../lib/core/error.js \
 --js=../lib/core/util.js \
 --js=../lib/core/event/eventproperties.js \

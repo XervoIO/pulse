@@ -17,10 +17,12 @@ describe("Plugin", function () {
   it("should be able to subscribe init callback", function () {
 
     var exceptionThrown = false;
+    var plugin = null;
+    var callback = null;
 
     try {
-      var plugin = new pulse.plugin.Plugin();
-      plugin.subscribe(pulse.Sprite, 'init', pulse.plugin.PluginCallbackTypes.onEnter, function () { });
+      plugin = new pulse.plugin.Plugin();
+      callback = plugin.subscribe('pulse.Sprite', 'init', pulse.plugin.PluginCallbackTypes.onEnter, function () { });
 
     }
     catch (e) {
@@ -29,6 +31,8 @@ describe("Plugin", function () {
     }
 
     expect(exceptionThrown).toEqual(false);
+
+    plugin.unsubscribe(callback);
   });
 
   it("should invoke subscribed init callback", function () {
@@ -38,12 +42,13 @@ describe("Plugin", function () {
     var plugin = new pulse.plugin.Plugin();
     pulse.plugins.add(plugin);
 
-    plugin.subscribe(pulse.Sprite, 'init',
+    var callback = plugin.subscribe('pulse.Sprite', 'init',
       pulse.plugin.PluginCallbackTypes.onEnter, function () { callbackInvoked = true; });
 
     var sprite = new pulse.Sprite({ src: 'dummy/path.png' });
 
     expect(callbackInvoked).toEqual(true);
+    plugin.unsubscribe(callback);
   });
 
   it("should invoke subscribed init callback with correct arguments", function () {
@@ -52,7 +57,7 @@ describe("Plugin", function () {
 
     var plugin = new pulse.plugin.Plugin();
     pulse.plugins.add(plugin);
-    plugin.subscribe(pulse.Sprite, 'init',
+    var callback = plugin.subscribe('pulse.Sprite', 'init',
       pulse.plugin.PluginCallbackTypes.onEnter,
       function (params) {
         expect(params.src).toEqual('dummy/path.png');
@@ -62,6 +67,8 @@ describe("Plugin", function () {
     var sprite = new pulse.Sprite({ src: 'dummy/path.png' });
 
     expect(callbackInvoked).toEqual(true);
+
+    plugin.unsubscribe(callback);
   });
 
   it("should invoke subscribed init callback with correct this variable", function () {
@@ -72,7 +79,7 @@ describe("Plugin", function () {
 
     var plugin = new pulse.plugin.Plugin();
     pulse.plugins.add(plugin);
-    plugin.subscribe(pulse.Sprite, 'init',
+    var callback = plugin.subscribe('pulse.Sprite', 'init',
       pulse.plugin.PluginCallbackTypes.onEnter,
       function (params) {
         // Can only do a != null here since the sprite
@@ -84,6 +91,8 @@ describe("Plugin", function () {
     sprite = new pulse.Sprite({ src: 'dummy/path.png' });
 
     expect(callbackInvoked).toEqual(true);
+
+    plugin.unsubscribe(callback);
   });
 
   it("should be able to unsubscribe callback", function () {
@@ -91,7 +100,7 @@ describe("Plugin", function () {
 
     var plugin = new pulse.plugin.Plugin();
     pulse.plugins.add(plugin);
-    var callback = plugin.subscribe(pulse.Sprite, 'init',
+    var callback = plugin.subscribe('pulse.Sprite', 'init',
       pulse.plugin.PluginCallbackTypes.onEnter,
       function (params) {
         callbackInvokeCount++;
