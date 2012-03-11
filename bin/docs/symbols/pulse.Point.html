@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - pulse.MouseEvent</title>
+		<title>JsDoc Reference - pulse.Point</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -266,7 +266,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class pulse.MouseEvent
+				Class pulse.Point
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -274,16 +274,16 @@ ul.inheritsList
 				
 				
 			
-				Mouse event properties
+				The point object.
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/event/eventproperties.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/point.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.MouseEvent.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.Point.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -296,9 +296,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#constructor">pulse.MouseEvent</a></b>()
+								<b><a href="../symbols/pulse.Point.html#constructor">pulse.Point</a></b>(params)
 							</div>
-							<div class="description">Simple class for holding properties for a mouse event</div>
+							<div class="description">Points are a simple objects that hold two values, x and y.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -309,7 +309,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.MouseEvent.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Point.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -323,10 +323,9 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#parent">parent</a></b>
+								<b><a href="../symbols/pulse.Point.html#x">x</a></b>
 								</div>
-								<div class="description">Event position relative to the parent of object which the event was
-raised from.</div>
+								<div class="description">The x coordinate of the point.</div>
 							</td>
 						</tr>
 					
@@ -334,39 +333,9 @@ raised from.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#position">position</a></b>
+								<b><a href="../symbols/pulse.Point.html#y">y</a></b>
 								</div>
-								<div class="description">Event position relative to the object in which the event was raised from.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#scrollDelta">scrollDelta</a></b>
-								</div>
-								<div class="description">The scroll delta for mouse wheel.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#window">window</a></b>
-								</div>
-								<div class="description">Event position relative to the entire html window.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.MouseEvent.html#world">world</a></b>
-								</div>
-								<div class="description">Event position relative to the game window.</div>
+								<div class="description">The y coordinate of the point.</div>
 							</td>
 						</tr>
 					
@@ -390,17 +359,42 @@ raised from.</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>pulse.MouseEvent</b>()
+						<b>pulse.Point</b>(params)
 				</div>
 				
 				<div class="description">
-					Simple class for holding properties for a mouse event
+					Points are a simple objects that hold two values, x and y. Typically they
+are used to indicate positions in a 2-Dimensional plane.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{object}</span>  <b>params</b>
+								
+							</dt>
+								<dd>parameters that can be set as initialized options
+on the point</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string|number}</span>  <b>params.x</b>
+								
+							</dt>
+								<dd>The x coordinate of the point.</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string|number}</span>  <b>params.y</b>
+								
+							</dt>
+								<dd>The y coordinate of the point.</dd>
+						
+						</dl>
 					
 					
 					
@@ -418,16 +412,15 @@ raised from.</div>
 					Field Detail
 				</div>
 				
-					<a name="parent"> </a>
+					<a name="x"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>parent</b>
+					<b>x</b>
 					
 					</div>
 					<div class="description">
-						Event position relative to the parent of object which the event was
-raised from.
+						The x coordinate of the point.
 						
 						
 					</div>
@@ -441,82 +434,15 @@ raised from.
 
 					<hr />
 				
-					<a name="position"> </a>
+					<a name="y"> </a>
 					<div class="fixedFont">
 					
 					
-					<b>position</b>
+					<b>y</b>
 					
 					</div>
 					<div class="description">
-						Event position relative to the object in which the event was raised from.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="scrollDelta"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>scrollDelta</b>
-					
-					</div>
-					<div class="description">
-						The scroll delta for mouse wheel. This is only filled in for mousewheel
-events.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="window"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>window</b>
-					
-					</div>
-					<div class="description">
-						Event position relative to the entire html window.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="world"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>world</b>
-					
-					</div>
-					<div class="description">
-						Event position relative to the game window.
+						The y coordinate of the point.
 						
 						
 					</div>
