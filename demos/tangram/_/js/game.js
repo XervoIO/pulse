@@ -22,8 +22,7 @@ pulse.ready(function(){
   // The base engine object
   var engine = new pulse.Engine({
     gameWindow: 'tangram',
-    width: 760,
-    height: 600
+    size: {width: 760, height: 600}
   });
 
   // Test game scene
@@ -33,8 +32,7 @@ pulse.ready(function(){
   // Shape holding layer
   var gameLayer = new pulse.Layer({
     name: '',
-    width: 760,
-    height: 600
+    size: {width: 760, height: 600}
   });
   gameLayer.anchor = {x: 0, y: 0};
   gameLayer.position = {x: 0, y: 0};

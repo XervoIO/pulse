@@ -11,23 +11,31 @@ pulse.ready(function initGame() {
   var width = 760;
   var height = 480;
   
-  var engine = new pulse.Engine({ gameWindow: 'gameWindow', iframe: false, width: 760, height: 480 });
+  var engine = new pulse.Engine({ 
+    gameWindow: 'gameWindow', iframe: false, 
+    size: {width: 760, height: 480}
+  });
+  
   var scene = new pulse.Scene();
   var layer = new Board({y: 50});
   layer.anchor = { x: 0, y: 0 };
   
-  var uiLayer = new pulse.Layer({width: 500, height:100, x:130,  y:350});
-  uiLayer.anchor = {x: 0, y: 0 };
+  var uiLayer = new pulse.Layer({
+    size:{width: 500, height:100}, 
+    x:130,  y:350
+  });
+  
+  uiLayer.anchor = {x: 0, y: 0};
   uiLayer.position = {x: 130, y: 350};
-  uiLayer.name = "UILayer"
+  uiLayer.name = "UILayer";
   
   var offsetY = rows * tileHeight;
   
   var tiles = [ ];
   
-  var normalTexture = new pulse.Texture( { filename: 'tile.png' });
-  var selectedTexture = new pulse.Texture( { filename: 'selected.png '});
-    
+  var normalTexture = new pulse.Texture({ filename: 'tile.png' });
+  var selectedTexture = new pulse.Texture({ filename: 'selected.png '});
+  
   // Create and layout tiles.
   for(var rowIdx = 0; rowIdx < rows; rowIdx++) {
     for(var colIdx = 0; colIdx < columns; colIdx++) {
