@@ -2,11 +2,11 @@
 	HTML5 Reset :: style.css
 	----------------------------------------------------------
 	We have learned much from/been inspired by/taken code where offered from:
-	
+
 	Eric Meyer					:: http://ericmeyer.com
 	HTML5 Doctor				:: http://html5doctor.com
 	and the HTML5 Boilerplate	:: http://html5boilerplate.com
-	
+
 -------------------------------------------------------------------------------*/
 
 /* Let's default this puppy out
@@ -20,7 +20,7 @@ html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquot
 	font-size: 100%;
 	vertical-align: baseline;
 	background: transparent;
-}									
+}
 
 article, aside, figure, footer, header, hgroup, nav, section {display: block;}
 
@@ -45,9 +45,9 @@ a:hover, a:active {outline: none;}
 
 /* hand cursor on clickable elements */
 .clickable,
-label, 
-input[type=button], 
-input[type=submit], 
+label,
+input[type=button],
+input[type=submit],
 button {cursor: pointer;}
 
 /* new Linux- and Windows-friendly sans-serif font stack: http://mky.be/fontstack */
@@ -58,10 +58,10 @@ a:hover {color: #69f;}
 
 /* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
 ::-moz-selection{background: #fcd700; color: #fff; text-shadow: none;}
-::selection {background: #fcd700; color: #fff; text-shadow: none;} 
+::selection {background: #fcd700; color: #fff; text-shadow: none;}
 
 /*	j.mp/webkit-tap-highlight-color */
-a:link {-webkit-tap-highlight-color: #fcd700;} 
+a:link {-webkit-tap-highlight-color: #fcd700;}
 
 html {
 	height: 100%;
@@ -102,6 +102,13 @@ h2 {
 	margin: 0 0 10px;
 }
 
+h3 {
+	font-size: 22px;
+	color: #FFF;
+	text-shadow: -1px -1px 0px #111111;
+	margin: 20px 0 10px;
+}
+
 .center {
 	width: 600px;
 	margin: 0 auto 5px;
@@ -125,7 +132,7 @@ h2 {
 	margin: 0 auto 50px;
 	padding: 20px 20px 10px;
 	overflow: hidden;
-	background: url('../img/download_bg.png') repeat-x 0 100%;
+	background: url('../img/topbox_bg.png') repeat-x 0 100%;
 }
 
 .download p {
@@ -140,6 +147,18 @@ h2 {
 	text-indent: -9999px;
 	margin: 0 10px 0 0;
 	background: url('../img/download_btn.png');
+}
+
+#docs-btn {
+	display: block;
+	position: relative;
+	top: -34px;
+	float: right;
+	width: 105px;
+	height: 34px;
+	text-indent: -9999px;
+	margin: 0;
+	background: url('../img/docs_btn.png');
 }
 
 .info {
@@ -193,6 +212,45 @@ h2 {
 	height: 34px;
 	background: url('../img/back_btn.png') no-repeat;
 	text-indent: -9999px;
+}
+
+#release-table {
+	width: 100%;
+	color: #F9F9F9;
+	text-shadow: 1px 1px 0px #111111;
+	font-size: 14px;
+	border-collapse: collapse;
+}
+
+#release-table tr.odd {
+	background: rgba(180, 180, 180, 0.2);
+}
+
+#release-table th,
+#release-table td {
+	text-align: left;
+	padding: 8px 5px;
+}
+
+#release-table a,
+#release-table a:hover {
+	color: #A3D4F5;
+}
+
+#release-table th.release {
+	width: 30%;
+}
+
+#release-table th.size {
+	width: 25%;
+}
+
+#release-table th.date {
+	width: 25%;
+}
+
+#release-table td.download-cell {
+	text-align: center;
 }
 
 footer {
