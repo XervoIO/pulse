@@ -274,7 +274,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Built-In Class _global_
+				Built-In Namespace _global_
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -310,36 +310,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#add">add</a></b>(plugin)
-								</div>
-								<div class="description">Adds a plugin to the collection.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/_global_.html#PClass">PClass</a></b>()
 								</div>
 								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#subscribe">subscribe</a></b>(objectType, functionName, callbackType, callback)
-								</div>
-								<div class="description">Subscribes a callback to a function and type.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/_global_.html#unsubscribe">unsubscribe</a></b>(pluginCallback)
-								</div>
-								<div class="description">Unscribes a callback.</div>
 							</td>
 						</tr>
 					
@@ -363,45 +336,6 @@ ul.inheritsList
 				<div class="sectionTitle">
 					Method Detail
 				</div>
-				
-					<a name="add"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>add</b>(plugin)
-					
-					</div>
-					<div class="description">
-						Adds a plugin to the collection.
-						
-							<br />
-							<i>Defined in: </i> &lt;../lib/core/plugincollection.js&gt;.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{pulse.Plugin}</span> <b>plugin</b>
-									
-								</dt>
-								<dd>The plugin to add.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
 				
 					<a name="PClass"> </a>
 					<div class="fixedFont">
@@ -429,108 +363,6 @@ ul.inheritsList
 						
 						
 
-					<hr />
-				
-					<a name="subscribe"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{<a href="../symbols/pulse.plugin.PluginCallback.html">pulse.plugin.PluginCallback</a>}</span>
-					<b>subscribe</b>(objectType, functionName, callbackType, callback)
-					
-					</div>
-					<div class="description">
-						Subscribes a callback to a function and type.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>objectType</b>
-									
-								</dt>
-								<dd>The object type to subscribe functions
-callbacks to (e.g. 'pulse.Sprite')</dd>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>functionName</b>
-									
-								</dt>
-								<dd>The name of the function, that when called,
-will invoke the specified callback</dd>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>callbackType</b>
-									
-								</dt>
-								<dd>The type of callback to hook.  Callbacks can
-occur when the function enters or immediately before it exits.
-Available types are defined in pulse.plugin.PluginCallbackTypes.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>callback</b>
-									
-								</dt>
-								<dd>The callback to invoke whenever the specified
-function is called on the specified object type</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{<a href="../symbols/pulse.plugin.PluginCallback.html">pulse.plugin.PluginCallback</a>}</span> A callback object that can be used to manage the callback.</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="unsubscribe"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>unsubscribe</b>(pluginCallback)
-					
-					</div>
-					<div class="description">
-						Unscribes a callback.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{<a href="../symbols/pulse.plugin.PluginCallback.html">pulse.plugin.PluginCallback</a>}</span> <b>pluginCallback</b>
-									
-								</dt>
-								<dd>The callback to unsubscribe.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
 					
 				
 			
@@ -545,7 +377,7 @@ function is called on the specified object type</dd>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 12 2012 11:19:31 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 12 2012 13:14:38 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>
