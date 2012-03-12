@@ -3436,6 +3436,9 @@ pulse.Engine = PClass.extend({init:function(params) {
   }
   this._private.currentTime = (new Date).getTime();
   var elapsed = this._private.currentTime - this._private.lastTime;
+  if(elapsed < this.tick) {
+    return
+  }
   var increments = Math.floor(elapsed / 30);
   if(increments === 0) {
     increments = 1
