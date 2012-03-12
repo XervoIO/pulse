@@ -1670,8 +1670,6 @@ pulse.Node = PClass.extend({init:function(params) {
   this.parent = null;
   this._private = {}
 }, update:function(elapsed) {
-  if(pulse.DEBUG) {
-  }
 }});
 pulse.Node.nodeIdx = 0;
 var pulse = pulse || {};
@@ -1708,7 +1706,6 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   this._private.image.onload = function() {
     _self.percentLoaded = 100;
     var evt = {asset:_self.name};
-    _self.events.raiseEvent("load", evt);
     _self.complete();
     _self._private.lastSlice = {x:-1, y:-1, width:_self._private.image.width * _self.scaleX, height:_self._private.image.height * _self.scaleY, rotation:_self.rotation, alpha:_self.alpha}
   };
@@ -1798,6 +1795,31 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   }
   ctx.restore();
   return this._private.imgCanvas
+}});
+var pulse = pulse || {};
+pulse.TextFile = pulse.Asset.extend({init:function(params) {
+  this._super(params);
+  this.text = "";
+  if(this.autoLoad) {
+    this.load()
+  }
+}, load:function() {
+  var _self = this;
+  var txtFile = new XMLHttpRequest;
+  txtFile.open("GET", this.filename, true);
+  txtFile.onreadystatechange = function() {
+    if(txtFile.readyState === 4) {
+      if(txtFile.status === 200) {
+        _self.text = txtFile.responseText;
+        _self.percentLoaded = 100;
+        _self.complete()
+      }else {
+        if(txtFile.status === 404) {
+        }
+      }
+    }
+  };
+  txtFile.send(null)
 }});
 var pulse = pulse || {};
 pulse.BitmapChar = PClass.extend({init:function() {
@@ -2101,12 +2123,10 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
 }, addAsset:function(asset) {
   if(asset instanceof pulse.Asset) {
     var _self = this;
-    asset.events.bind("load", function(evt) {
+    asset.events.bind("complete", function(evt) {
       _self._private.numberLoaded++;
       _self.updatePercent();
-      if(_self.percentLoaded === 100) {
-        _self.events.raiseEvent("complete", {})
-      }
+      _self.events.raiseEvent("assetLoaded", {asset:asset.name})
     });
     this.assets.push(asset)
   }
@@ -2123,7 +2143,11 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
   }
 }, updatePercent:function() {
   this.percentLoaded = this._private.numberLoaded / this.assets.length * 100;
-  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2))
+  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+  this.events.raiseEvent("progressChanged", {});
+  if(this.percentLoaded === 100) {
+    this.events.raiseEvent("complete", {})
+  }
 }});
 var pulse = pulse || {};
 pulse.AssetManager = PClass.extend({init:function() {
@@ -2137,12 +2161,11 @@ pulse.AssetManager = PClass.extend({init:function() {
 }, addBundle:function(bundle, name) {
   if(bundle instanceof pulse.AssetBundle && !this.bundles.hasOwnProperty(name)) {
     var _self = this;
-    bundle.events.bind("complete", function(evt) {
-      _self._private.bundlesLoaded++;
-      _self.updatePercent();
-      if(_self.percentLoaded === 100) {
-        _self.events.raiseEvent("complete", {})
-      }
+    bundle.events.bind("progressChanged", function(evt) {
+      _self.updatePercent()
+    });
+    bundle.events.bind("assetLoaded", function(evt) {
+      _self.events.raiseEvent("assetLoaded", evt)
     });
     this.bundles[name] = bundle
   }
@@ -2183,7 +2206,11 @@ pulse.AssetManager = PClass.extend({init:function() {
     percent = percent + this.bundles[b].percentLoaded
   }
   this.percentLoaded = percent / totalPercent * 100;
-  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2))
+  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+  this.events.raiseEvent("progressChanged", {});
+  if(this.percentLoaded === 100) {
+    this.events.raiseEvent("complete", {})
+  }
 }});
 var pulse = pulse || {};
 pulse.Visual = pulse.Node.extend({init:function(params) {
@@ -2223,7 +2250,8 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.visiblePrevious = true;
   this.actions = {};
   this.runningActions = {};
-  this.updated = true
+  this.updated = true;
+  this.mousein = false
 }, move:function(x, y) {
   this.position = {x:this.position.x + x, y:this.position.y + y}
 }, getAction:function(name) {
@@ -2292,8 +2320,6 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
     this.updated = true
   }
 }, draw:function(ctx) {
-  if(pulse.DEBUG) {
-  }
   if(this.canvas.width === 0 || this.canvas.height === 0) {
     return
   }
@@ -2376,6 +2402,12 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.boundsPrevious = this.bounds;
   this.bounds = {x:this.positionTopLeft.x, y:this.positionTopLeft.y, width:this.size.width * Math.abs(this.scale.x), height:this.size.height * Math.abs(this.scale.y)};
   this.invalidProperties = false
+}});
+var pulse = pulse || {};
+pulse.Point = PClass.extend({init:function(params) {
+  params = pulse.util.checkParams(params, {x:0, y:0});
+  this.x = params.x;
+  this.y = params.y
 }});
 var pulse = pulse || {};
 pulse.Action = pulse.Node.extend({init:function(params) {
@@ -2518,6 +2550,47 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
     this.target.textureFrame = frame;
     this.target.updated = true
   }
+}});
+var pulse = pulse || {};
+pulse.MoveAction = pulse.Action.extend({init:function(params) {
+  this._super(params);
+  params = pulse.util.checkParams(params, {name:this.name, position:null, duration:0, easing:pulse.util.easeInOutQuad});
+  this.position = params.position;
+  this.duration = params.duration;
+  this.easingFunction = params.easing;
+  this._private.playTime = 0;
+  this._private.startPosition = null;
+  this._private.positionDiff = null
+}, start:function(oframe) {
+  this._super();
+  if(!this.target) {
+    return
+  }
+  if(!this.isPaused) {
+    this._private.playTime = 0;
+    this._private.startPosition = {x:this.target.position.x, y:this.target.position.y};
+    this._private.positionDiff = {x:this.position.x - this._private.startPosition.x, y:this.position.y - this._private.startPosition.y}
+  }
+}, pause:function() {
+  this._super()
+}, stop:function() {
+  this._super()
+}, complete:function() {
+  this._super()
+}, update:function(elapsed) {
+  this._super();
+  if(this.running === false) {
+    return
+  }
+  this._private.playTime += elapsed;
+  var newPosition = {};
+  if(this._private.playTime > this.duration) {
+    this._private.playTime = this.duration;
+    this.stop();
+    this.complete()
+  }
+  newPosition = {x:this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration), y:this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)};
+  this.target.position = newPosition
 }});
 var pulse = pulse || {};
 pulse.Sprite = pulse.Visual.extend({init:function(params) {
@@ -2681,6 +2754,9 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   }
   if(type === "mouseup") {
     this.killDrag(evt)
+  }
+  if(type == "mousemove") {
+    this._private.mousein = true
   }
 }});
 pulse.Sprite.HIT_TEST_RECT = "rect";
@@ -2847,11 +2923,10 @@ pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
 var pulse = pulse || {};
 pulse.Layer = pulse.Visual.extend({init:function(params) {
   this._super(params);
-  params = pulse.util.checkParams(params, {x:0, y:0, width:0, height:0});
+  params = pulse.util.checkParams(params, {x:0, y:0, size:{width:0, height:0}});
   this.position.x = params.x;
   this.position.y = params.y;
-  this.size.width = params.width;
-  this.size.height = params.height;
+  this.size = params.size;
   this.canvas.width = this.size.width;
   this.canvas.height = this.size.height;
   this.canvas.style.position = "absolute";
@@ -2922,6 +2997,8 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
       if(obj instanceof pulse.Visual) {
         if(obj.visible) {
           obj.draw(this._private.context)
+        }else {
+          obj.updated = false
         }
       }
     }
@@ -2930,7 +3007,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 }, pointInBounds:function(point) {
   return point.x > this.bounds.x && point.x < this.bounds.x + this.bounds.width && point.y > this.bounds.y && point.y < this.bounds.y + this.bounds.height
 }, eventsCallback:function(type, evt) {
-  if(typeof evt === "undefined") {
+  if(typeof evt === "undefined" || typeof evt.position === "undefined") {
     return
   }
   evt.parent.x = evt.position.x;
@@ -2945,7 +3022,15 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
       evt.position.y = evt.parent.y - sBounds.y;
       evt.sender = sprite;
       if(sprite.handleAllEvents || sprite.inCurrentBounds(evt.parent.x, evt.parent.y)) {
+        if(sprite.inCurrentBounds(evt.parent.x, evt.parent.y) && sprite.mousein === false) {
+          sprite.mousein = true;
+          sprite.events.raiseEvent("mouseover", evt)
+        }
         sprite.events.raiseEvent(type, evt)
+      }
+      if(!sprite.inCurrentBounds(evt.parent.x, evt.parent.y) && sprite.mousein === true) {
+        sprite.mousein = false;
+        sprite.events.raiseEvent("mouseout", evt)
       }
       if(sprite.dropAcceptEnabled) {
         for(var id in pulse.EventManager.DraggedItems) {
@@ -3076,13 +3161,22 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   for(var l in this.layers) {
     if(pulse.events[type] === "mouse") {
       var lBounds = this.layers[l].bounds;
+      evt.parent.x = evt.position.x;
+      evt.parent.y = evt.position.y;
+      evt.position.x = evt.world.x - lBounds.x;
+      evt.position.y = evt.world.y - lBounds.y;
+      evt.sender = this.layers[l];
       if(this.layers[l].pointInBounds(evt.world)) {
-        evt.parent.x = evt.position.x;
-        evt.parent.y = evt.position.y;
-        evt.position.x = evt.world.x - lBounds.x;
-        evt.position.y = evt.world.y - lBounds.y;
-        evt.sender = this.layers[l];
+        if(type === "mousemove" && this.layers[l].mousein === false) {
+          this.layers[l].mousein = true;
+          this.layers[l].events.raiseEvent("mouseover", evt)
+        }
         this.layers[l].events.raiseEvent(type, evt)
+      }else {
+        if(this.layers[l].mousein === true) {
+          this.layers[l].mousein = false;
+          this.layers[l].events.raiseEvent("mouseout", evt)
+        }
       }
     }else {
       evt.sender = this.layers[l];
@@ -3137,7 +3231,7 @@ pulse.SceneManager = PClass.extend({init:function(params) {
 }});
 var pulse = pulse || {};
 pulse.Engine = PClass.extend({init:function(params) {
-  params = pulse.util.checkParams(params, {gameWindow:"gameWindow", width:0, height:0, iframe:false});
+  params = pulse.util.checkParams(params, {gameWindow:"gameWindow", size:{width:0, height:0}});
   this.gameWindow = null;
   this.focused = false;
   if(typeof params.gameWindow === "object") {
@@ -3145,10 +3239,8 @@ pulse.Engine = PClass.extend({init:function(params) {
   }else {
     this.gameWindow = document.getElementById(params.gameWindow)
   }
-  this.size = {};
-  this.size.width = params.width;
-  this.size.height = params.height;
-  if(this.width === 0 || this.height === 0) {
+  this.size = params.size;
+  if(this.size.width === 0 || this.size.width === undefined || this.size.height === 0 || this.size.height === undefined) {
     if(this.gameWindow) {
       var parentWidth = parseInt(this.gameWindow.style.width, 10);
       var parentHeight = parseInt(this.gameWindow.style.height, 10);
@@ -3156,7 +3248,7 @@ pulse.Engine = PClass.extend({init:function(params) {
         this.size.width = parentWidth
       }
       if(parentHeight) {
-        this.size.width = parentHeight
+        this.size.height = parentHeight
       }
     }
   }
@@ -3172,19 +3264,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.mainDiv.style.width = this.size.width + "px";
   this._private.mainDiv.style.height = this.size.height + "px";
   this._private.mainDiv.style.overflow = "hidden";
-  var child = this._private.mainDiv;
-  this._private.useIFrame = params.iframe;
-  if(this._private.useIFrame) {
-    this._private.innerFrame = pulse.util.getIFrame(this.gameWindow);
-    this._private.innerFrame.style.overflow = "hidden";
-    this._private.innerFrame.style.border = "0";
-    this._private.innerFrame.style.width = this._private.mainDiv.style.width;
-    this._private.innerFrame.style.height = this._private.mainDiv.style.height;
-    this._private.innerFrame.doc.body.appendChild(this._private.mainDiv);
-    this._private.innerFrame.doc.body.style.overflow = "hidden";
-    child = this._private.innerFrame
-  }
-  this.gameWindow.appendChild(child);
+  this.gameWindow.appendChild(this._private.mainDiv);
   this.scenes = new pulse.SceneManager({gameWindow:this._private.mainDiv});
   this.masterTime = 0;
   this.tick = 100;
@@ -3205,12 +3285,11 @@ pulse.Engine = PClass.extend({init:function(params) {
 }, bindEvents:function() {
   var eng = this;
   for(var e in pulse.events) {
-    var wnd = this._private.useIFrame ? this._private.innerFrame.doc.defaultView : window;
-    wnd.addEventListener(e, function(evt) {
+    window.addEventListener(e, function(evt) {
       eng.windowEvent.call(eng, evt)
     }, false);
     if(e === "mousewheel") {
-      wnd.addEventListener("DOMMouseScroll", function(evt) {
+      window.addEventListener("DOMMouseScroll", function(evt) {
         eng.windowEvent.call(eng, evt)
       }, false)
     }
@@ -3225,15 +3304,17 @@ pulse.Engine = PClass.extend({init:function(params) {
   requestAnimFrame(function() {
     eng.loop.call(eng)
   }, this._private.mainDiv)
-}, loop:function() {
+}, loop:function(autoContinue) {
   var eng = this;
-  requestAnimFrame(function() {
-    eng.loop.call(eng)
-  }, this._private.mainDiv);
+  if(autoContinue || autoContinue == undefined) {
+    requestAnimFrame(function() {
+      eng.loop.call(eng)
+    }, this._private.mainDiv)
+  }
   this._private.currentTime = (new Date).getTime();
   var elapsed = this._private.currentTime - this._private.lastTime;
   var increments = Math.floor(elapsed / 30);
-  if(increments == 0) {
+  if(increments === 0) {
     increments = 1
   }
   elapsed /= increments;
@@ -3257,7 +3338,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   var offset = this.getWindowOffset();
   var scrollX = 0;
   var scrollY = 0;
-  if(window.pageXOffset != undefined && window.pageYOffset != undefined) {
+  if(window.pageXOffset && window.pageYOffset) {
     scrollX = window.pageXOffset;
     scrollY = window.pageYOffset
   }else {
@@ -3285,6 +3366,10 @@ pulse.Engine = PClass.extend({init:function(params) {
       if(rawEvt.preventDefault) {
         rawEvt.preventDefault()
       }
+      if(document.activeElement !== this._private.mainDiv && rawEvt.type.toLowerCase() === "click") {
+        document.activeElement.blur();
+        this._private.mainDiv.focus()
+      }
       if(rawEvt.type.toLowerCase() === "mousedown") {
         this.focused = true
       }
@@ -3292,6 +3377,7 @@ pulse.Engine = PClass.extend({init:function(params) {
       if(rawEvt.type.toLowerCase() === "mousedown") {
         this.focused = false
       }
+      activeScenes[s].events.raiseEvent("mouseout", evtProps)
     }
     if(rawEvt.type.toLowerCase() === "mousewheel" || rawEvt.type.toLowerCase() === "dommousescroll") {
       var delta = 0;
