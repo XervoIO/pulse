@@ -1,6 +1,9 @@
+# Exclude gradle directory
+.gradle
+
 # Exclude the build directory
-build/*
- 
+build/build
+
 # Exclude temp nibs and swap files
 *~.nib
 *.swp
@@ -40,3 +43,7 @@ lib/core/scene.js~
 lib/core/engine.js~
 
 demos/Isometric/demo.css~
+
+bin/pulse.combined.js
+
+bin/pulse.min.js

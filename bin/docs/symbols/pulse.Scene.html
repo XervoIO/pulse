@@ -48,7 +48,7 @@ pre.code
 {
 	margin-top: 24px;
 	float: left;
-	width: 160px;
+	width: 180px;
 	position: absolute;
 	left: 8px;
 	background-color: #F3F3F3;
@@ -57,7 +57,7 @@ pre.code
 
 #content
 {
-	margin-left: 190px;
+	margin-left: 210px;
 	width: 600px;
 }
 
@@ -147,7 +147,7 @@ ul.inheritsList
 }
 
 .detailList {
-	margin-left: 20px; 
+	margin-left: 20px;
 	line-height: 15px;
 }
 .detailList dt { margin-left: 20px; }
@@ -235,7 +235,19 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a></li>
 	
+	<li><a href="../symbols/pulse.MoveAction.html">pulse.MoveAction</a></li>
+	
 	<li><a href="../symbols/pulse.Node.html">pulse.Node</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.html">pulse.plugin</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.Plugin.html">pulse.plugin.Plugin</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.PluginCallback.html">pulse.plugin.PluginCallback</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.PluginCollection.html">pulse.plugin.PluginCollection</a></li>
+	
+	<li><a href="../symbols/pulse.Point.html">pulse.Point</a></li>
 	
 	<li><a href="../symbols/pulse.Scene.html">pulse.Scene</a></li>
 	
@@ -245,7 +257,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.Sprite.html">pulse.Sprite</a></li>
 	
+	<li><a href="../symbols/pulse.TextFile.html">pulse.TextFile</a></li>
+	
 	<li><a href="../symbols/pulse.Texture.html">pulse.Texture</a></li>
+	
+	<li><a href="../symbols/pulse.util.html">pulse.util</a></li>
 	
 	<li><a href="../symbols/pulse.Visual.html">pulse.Visual</a></li>
 	
@@ -292,7 +308,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Scene.html#constructor">pulse.Scene</a></b>(params)
 							</div>
-							<div class="description">Copyright 2011 Paranoid Ferret Productions
+							<div class="description">copyright 2012 Paranoid Ferret Productions
 
 Scenes are collections of layers that the basis of all
 things visual in the engine.</div>
@@ -330,6 +346,16 @@ things visual in the engine.</div>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								<b><a href="../symbols/pulse.Scene.html#container">container</a></b>
+								</div>
+								<div class="description">HTML element container for this scene, will hold the canvas element.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								<b><a href="../symbols/pulse.Scene.html#events">events</a></b>
 								</div>
 								<div class="description">The event manager for this scene, handles all events.</div>
@@ -352,7 +378,7 @@ things visual in the engine.</div>
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/pulse.Node.html">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node.html#name">name</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/pulse.Node.html">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node.html#name">name</a>, <a href="../symbols/pulse.Node.html#parent">parent</a></dd>
 				</dl>
 				
 			
@@ -401,6 +427,15 @@ things visual in the engine.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#getLiveCanvas">getLiveCanvas</a></b>(layer)
+								</div>
+								<div class="description">Gets a live canvas for the layer passed in.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#getLiveLayer">getLiveLayer</a></b>(name)
 								</div>
 								<div class="description">Gets a live canvas for a layer in this scene.</div>
@@ -443,6 +478,15 @@ things visual in the engine.</div>
 							</td>
 						</tr>
 					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#updateLiveLayers">updateLiveLayers</a></b>()
+								</div>
+								<div class="description">Updates the scene's container with correctly ordered live canvases.</div>
+							</td>
+						</tr>
+					
 					</tbody>
 				</table>
 				
@@ -454,6 +498,91 @@ things visual in the engine.</div>
 				
 			
 <!-- ============================== events summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the events documented in the class pulse.Scene.">
+					<caption>Event Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Event Attributes</th>
+							<th scope="col">Event Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:click">click</a></b>(evt)
+								</div>
+								<div class="description">Event rose when mouse button is clicked while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:keydown">keydown</a></b>(evt)
+								</div>
+								<div class="description">Event rose when a key is pushed down while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:keypress">keypress</a></b>(evt)
+								</div>
+								<div class="description">Event rose when a key is pressed while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:keyup">keyup</a></b>(evt)
+								</div>
+								<div class="description">Event rose when a key is released while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:mousedown">mousedown</a></b>(evt)
+								</div>
+								<div class="description">Event rose when mouse button is pressed down while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:mousemove">mousemove</a></b>(evt)
+								</div>
+								<div class="description">Event rose when mouse is moved while this scene is active.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Scene.html#event:mouseup">mouseup</a></b>(evt)
+								</div>
+								<div class="description">Event rose when mouse button is released while this scene is active.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+				<dl class="inheritsList">
+				
+				</dl>
+				
 			
 
 <!-- ============================== constructor details ==================== -->		
@@ -468,7 +597,7 @@ things visual in the engine.</div>
 				</div>
 				
 				<div class="description">
-					Copyright 2011 Paranoid Ferret Productions
+					copyright 2012 Paranoid Ferret Productions
 
 Scenes are collections of layers that the basis of all
 things visual in the engine.
@@ -522,6 +651,28 @@ on the node</dd>
 					</div>
 					<div class="description">
 						Whether this scene is active.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="container"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>container</b>
+					
+					</div>
+					<div class="description">
+						HTML element container for this scene, will hold the canvas element.
 						
 						
 					</div>
@@ -709,6 +860,42 @@ to that layer.
 
 					<hr />
 				
+					<a name="getLiveCanvas"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>getLiveCanvas</b>(layer)
+					
+					</div>
+					<div class="description">
+						Gets a live canvas for the layer passed in.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>layer</b>
+									
+								</dt>
+								<dd>the layer to create the canvas/context for</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="getLiveLayer"> </a>
 					<div class="fixedFont">
 					
@@ -879,10 +1066,35 @@ default layers sizes too.
 									<span class="light fixedFont">{number}</span> <b>elapsed</b>
 									
 								</dt>
-								<dd>time elapsed since last update call in 
+								<dd>time elapsed since last update call in
 milliseconds</dd>
 							
 							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="updateLiveLayers"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>updateLiveLayers</b>()
+					
+					</div>
+					<div class="description">
+						Updates the scene's container with correctly ordered live canvases.
+						
+						
+					</div>
+					
+					
+					
 						
 						
 						
@@ -897,6 +1109,263 @@ milliseconds</dd>
 			
 <!-- ============================== event details ========================= -->		
 			
+				<div class="sectionTitle">
+					Event Detail
+				</div>
+				
+					<a name="event:click"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>click</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when mouse button is clicked while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The mouse event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:keydown"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>keydown</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when a key is pushed down while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Event.html">pulse.Event</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The keyboard event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:keypress"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>keypress</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when a key is pressed while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Event.html">pulse.Event</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The keyboard event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:keyup"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>keyup</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when a key is released while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Event.html">pulse.Event</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The keyboard event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:mousedown"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>mousedown</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when mouse button is pressed down while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The mouse event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:mousemove"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>mousemove</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when mouse is moved while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The mouse event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:mouseup"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>mouseup</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when mouse button is released while this scene is active.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The mouse event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
 			
 			<hr />
 		</div>
@@ -905,7 +1374,7 @@ milliseconds</dd>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sat Jan 21 2012 14:48:54 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 12 2012 11:19:32 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

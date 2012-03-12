@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.1.0/jasmine_favicon.png">
+
+  <link rel="stylesheet" type="text/css" href="lib/jasmine-1.1.0/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine-1.1.0/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine-1.1.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="lib/jasmine-reporters/jasmine.phantomjs-reporter.js"></script>
+  <script type="text/javascript" src="lib/jasmine-dom-fixtures.js"></script>
+  <script type="text/javascript" src="lib/jasmine-dom-matchers.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../lib/core/main.js"></script>
+  <script type="text/javascript" src="../lib/core/plugin.js"></script>
+  <script type="text/javascript" src="../lib/core/plugincollection.js"></script>
+  <script type="text/javascript" src="../lib/other/soundmanager2.js"></script>
+  <script type="text/javascript" src="../lib/core/error.js"></script>
+  <script type="text/javascript" src="../lib/core/util.js"></script>
+  <script type="text/javascript" src="../lib/core/event/eventproperties.js"></script>
+  <script type="text/javascript" src="../lib/core/event/eventmanager.js"></script>
+  <script type="text/javascript" src="../lib/core/node.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/asset.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/texture.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/bitmapfont.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/sound.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/assetbundle.js"></script>
+  <script type="text/javascript" src="../lib/core/asset/assetmanager.js"></script>
+  <script type="text/javascript" src="../lib/core/visual.js"></script>
+  <script type="text/javascript" src="../lib/core/action/action.js"></script>
+  <script type="text/javascript" src="../lib/core/action/animateaction.js"></script>
+  <script type="text/javascript" src="../lib/core/sprite.js"></script>
+  <script type="text/javascript" src="../lib/core/bitmaplabel.js"></script>
+  <script type="text/javascript" src="../lib/core/canvaslabel.js"></script>
+  <script type="text/javascript" src="../lib/core/layer.js"></script>
+  <script type="text/javascript" src="../lib/core/scene.js"></script>
+  <script type="text/javascript" src="../lib/core/scenemanager.js"></script>
+  <script type="text/javascript" src="../lib/core/engine.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/Plugin.js"></script>
+  <script type="text/javascript" src="spec/Engine.js"></script>
+  <script type="text/javascript" src="spec/Sprite.js"></script>
+  
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var trivialReporter = new jasmine.TrivialReporter();
+
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      jasmineEnv.addReporter(new jasmine.PhantomJSReporter());
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>

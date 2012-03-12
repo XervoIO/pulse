@@ -1,0 +1,88 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.eriwen:gradle-js-plugin:0.2'
+  }
+}
+
+apply plugin: 'js'
+
+def filea = fileTree(dir: "../lib/core", includes: ['main.js'])
+def fileb = fileTree(dir: "../lib/other", includes: ['soundmanager2.js'])
+def filec = fileTree(dir: "../lib/core", includes: ['error.js'])
+def filed = fileTree(dir: "../lib/core", includes: ['util.js'])
+def filee = fileTree(dir: "../lib/core/event", includes: ['eventproperties.js'])
+def filef = fileTree(dir: "../lib/core/event", includes: ['eventmanager.js'])
+def fileg = fileTree(dir: "../lib/core", includes: ['node.js'])
+def fileh = fileTree(dir: "../lib/core/asset", includes: ['asset.js'])
+def filei = fileTree(dir: "../lib/core/asset", includes: ['texture.js'])
+def filej = fileTree(dir: "../lib/core/asset", includes: ['bitmapfont.js'])
+def filek = fileTree(dir: "../lib/core/asset", includes: ['sound.js'])
+def filel = fileTree(dir: "../lib/core/asset", includes: ['assetbundle.js'])
+def filem = fileTree(dir: "../lib/core/asset", includes: ['assetmanager.js'])
+def filen = fileTree(dir: "../lib/core", includes: ['visual.js'])
+def fileo = fileTree(dir: "../lib/core/action", includes: ['action.js'])
+def filep = fileTree(dir: "../lib/core/action", includes: ['animateaction.js'])
+def fileq = fileTree(dir: "../lib/core", includes: ['sprite.js'])
+def filer = fileTree(dir: "../lib/core", includes: ['bitmaplabel.js'])
+def files = fileTree(dir: "../lib/core", includes: ['canvaslabel.js'])
+def filet = fileTree(dir: "../lib/core", includes: ['layer.js'])
+def fileu = fileTree(dir: "../lib/core", includes: ['scene.js'])
+def filev = fileTree(dir: "../lib/core", includes: ['scenemanager.js'])
+def filew = fileTree(dir: "../lib/core", includes: ['engine.js'])
+
+combineJs {
+  inputs.files filea + fileb + filec + filed + filee + filef + fileg + fileh + filef + fileg + fileh + filei + filej + filek + filel + filem + filen + filen + fileo + filep + fileq + filer + files + filet + fileu + filev + filew
+  outputs.file file("../bin/pulse.combined.js")
+}
+
+task minifyDev(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+  dependsOn << 'combineJs'
+  inputs.file file("../bin/pulse.combined.js")
+  outputs.file file("../bin/pulse.debug.js")
+  compilationLevel = 'WHITESPACE_ONLY'
+}
+
+task minifyProd(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+  dependsOn << 'combineJs'
+  inputs.file file("../bin/pulse.combined.js")
+  outputs.file file("../bin/pulse.min.js")
+  compilationLevel = 'SIMPLE_OPTIMIZATIONS'
+}
+
+task jshintz(type: Exec) {
+  outputs.upToDateWhen { false }
+
+  ignoreExitValue = true
+
+  inputs.file fileTree(dir: "../lib/core", include: "**/*.js")
+  outputs.file file("../jshint.xml")
+
+  commandLine = ["jshint", "../lib/core", "--config", 'jshint.json', "--jslint-reporter"]
+  standardOutput = new BufferedOutputStream(new FileOutputStream("jshint.xml"))
+}
+
+task jasmine(type: Exec) {
+  outputs.upToDateWhen { false }
+
+  ignoreExitValue = true
+
+  inputs.files fileTree(dir: "../tests/spec", include: "**/*.js")
+  outputs.dir("../tests/results")
+
+  commandLine = ["/usr/bin/env", "DISPLAY=:0", "phantomjs", "../tests/phantomjs_jasminexml_runner.js", "../tests/test_runner.html", "../tests/results"]
+}
+
+task jsdoc(type: Exec) {
+  outputs.upToDateWhen { false }
+
+  ignoreExitValue = true
+
+  inputs.files fileTree(dir: "../lib/core", include: "**/*.js")
+  outputs.dir("../bin/docs")
+
+  commandLine = ["java", "-jar", "jsdoc/jsrun.jar", "jsdoc/app/run.js", "-c=jsdoc/pulse.conf"]
+}

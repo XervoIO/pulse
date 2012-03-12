@@ -1,12 +1,16 @@
 java -jar compiler.jar \
 --js=../lib/core/main.js \
 --js=../lib/other/soundmanager2.js \
+--js=../lib/core/plugin.js \
+--js=../lib/core/plugincollection.js \
 --js=../lib/core/error.js \
 --js=../lib/core/util.js \
+--js=../lib/core/point.js \
 --js=../lib/core/event/eventproperties.js \
 --js=../lib/core/event/eventmanager.js \
 --js=../lib/core/node.js \
 --js=../lib/core/asset/asset.js \
+--js=../lib/core/asset/textfile.js \
 --js=../lib/core/asset/texture.js \
 --js=../lib/core/asset/bitmapfont.js \
 --js=../lib/core/asset/sound.js \
@@ -15,6 +19,7 @@ java -jar compiler.jar \
 --js=../lib/core/visual.js \
 --js=../lib/core/action/action.js \
 --js=../lib/core/action/animateaction.js \
+--js=../lib/core/action/moveaction.js \
 --js=../lib/core/sprite.js \
 --js=../lib/core/bitmaplabel.js \
 --js=../lib/core/canvaslabel.js \
@@ -27,12 +32,16 @@ java -jar compiler.jar \
 java -jar compiler.jar \
 --js=../lib/core/main.js \
 --js=../lib/other/soundmanager2.js \
+--js=../lib/core/plugin.js \
+--js=../lib/core/plugincollection.js \
 --js=../lib/core/error.js \
 --js=../lib/core/util.js \
+--js=../lib/core/point.js \
 --js=../lib/core/event/eventproperties.js \
 --js=../lib/core/event/eventmanager.js \
 --js=../lib/core/node.js \
 --js=../lib/core/asset/asset.js \
+--js=../lib/core/asset/textfile.js \
 --js=../lib/core/asset/texture.js \
 --js=../lib/core/asset/bitmapfont.js \
 --js=../lib/core/asset/sound.js \
@@ -41,6 +50,7 @@ java -jar compiler.jar \
 --js=../lib/core/visual.js \
 --js=../lib/core/action/action.js \
 --js=../lib/core/action/animateaction.js \
+--js=../lib/core/action/moveaction.js \
 --js=../lib/core/sprite.js \
 --js=../lib/core/bitmaplabel.js \
 --js=../lib/core/canvaslabel.js \

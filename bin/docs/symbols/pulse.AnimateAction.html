@@ -48,7 +48,7 @@ pre.code
 {
 	margin-top: 24px;
 	float: left;
-	width: 160px;
+	width: 180px;
 	position: absolute;
 	left: 8px;
 	background-color: #F3F3F3;
@@ -57,7 +57,7 @@ pre.code
 
 #content
 {
-	margin-left: 190px;
+	margin-left: 210px;
 	width: 600px;
 }
 
@@ -147,7 +147,7 @@ ul.inheritsList
 }
 
 .detailList {
-	margin-left: 20px; 
+	margin-left: 20px;
 	line-height: 15px;
 }
 .detailList dt { margin-left: 20px; }
@@ -235,7 +235,19 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a></li>
 	
+	<li><a href="../symbols/pulse.MoveAction.html">pulse.MoveAction</a></li>
+	
 	<li><a href="../symbols/pulse.Node.html">pulse.Node</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.html">pulse.plugin</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.Plugin.html">pulse.plugin.Plugin</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.PluginCallback.html">pulse.plugin.PluginCallback</a></li>
+	
+	<li><a href="../symbols/pulse.plugin.PluginCollection.html">pulse.plugin.PluginCollection</a></li>
+	
+	<li><a href="../symbols/pulse.Point.html">pulse.Point</a></li>
 	
 	<li><a href="../symbols/pulse.Scene.html">pulse.Scene</a></li>
 	
@@ -245,7 +257,11 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.Sprite.html">pulse.Sprite</a></li>
 	
+	<li><a href="../symbols/pulse.TextFile.html">pulse.TextFile</a></li>
+	
 	<li><a href="../symbols/pulse.Texture.html">pulse.Texture</a></li>
+	
+	<li><a href="../symbols/pulse.util.html">pulse.util</a></li>
 	
 	<li><a href="../symbols/pulse.Visual.html">pulse.Visual</a></li>
 	
@@ -331,7 +347,7 @@ changes at a given interval.</div>
 				
 				
 				<dl class="inheritsList">
-				<dt>Fields borrowed from class <a href="../symbols/pulse.Action.html">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action.html#events">events</a>, <a href="../symbols/pulse.Action.html#isComplete">isComplete</a>, <a href="../symbols/pulse.Action.html#isRunning">isRunning</a>, <a href="../symbols/pulse.Action.html#target">target</a></dd><dt>Fields borrowed from class <a href="../symbols/pulse.Node.html">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node.html#name">name</a></dd>
+				<dt>Fields borrowed from class <a href="../symbols/pulse.Action.html">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action.html#events">events</a>, <a href="../symbols/pulse.Action.html#isComplete">isComplete</a>, <a href="../symbols/pulse.Action.html#isPaused">isPaused</a>, <a href="../symbols/pulse.Action.html#isRunning">isRunning</a>, <a href="../symbols/pulse.Action.html#target">target</a></dd><dt>Fields borrowed from class <a href="../symbols/pulse.Node.html">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node.html#name">name</a>, <a href="../symbols/pulse.Node.html#parent">parent</a></dd>
 				</dl>
 				
 			
@@ -426,6 +442,15 @@ the current frame.</div>
 			
 <!-- ============================== events summary ======================== -->
 			
+				
+				
+				
+				
+				<dl class="inheritsList">
+				<dt>Events borrowed from class <a href="../symbols/pulse.Action.html">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action.html#event:complete">complete</a></dd>
+				</dl>
+				
+			
 
 <!-- ============================== constructor details ==================== -->		
 			
@@ -475,7 +500,7 @@ on the node</dd>
 								<span class="light fixedFont">{object}</span>  <b>params.size</b>
 								<i>Optional</i>
 							</dt>
-								<dd>a point object that represents the size of the 
+								<dd>a point object that represents the size of the
 animation frames</dd>
 						
 							<dt>
@@ -496,7 +521,7 @@ frames</dd>
 								<span class="light fixedFont">{point}</span>  <b>params.offset</b>
 								<i>Optional</i>
 							</dt>
-								<dd>the pixel offset of the animation in respect to the 
+								<dd>the pixel offset of the animation in respect to the
 sprite sheet</dd>
 						
 							<dt>
@@ -509,7 +534,7 @@ sprite sheet</dd>
 								<span class="light fixedFont">{number}</span>  <b>params.plays</b>
 								<i>Optional</i>
 							</dt>
-								<dd>the number of times the animation should loop, if 
+								<dd>the number of times the animation should loop, if
 less than 0 it will loop continuously</dd>
 						
 						</dl>
@@ -768,7 +793,7 @@ the current frame.
 					
 					</div>
 					<div class="description">
-						This is the master update function for the animation. This will 
+						This is the master update function for the animation. This will
 update the target's texture with the correct frame.
 						
 						
@@ -784,7 +809,7 @@ update the target's texture with the correct frame.
 									<span class="light fixedFont">{number}</span> <b>elapsed</b>
 									
 								</dt>
-								<dd>the elapsed time since last update call in 
+								<dd>the elapsed time since last update call in
 milliseconds</dd>
 							
 							</dl>
@@ -810,7 +835,7 @@ milliseconds</dd>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sat Jan 21 2012 14:48:53 GMT-0500 (EST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Mar 12 2012 11:19:31 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

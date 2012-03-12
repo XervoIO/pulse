@@ -37,8 +37,9 @@ window.requestAnimFrame = function() {
   }
 })();
 if(typeof pulse == "undefined") {
-  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard"}, customevents:{"dragstart":"drag", "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
+  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "mouseover":"mouse", "mouseout":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard"}, customevents:{"dragstart":"drag", "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
 }
+var pulse = pulse || {};
 pulse.readyCallbacks = [];
 pulse.isReady = false;
 pulse.ready = function(callback) {
@@ -61,7 +62,7 @@ if(document.addEventListener) {
   window.addEventListener("load", pulse.DOMContentLoaded, false)
 }else {
   if(document.attachEvent) {
-    document.attachEvent("onreadystatechange", DOMContentLoaded);
+    document.attachEvent("onreadystatechange", pulse.DOMContentLoaded);
     window.attachEvent("onload", pulse.DOMContentLoaded)
   }
 }
@@ -1452,10 +1453,67 @@ pulse.DEBUG = false;
   $.SoundManager = N;
   $.soundManager = Z
 })(window);
+var pulse = pulse || {};
+pulse.plugin = pulse.plugin || {};
+pulse.plugin.Plugin = PClass.extend({init:function() {
+  this._private = {};
+  this._private.types = {}
+}, subscribe:function(objectType, functionName, callbackType, callback) {
+  var pluginCallback = new pulse.plugin.PluginCallback({objectType:objectType, functionName:functionName, callbackType:callbackType, callback:callback, pluginManager:this});
+  if(this._private.types[objectType] == undefined) {
+    this._private.types[objectType] = {}
+  }
+  if(this._private.types[objectType][functionName] == undefined) {
+    this._private.types[objectType][functionName] = {}
+  }
+  if(this._private.types[objectType][functionName][callbackType] == undefined) {
+    this._private.types[objectType][functionName][callbackType] = []
+  }
+  this._private.types[objectType][functionName][callbackType].push(pluginCallback);
+  return pluginCallback
+}, invoke:function(objectType, functionName, callbackType, sender, params) {
+  if(this._private.types[objectType] != undefined && this._private.types[objectType][functionName] != undefined && this._private.types[objectType][functionName][callbackType] != undefined) {
+    for(var key in this._private.types[objectType][functionName][callbackType]) {
+      this._private.types[objectType][functionName][callbackType][key].callback.apply(sender, params)
+    }
+  }
+}, unsubscribe:function(pluginCallback) {
+  if(this._private.types[pluginCallback.objectType] != undefined && this._private.types[pluginCallback.objectType][pluginCallback.functionName] != undefined && this._private.types[pluginCallback.objectType][pluginCallback.functionName][pluginCallback.callbackType] != undefined) {
+    var callbacks = this._private.types[pluginCallback.objectType][pluginCallback.functionName][pluginCallback.callbackType];
+    for(var key in callbacks) {
+      if(callbacks[key] == pluginCallback) {
+        callbacks.splice(key, 1)
+      }
+    }
+  }
+}});
+pulse.plugin.PluginCallback = PClass.extend({init:function(params) {
+  this.objectType = params.objectType;
+  this.functionName = params.functionName;
+  this.callbackType = params.callbackType;
+  this.callback = params.callback
+}});
+pulse.plugin.PluginCallbackTypes = {onEnter:"onEnter", onExit:"onExit"};
+var pulse = pulse || {};
+pulse.plugin = pulse.plugin || {};
+pulse.plugin.PluginCollection = PClass.extend({init:function() {
+  this._private = {};
+  this._private.plugins = []
+}, add:function(plugin) {
+  this._private.plugins.push(plugin)
+}, invoke:function() {
+  for(var key in this._private.plugins) {
+    this._private.plugins[key].invoke.apply(this._private.plugins[key], arguments)
+  }
+}});
+pulse.plugins = pulse.plugins || new pulse.plugin.PluginCollection;
+var pulse = pulse || {};
 pulse.error = {DuplicateName:function(name) {
   throw"There is already an object with the name " + name + " on this layer.";
 }};
-pulse.util = {find:function(collection, name) {
+var pulse = pulse || {};
+pulse.util = pulse.util || {};
+pulse.util.find = function(collection, name) {
   var found = [];
   if(collection instanceof Array) {
     for(var o = 0;o < collection.length;o++) {
@@ -1465,15 +1523,16 @@ pulse.util = {find:function(collection, name) {
     }
   }else {
     if(typeof collection == "object") {
-      for(var obj in collection) {
-        if(obj == name) {
-          found.push(collection[obj])
+      for(var ob in collection) {
+        if(ob == name) {
+          found.push(collection[ob])
         }
       }
     }
   }
   return found
-}, intersects:function(box1, box2) {
+};
+pulse.util.intersects = function(box1, box2) {
   var points = [{x:box1.x, y:box1.y}, {x:box1.x, y:box1.y + box1.height}, {x:box1.x + box1.width, y:box1.y}, {x:box1.x + box1.width, y:box1.y + box1.height}];
   for(var p = 0;p < 4;p++) {
     var pnt = points[p];
@@ -1484,20 +1543,14 @@ pulse.util = {find:function(collection, name) {
     }
   }
   return false
-}, compare:function(obj1, obj2) {
-  if(obj1 instanceof Point && obj2 instanceof Point) {
-    if(obj1.x == obj2.x && obj1.y == obj2.y) {
-      return true
-    }else {
-      return false
-    }
-  }
-}, checkValue:function(variable, vDefault) {
+};
+pulse.util.checkValue = function(variable, vDefault) {
   if(variable === null) {
     variable = vDefault
   }
   return variable
-}, checkProperty:function(obj, prop, propDefault) {
+};
+pulse.util.checkProperty = function(obj, prop, propDefault) {
   if(typeof obj == "undefined") {
     obj = {}
   }
@@ -1505,7 +1558,8 @@ pulse.util = {find:function(collection, name) {
     obj[prop] = propDefault
   }
   return obj
-}, checkParams:function(params, defaults) {
+};
+pulse.util.checkParams = function(params, defaults) {
   if(typeof params == "undefined" || params === null || typeof params != "object") {
     params = {}
   }
@@ -1515,7 +1569,8 @@ pulse.util = {find:function(collection, name) {
     }
   }
   return params
-}, getLength:function(obj) {
+};
+pulse.util.getLength = function(obj) {
   var size = 0, key;
   for(key in obj) {
     if(obj.hasOwnProperty(key)) {
@@ -1523,12 +1578,13 @@ pulse.util = {find:function(collection, name) {
     }
   }
   return size
-}, compareZIndexes:function(objA, objB) {
-  za = 0;
+};
+pulse.util.compareZIndexes = function(objA, objB) {
+  var za = 0;
   if(objA.hasOwnProperty("zindex")) {
     za = objA.zindex
   }
-  zb = 0;
+  var zb = 0;
   if(objB.hasOwnProperty("zindex")) {
     zb = objB.zindex
   }
@@ -1539,7 +1595,8 @@ pulse.util = {find:function(collection, name) {
     return 1
   }
   return 0
-}, getOrderedKeys:function(objects) {
+};
+pulse.util.getOrderedKeys = function(objects) {
   var ordered = [];
   for(var o in objects) {
     if(objects[o].hasOwnProperty("name")) {
@@ -1548,11 +1605,12 @@ pulse.util = {find:function(collection, name) {
   }
   ordered.sort(pulse.util.compareZIndexes);
   var keys = [];
-  for(var obj = 0;obj < ordered.length;obj++) {
-    keys.push(ordered[obj].name)
+  for(var ov = 0;ov < ordered.length;ov++) {
+    keys.push(ordered[ov].name)
   }
   return keys
-}, getIFrame:function(parentElement) {
+};
+pulse.util.getIFrame = function(parentElement) {
   var iframe = document.createElement("iframe");
   if(parentElement === null) {
     parentElement = document.body
@@ -1576,7 +1634,38 @@ pulse.util = {find:function(collection, name) {
   iframe.doc.open();
   iframe.doc.close();
   return iframe
-}};
+};
+pulse.util.easeLinear = function(t, b, c, d) {
+  return c * t / d + b
+};
+pulse.util.easeInQuad = function(t, b, c, d) {
+  t /= d;
+  return c * t * t + b
+};
+pulse.util.easeOutQuad = function(t, b, c, d) {
+  t /= d;
+  return-c * t * (t - 2) + b
+};
+pulse.util.easeInOutQuad = function(t, b, c, d) {
+  t /= d / 2;
+  if(t < 1) {
+    return c / 2 * t * t + b
+  }
+  t--;
+  return-c / 2 * (t * (t - 2) - 1) + b
+};
+pulse.util.easeOutCubic = function(t, b, c, d) {
+  t /= d;
+  t--;
+  return c * (t * t * t + 1) + b
+};
+var pulse = pulse || {};
+pulse.Point = PClass.extend({init:function(params) {
+  params = pulse.util.checkParams(params, {x:0, y:0});
+  this.x = params.x;
+  this.y = params.y
+}});
+var pulse = pulse || {};
 pulse.Event = PClass.extend({init:function() {
   this.sender = null
 }});
@@ -1588,6 +1677,7 @@ pulse.MouseEvent = pulse.Event.extend({init:function() {
   this.position = {x:0, y:0};
   this.scrollDelta = 0
 }});
+var pulse = pulse || {};
 pulse.EventManager = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {owner:null, masterCallback:null});
   this.owner = params.owner;
@@ -1596,7 +1686,7 @@ pulse.EventManager = PClass.extend({init:function(params) {
   this._private.events = {}
 }, bind:function(type, callback) {
   if(!this._private.events.hasOwnProperty(type)) {
-    this._private.events[type] = new Array;
+    this._private.events[type] = [];
     this._private.events[type].push(callback)
   }else {
     this._private.events[type].push(callback)
@@ -1604,6 +1694,14 @@ pulse.EventManager = PClass.extend({init:function(params) {
 }, unbind:function(type) {
   if(this._private.events.hasOwnProperty(type)) {
     delete this._private.events[type]
+  }
+}, unbindFunction:function(type, callback) {
+  if(this._private.events.hasOwnProperty(type)) {
+    for(var i = this._private.events[type].length - 1;i >= 0;i--) {
+      if(this._private.events[type][i] === callback) {
+        this._private.events[type].splice(i, 1)
+      }
+    }
   }
 }, hasEvent:function(type) {
   if(this._private.events.hasOwnProperty(type)) {
@@ -1616,7 +1714,7 @@ pulse.EventManager = PClass.extend({init:function(params) {
       this._private.events[type][e](evt)
     }
   }
-  if(typeof this.masterCallback == "function") {
+  if(typeof this.masterCallback === "function") {
     if(this.owner) {
       this.masterCallback.call(this.owner, type, evt)
     }else {
@@ -1625,16 +1723,20 @@ pulse.EventManager = PClass.extend({init:function(params) {
   }
 }});
 pulse.EventManager.DraggedItems = {};
+var pulse = pulse || {};
 pulse.Node = PClass.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.Node", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   params = pulse.util.checkParams(params, {name:"Node" + pulse.Node.nodeIdx++});
   this.name = params.name;
-  this._private = {}
+  this.parent = null;
+  this._private = {};
+  pulse.plugins.invoke("pulse.Node", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, update:function(elapsed) {
-  if(pulse.DEBUG) {
-    console.log("node update")
-  }
+  pulse.plugins.invoke("pulse.Node", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  pulse.plugins.invoke("pulse.Node", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }});
 pulse.Node.nodeIdx = 0;
+var pulse = pulse || {};
 pulse.Asset = pulse.Node.extend({init:function(params) {
   this._super(params);
   params = pulse.util.checkParams(params, {filename:"", autoLoad:true});
@@ -1648,26 +1750,51 @@ pulse.Asset = pulse.Node.extend({init:function(params) {
 }, complete:function() {
   this.events.raiseEvent("complete", {asset:this})
 }});
+var pulse = pulse || {};
+pulse.TextFile = pulse.Asset.extend({init:function(params) {
+  this._super(params);
+  this.text = "";
+  if(this.autoLoad) {
+    this.load()
+  }
+}, load:function() {
+  var _self = this;
+  var txtFile = new XMLHttpRequest;
+  txtFile.open("GET", this.filename, true);
+  txtFile.onreadystatechange = function() {
+    if(txtFile.readyState === 4) {
+      if(txtFile.status === 200) {
+        _self.text = txtFile.responseText;
+        _self.percentLoaded = 100;
+        _self.complete()
+      }else {
+        if(txtFile.status === 404) {
+        }
+      }
+    }
+  };
+  txtFile.send(null)
+}});
+var pulse = pulse || {};
 pulse.Texture = pulse.Asset.extend({init:function(params) {
   this._super(params);
-  if(params.filename == "") {
+  if(params.filename === "") {
     throw"Invalid source for pulse image.";
   }
   this._private.image = new Image;
   this._private.imgCanvas = document.createElement("canvas");
-  if(this.autoLoad == true) {
+  if(this.autoLoad === true) {
     this._private.image.src = this.filename
   }
   this.scaleX = 1;
   this.scaleY = 1;
   this.rotation = 0;
   this.alpha = 100;
-  this._private.lastSlice;
+  this._private.lastSlice = null;
   var _self = this;
   this._private.image.onload = function() {
     _self.percentLoaded = 100;
     var evt = {asset:_self.name};
-    _self.events.raiseEvent("load", evt);
     _self.complete();
     _self._private.lastSlice = {x:-1, y:-1, width:_self._private.image.width * _self.scaleX, height:_self._private.image.height * _self.scaleY, rotation:_self.rotation, alpha:_self.alpha}
   };
@@ -1675,7 +1802,7 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
     _self.error = true
   }
 }, load:function() {
-  if(this.autoLoad == true) {
+  if(this.autoLoad === true) {
     return
   }
   this._private.image.src = this.filename
@@ -1684,32 +1811,32 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
 }, height:function() {
   return this._private.image.height * this.scaleY
 }, slice:function(x, y, width, height) {
-  if(this.percentLoaded != 100) {
+  if(this.percentLoaded !== 100) {
     return null
   }
-  if(x == this._private.lastSlice.x && y == this._private.lastSlice.y && width == this._private.lastSlice.width && height == this._private.lastSlice.height && this.rotation == this._private.lastSlice.rotation && this.alpha == this._private.lastSlice.alpha) {
+  if(x === this._private.lastSlice.x && y === this._private.lastSlice.y && width === this._private.lastSlice.width && height === this._private.lastSlice.height && this.rotation === this._private.lastSlice.rotation && this.alpha === this._private.lastSlice.alpha) {
     return this._private.imgCanvas
   }
   this._private.lastSlice = {x:x, y:y, width:width * this.scaleX, height:height * this.scaleY, rotation:this.rotation, alpha:this.alpha};
-  if(x == null || x < 0) {
+  if(x === null || x < 0) {
     x = 0
   }
   if(x > this._private.image.width) {
     x = this._private.image.width
   }
-  if(y == null || y < 0) {
+  if(y === null || y < 0) {
     y = 0
   }
   if(y > this._private.image.height) {
     y = height
   }
-  if(width == null || width > this._private.image.width) {
+  if(width === null || width > this._private.image.width) {
     width = this._private.image.width
   }
   if(x + width > this._private.image.width) {
     width = this._private.image.width - x
   }
-  if(height == null || height > this._private.image.height) {
+  if(height === null || height > this._private.image.height) {
     height = this._private.image.height
   }
   if(y + height > this._private.image.height) {
@@ -1721,7 +1848,7 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   var iHeight = sHeight * this.scaleY;
   var cWidth = iWidth;
   var cHeight = iHeight;
-  if(this.rotation % 360 != 0) {
+  if(this.rotation % 360 !== 0) {
     cWidth = iWidth * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + iHeight * Math.abs(Math.sin(Math.PI * this.rotation / 180));
     cHeight = iHeight * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + iWidth * Math.abs(Math.sin(Math.PI * this.rotation / 180))
   }
@@ -1731,7 +1858,7 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   ctx.save();
   var drawX = 0;
   var drawY = 0;
-  if(this.rotation % 360 != 0) {
+  if(this.rotation % 360 !== 0) {
     drawX = (cWidth - iWidth) / 2;
     drawY = (cHeight - iHeight) / 2;
     var rotationX = cWidth / 2;
@@ -1758,6 +1885,7 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   ctx.restore();
   return this._private.imgCanvas
 }});
+var pulse = pulse || {};
 pulse.BitmapChar = PClass.extend({init:function() {
   this.position = {x:0, y:0};
   this.size = {width:0, height:0};
@@ -1796,6 +1924,9 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
         var lines = fntFile.responseText.split("\n");
         _self.percentLoaded = 50;
         _self.parse(lines)
+      }else {
+        if(fntFile.status === 404) {
+        }
       }
     }
   };
@@ -1804,72 +1935,72 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
   var line;
   for(var i = 0;i < lines.length;i++) {
     line = lines[i];
-    if(line.indexOf("common") == 0) {
+    if(line.indexOf("common") === 0) {
       var keyvals = line.split(" ");
       for(var j = 0;j < keyvals.length;j++) {
         var keyval = keyvals[j].split("=");
         if(keyval.length > 1) {
           switch(keyval[0]) {
             case "lineHeight":
-              this.lineHeight = parseInt(keyval[1]);
+              this.lineHeight = parseInt(keyval[1], 10);
               break;
             case "base":
-              this.base = parseInt(keyval[1]);
+              this.base = parseInt(keyval[1], 10);
               break;
             case "scaleW":
-              this.size.width = parseInt(keyval[1]);
+              this.size.width = parseInt(keyval[1], 10);
               break;
             case "scaleH":
-              this.size.height = parseInt(keyval[1]);
+              this.size.height = parseInt(keyval[1], 10);
               break
           }
         }
       }
     }else {
-      if(line.indexOf("page") == 0) {
-        var keyvals = line.split(" ");
-        for(var j = 0;j < keyvals.length;j++) {
-          var keyval = keyvals[j].split("=");
-          if(keyval.length > 1) {
-            if(keyval[0] == "file") {
-              this.imageFilename = keyval[1].replace(/"/gi, "")
+      if(line.indexOf("page") === 0) {
+        var pvals = line.split(" ");
+        for(var p = 0;p < pvals.length;p++) {
+          var pval = pvals[p].split("=");
+          if(pval.length > 1) {
+            if(pval[0] === "file") {
+              this.imageFilename = pval[1].replace(/"/gi, "")
             }
           }
         }
       }else {
-        if(line.indexOf("char") == 0) {
+        if(line.indexOf("char") === 0) {
           var character = new pulse.BitmapChar;
-          var keyvals = line.split(" ");
-          for(var j = 0;j < keyvals.length;j++) {
-            var keyval = keyvals[j].split("=");
-            if(keyval.length > 1) {
-              switch(keyval[0]) {
+          var cvals = line.split(" ");
+          for(var c = 0;c < cvals.length;c++) {
+            var cval = cvals[c].split("=");
+            if(cval.length > 1) {
+              switch(cval[0]) {
                 case "id":
-                  this.characters[keyval[1]] = character;
+                  this.characters[cval[1]] = character;
                   break;
                 case "x":
-                  character.position.x = parseInt(keyval[1]);
+                  character.position.x = parseInt(cval[1], 10);
                   break;
                 case "y":
-                  character.position.y = parseInt(keyval[1]);
+                  character.position.y = parseInt(cval[1], 10);
                   break;
                 case "width":
-                  character.size.width = parseInt(keyval[1]);
+                  character.size.width = parseInt(cval[1], 10);
                   break;
                 case "height":
-                  character.size.height = parseInt(keyval[1]);
+                  character.size.height = parseInt(cval[1], 10);
                   break;
                 case "xoffset":
-                  character.offset.x = parseInt(keyval[1]);
+                  character.offset.x = parseInt(cval[1], 10);
                   break;
                 case "yoffset":
-                  character.offset.y = parseInt(keyval[1]);
+                  character.offset.y = parseInt(cval[1], 10);
                   break;
                 case "xadvance":
-                  character.xAdvance = parseInt(keyval[1]);
+                  character.xAdvance = parseInt(cval[1], 10);
                   break;
                 case "page":
-                  character.page = parseInt(keyval[1]);
+                  character.page = parseInt(cval[1], 10);
                   break
               }
             }
@@ -1904,6 +2035,7 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
   }
   return width
 }});
+var pulse = pulse || {};
 pulse.Sound = pulse.Asset.extend({init:function(params) {
   this._super(params);
   params = pulse.util.checkParams(params, {type:"flash", loop:false});
@@ -1932,7 +2064,7 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
       }});
       break;
     case "html5":
-      audio = document.createElement("audio");
+      var audio = document.createElement("audio");
       if(audio.canPlayType) {
         audio.setAttribute("preload", "auto");
         if(!!audio.canPlayType && "" != audio.canPlayType("audio/mpeg")) {
@@ -2019,7 +2151,7 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
   }
   this.events.raiseEvent("finished", {sound:this})
 }, initFlashPlayer:function() {
-  if(pulse.Sound.FlashInitialized == false) {
+  if(pulse.Sound.FlashInitialized === false) {
     pulse.Sound.FlashInitialized = true;
     window.soundManager = new SoundManager(pulse.libsrc + "/other/");
     soundManager.beginDelayedInit();
@@ -2032,10 +2164,9 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
       }
     }, this);
     soundManager.ontimeout(function() {
-      console.log(e)
     })
   }else {
-    if(pulse.Sound.FlashReady == false) {
+    if(pulse.Sound.FlashReady === false) {
       soundManager.onready(function() {
         if(this.autoLoad) {
           this.load()
@@ -2046,8 +2177,9 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
 }});
 pulse.Sound.FlashInitialized = false;
 pulse.Sound.FlashReady = false;
+var pulse = pulse || {};
 pulse.AssetBundle = PClass.extend({init:function(params) {
-  this.assets = new Array;
+  this.assets = [];
   this.events = new pulse.EventManager;
   this._private = {};
   this._private.numberLoaded = 0;
@@ -2055,18 +2187,16 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
 }, addAsset:function(asset) {
   if(asset instanceof pulse.Asset) {
     var _self = this;
-    asset.events.bind("load", function(evt) {
+    asset.events.bind("complete", function(evt) {
       _self._private.numberLoaded++;
       _self.updatePercent();
-      if(_self.percentLoaded == 100) {
-        _self.events.raiseEvent("complete", {})
-      }
+      _self.events.raiseEvent("assetLoaded", {asset:asset.name})
     });
     this.assets.push(asset)
   }
 }, getAsset:function(name) {
   for(var a = 0;a < this.assets.length;a++) {
-    if(this.assets[a].name == name) {
+    if(this.assets[a].name === name) {
       return this.assets[a]
     }
   }
@@ -2077,8 +2207,13 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
   }
 }, updatePercent:function() {
   this.percentLoaded = this._private.numberLoaded / this.assets.length * 100;
-  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2))
+  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+  this.events.raiseEvent("progressChanged", {});
+  if(this.percentLoaded === 100) {
+    this.events.raiseEvent("complete", {})
+  }
 }});
+var pulse = pulse || {};
 pulse.AssetManager = PClass.extend({init:function() {
   this.bundles = {};
   this.addBundle(new pulse.AssetBundle, "global");
@@ -2090,28 +2225,27 @@ pulse.AssetManager = PClass.extend({init:function() {
 }, addBundle:function(bundle, name) {
   if(bundle instanceof pulse.AssetBundle && !this.bundles.hasOwnProperty(name)) {
     var _self = this;
-    bundle.events.bind("complete", function(evt) {
-      _self._private.bundlesLoaded++;
-      _self.updatePercent();
-      if(_self.percentLoaded == 100) {
-        _self.events.raiseEvent("complete", {})
-      }
+    bundle.events.bind("progressChanged", function(evt) {
+      _self.updatePercent()
+    });
+    bundle.events.bind("assetLoaded", function(evt) {
+      _self.events.raiseEvent("assetLoaded", evt)
     });
     this.bundles[name] = bundle
   }
 }, addAsset:function(asset, bundle) {
   if(asset instanceof pulse.Asset) {
-    if(typeof bundle == "string") {
+    if(typeof bundle === "string") {
       if(!this.bundles.hasOwnProperty(bundle)) {
         this.addBundle(new pulse.AssetBundle, bundle)
       }
       this.bundles[bundle].addAsset(asset);
-      if(this.bundles[bundle].percentLoaded == 100) {
+      if(this.bundles[bundle].percentLoaded === 100) {
         this.loadedBundles--
       }
     }else {
       this.bundles["global"].addAsset(asset);
-      if(this.bundles["global"].percentLoaded == 100) {
+      if(this.bundles["global"].percentLoaded === 100) {
         this.bundles["global"].updatePercent();
         this.loadedBundles--
       }
@@ -2136,9 +2270,15 @@ pulse.AssetManager = PClass.extend({init:function() {
     percent = percent + this.bundles[b].percentLoaded
   }
   this.percentLoaded = percent / totalPercent * 100;
-  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2))
+  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+  this.events.raiseEvent("progressChanged", {});
+  if(this.percentLoaded === 100) {
+    this.events.raiseEvent("complete", {})
+  }
 }});
+var pulse = pulse || {};
 pulse.Visual = pulse.Node.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.Visual", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(params);
   this.canvas = document.createElement("canvas");
   this._private.context = this.canvas.getContext("2d");
@@ -2160,68 +2300,96 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.positionTopLeft = {x:0, y:0};
   this.positionTopLeftPrevious = {x:0, y:0};
   this.invalidProperties = true;
-  this.zindex = 0;
+  this.zindex = Number.NaN;
   this.zindexPrevious = 0;
   this.shuffled = false;
   this.alpha = 100;
   this.alphaPrevious = 100;
+  this.shadowEnabled = false;
+  this.shadowEnabledPrevious = false;
+  this.shadowOffsetX = 2;
+  this.shadowOffsetY = 2;
+  this.shadowBlur = 2;
+  this.shadowColor = "rgba(0, 0, 0, 0.5)";
   this.visible = true;
   this.visiblePrevious = true;
-  this.updated = true
+  this.actions = {};
+  this.runningActions = {};
+  this.updated = true;
+  this.mousein = false;
+  pulse.plugins.invoke("pulse.Visual", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, move:function(x, y) {
   this.position = {x:this.position.x + x, y:this.position.y + y}
+}, getAction:function(name) {
+  return this.actions[name]
+}, runAction:function(name, oframe) {
+  oframe = oframe || null;
+  var action = this.getAction(name);
+  action.target = this;
+  action.start(oframe);
+  return action
+}, addAction:function(action) {
+  action.target = this;
+  this.actions[action.name] = action
 }, update:function(elapsed) {
+  pulse.plugins.invoke("pulse.Visual", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(elapsed);
+  for(var n in this.runningActions) {
+    this.runningActions[n].update(elapsed)
+  }
   if(this._private.firstUpdate) {
     this._private.firstUpdate = false;
     this.invalidProperties = true
   }
-  if(this.position.x != this.positionPrevious.x || this.position.y != this.positionPrevious.y) {
+  if(this.position.x !== this.positionPrevious.x || this.position.y !== this.positionPrevious.y) {
     this.positionPrevious.x = this.position.x;
     this.positionPrevious.y = this.position.y;
     this.invalidProperties = true
   }
-  if(this.size.width != this.sizePrevious.width || this.size.height != this.sizePrevious.height) {
+  if(this.size.width !== this.sizePrevious.width || this.size.height !== this.sizePrevious.height) {
     this.sizePrevious.width = this.size.width;
     this.sizePrevious.height = this.size.height;
     this.invalidProperties = true
   }
-  if(this.anchor.x != this.anchorPrevious.x || this.anchor.y != this.anchorPrevious.y) {
+  if(this.anchor.x !== this.anchorPrevious.x || this.anchor.y !== this.anchorPrevious.y) {
     this.anchorPrevious.x = this.anchor.x;
     this.anchorPrevious.y = this.anchor.y;
     this.invalidProperties = true
   }
-  if(this.scale.x != this.scalePrevious.x || this.scale.y != this.scalePrevious.y) {
+  if(this.scale.x !== this.scalePrevious.x || this.scale.y !== this.scalePrevious.y) {
     this.scalePrevious.x = this.scale.x;
     this.scalePrevious.y = this.scale.y;
     this.invalidProperties = true
   }
-  if(this.rotation != this.rotationPrevious) {
+  if(this.rotation !== this.rotationPrevious) {
     this.rotationPrevious = this.rotation;
     this.invalidProperties = true
   }
-  if(this.zindex != this.zindexPrevious) {
+  if(this.zindex !== this.zindexPrevious) {
     this.zindexPrevious = this.zindex;
     this.shuffled = true;
     this.updated = true
   }
-  if(this.alpha != this.alphaPrevious) {
+  if(this.alpha !== this.alphaPrevious) {
     this.alphaPrevious = this.alpha;
     this.updated = true
   }
-  if(this.visible != this.visiblePrevious) {
+  if(this.visible !== this.visiblePrevious) {
     this.visiblePrevious = this.visible;
+    this.updated = true
+  }
+  if(this.shadowEnabled !== this.shadowEnabledPrevious) {
+    this.shadowEnabledPrevious = this.shadowEnabled;
     this.updated = true
   }
   if(this.invalidProperties) {
     this.calculateProperties();
     this.updated = true
   }
+  pulse.plugins.invoke("pulse.Visual", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
-  if(pulse.DEBUG) {
-    console.log("visual node draw")
-  }
-  if(this.canvas.width == 0 || this.canvas.height == 0) {
+  pulse.plugins.invoke("pulse.Visual", "draw", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(this.canvas.width === 0 || this.canvas.height === 0) {
     return
   }
   ctx.save();
@@ -2239,7 +2407,7 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
     ctx.strokeRect(this.positionTopLeft.x, this.positionTopLeft.y, this.size.width, this.size.height)
   }
   ctx.globalAlpha = this.alpha / 100;
-  if(this.rotation > 0) {
+  if(this.rotation !== 0) {
     var rotationX = this.positionTopLeft.x + this.size.width * Math.abs(this.scale.x) / 2;
     var rotationY = this.positionTopLeft.y + this.size.height * Math.abs(this.scale.y) / 2;
     ctx.translate(rotationX, rotationY);
@@ -2254,6 +2422,12 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   var py = this.positionTopLeft.y / this.scale.y;
   if(this.scale.y < 1) {
     py -= this.size.height
+  }
+  if(this.shadowEnabled) {
+    ctx.shadowOffsetX = this.shadowOffsetX;
+    ctx.shadowOffsetY = this.shadowOffsetY;
+    ctx.shadowBlur = this.shadowBlur;
+    ctx.shadowColor = this.shadowColor
   }
   ctx.drawImage(this.canvas, px, py);
   if(pulse.DEBUG) {
@@ -2270,7 +2444,8 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
     ctx.fill();
     ctx.restore()
   }
-  this.updated = false
+  this.updated = false;
+  pulse.plugins.invoke("pulse.Visual", "draw", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, calculateProperties:function() {
   var sw = this.size.width;
   var sh = this.size.height;
@@ -2288,23 +2463,25 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   var xpos = this.position.x - Math.sin(Math.PI * -(this.rotation + this.anchorAngle) / 180) * this.anchorRadius - ox;
   var ypos = this.position.y - Math.cos(Math.PI * -(this.rotation + this.anchorAngle) / 180) * this.anchorRadius - oy;
   this.positionTopLeft = {x:xpos, y:ypos};
-  if(this.canvas.width != this.size.width) {
+  if(this.canvas.width !== this.size.width) {
     this.canvas.width = this.size.width
   }
-  if(this.canvas.height != this.size.height) {
+  if(this.canvas.height !== this.size.height) {
     this.canvas.height = this.size.height
   }
   this.boundsPrevious = this.bounds;
   this.bounds = {x:this.positionTopLeft.x, y:this.positionTopLeft.y, width:this.size.width * Math.abs(this.scale.x), height:this.size.height * Math.abs(this.scale.y)};
   this.invalidProperties = false
 }});
+var pulse = pulse || {};
 pulse.Action = pulse.Node.extend({init:function(params) {
   this._super(params);
-  if(params.target == "") {
+  if(params.target === "") {
     throw"Target must be included for action.";
   }
   this.target = params.target;
   this.isRunning = false;
+  this.isPaused = false;
   this.isComplete = false;
   this.events = new pulse.EventManager
 }, start:function() {
@@ -2315,12 +2492,14 @@ pulse.Action = pulse.Node.extend({init:function(params) {
     this.target.runningActions[this.name] = this
   }
   this.isComplete = false;
-  this.isRunning = true
+  this.isRunning = true;
+  this.isPaused = false
 }, pause:function() {
   if(pulse.DEBUG) {
     console.log("action paused")
   }
-  this.isRunning = false
+  this.isRunning = false;
+  this.isPaused = true
 }, stop:function() {
   if(pulse.DEBUG) {
     console.log("action stopped")
@@ -2328,7 +2507,8 @@ pulse.Action = pulse.Node.extend({init:function(params) {
   if(this.target.runningActions) {
     delete this.target.runningActions[this.name]
   }
-  this.isRunning = false
+  this.isRunning = false;
+  this.isPaused = false
 }, complete:function() {
   if(pulse.DEBUG) {
     console.log("action complete")
@@ -2340,6 +2520,7 @@ pulse.Action = pulse.Node.extend({init:function(params) {
   this.isComplete = true;
   this.events.raiseEvent("complete", {action:this})
 }});
+var pulse = pulse || {};
 pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   this._super(params);
   params = pulse.util.checkParams(params, {name:this.name, size:{width:0, height:0}, frames:0, frameRate:0, offset:{x:0, y:0}, bounds:{width:1, height:1}, plays:-1});
@@ -2355,14 +2536,14 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   this._private.start = 0;
   this._private.playTime = 0
 }, bounds:function(newBounds) {
-  if(newBounds == undefined || newBounds == null) {
+  if(typeof newBounds === "undefined" || newBounds === null) {
     return this._private.bounds
   }
-  if(newBounds.x <= 0) {
-    newBounds.x = 1
+  if(newBounds.width <= 0) {
+    newBounds.width = 1
   }
-  if(newBounds.y <= 0) {
-    newBounds.y = 1
+  if(newBounds.height <= 0) {
+    newBounds.height = 1
   }
   this._private.bounds = newBounds
 }, getFrame:function(index) {
@@ -2372,13 +2553,13 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   }
   var x = (frame + this._private.offset.x) * this.size.width;
   var y = this._private.offset.y;
-  while(x >= this._private.bounds.x) {
-    x = x - this._private.bounds.x;
+  while(x >= this._private.bounds.width) {
+    x = x - this._private.bounds.width;
     y++
   }
   y = y * this.size.height;
-  if(y >= this._private.bounds.y) {
-    y = this._private.bounds.y - this.size.height
+  if(y >= this._private.bounds.height) {
+    y = this._private.bounds.height - this.size.height
   }
   return{x:x, y:y, width:this.size.width, height:this.size.height}
 }, start:function(oframe) {
@@ -2408,7 +2589,7 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   }
 }, update:function(elapsed) {
   this._super();
-  if(this.running == false) {
+  if(this.running === false) {
     return
   }
   var updated = false;
@@ -2434,10 +2615,51 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
     this.target.updated = true
   }
 }});
-pulse.Sprite = pulse.Visual.extend({init:function(params) {
+var pulse = pulse || {};
+pulse.MoveAction = pulse.Action.extend({init:function(params) {
   this._super(params);
-  this.actions = {};
-  this.runningActions = {};
+  params = pulse.util.checkParams(params, {name:this.name, position:null, duration:0, easing:pulse.util.easeInOutQuad});
+  this.position = params.position;
+  this.duration = params.duration;
+  this.easingFunction = params.easing;
+  this._private.playTime = 0;
+  this._private.startPosition = null;
+  this._private.positionDiff = null
+}, start:function(oframe) {
+  this._super();
+  if(!this.target) {
+    return
+  }
+  if(!this.isPaused) {
+    this._private.playTime = 0;
+    this._private.startPosition = {x:this.target.position.x, y:this.target.position.y};
+    this._private.positionDiff = {x:this.position.x - this._private.startPosition.x, y:this.position.y - this._private.startPosition.y}
+  }
+}, pause:function() {
+  this._super()
+}, stop:function() {
+  this._super()
+}, complete:function() {
+  this._super()
+}, update:function(elapsed) {
+  this._super();
+  if(this.running === false) {
+    return
+  }
+  this._private.playTime += elapsed;
+  var newPosition = {};
+  if(this._private.playTime > this.duration) {
+    this._private.playTime = this.duration;
+    this.stop();
+    this.complete()
+  }
+  newPosition = {x:this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration), y:this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)};
+  this.target.position = newPosition
+}});
+var pulse = pulse || {};
+pulse.Sprite = pulse.Visual.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.Sprite", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  this._super(params);
   this.texture = null;
   this.texturePrevious = null;
   this.textureFrame = {x:0, y:0, width:0, height:0};
@@ -2445,29 +2667,29 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   this.textureUpdated = true;
   params = pulse.util.checkParams(params, {src:"", size:{}});
   this.size = params.size;
-  if(typeof params.src == "object") {
+  if(typeof params.src === "object") {
     this.texture = params.src
   }else {
     this.texture = new pulse.Texture({"filename":params.src})
   }
   this._private.isDragging = false;
   this._private.dragPos = false;
+  this.hitTestType = pulse.Sprite.HIT_TEST_RECT;
+  this.hitTestPoints = null;
   this.dragDropEnabled = false;
   this.dragMoveEnabled = false;
   this.dropAcceptEnabled = false;
   this.draggedOverItems = {};
   this.handleAllEvents = false;
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback})
+  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
+  var self = this;
+  this.itemDroppedCallback = function(e) {
+    e.target = self;
+    self.events.raiseEvent("itemdropped", e)
+  };
+  pulse.plugins.invoke("pulse.Sprite", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, loaded:function() {
   return this.texture.loaded()
-}, getAction:function(name) {
-  return this.actions[name]
-}, runAction:function(name, oframe) {
-  oframe = oframe || null;
-  var action = this.getAction(name);
-  action.target = this;
-  action.start(oframe);
-  return action
 }, addAction:function(params) {
   var newAction;
   if(params instanceof pulse.Action) {
@@ -2479,13 +2701,45 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   newAction.bounds({x:this.texture.width(), y:this.texture.height()});
   this.actions[newAction.name] = newAction
 }, inCurrentBounds:function(x, y) {
-  if(x > this.bounds.x && x < this.bounds.x + this.bounds.width && y > this.bounds.y && y < this.bounds.y + this.bounds.height) {
-    return true
+  x -= this.bounds.x;
+  y -= this.bounds.y;
+  if(this.rotation !== 0) {
+    var ax = this.size.width / 2;
+    var ay = this.size.height / 2;
+    var dx = x - ax;
+    var dy = y - ay;
+    var r = Math.sqrt(dx * dx + dy * dy);
+    var angle = Math.atan2(dy, dx) + Math.PI / 2;
+    x = r * Math.sin(angle - this.rotation * Math.PI / 180) + ax;
+    y = ay - r * Math.cos(angle - this.rotation * Math.PI / 180)
   }
-  return false
-}, rectInCurrentBounds:function(rect) {
-  if(rect.x > this.bounds.x && rect.x + rect.width < this.bounds.x + this.bounds.width && rect.y > this.bounds.y && rect.y + rect.height < this.bounds.y + this.bounds.height) {
-    return true
+  if(this.hitTestType === pulse.Sprite.HIT_TEST_RECT) {
+    if(this.hitTestPoints && this.hitTestPoints.length > 0) {
+      if(x >= this.hitTestPoints[0].x && x <= this.hitTestPoints[1].x && y >= this.hitTestPoints[0].y && y <= this.hitTestPoints[1].y) {
+        return true
+      }
+    }else {
+      if(x >= 0 && x <= this.bounds.width && y >= 0 && y <= this.bounds.height) {
+        return true
+      }
+    }
+  }else {
+    if(this.hitTestType === pulse.Sprite.HIT_TEST_CONVEX) {
+      if(this.hitTestPoints && this.hitTestPoints.length >= 3) {
+        var pcount = this.hitTestPoints.length;
+        var retval = false;
+        var vert1 = {};
+        var vert2 = {};
+        for(var i = 0, j = pcount - 1;i < pcount;j = i++) {
+          vert1 = this.hitTestPoints[i];
+          vert2 = this.hitTestPoints[j];
+          if(vert1.y > y != vert2.y > y && x < (vert2.x - vert1.x) * (y - vert1.y) / (vert2.y - vert1.y) + vert1.x) {
+            retval = !retval
+          }
+        }
+        return retval
+      }
+    }
   }
   return false
 }, getCurrentFrame:function() {
@@ -2493,22 +2747,23 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     return
   }
   var tw = this.texture.width();
-  if(this.textureFrame.width != 0) {
+  if(this.textureFrame.width !== 0) {
     tw = this.textureFrame.width
   }
   var th = this.texture.height();
-  if(this.textureFrame.height != 0) {
+  if(this.textureFrame.height !== 0) {
     th = this.textureFrame.height
   }
   return this.texture.slice(this.textureFrame.x, this.textureFrame.y, tw, th)
 }, update:function(elapsed) {
-  if(this.texture != this.texturePrevious) {
+  pulse.plugins.invoke("pulse.Sprite", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(this.texture !== this.texturePrevious) {
     this.texturePrevious = this.texture;
     this.textureUpdated = true;
     this.updated = true
   }
-  if(this.texture.percentLoaded == 100) {
-    if(this.size == null) {
+  if(this.texture.percentLoaded === 100) {
+    if(this.size === null) {
       this.size = {}
     }
     if(!this.size.width) {
@@ -2518,7 +2773,7 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
       this.size.height = this.texture.height()
     }
   }
-  if(this.textureFrame.x != this.textureFramePrevious.x || this.textureFrame.y != this.textureFramePrevious.y || this.textureFrame.width != this.textureFramePrevious.width || this.textureFrame.height != this.textureFramePrevious.height) {
+  if(this.textureFrame.x !== this.textureFramePrevious.x || this.textureFrame.y !== this.textureFramePrevious.y || this.textureFrame.width !== this.textureFramePrevious.width || this.textureFrame.height !== this.textureFramePrevious.height) {
     this.textureFramePrevious.x = this.textureFrame.x;
     this.textureFramePrevious.y = this.textureFrame.y;
     this.textureFramePrevious.width = this.textureFrame.width;
@@ -2526,12 +2781,11 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this.textureUpdated = true;
     this.updated = true
   }
-  for(var n in this.runningActions) {
-    this.runningActions[n].update(elapsed)
-  }
-  this._super(elapsed)
+  this._super(elapsed);
+  pulse.plugins.invoke("pulse.Sprite", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
-  if(this.texture.percentLoaded < 100 || this.size.width == 0 || this.size.height == 0) {
+  pulse.plugins.invoke("pulse.Sprite", "draw", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(this.texture.percentLoaded < 100 || this.size.width === 0 || this.size.height === 0) {
     return
   }
   if(this.textureUpdated) {
@@ -2540,7 +2794,8 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this._private.context.drawImage(slice, 0, 0, this.size.width, this.size.height);
     this.textureUpdated = false
   }
-  this._super(ctx)
+  this._super(ctx);
+  pulse.plugins.invoke("pulse.Sprite", "draw", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, calculateProperties:function() {
   this._super()
 }, killDrag:function(evt) {
@@ -2552,7 +2807,7 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     delete pulse.EventManager.DraggedItems["sprite:" + this.name]
   }
 }, eventsCallback:function(type, evt) {
-  if(type == "mousedown" && this.dragDropEnabled) {
+  if(type === "mousedown" && this.dragDropEnabled) {
     this._private.isDragging = true;
     this._private.dragPos = {x:evt.world.x, y:evt.world.y};
     this.handleAllEvents = true;
@@ -2560,18 +2815,25 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this.events.raiseEvent("dragstart", evt);
     pulse.EventManager.DraggedItems["sprite:" + this.name] = this
   }
-  if((type == "mousemove" || type == "mouseup") && this._private.isDragging) {
+  if((type === "mousemove" || type === "mouseup") && this._private.isDragging) {
     var posDiff = {x:evt.world.x - this._private.dragPos.x, y:evt.world.y - this._private.dragPos.y};
     if(this.dragMoveEnabled) {
       this.position = {x:this.position.x + posDiff.x, y:this.position.y + posDiff.y}
     }
     this._private.dragPos = {x:evt.world.x, y:evt.world.y}
   }
-  if(type == "mouseup") {
+  if(type === "mouseup") {
     this.killDrag(evt)
   }
+  if(type == "mousemove") {
+    this._private.mousein = true
+  }
 }});
+pulse.Sprite.HIT_TEST_RECT = "rect";
+pulse.Sprite.HIT_TEST_CONVEX = "convex";
+var pulse = pulse || {};
 pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.BitmapLabel", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(params);
   params = pulse.util.checkParams(params, {font:"", text:""});
   this.font = null;
@@ -2579,27 +2841,32 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
   this.text = params.text;
   this.textPrevious = "";
   this._private.verts = [];
-  if(typeof params.font == "object") {
+  if(typeof params.font === "object") {
     this.font = params.font
   }else {
     this.font = new pulse.BitmapFont({"filename":params.font})
   }
+  pulse.plugins.invoke("pulse.BitmapLabel", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, loaded:function() {
-  return this.font.percentLoaded == 100
+  return this.font.percentLoaded === 100
 }, update:function(elapsed) {
-  if(this.text != this.textPrevious && this.loaded()) {
+  pulse.plugins.invoke("pulse.BitmapLabel", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(this.text !== this.textPrevious && this.loaded()) {
     this.textPrevious = this.text;
     this.size.height = this.font.lineHeight;
     this.size.width = this.font.getStringWidth(this.text);
     this._private.verts = this.font.getStringBitmapChars(this.text);
     this.updated = true
   }
-  if(this.loaded() && this.font != this.fontPrevious) {
+  if(this.font !== this.fontPrevious && this.loaded()) {
+    this.fontPrevious = this.font;
     this.updated = true
   }
-  this._super(elapsed)
+  this._super(elapsed);
+  pulse.plugins.invoke("pulse.BitmapLabel", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
-  if(!this.loaded() || this.size.width == 0 || this.size.height == 0) {
+  pulse.plugins.invoke("pulse.BitmapLabel", "draw", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(!this.loaded() || this.size.width === 0 || this.size.height === 0) {
     return
   }
   this._private.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -2607,14 +2874,17 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
   var cursor = 0;
   for(var i = 0;i < this._private.verts.length;i++) {
     vert = this._private.verts[i];
-    if(vert.size.width != 0 && vert.size.height != 0) {
+    if(vert.size.width !== 0 && vert.size.height !== 0) {
       this._private.context.drawImage(this.font.image, vert.position.x, vert.position.y, vert.size.width, vert.size.height, cursor, 0, vert.size.width, vert.size.height)
     }
     cursor += vert.xAdvance
   }
-  this._super(ctx)
+  this._super(ctx);
+  pulse.plugins.invoke("pulse.BitmapLabel", "draw", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }});
+var pulse = pulse || {};
 pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.CanvasLabel", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(params);
   params = pulse.util.checkParams(params, {font:"sans-serif", fontSize:20, text:""});
   this.font = params.font;
@@ -2634,10 +2904,12 @@ pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
   this.italic = false;
   this.italicPrevious = false;
   this.textBaseline = "middle";
-  this.textBaselinePrevious = "middle"
+  this.textBaselinePrevious = "middle";
+  pulse.plugins.invoke("pulse.CanvasLabel", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, loaded:function() {
-  return this.font.percentLoaded == 100
+  return this.font.percentLoaded === 100
 }, update:function(elapsed) {
+  pulse.plugins.invoke("pulse.CanvasLabel", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var textSizeUpdated = false;
   if(this.font != this.fontPrevious) {
     this.fontPrevious = this.font;
@@ -2691,7 +2963,7 @@ pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
       ctx.fillStyle = this.fillColor;
       ctx.fillText(this.text, 0, 0)
     }
-    if(this.strokeColor != "transparent" && this.strokeWidth != 0) {
+    if(this.strokeColor != "transparent" && this.strokeWidth !== 0) {
       ctx.lineWidth = this.strokeWidth;
       ctx.strokeStyle = this.strokeColor;
       ctx.strokeText(this.text, 0, 0)
@@ -2701,9 +2973,11 @@ pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
     this.size.width = Math.ceil(dim.width) + 2;
     this.updated = true
   }
-  this._super(elapsed)
+  this._super(elapsed);
+  pulse.plugins.invoke("pulse.CanvasLabel", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
-  if(this.size.width == 0 || this.size.height == 0) {
+  pulse.plugins.invoke("pulse.CanvasLabel", "draw", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  if(this.size.width === 0 || this.size.height === 0) {
     return
   }
   this._private.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -2720,46 +2994,54 @@ pulse.CanvasLabel = pulse.Visual.extend({init:function(params) {
     this._private.context.fillStyle = this.fillColor;
     this._private.context.fillText(this.text, 0, this.size.height / 2)
   }
-  if(this.strokeColor != "transparent" && this.strokeWidth != 0) {
+  if(this.strokeColor != "transparent" && this.strokeWidth !== 0) {
     this._private.context.lineWidth = this.strokeWidth;
     this._private.context.strokeStyle = this.strokeColor;
     this._private.context.strokeText(this.text, 0, this.size.height / 2)
   }
-  this._super(ctx)
+  this._super(ctx);
+  pulse.plugins.invoke("pulse.CanvasLabel", "draw", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }});
+var pulse = pulse || {};
 pulse.Layer = pulse.Visual.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.Layer", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(params);
-  params = pulse.util.checkParams(params, {x:0, y:0, width:0, height:0});
+  params = pulse.util.checkParams(params, {x:0, y:0, size:{width:0, height:0}});
   this.position.x = params.x;
   this.position.y = params.y;
-  this.size.width = params.width;
-  this.size.height = params.height;
+  this.size = params.size;
   this.canvas.width = this.size.width;
   this.canvas.height = this.size.height;
   this.canvas.style.position = "absolute";
   this.objects = {};
-  this._private.orderedKeys = new Array;
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback})
+  this._private.orderedKeys = [];
+  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
+  pulse.plugins.invoke("pulse.Layer", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, addNode:function(obj) {
   if(obj instanceof pulse.Visual) {
+    if(isNaN(obj.zindex)) {
+      obj.zindex = this._private.orderedKeys.length + 1
+    }
     if(!this.objects.hasOwnProperty(obj.name)) {
       this.objects[obj.name] = obj;
+      obj.parent = this;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
     }else {
       pulse.error.DuplicateName(obj.name)
     }
   }
-}, removeObject:function(name) {
+}, removeNode:function(name) {
   if(this.objects.hasOwnProperty(name)) {
     if(this.objects[name] instanceof pulse.Sprite) {
       var clear = this.objects[name].boundsPrevious;
       this._private.context.clearRect(clear.x, clear.y, clear.width, clear.height)
     }
+    this.objects[name].parent = null;
     delete this.objects[name]
   }
-}, getObject:function(name) {
+}, getNode:function(name) {
   return this.objects[name]
-}, getObjectsByType:function(type) {
+}, getNodesByType:function(type) {
   var ret = {};
   for(var o in this.objects) {
     if(this.objects[o] instanceof type) {
@@ -2768,10 +3050,11 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   }
   return ret
 }, update:function(elapsed) {
+  pulse.plugins.invoke("pulse.Layer", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var reorder = false;
   for(var s in this.objects) {
     if(this.objects[s] instanceof pulse.Visual) {
-      if(this.objects[s].shuffled == true) {
+      if(this.objects[s].shuffled === true) {
         reorder = true
       }
       this.objects[s].update(elapsed);
@@ -2783,8 +3066,10 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   if(reorder) {
     this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
   }
-  this._super(elapsed)
+  this._super(elapsed);
+  pulse.plugins.invoke("pulse.Layer", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
+  pulse.plugins.invoke("pulse.Layer", "draw", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var isDirty = false;
   for(var o in this.objects) {
     if(this.objects[o].updated) {
@@ -2794,32 +3079,46 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   }
   if(isDirty) {
     this._private.context.clearRect(0, 0, this.size.width, this.size.height);
-    for(var o = 0;o < this._private.orderedKeys.length;o++) {
-      var obj = this.objects[this._private.orderedKeys[o]];
+    for(var ok = 0;ok < this._private.orderedKeys.length;ok++) {
+      var obj = this.objects[this._private.orderedKeys[ok]];
       if(obj instanceof pulse.Visual) {
         if(obj.visible) {
           obj.draw(this._private.context)
+        }else {
+          obj.updated = false
         }
       }
     }
   }
-  this._super(ctx)
+  this._super(ctx);
+  pulse.plugins.invoke("pulse.Layer", "draw", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, pointInBounds:function(point) {
   return point.x > this.bounds.x && point.x < this.bounds.x + this.bounds.width && point.y > this.bounds.y && point.y < this.bounds.y + this.bounds.height
 }, eventsCallback:function(type, evt) {
+  if(typeof evt === "undefined" || typeof evt.position === "undefined") {
+    return
+  }
   evt.parent.x = evt.position.x;
   evt.parent.y = evt.position.y;
-  var sprites = this.getObjectsByType(pulse.Sprite);
+  var sprites = this.getNodesByType(pulse.Sprite);
   var sprite;
   for(var s in sprites) {
     sprite = sprites[s];
-    if(pulse.events[type] == "mouse") {
+    if(pulse.events[type] === "mouse") {
       var sBounds = sprite.bounds;
       evt.position.x = evt.parent.x - sBounds.x;
       evt.position.y = evt.parent.y - sBounds.y;
       evt.sender = sprite;
       if(sprite.handleAllEvents || sprite.inCurrentBounds(evt.parent.x, evt.parent.y)) {
+        if(sprite.inCurrentBounds(evt.parent.x, evt.parent.y) && sprite.mousein === false) {
+          sprite.mousein = true;
+          sprite.events.raiseEvent("mouseover", evt)
+        }
         sprite.events.raiseEvent(type, evt)
+      }
+      if(!sprite.inCurrentBounds(evt.parent.x, evt.parent.y) && sprite.mousein === true) {
+        sprite.mousein = false;
+        sprite.events.raiseEvent("mouseout", evt)
       }
       if(sprite.dropAcceptEnabled) {
         for(var id in pulse.EventManager.DraggedItems) {
@@ -2828,6 +3127,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
             evt.target = obj;
             if(!sprite.draggedOverItems[id]) {
               sprite.draggedOverItems[id] = obj;
+              obj.events.bind("dragdrop", sprite.itemDroppedCallback);
               sprite.events.raiseEvent("dragenter", evt)
             }else {
               evt.sender = sprite;
@@ -2837,6 +3137,7 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
             if(sprite.draggedOverItems[id]) {
               delete sprite.draggedOverItems[id];
               evt.target = obj;
+              obj.events.unbindFunction("dragdrop", sprite.itemDroppedCallback);
               sprite.events.raiseEvent("dragexit", evt)
             }
           }
@@ -2848,14 +3149,18 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
     }
   }
 }});
+var pulse = pulse || {};
 pulse.Scene = pulse.Node.extend({init:function(params) {
+  pulse.plugins.invoke("pulse.Scene", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(params);
+  this.container = null;
   this.layers = {};
   this._private.liveLayers = {};
   this._private.orderedKeys = [];
   this._private.defaultSize = {width:0, height:0};
   this.active = false;
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback})
+  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
+  pulse.plugins.invoke("pulse.Scene", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, setDefaultSize:function(width, height) {
   for(var l in this.layers) {
     if(this.layers[l].size.width < 1) {
@@ -2868,8 +3173,15 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   this._private.defaultSize = {width:width, height:height}
 }, addLayer:function(layer, zindex) {
   if(layer instanceof pulse.Layer && !this.layers.hasOwnProperty(layer.name)) {
-    if(typeof zindex == "number") {
+    if(typeof zindex === "number") {
       layer.zindex = zindex
+    }
+    var appendToEnd = false;
+    if(isNaN(layer.zindex)) {
+      layer.zindex = this._private.orderedKeys.length + 1
+    }
+    if(layer.zindex === this._private.orderedKeys.length + 1) {
+      appendToEnd = true
     }
     if(layer.size.width < 1) {
       layer.size.width = this._private.defaultSize.width
@@ -2878,11 +3190,20 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
       layer.size.height = this._private.defaultSize.height
     }
     this.layers[layer.name] = layer;
-    this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers)
+    this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers);
+    if(this.active === true) {
+      this._private.liveLayers[layer.name] = this.getLiveCanvas(layer);
+      if(appendToEnd === true) {
+        this.container.appendChild(this._private.liveLayers[layer.name].canvas)
+      }else {
+        this.updateLiveLayers()
+      }
+    }
   }
 }, removeLayer:function(name) {
-  if(typeof name == "string" && this.layers.hasOwnProperty(name)) {
-    delete _layers[name]
+  if(typeof name === "string" && this.layers.hasOwnProperty(name)) {
+    delete this.layers[name];
+    delete this._private.liveLayers[name]
   }
 }, getLayer:function(name) {
   if(this.layers.hasOwnProperty(name)) {
@@ -2894,38 +3215,56 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
     return this._private.liveLayers[name]
   }
   return null
-}, getSceneContainer:function() {
-  var container = document.createElement("div");
-  container.style.position = "absolute";
-  container.id = this.name;
+}, getLiveCanvas:function(layer) {
+  var liveCanvas = document.createElement("canvas");
+  liveCanvas.width = this._private.defaultSize.width;
+  liveCanvas.height = this._private.defaultSize.height;
+  liveCanvas.style.position = "absolute";
+  liveCanvas.id = "live:" + layer.name;
+  var ctx = liveCanvas.getContext("2d");
+  return{canvas:liveCanvas, context:ctx}
+}, updateLiveLayers:function() {
+  while(this.container.hasChildNodes()) {
+    this.container.removeChild(this.container.lastChild)
+  }
   for(var l = 0;l < this._private.orderedKeys.length;l++) {
     if(!this.layers[this._private.orderedKeys[l]]) {
       continue
     }
     var layer = this.layers[this._private.orderedKeys[l]];
-    var liveCanvas = document.createElement("canvas");
-    liveCanvas.width = this._private.defaultSize.width;
-    liveCanvas.height = this._private.defaultSize.height;
-    liveCanvas.style.position = "absolute";
-    liveCanvas.id = "live:" + layer.name;
-    var ctx = liveCanvas.getContext("2d");
-    this._private.liveLayers[layer.name] = {canvas:liveCanvas, context:ctx};
-    container.appendChild(liveCanvas)
+    if(layer.size.width < 1) {
+      layer.size.width = this._private.defaultSize.width
+    }
+    if(layer.size.height < 1) {
+      layer.size.height = this._private.defaultSize.height
+    }
+    if(!this._private.liveLayers.hasOwnProperty(layer.name)) {
+      this._private.liveLayers[layer.name] = this.getLiveCanvas(layer)
+    }
+    this.container.appendChild(this._private.liveLayers[layer.name].canvas)
   }
-  return container
+}, getSceneContainer:function() {
+  if(!this.container) {
+    this.container = document.createElement("div");
+    this.container.style.position = "absolute";
+    this.container.id = this.name;
+    this.updateLiveLayers()
+  }
+  return this.container
 }, update:function(elapsed) {
+  pulse.plugins.invoke("pulse.Scene", "update", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   this._super(elapsed);
   var reorder = false;
   for(var l in this.layers) {
-    if(this.layers[l].shuffled == true) {
+    if(this.layers[l].shuffled === true) {
       reorder = true
     }
   }
-  if(reorder == true) {
+  if(reorder === true) {
     this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers)
   }
-  for(var l in this.layers) {
-    this.layers[l].update(elapsed)
+  for(var ul in this.layers) {
+    this.layers[ul].update(elapsed)
   }
   for(var o = 0;o < this._private.orderedKeys.length;o++) {
     var layer = this.layers[this._private.orderedKeys[o]];
@@ -2937,17 +3276,27 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
       layer.draw(ctx)
     }
   }
+  pulse.plugins.invoke("pulse.Scene", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, eventsCallback:function(type, evt) {
   for(var l in this.layers) {
-    if(pulse.events[type] == "mouse") {
+    if(pulse.events[type] === "mouse") {
       var lBounds = this.layers[l].bounds;
+      evt.parent.x = evt.position.x;
+      evt.parent.y = evt.position.y;
+      evt.position.x = evt.world.x - lBounds.x;
+      evt.position.y = evt.world.y - lBounds.y;
+      evt.sender = this.layers[l];
       if(this.layers[l].pointInBounds(evt.world)) {
-        evt.parent.x = evt.position.x;
-        evt.parent.y = evt.position.y;
-        evt.position.x = evt.world.x - lBounds.x;
-        evt.position.y = evt.world.y - lBounds.y;
-        evt.sender = this.layers[l];
+        if(type === "mousemove" && this.layers[l].mousein === false) {
+          this.layers[l].mousein = true;
+          this.layers[l].events.raiseEvent("mouseover", evt)
+        }
         this.layers[l].events.raiseEvent(type, evt)
+      }else {
+        if(this.layers[l].mousein === true) {
+          this.layers[l].mousein = false;
+          this.layers[l].events.raiseEvent("mouseout", evt)
+        }
       }
     }else {
       evt.sender = this.layers[l];
@@ -2955,6 +3304,7 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
     }
   }
 }});
+var pulse = pulse || {};
 pulse.SceneManager = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {gameWindow:document.getElementsByTagName("body")[0]});
   this.scenes = {};
@@ -2989,8 +3339,8 @@ pulse.SceneManager = PClass.extend({init:function(params) {
 }, getScenes:function(active) {
   var scenes = [];
   for(var s in this.scenes) {
-    if(active == true) {
-      if(this.scenes[s].active == true) {
+    if(active === true) {
+      if(this.scenes[s].active === true) {
         scenes.push(this.scenes[s])
       }
     }else {
@@ -2999,34 +3349,34 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   }
   return scenes
 }});
+var pulse = pulse || {};
 pulse.Engine = PClass.extend({init:function(params) {
-  params = pulse.util.checkParams(params, {gameWindow:"gameWindow", width:0, height:0, iframe:false});
+  pulse.plugins.invoke("pulse.Engine", "init", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
+  params = pulse.util.checkParams(params, {gameWindow:"gameWindow", size:{width:0, height:0}});
   this.gameWindow = null;
   this.focused = false;
-  if(typeof params.gameWindow == "object") {
+  if(typeof params.gameWindow === "object") {
     this.gameWindow = params.gameWindow
   }else {
     this.gameWindow = document.getElementById(params.gameWindow)
   }
-  this.size = {};
-  this.size.width = params.width;
-  this.size.height = params.height;
-  if(this.width == 0 || this.height == 0) {
+  this.size = params.size;
+  if(this.size.width === 0 || this.size.width === undefined || this.size.height === 0 || this.size.height === undefined) {
     if(this.gameWindow) {
-      var parentWidth = parseInt(this.gameWindow.style.width);
-      var parentHeight = parseInt(this.gameWindow.style.height);
+      var parentWidth = parseInt(this.gameWindow.style.width, 10);
+      var parentHeight = parseInt(this.gameWindow.style.height, 10);
       if(parentWidth) {
         this.size.width = parentWidth
       }
       if(parentHeight) {
-        this.size.width = parentHeight
+        this.size.height = parentHeight
       }
     }
   }
-  if(this.size.width == 0) {
+  if(this.size.width === 0) {
     this.size.width = 640
   }
-  if(this.size.height == 0) {
+  if(this.size.height === 0) {
     this.size.height = 480
   }
   this._private = {};
@@ -3035,25 +3385,14 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.mainDiv.style.width = this.size.width + "px";
   this._private.mainDiv.style.height = this.size.height + "px";
   this._private.mainDiv.style.overflow = "hidden";
-  var child = this._private.mainDiv;
-  this._private.useIFrame = params.iframe;
-  if(this._private.useIFrame) {
-    this._private.innerFrame = pulse.util.getIFrame(this.gameWindow);
-    this._private.innerFrame.style.overflow = "hidden";
-    this._private.innerFrame.style.border = "0";
-    this._private.innerFrame.style.width = this._private.mainDiv.style.width;
-    this._private.innerFrame.style.height = this._private.mainDiv.style.height;
-    this._private.innerFrame.doc.body.appendChild(this._private.mainDiv);
-    this._private.innerFrame.doc.body.style.overflow = "hidden";
-    child = this._private.innerFrame
-  }
-  this.gameWindow.appendChild(child);
+  this.gameWindow.appendChild(this._private.mainDiv);
   this.scenes = new pulse.SceneManager({gameWindow:this._private.mainDiv});
   this.masterTime = 0;
   this.tick = 100;
   this.loopLogic = null;
   this._private.currentTime = (new Date).getTime();
-  this._private.lastTime = this._private.currentTime
+  this._private.lastTime = this._private.currentTime;
+  pulse.plugins.invoke("pulse.Engine", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, getWindowOffset:function() {
   var offX = this._private.mainDiv.offsetLeft;
   var offY = this._private.mainDiv.offsetTop;
@@ -3068,12 +3407,11 @@ pulse.Engine = PClass.extend({init:function(params) {
 }, bindEvents:function() {
   var eng = this;
   for(var e in pulse.events) {
-    var wnd = this._private.useIFrame ? this._private.innerFrame.doc.defaultView : window;
-    wnd.addEventListener(e, function(evt) {
+    window.addEventListener(e, function(evt) {
       eng.windowEvent.call(eng, evt)
     }, false);
-    if(e == "mousewheel") {
-      wnd.addEventListener("DOMMouseScroll", function(evt) {
+    if(e === "mousewheel") {
+      window.addEventListener("DOMMouseScroll", function(evt) {
         eng.windowEvent.call(eng, evt)
       }, false)
     }
@@ -3088,25 +3426,38 @@ pulse.Engine = PClass.extend({init:function(params) {
   requestAnimFrame(function() {
     eng.loop.call(eng)
   }, this._private.mainDiv)
-}, loop:function() {
+}, loop:function(autoContinue) {
+  pulse.plugins.invoke("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var eng = this;
-  requestAnimFrame(function() {
-    eng.loop.call(eng)
-  }, this._private.mainDiv);
+  if(autoContinue || autoContinue == undefined) {
+    requestAnimFrame(function() {
+      eng.loop.call(eng)
+    }, this._private.mainDiv)
+  }
   this._private.currentTime = (new Date).getTime();
   var elapsed = this._private.currentTime - this._private.lastTime;
   if(elapsed < this.tick) {
     return
   }
-  if(this.loopLogic) {
-    this.loopLogic(this.scenes, elapsed)
+  var increments = Math.floor(elapsed / 30);
+  if(increments === 0) {
+    increments = 1
   }
-  var activeScenes = this.scenes.getScenes(true);
-  for(var s = 0;s < activeScenes.length;s++) {
-    activeScenes[s].update(elapsed)
+  if(increments < 20) {
+    elapsed /= increments;
+    for(var incrementIdx = 0;incrementIdx < increments;incrementIdx++) {
+      if(this.loopLogic) {
+        this.loopLogic(this.scenes, elapsed)
+      }
+      var activeScenes = this.scenes.getScenes(true);
+      for(var s = 0;s < activeScenes.length;s++) {
+        activeScenes[s].update(elapsed)
+      }
+      this.masterTime += elapsed
+    }
   }
   this._private.lastTime = this._private.currentTime;
-  this.masterTime += elapsed
+  pulse.plugins.invoke("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, windowEvent:function(rawEvt) {
   if(!rawEvt) {
     rawEvt = window.event
@@ -3116,7 +3467,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   var offset = this.getWindowOffset();
   var scrollX = 0;
   var scrollY = 0;
-  if(window.pageXOffset != undefined && window.pageYOffset != undefined) {
+  if(window.pageXOffset && window.pageYOffset) {
     scrollX = window.pageXOffset;
     scrollY = window.pageYOffset
   }else {
@@ -3131,7 +3482,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   evtProps.world.x = x;
   evtProps.world.y = y;
   var eventInsideGame = false;
-  if(x > 0 && x < parseInt(this._private.mainDiv.style.width) && y > 0 && y < parseInt(this._private.mainDiv.style.height)) {
+  if(x > 0 && x < parseInt(this._private.mainDiv.style.width, 10) && y > 0 && y < parseInt(this._private.mainDiv.style.height, 10)) {
     eventInsideGame = true
   }
   var eventInsideScene = false;
@@ -3144,15 +3495,20 @@ pulse.Engine = PClass.extend({init:function(params) {
       if(rawEvt.preventDefault) {
         rawEvt.preventDefault()
       }
-      if(rawEvt.type.toLowerCase() == "mousedown") {
+      if(document.activeElement !== this._private.mainDiv && rawEvt.type.toLowerCase() === "click") {
+        document.activeElement.blur();
+        this._private.mainDiv.focus()
+      }
+      if(rawEvt.type.toLowerCase() === "mousedown") {
         this.focused = true
       }
     }else {
-      if(rawEvt.type.toLowerCase() == "mousedown") {
+      if(rawEvt.type.toLowerCase() === "mousedown") {
         this.focused = false
       }
+      activeScenes[s].events.raiseEvent("mouseout", evtProps)
     }
-    if(rawEvt.type.toLowerCase() == "mousewheel" || rawEvt.type.toLowerCase() == "dommousescroll") {
+    if(rawEvt.type.toLowerCase() === "mousewheel" || rawEvt.type.toLowerCase() === "dommousescroll") {
       var delta = 0;
       if(rawEvt.wheelDelta) {
         delta = rawEvt.wheelDelta / 120
@@ -3164,7 +3520,7 @@ pulse.Engine = PClass.extend({init:function(params) {
       evtProps.scrollDelta = delta;
       etype = "mousewheel"
     }
-    if(pulse.events[rawEvt.type] == "keyboard") {
+    if(pulse.events[rawEvt.type] === "keyboard") {
       var code;
       if(rawEvt.charCode) {
         code = rawEvt.charCode
@@ -3185,9 +3541,9 @@ pulse.Engine = PClass.extend({init:function(params) {
       activeScenes[s].events.raiseEvent(etype, evtProps)
     }
   }
-  if(rawEvt.type.toLowerCase() == "mouseup" && !eventInsideGame) {
+  if(rawEvt.type.toLowerCase() === "mouseup" && !eventInsideGame) {
     for(var di in pulse.EventManager.DraggedItems) {
-      if(di.indexOf("sprite") == 0) {
+      if(di.indexOf("sprite") === 0) {
         pulse.EventManager.DraggedItems[di].killDrag(evtProps)
       }
     }
