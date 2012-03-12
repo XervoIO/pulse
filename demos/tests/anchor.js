@@ -57,12 +57,13 @@ pulse.ready(function() {
     }
   
     pulse.DEBUG = true;
-  
-    cybertron.addLayer(world);
+    
     cybertron.addLayer(bg);
     
     engine.scenes.addScene(cybertron);
     engine.scenes.activateScene(cybertron);
+    
+    cybertron.addLayer(world);
     
     engine.go(16.67, loop);
   }
