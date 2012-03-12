@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - pulse.Node</title>
+		<title>JsDoc Reference - pulse.plugin.Plugin</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -274,7 +274,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class pulse.Node
+				Class pulse.plugin.Plugin
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -282,16 +282,16 @@ ul.inheritsList
 				
 				
 			
-				The base node object.
+				Plugin
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/node.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core/plugin.js&gt;.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.Node.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.plugin.Plugin.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -304,9 +304,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/pulse.Node.html#constructor">pulse.Node</a></b>(params)
+								<b><a href="../symbols/pulse.plugin.Plugin.html#constructor">pulse.plugin.Plugin</a></b>()
 							</div>
-							<div class="description">The base type for all objects added to the world.</div>
+							<div class="description">Manages the subscribing and invoking of plugin callbacks.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -315,73 +315,8 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Node.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.Node.html#name">name</a></b>
-								</div>
-								<div class="description">The name of the node.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								<b><a href="../symbols/pulse.Node.html#parent">parent</a></b>
-								</div>
-								<div class="description">Parent container of this node.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 
 <!-- ============================== methods summary ======================== -->
-			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.Node.">
-					<caption>Method Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/pulse.Node.html#update">update</a></b>(elapsed)
-								</div>
-								<div class="description">Update function called on each loop in the engine</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
 			
 <!-- ============================== events summary ======================== -->
 			
@@ -394,35 +329,17 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>pulse.Node</b>(params)
+						<b>pulse.plugin.Plugin</b>()
 				</div>
 				
 				<div class="description">
-					The base type for all objects added to the world.
+					Manages the subscribing and invoking of plugin callbacks.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
 				
 				
 				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								<span class="light fixedFont">{object}</span>  <b>params</b>
-								<i>Optional</i>
-							</dt>
-								<dd>parameters that can be set as initialized options
-on the node</dd>
-						
-							<dt>
-								<span class="light fixedFont">{string}</span>  <b>params.name</b>
-								<i>Optional</i>
-							</dt>
-								<dd>name of the node</dd>
-						
-						</dl>
 					
 					
 					
@@ -436,100 +353,8 @@ on the node</dd>
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name="name"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>name</b>
-					
-					</div>
-					<div class="description">
-						The name of the node.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name="parent"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>parent</b>
-					
-					</div>
-					<div class="description">
-						Parent container of this node. Will be updated by parent when added or
-removed.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Method Detail
-				</div>
-				
-					<a name="update"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>update</b>(elapsed)
-					
-					</div>
-					<div class="description">
-						Update function called on each loop in the engine
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{number}</span> <b>elapsed</b>
-									
-								</dt>
-								<dd>the elapsed time since last call in
-milliseconds</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					
-				
 			
 			
 <!-- ============================== event details ========================= -->		
