@@ -1467,7 +1467,7 @@ pulse.plugin.Plugin = PClass.extend({init:function() {
     this._private.types[objectType][functionName] = {}
   }
   if(this._private.types[objectType][functionName][callbackType] == undefined) {
-    this._private.types[objectType][functionName][callbackType] = new Array
+    this._private.types[objectType][functionName][callbackType] = []
   }
   this._private.types[objectType][functionName][callbackType].push(pluginCallback);
   return pluginCallback
@@ -1498,7 +1498,7 @@ var pulse = pulse || {};
 pulse.plugin = pulse.plugin || {};
 pulse.plugin.PluginCollection = PClass.extend({init:function() {
   this._private = {};
-  this._private.plugins = Array()
+  this._private.plugins = []
 }, add:function(plugin) {
   this._private.plugins.push(plugin)
 }, invoke:function() {
@@ -3443,16 +3443,18 @@ pulse.Engine = PClass.extend({init:function(params) {
   if(increments === 0) {
     increments = 1
   }
-  elapsed /= increments;
-  for(var incrementIdx = 0;incrementIdx < increments;incrementIdx++) {
-    if(this.loopLogic) {
-      this.loopLogic(this.scenes, elapsed)
+  if(increments < 20) {
+    elapsed /= increments;
+    for(var incrementIdx = 0;incrementIdx < increments;incrementIdx++) {
+      if(this.loopLogic) {
+        this.loopLogic(this.scenes, elapsed)
+      }
+      var activeScenes = this.scenes.getScenes(true);
+      for(var s = 0;s < activeScenes.length;s++) {
+        activeScenes[s].update(elapsed)
+      }
+      this.masterTime += elapsed
     }
-    var activeScenes = this.scenes.getScenes(true);
-    for(var s = 0;s < activeScenes.length;s++) {
-      activeScenes[s].update(elapsed)
-    }
-    this.masterTime += elapsed
   }
   this._private.lastTime = this._private.currentTime;
   pulse.plugins.invoke("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
