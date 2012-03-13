@@ -110,7 +110,7 @@ pulse.ready(function(){
     size: {width: 36, height: 34}
   });
   lPuzzle.anchor = {x: 0, y: 1.0};
-  lPuzzle.position = {x: 434, y: 200};
+  lPuzzle.position = {x: 434, y: 210};
   lPuzzle.events.bind('click', function(e) {
     if(gameManager.selectedPuzzle === 0) {
       return;
@@ -126,7 +126,7 @@ pulse.ready(function(){
     size: {width: 36, height: 34}
   });
   rPuzzle.anchor = {x: 1.0, y: 1.0};
-  rPuzzle.position = {x: 550, y: 200};
+  rPuzzle.position = {x: 550, y: 210};
   rPuzzle.events.bind('click', function(e) {
     if(gameManager.selectedPuzzle === gameManager.puzzles.length - 1) {
       return;
