@@ -3,17 +3,14 @@ var tg = tg || { };
 
 pulse.ready(function(){
 
-  //pulse.DEBUG = true;
-
   tg.skins = {};
-  tg.skins.test = new pulse.Texture({filename: '_/img/skin.png'});
-  tg.skins.blue = new pulse.Texture({filename: '_/img/skin_blue.png'});
-  tg.skins.burgundy = new pulse.Texture({filename: '_/img/skin_burgundy.png'});
-  tg.skins.orange = new pulse.Texture({filename: '_/img/skin_orange.png'});
-  tg.skins.green = new pulse.Texture({filename: '_/img/skin_green.png'});
-  tg.skins.red = new pulse.Texture({filename: '_/img/skin_red.png'});
-  tg.skins.purple = new pulse.Texture({filename: '_/img/skin_purple.png'});
-  tg.skins.yellow = new pulse.Texture({filename: '_/img/skin_yellow.png'});
+  tg.skins.blue = new pulse.Texture({filename: '_/img/skin_blue_lines.png'});
+  tg.skins.burgundy = new pulse.Texture({filename: '_/img/skin_burgundy_lines.png'});
+  tg.skins.orange = new pulse.Texture({filename: '_/img/skin_orange_lines.png'});
+  tg.skins.green = new pulse.Texture({filename: '_/img/skin_green_lines.png'});
+  tg.skins.red = new pulse.Texture({filename: '_/img/skin_red.png_lines'});
+  tg.skins.purple = new pulse.Texture({filename: '_/img/skin_purple_lines.png'});
+  tg.skins.yellow = new pulse.Texture({filename: '_/img/skin_yellow_lines.png'});
 
   var level = eval('(' + '[[{"x" : 145, "y" : 220}, {"x" : 38, "y" : 220}, {"x" : 38, "y" : 113}], [{"x" : 37, "y" : 220}, {"x" : 145, "y" : 220}, {"x" : 145, "y" : 327}], [{"x" : 66, "y" : 252}, {"x" : 142, "y" : 328}, {"x" : 66, "y" : 328}], [{"x" : 0, "y" : 0}, {"x" : 38, "y" : 38}, {"x" : 0, "y" : 76}], [{"x" : 76, "y" : 75}, {"x" : 38, "y" : 37}, {"x" : 76, "y" : -1}], [{"x" : 38, "y" : 37}, {"x" : 76, "y" : 75}, {"x" : 38, "y" : 113}, {"x" : 0, "y" : 75}], [{"x" : 119, "y" : 194}, {"x" : 119, "y" : 118}, {"x" : 157, "y" : 80}, {"x" : 157, "y" : 156}]]' + ')');
 

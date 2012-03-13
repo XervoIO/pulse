@@ -146,8 +146,8 @@ mark {background-color: #fcd700; color: #000; font-style: italic; font-weight: b
 /* game css */
 #tangram {
   border: 2px solid #333;
-  width: 760px;
-  height: 600px;
+  width: 600px;
+  height: 500px;
 }
 
 #tangram canvas {
