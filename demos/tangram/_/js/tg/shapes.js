@@ -150,5 +150,49 @@ tg.pieces.Trapezoid = tg.TanPiece.extend({
       {x: 19, y: 19},
       {x: 0, y: 38}
     ];
+
+    this.flipMask = document.createElement('canvas');
+    ctx = this.flipMask.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.lineTo(0,76);
+    ctx.lineTo(38,114);
+    ctx.lineTo(38,38);
+    ctx.lineTo(0,0);
+    ctx.fill();
+
+    this.flippedHitPoints = [{x: 0, y: 0}, {x: 0, y: 76}, {x: 38, y: 114}, {x: 38, y: 38}];
+    this.flippedControlPoints = [
+      {x: 0, y: 0},
+      {x: 0, y: 38},
+      {x: 0, y: 76},
+      {x: 19, y: 95},
+      {x: 38, y: 114},
+      {x: 38, y: 76},
+      {x: 19, y: 19},
+      {x: 38, y: 38}
+    ];
+
+    this.oldHitPoints = [];
+    this.oldControlPoints = [];
+    this.oldMask = [];
+  },
+
+  flip : function() {
+    this.oldMask = this.maskCanvas;
+    this.maskCanvas = this.flipMask;
+    this.flipMask = this.oldMask;
+
+    this.oldHitPoints = this.hitTestPoints;
+    this.hitTestPoints = this.flippedHitPoints;
+    this.flippedHitPoints = this.oldHitPoints;
+
+    this.oldControlPoints = this.controlLocalPoints;
+    this.controlLocalPoints = this.flippedControlPoints;
+    this.flippedControlPoints = this.oldControlPoints;
+
+    this.calculateProperties();
+    this.textureUpdated = true;
+    this.updated = true;
   }
 });

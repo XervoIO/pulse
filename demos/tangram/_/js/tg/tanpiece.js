@@ -9,9 +9,9 @@ tg.TanPiece = tg.MaskedSprite.extend({
 
     this.shadowEnabled = true;
     this.shadowOffsetX = 1;
-    this.shadowOffsetY = 3;
-    this.shadowBlur = 2;
-    this.shadowColor = "rgba(0, 0, 0, 0.33)";
+    this.shadowOffsetY = 2;
+    this.shadowBlur = 5;
+    this.shadowColor = "rgba(0, 0, 0, 0.23)";
   },
 
   calculateProperties : function(elapsed) {

@@ -10,6 +10,7 @@ pulse.ready(function(){
   tg.skins.red = new pulse.Texture({filename: '_/img/skin_red_lines.png'});
   tg.skins.purple = new pulse.Texture({filename: '_/img/skin_purple_lines.png'});
   tg.skins.yellow = new pulse.Texture({filename: '_/img/skin_yellow_lines.png'});
+  tg.skins.puzzles = new pulse.Texture({filename: '_/img/puzzles.png'});
 
   // The base engine object
   var engine = new pulse.Engine({
@@ -95,12 +96,72 @@ pulse.ready(function(){
   });
   gameLayer.addNode(gameArea);
 
+
+  var puzzleArea = new pulse.Sprite({
+    src: '_/img/puzzle_area_bg.png',
+    size: {width: 176, height: 201}
+  });
+  puzzleArea.anchor = {x: 1.0, y: 0};
+  puzzleArea.position = {x: 580, y: 20};
+  gameLayer.addNode(puzzleArea);
+
+  var lPuzzle = new pulse.Sprite({
+    src: '_/img/left_button.png',
+    size: {width: 36, height: 34}
+  });
+  lPuzzle.anchor = {x: 0, y: 1.0};
+  lPuzzle.position = {x: 434, y: 200};
+  lPuzzle.events.bind('click', function(e) {
+    if(gameManager.selectedPuzzle === 0) {
+      return;
+    }
+    gameManager.puzzles[gameManager.selectedPuzzle].visible = false;
+    gameManager.selectedPuzzle--;
+    gameManager.puzzles[gameManager.selectedPuzzle].visible = true;
+  });
+  gameLayer.addNode(lPuzzle);
+
+  var rPuzzle = new pulse.Sprite({
+    src: '_/img/right_button.png',
+    size: {width: 36, height: 34}
+  });
+  rPuzzle.anchor = {x: 1.0, y: 1.0};
+  rPuzzle.position = {x: 550, y: 200};
+  rPuzzle.events.bind('click', function(e) {
+    if(gameManager.selectedPuzzle === gameManager.puzzles.length - 1) {
+      return;
+    }
+    gameManager.puzzles[gameManager.selectedPuzzle].visible = false;
+    gameManager.selectedPuzzle++;
+    gameManager.puzzles[gameManager.selectedPuzzle].visible = true;
+  });
+  gameLayer.addNode(rPuzzle);
+
+  for(var i = 0; i < 10; i++) {
+    var p = new pulse.Sprite({
+      src: tg.skins.puzzles,
+      size: {width: 140, height: 140}
+    });
+    p.textureFrame = {
+      x: i * 140,
+      y: 0,
+      width: 140,
+      height: 140
+    };
+    p.position = {x: 492, y: 93};
+    if(i > 0) {
+      p.visible = false;
+    }
+    gameManager.puzzles.push(p);
+    gameLayer.addNode(p);
+  }
+
   var tlPiece1 = new tg.pieces.TriangleLarge({
     src: tg.skins.green,
     gameManager: gameManager
   });
-  tlPiece1.position = {x: 90, y: 350};
-  tlPiece1.rotation = 90;
+  tlPiece1.position = {x: 83, y: 354};
+  tlPiece1.rotation = 135;
   gameLayer.addNode(tlPiece1);
   gameManager.pieces.push(tlPiece1);
 
@@ -108,8 +169,8 @@ pulse.ready(function(){
     src: tg.skins.orange,
     gameManager: gameManager
   });
-  tlPiece2.position = {x: 200, y: 150};
-  tlPiece2.rotation = 270;
+  tlPiece2.position = {x: 180, y: 120};
+  tlPiece2.rotation = 315;
   gameLayer.addNode(tlPiece2);
   gameManager.pieces.push(tlPiece2);
 
@@ -117,7 +178,7 @@ pulse.ready(function(){
     src: tg.skins.red,
     gameManager: gameManager
   });
-  tmPiece1.position = {x: 220, y: 350};
+  tmPiece1.position = {x: 470, y: 430};
   gameLayer.addNode(tmPiece1);
   gameManager.pieces.push(tmPiece1);
 
@@ -125,7 +186,7 @@ pulse.ready(function(){
     src: tg.skins.purple,
     gameManager: gameManager
   });
-  tsPiece1.position = {x: 290, y: 350};
+  tsPiece1.position = {x: 243, y: 440};
   gameLayer.addNode(tsPiece1);
   gameManager.pieces.push(tsPiece1);
 
@@ -133,7 +194,7 @@ pulse.ready(function(){
     src: tg.skins.burgundy,
     gameManager: gameManager
   });
-  tsPiece2.position = {x: 560, y: 350};
+  tsPiece2.position = {x: 510, y: 310};
   tsPiece2.rotation = 180;
   gameLayer.addNode(tsPiece2);
   gameManager.pieces.push(tsPiece2);
@@ -142,7 +203,7 @@ pulse.ready(function(){
     src: tg.skins.yellow,
     gameManager: gameManager
   });
-  sqPiece1.position = {x: 490, y: 350};
+  sqPiece1.position = {x: 307, y: 250};
   gameLayer.addNode(sqPiece1);
   gameManager.pieces.push(sqPiece1);
 
@@ -150,7 +211,7 @@ pulse.ready(function(){
     src: tg.skins.blue,
     gameManager: gameManager
   });
-  tpPiece1.position = {x: 380, y: 350};
+  tpPiece1.position = {x: 260, y: 335};
   tpPiece1.rotation = 90;
   gameLayer.addNode(tpPiece1);
   gameManager.pieces.push(tpPiece1);
@@ -161,6 +222,9 @@ pulse.ready(function(){
     }
     if(e.keyCode === 39 || e.keyCode === 68) {
       gameManager.rotateSelectedPiece(45);
+    }
+    if(e.keyCode === 70) {
+      gameManager.flipSelectedPiece();
     }
   });
 

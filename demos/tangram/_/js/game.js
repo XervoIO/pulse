@@ -179,6 +179,9 @@ pulse.ready(function(){
     if(e.keyCode === 39 || e.keyCode === 68) {
       gameManager.rotateSelectedPiece(45);
     }
+    if(e.keyCode === 70) {
+      gameManager.flipSelectedPiece();
+    }
   });
 
   function loop(sceneManager) {
