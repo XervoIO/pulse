@@ -3311,7 +3311,15 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   this.gameWindow = params.gameWindow
 }, addScene:function(scene) {
   if(scene instanceof pulse.Scene && !this.scenes.hasOwnProperty(scene.name)) {
-    scene.setDefaultSize(this.gameWindow.clientWidth, this.gameWindow.clientHeight);
+    var width = this.gameWindow.clientWidth;
+    var height = this.gameWindow.clientHeight;
+    if(width === 0 && this.gameWindow.style.width) {
+      width = parseInt(this.gameWindow.style.width)
+    }
+    if(height === 0 && this.gameWindow.style.height) {
+      height = parseInt(this.gameWindow.style.height)
+    }
+    scene.setDefaultSize(width, height);
     this.scenes[scene.name] = scene
   }
 }, removeScene:function(name) {
