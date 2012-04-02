@@ -2875,7 +2875,7 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
   for(var i = 0;i < this._private.verts.length;i++) {
     vert = this._private.verts[i];
     if(vert.size.width !== 0 && vert.size.height !== 0) {
-      this._private.context.drawImage(this.font.image, vert.position.x, vert.position.y, vert.size.width, vert.size.height, cursor, 0, vert.size.width, vert.size.height)
+      this._private.context.drawImage(this.font.image, vert.position.x, vert.position.y, vert.size.width, vert.size.height, cursor + vert.offset.x, vert.offset.y, vert.size.width, vert.size.height)
     }
     cursor += vert.xAdvance
   }
@@ -3355,6 +3355,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {gameWindow:"gameWindow", size:{width:0, height:0}});
   this.gameWindow = null;
   this.focused = false;
+  this.hidden = false;
   if(typeof params.gameWindow === "object") {
     this.gameWindow = params.gameWindow
   }else {
@@ -3459,6 +3460,9 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.lastTime = this._private.currentTime;
   pulse.plugins.invoke("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, windowEvent:function(rawEvt) {
+  if(this.hidden) {
+    return
+  }
   if(!rawEvt) {
     rawEvt = window.event
   }
