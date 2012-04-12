@@ -1,6 +1,6 @@
 pulse.ready(function() {
 
-  var font = new pulse.BitmapFont({filename:'../font/hobol.fnt'});
+  var font = new pulse.BitmapFont({filename:'../font/heln.fnt'});
 
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
