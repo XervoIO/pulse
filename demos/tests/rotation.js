@@ -61,7 +61,7 @@ pulse.ready(function() {
     cybertron.addLayer(bg);
 
     engine.addScene(cybertron);
-    engine.scenes.activateScene(cybertron);
+    engine.activateScene(cybertron);
 
     engine.go(50, loop);
   }
