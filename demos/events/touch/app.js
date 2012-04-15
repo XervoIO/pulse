@@ -39,7 +39,7 @@ pulse.ready(function() {
       s = new pulse.Sprite({name: 'Box' + i, src: textures[i%3]});
       s.anchor = {x: i % 3 * 0.5, y: Math.floor(i / 3) * 0.5};
       s.position = {x: 106 + (i % 3 * 213), y: 35 + Math.floor(i / 3) * 120};
-      s.events.bind('mouseover', function(e){
+      s.events.bind('click', function(e){
         var cns = document.getElementById('console');
         cns.innerHTML += e.sender.name + " box clicked|";
       });
