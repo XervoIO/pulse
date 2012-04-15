@@ -3,11 +3,11 @@ pulse.ready(function() {
   var engine = new pulse.Engine({gameWindow: gw});
   var cybertron = new pulse.Scene({name: 'cybertron'});
 
-  var sound = new pulse.Sound({filename: '../media/podcast', type : 'html5'});
+  var sound = new pulse.Sound({filename: '../media/wheel_spin', type : 'html5'});
 
   var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
   var bgs = new pulse.Sprite({
-    src: '../img/gray_bg.jpg', 
+    src: '../img/gray_bg.jpg',
     name: 'bg'
   });
   bgs.position = {x: 320, y: 240};
@@ -35,14 +35,14 @@ pulse.ready(function() {
     sound.pause();
   });
   world.addNode(pause);
-  
+
   var stop = new pulse.Sprite({src: '../img/stop_btn.png'});
   stop.position = {x: 495, y: 300};
   stop.events.bind('click', function(){
     sound.stop();
   });
   world.addNode(stop);
-  
+
   engine.scenes.addScene(cybertron);
   engine.scenes.activateScene(cybertron);
 
@@ -50,10 +50,10 @@ pulse.ready(function() {
   gui.add(sound, 'loop');
 
   function loop(sceneManager)
-  { 
+  {
     var debugTime = document.getElementById('time');
     debugTime.innerText = engine.masterTime;
   }
-  
+
   engine.go(50, loop);
 });
