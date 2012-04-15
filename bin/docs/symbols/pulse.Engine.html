@@ -261,6 +261,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.Texture.html">pulse.Texture</a></li>
 	
+	<li><a href="../symbols/pulse.TouchEvent.html">pulse.TouchEvent</a></li>
+	
 	<li><a href="../symbols/pulse.util.html">pulse.util</a></li>
 	
 	<li><a href="../symbols/pulse.Visual.html">pulse.Visual</a></li>
@@ -285,7 +287,7 @@ ul.inheritsList
 				Main engine class
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/engine.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core\engine.js&gt;.
 				
 			</p>
 
@@ -306,8 +308,7 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Engine.html#constructor">pulse.Engine</a></b>(params)
 							</div>
-							<div class="description">Engine handles starting the game, generating the game loop and
-handling the base game window</div>
+							<div class="description">Engine handles starting the game, generating the game loop andhandling the base game window</div>
 						</td>
 					</tr>
 				</tbody>
@@ -374,8 +375,7 @@ handling the base game window</div>
 								<div class="fixedFont">
 								<b><a href="../symbols/pulse.Engine.html#scenes">scenes</a></b>
 								</div>
-								<div class="description">Scene manager handles adding, remove, activating, and deactivating
-scenes.</div>
+								<div class="description">Scene manager handles adding, remove, activating, and deactivatingscenes.</div>
 							</td>
 						</tr>
 					
@@ -423,6 +423,33 @@ scenes.</div>
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Engine.html#activateScene">activateScene</a></b>(scene)
+								</div>
+								<div class="description">Activates a scene in this engine's scene manager by name.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Engine.html#addScene">addScene</a></b>(scene)
+								</div>
+								<div class="description">Adds a scene to this engine's scene manager.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Engine.html#deactivateScene">deactivateScene</a></b>(scene)
+								</div>
+								<div class="description">Deactivate a scene in this engine's scene manager by name.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Engine.html#getWindowOffset">getWindowOffset</a></b>()
 								</div>
 								<div class="description">The current game window offset from the main html window.</div>
@@ -447,6 +474,15 @@ scenes.</div>
 							</td>
 						</tr>
 					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Engine.html#removeScene">removeScene</a></b>(scene)
+								</div>
+								<div class="description">Removes a scene from this engine's scene manager by name.</div>
+							</td>
+						</tr>
+					
 					</tbody>
 				</table>
 				
@@ -468,8 +504,7 @@ scenes.</div>
 				</div>
 				
 				<div class="description">
-					Engine handles starting the game, generating the game loop and
-handling the base game window
+					Engine handles starting the game, generating the game loop andhandling the base game window
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -484,16 +519,13 @@ handling the base game window
 								<span class="light fixedFont">{object}</span>  <b>params</b>
 								
 							</dt>
-								<dd>parameters that can be set as initialized options
-on the node</dd>
+								<dd>parameters that can be set as initialized optionson the node</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string|DOMElement}</span>  <b>params.gameWindow</b>
 								
 							</dt>
-								<dd>the dom element to use as the main
-game window, if a string it will pull the element by id, if it's a element
-it will simply use it as is</dd>
+								<dd>the dom element to use as the maingame window, if a string it will pull the element by id, if it's a elementit will simply use it as is</dd>
 						
 							<dt>
 								<span class="light fixedFont">{number}</span>  <b>params.width</b>
@@ -606,8 +638,7 @@ it will simply use it as is</dd>
 					
 					</div>
 					<div class="description">
-						Master time of the engine. This holds how long the engine has been
-running.
+						Master time of the engine. This holds how long the engine has beenrunning.
 						
 						
 					</div>
@@ -629,8 +660,7 @@ running.
 					
 					</div>
 					<div class="description">
-						Scene manager handles adding, remove, activating, and deactivating
-scenes.
+						Scene manager handles adding, remove, activating, and deactivatingscenes.
 						
 						
 					</div>
@@ -695,6 +725,114 @@ scenes.
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+					<a name="activateScene"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>activateScene</b>(scene)
+					
+					</div>
+					<div class="description">
+						Activates a scene in this engine's scene manager by name.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>|string}</span> <b>scene</b>
+									
+								</dt>
+								<dd>the scene or name of scene</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="addScene"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>addScene</b>(scene)
+					
+					</div>
+					<div class="description">
+						Adds a scene to this engine's scene manager.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>}</span> <b>scene</b>
+									
+								</dt>
+								<dd>the scene to add</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="deactivateScene"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>deactivateScene</b>(scene)
+					
+					</div>
+					<div class="description">
+						Deactivate a scene in this engine's scene manager by name.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>|string}</span> <b>scene</b>
+									
+								</dt>
+								<dd>the scene or name of scene</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
 				
 					<a name="getWindowOffset"> </a>
 					<div class="fixedFont">
@@ -804,6 +942,42 @@ scenes.
 						
 						
 
+					<hr />
+				
+					<a name="removeScene"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>removeScene</b>(scene)
+					
+					</div>
+					<div class="description">
+						Removes a scene from this engine's scene manager by name.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.Scene.html">pulse.Scene</a>|string}</span> <b>scene</b>
+									
+								</dt>
+								<dd>the scene or name of scene</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
 					
 				
 			
@@ -818,7 +992,7 @@ scenes.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Apr 01 2012 22:15:28 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Apr 15 2012 13:07:14 GMT-0700 (MST)
 		</div>
 	</body>
 </html>

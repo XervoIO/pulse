@@ -261,6 +261,8 @@ ul.inheritsList
 	
 	<li><a href="../symbols/pulse.Texture.html">pulse.Texture</a></li>
 	
+	<li><a href="../symbols/pulse.TouchEvent.html">pulse.TouchEvent</a></li>
+	
 	<li><a href="../symbols/pulse.util.html">pulse.util</a></li>
 	
 	<li><a href="../symbols/pulse.Visual.html">pulse.Visual</a></li>
@@ -285,7 +287,7 @@ ul.inheritsList
 				Mouse event properties
 				
 				
-					<br /><i>Defined in: </i> &lt;../lib/core/event/eventproperties.js&gt;.
+					<br /><i>Defined in: </i> &lt;../lib/core\event\eventproperties.js&gt;.
 				
 			</p>
 
@@ -331,10 +333,39 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MouseEvent.html#changedTouches">changedTouches</a></b>
+								</div>
+								<div class="description">Touch objects returned from the event that have been updated.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MouseEvent.html#gestureRotation">gestureRotation</a></b>
+								</div>
+								<div class="description">The rotation of the current gesture.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MouseEvent.html#gestureScale">gestureScale</a></b>
+								</div>
+								<div class="description">The scale of the current gesture.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
 								<b><a href="../symbols/pulse.MouseEvent.html#parent">parent</a></b>
 								</div>
-								<div class="description">Event position relative to the parent of object which the event was
-raised from.</div>
+								<div class="description">Event position relative to the parent of object which the event wasraised from.</div>
 							</td>
 						</tr>
 					
@@ -355,6 +386,26 @@ raised from.</div>
 								<b><a href="../symbols/pulse.MouseEvent.html#scrollDelta">scrollDelta</a></b>
 								</div>
 								<div class="description">The scroll delta for mouse wheel.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MouseEvent.html#targetTouches">targetTouches</a></b>
+								</div>
+								<div class="description">Touch objects returned that originate from the same target element.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/pulse.MouseEvent.html#touches">touches</a></b>
+								</div>
+								<div class="description">Touch objects returned from the event.</div>
 							</td>
 						</tr>
 					
@@ -426,6 +477,72 @@ raised from.</div>
 					Field Detail
 				</div>
 				
+					<a name="changedTouches"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>changedTouches</b>
+					
+					</div>
+					<div class="description">
+						Touch objects returned from the event that have been updated.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="gestureRotation"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>gestureRotation</b>
+					
+					</div>
+					<div class="description">
+						The rotation of the current gesture.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="gestureScale"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>gestureScale</b>
+					
+					</div>
+					<div class="description">
+						The scale of the current gesture.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name="parent"> </a>
 					<div class="fixedFont">
 					
@@ -434,8 +551,7 @@ raised from.</div>
 					
 					</div>
 					<div class="description">
-						Event position relative to the parent of object which the event was
-raised from.
+						Event position relative to the parent of object which the event wasraised from.
 						
 						
 					</div>
@@ -479,8 +595,51 @@ raised from.
 					
 					</div>
 					<div class="description">
-						The scroll delta for mouse wheel. This is only filled in for mousewheel
-events.
+						The scroll delta for mouse wheel. This is only filled in for mousewheelevents.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="targetTouches"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>targetTouches</b>
+					
+					</div>
+					<div class="description">
+						Touch objects returned that originate from the same target element.
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="touches"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>touches</b>
+					
+					</div>
+					<div class="description">
+						Touch objects returned from the event.
 						
 						
 					</div>
@@ -553,7 +712,7 @@ events.
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Apr 01 2012 22:15:28 GMT-0400 (EDT)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Apr 15 2012 13:07:14 GMT-0700 (MST)
 		</div>
 	</body>
 </html>
