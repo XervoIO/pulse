@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>pfpgame</title>
+  <meta name="generator" content="Studio 3 http://aptana.com/">
+  <meta name="author" content="Neo">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+  <meta http-equiv="cache-control" content="no-store">
+  <meta http-equiv="cache-control" content="no-cache">
+  <script src="../../../lib/other/require.js"></script>
+  <script type="text/javascript">
+    requirejs.config({ paths: { order: "../../../lib/other/order" }});
+  </script>
+  <script src="../../../lib/pulse.js" type="text/javascript"></script>
+  <link href="../../demo.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript">
+    pulse.addGameFile('anchor.js');
+    pulse.init('../../../lib');
+</script>
+</head>
+<body>
+  <div id="debug">
+    <div>Time: <span id="time"></span></div>
+    <div>Console: <span id="console"></span></div>
+  </div>
+  <div id="gameWindow"></div>
+</body>
+</html>
