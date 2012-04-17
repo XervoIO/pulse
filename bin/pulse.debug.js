@@ -37,12 +37,16 @@ window.requestAnimFrame = function() {
   }
 })();
 if(typeof pulse == "undefined") {
-  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "mouseover":"mouse", "mouseout":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard"}, customevents:{"dragstart":"drag", "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
+  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "mouseover":"mouse", "mouseout":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard", "touchstart":"touch", "touchmove":"touch", "touchend":"touch", "touchcancel":"touch", "touchclick":"touch", "gesturestart":"touchgesture", "gesturechange":"touchgesture", "gestureend":"touchgesture"}, eventtranslations:{"touchstart":"mousedown", "touchmove":"mousemove", "touchend":"mouseup"}, 
+  customevents:{"dragstart":"drag", "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
 }
 var pulse = pulse || {};
 pulse.readyCallbacks = [];
 pulse.isReady = false;
 pulse.ready = function(callback) {
+  if(document.readyState === "complete") {
+    pulse.isReady = true
+  }
   if(pulse.isReady) {
     setTimeout(callback, 1)
   }
@@ -57,13 +61,15 @@ pulse.DOMContentLoaded = function() {
     pulse.readyCallbacks[readyIdx]()
   }
 };
-if(document.addEventListener) {
-  document.addEventListener("DOMContentLoaded", pulse.DOMContentLoaded, false);
-  window.addEventListener("load", pulse.DOMContentLoaded, false)
-}else {
-  if(document.attachEvent) {
-    document.attachEvent("onreadystatechange", pulse.DOMContentLoaded);
-    window.attachEvent("onload", pulse.DOMContentLoaded)
+if(document.readyState !== "complete") {
+  if(document.addEventListener) {
+    document.addEventListener("DOMContentLoaded", pulse.DOMContentLoaded, false);
+    window.addEventListener("load", pulse.DOMContentLoaded, false)
+  }else {
+    if(document.attachEvent) {
+      document.attachEvent("onreadystatechange", pulse.DOMContentLoaded);
+      window.attachEvent("onload", pulse.DOMContentLoaded)
+    }
   }
 }
 pulse.DEBUG = false;
@@ -1659,12 +1665,22 @@ pulse.util.easeOutCubic = function(t, b, c, d) {
   t--;
   return c * (t * t * t + 1) + b
 };
+pulse.util.eventSupported = function(type) {
+  var el = document.createElement("canvas");
+  return"on" + type in el
+};
 var pulse = pulse || {};
 pulse.Point = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {x:0, y:0});
   this.x = params.x;
   this.y = params.y
 }});
+var pulse = pulse || {};
+pulse.support = pulse.support || {};
+pulse.support.touch = false;
+pulse.ready(function() {
+  pulse.support.touch = pulse.util.eventSupported("touchstart")
+});
 var pulse = pulse || {};
 pulse.Event = PClass.extend({init:function() {
   this.sender = null
@@ -1677,29 +1693,41 @@ pulse.MouseEvent = pulse.Event.extend({init:function() {
   this.position = {x:0, y:0};
   this.scrollDelta = 0
 }});
+pulse.TouchEvent = pulse.MouseEvent.extend({init:function() {
+  this._super();
+  this.touches = [];
+  this.changedTouches = [];
+  this.targetTouches = [];
+  this.gestureScale = 1;
+  this.gestureRotation = 0
+}});
 var pulse = pulse || {};
 pulse.EventManager = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {owner:null, masterCallback:null});
   this.owner = params.owner;
   this.masterCallback = params.masterCallback;
   this._private = {};
-  this._private.events = {}
+  this._private.events = {};
+  this._private.touchDown = false
 }, bind:function(type, callback) {
-  if(!this._private.events.hasOwnProperty(type)) {
-    this._private.events[type] = [];
-    this._private.events[type].push(callback)
+  var evtName = this.checkType(type);
+  if(!this._private.events.hasOwnProperty(evtName)) {
+    this._private.events[evtName] = [];
+    this._private.events[evtName].push(callback)
   }else {
-    this._private.events[type].push(callback)
+    this._private.events[evtName].push(callback)
   }
 }, unbind:function(type) {
-  if(this._private.events.hasOwnProperty(type)) {
-    delete this._private.events[type]
+  var evtName = this.checkType(type);
+  if(this._private.events.hasOwnProperty(evtName)) {
+    delete this._private.events[evtName]
   }
 }, unbindFunction:function(type, callback) {
-  if(this._private.events.hasOwnProperty(type)) {
-    for(var i = this._private.events[type].length - 1;i >= 0;i--) {
-      if(this._private.events[type][i] === callback) {
-        this._private.events[type].splice(i, 1)
+  var evtName = this.checkType(type);
+  if(this._private.events.hasOwnProperty(evtName)) {
+    for(var i = this._private.events[evtName].length - 1;i >= 0;i--) {
+      if(this._private.events[evtName][i] === callback) {
+        this._private.events[evtName].splice(i, 1)
       }
     }
   }
@@ -1709,6 +1737,17 @@ pulse.EventManager = PClass.extend({init:function(params) {
   }
   return false
 }, raiseEvent:function(type, evt) {
+  if(type === "touchstart" && this._private.touchDown === false) {
+    this._private.touchDown = true
+  }else {
+    if(type === "touchend" && this._private.touchDown === true) {
+      this.raiseEvent("touchclick", evt)
+    }else {
+      if(type === "touchclick" || type === "mouseout") {
+        this._private.touchDown = false
+      }
+    }
+  }
   if(this.hasEvent(type)) {
     for(var e = 0;e < this._private.events[type].length;e++) {
       this._private.events[type][e](evt)
@@ -1721,6 +1760,16 @@ pulse.EventManager = PClass.extend({init:function(params) {
       this.masterCallback(type, evt)
     }
   }
+}, checkType:function(type) {
+  if(type === "click" && pulse.util.eventSupported("touchend")) {
+    return"touchclick"
+  }
+  for(var t in pulse.eventtranslations) {
+    if(type === pulse.eventtranslations[t] && this.eventSupported(t)) {
+      return t
+    }
+  }
+  return type
 }});
 pulse.EventManager.DraggedItems = {};
 var pulse = pulse || {};
@@ -2067,16 +2116,19 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
       var audio = document.createElement("audio");
       if(audio.canPlayType) {
         audio.setAttribute("preload", "auto");
-        if(!!audio.canPlayType && "" != audio.canPlayType("audio/mpeg")) {
+        if(!!audio.canPlayType && "" !== audio.canPlayType("audio/mpeg")) {
           audio.setAttribute("src", this.filename + ".mp3")
         }else {
-          if(!!audio.canPlayType && "" != audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          if(!!audio.canPlayType && "" !== audio.canPlayType('audio/ogg; codecs="vorbis"')) {
             audio.setAttribute("src", this.filename + ".ogg")
           }
         }
         audio.addEventListener("progress", function(e) {
-          _self.percentLoaded = audio.buffered.end(0) / audio.duration * 100;
-          console.log(_self.percentLoaded);
+          if(audio.buffered.end.length > 0) {
+            _self.percentLoaded = audio.buffered.end(0) / audio.duration * 100
+          }else {
+            _self.percentLoaded = 0
+          }
           if(_self.percentLoaded >= 100) {
             _self.complete()
           }
@@ -2875,7 +2927,7 @@ pulse.BitmapLabel = pulse.Visual.extend({init:function(params) {
   for(var i = 0;i < this._private.verts.length;i++) {
     vert = this._private.verts[i];
     if(vert.size.width !== 0 && vert.size.height !== 0) {
-      this._private.context.drawImage(this.font.image, vert.position.x, vert.position.y, vert.size.width, vert.size.height, cursor, 0, vert.size.width, vert.size.height)
+      this._private.context.drawImage(this.font.image, vert.position.x, vert.position.y, vert.size.width, vert.size.height, cursor + vert.offset.x, vert.offset.y, vert.size.width, vert.size.height)
     }
     cursor += vert.xAdvance
   }
@@ -3025,19 +3077,24 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
     if(!this.objects.hasOwnProperty(obj.name)) {
       this.objects[obj.name] = obj;
       obj.parent = this;
+      obj.updated = true;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
     }else {
       pulse.error.DuplicateName(obj.name)
     }
   }
 }, removeNode:function(name) {
-  if(this.objects.hasOwnProperty(name)) {
-    if(this.objects[name] instanceof pulse.Sprite) {
-      var clear = this.objects[name].boundsPrevious;
+  var spriteName = name;
+  if(name instanceof pulse.Visual) {
+    spriteName = name.name
+  }
+  if(this.objects.hasOwnProperty(spriteName)) {
+    if(this.objects[spriteName] instanceof pulse.Visual) {
+      var clear = this.objects[spriteName].boundsPrevious;
       this._private.context.clearRect(clear.x, clear.y, clear.width, clear.height)
     }
-    this.objects[name].parent = null;
-    delete this.objects[name]
+    this.objects[spriteName].parent = null;
+    delete this.objects[spriteName]
   }
 }, getNode:function(name) {
   return this.objects[name]
@@ -3104,7 +3161,10 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   var sprite;
   for(var s in sprites) {
     sprite = sprites[s];
-    if(pulse.events[type] === "mouse") {
+    if(!sprite.visible) {
+      continue
+    }
+    if(pulse.events[type] === "mouse" || pulse.events[type] === "touch") {
       var sBounds = sprite.bounds;
       evt.position.x = evt.parent.x - sBounds.x;
       evt.position.y = evt.parent.y - sBounds.y;
@@ -3279,7 +3339,7 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   pulse.plugins.invoke("pulse.Scene", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, eventsCallback:function(type, evt) {
   for(var l in this.layers) {
-    if(pulse.events[type] === "mouse") {
+    if(pulse.events[type] === "mouse" || pulse.events[type] === "touch") {
       var lBounds = this.layers[l].bounds;
       evt.parent.x = evt.position.x;
       evt.parent.y = evt.position.y;
@@ -3287,7 +3347,7 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
       evt.position.y = evt.world.y - lBounds.y;
       evt.sender = this.layers[l];
       if(this.layers[l].pointInBounds(evt.world)) {
-        if(type === "mousemove" && this.layers[l].mousein === false) {
+        if((type === "mousemove" || type === "touchmove") && this.layers[l].mousein === false) {
           this.layers[l].mousein = true;
           this.layers[l].events.raiseEvent("mouseover", evt)
         }
@@ -3311,10 +3371,21 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   this.gameWindow = params.gameWindow
 }, addScene:function(scene) {
   if(scene instanceof pulse.Scene && !this.scenes.hasOwnProperty(scene.name)) {
-    scene.setDefaultSize(this.gameWindow.clientWidth, this.gameWindow.clientHeight);
+    var width = this.gameWindow.clientWidth;
+    var height = this.gameWindow.clientHeight;
+    if(width === 0 && this.gameWindow.style.width) {
+      width = parseInt(this.gameWindow.style.width)
+    }
+    if(height === 0 && this.gameWindow.style.height) {
+      height = parseInt(this.gameWindow.style.height)
+    }
+    scene.setDefaultSize(width, height);
     this.scenes[scene.name] = scene
   }
 }, removeScene:function(name) {
+  if(name instanceof pulse.Scene) {
+    name = name.name
+  }
   if(this.scenes.hasOwnProperty(name)) {
     delete this.scenes[name]
   }
@@ -3355,6 +3426,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {gameWindow:"gameWindow", size:{width:0, height:0}});
   this.gameWindow = null;
   this.focused = false;
+  this.hidden = false;
   if(typeof params.gameWindow === "object") {
     this.gameWindow = params.gameWindow
   }else {
@@ -3459,6 +3531,9 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.lastTime = this._private.currentTime;
   pulse.plugins.invoke("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, windowEvent:function(rawEvt) {
+  if(this.hidden) {
+    return
+  }
   if(!rawEvt) {
     rawEvt = window.event
   }
@@ -3474,9 +3549,34 @@ pulse.Engine = PClass.extend({init:function(params) {
     scrollX = document.body.scrollLeft;
     scrollY = document.body.scrollTop
   }
+  var evtProps = new pulse.MouseEvent;
   var x = rawEvt.clientX - offset.x + scrollX;
   var y = rawEvt.clientY - offset.y + scrollY;
-  var evtProps = new pulse.MouseEvent;
+  var isTouch = false;
+  if(pulse.events[etype] === "touch" || pulse.events[etype] === "touchgesture") {
+    isTouch = true;
+    evtProps = new pulse.TouchEvent;
+    if(rawEvt.touches && rawEvt.touches.length > 0) {
+      x = rawEvt.touches[0].clientX - offset.x + scrollX;
+      y = rawEvt.touches[0].clientY - offset.y + scrollY;
+      evtProps.touches = rawEvt.touches
+    }
+    if(rawEvt.changedTouches && rawEvt.changedTouches.length > 0) {
+      evtProps.changedTouches = rawEvt.changedTouches;
+      if(etype === "touchend") {
+        x = rawEvt.changedTouches[0].clientX - offset.x + scrollX;
+        y = rawEvt.changedTouches[0].clientY - offset.y + scrollY
+      }
+    }
+    if(rawEvt.targetTouches && rawEvt.targetTouches.length > 0) {
+      evtProps.targetTouches = rawEvt.changedTouches
+    }
+    if(rawEvt.scale && rawEvt.rotation) {
+      evtProps.gestureScale = rawEvt.scale;
+      evtProps.gestureRotation = rawEvt.rotation
+    }
+    this.focused = true
+  }
   evtProps.window.x = rawEvt.clientX;
   evtProps.window.y = rawEvt.clientY;
   evtProps.world.x = x;
@@ -3492,7 +3592,7 @@ pulse.Engine = PClass.extend({init:function(params) {
     evtProps.position.x = x;
     evtProps.position.y = y;
     if(eventInsideGame) {
-      if(rawEvt.preventDefault) {
+      if(rawEvt.preventDefault && isTouch === false) {
         rawEvt.preventDefault()
       }
       if(document.activeElement !== this._private.mainDiv && rawEvt.type.toLowerCase() === "click") {
@@ -3547,6 +3647,22 @@ pulse.Engine = PClass.extend({init:function(params) {
         pulse.EventManager.DraggedItems[di].killDrag(evtProps)
       }
     }
+  }
+}, addScene:function(scene) {
+  if(this.scenes && this.scenes.addScene) {
+    this.scenes.addScene(scene)
+  }
+}, removeScene:function(scene) {
+  if(this.scenes && this.scenes.addScene) {
+    this.scenes.removeScene(scene)
+  }
+}, activateScene:function(scene) {
+  if(this.scenes && this.scenes.addScene) {
+    this.scenes.activateScene(scene)
+  }
+}, deactivateScene:function(scene) {
+  if(this.scenes && this.scenes.addScene) {
+    this.scenes.deactivateScene(scene)
   }
 }});
 
