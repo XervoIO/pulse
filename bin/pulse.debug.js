@@ -37,8 +37,8 @@ window.requestAnimFrame = function() {
   }
 })();
 if(typeof pulse == "undefined") {
-  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "mouseover":"mouse", "mouseout":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard", "touchstart":"touch", "touchmove":"touch", "touchend":"touch", "touchcancel":"touch", "gesturestart":"touchgesture", "gesturechange":"touchgesture", "gestureend":"touchgesture"}, eventtranslations:{"touchstart":"mousedown", "touchmove":"mousemove", "touchend":"mouseup"}, customevents:{"dragstart":"drag", 
-  "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
+  pulse = {events:{"mousedown":"mouse", "mouseup":"mouse", "mouseover":"mouse", "mouseout":"mouse", "click":"mouse", "mousemove":"mouse", "mousewheel":"mouse", "keyup":"keyboard", "keydown":"keyboard", "keypress":"keyboard", "touchstart":"touch", "touchmove":"touch", "touchend":"touch", "touchcancel":"touch", "touchclick":"touch", "gesturestart":"touchgesture", "gesturechange":"touchgesture", "gestureend":"touchgesture"}, eventtranslations:{"touchstart":"mousedown", "touchmove":"mousemove", "touchend":"mouseup"}, 
+  customevents:{"dragstart":"drag", "dragdrop":"drag", "dragenter":"drag", "dragover":"drag", "dragexit":"drag", "complete":"action", "finished":"audio"}}
 }
 var pulse = pulse || {};
 pulse.readyCallbacks = [];
@@ -1665,12 +1665,22 @@ pulse.util.easeOutCubic = function(t, b, c, d) {
   t--;
   return c * (t * t * t + 1) + b
 };
+pulse.util.eventSupported = function(type) {
+  var el = document.createElement("canvas");
+  return"on" + type in el
+};
 var pulse = pulse || {};
 pulse.Point = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {x:0, y:0});
   this.x = params.x;
   this.y = params.y
 }});
+var pulse = pulse || {};
+pulse.support = pulse.support || {};
+pulse.support.touch = false;
+pulse.ready(function() {
+  pulse.support.touch = pulse.util.eventSupported("touchstart")
+});
 var pulse = pulse || {};
 pulse.Event = PClass.extend({init:function() {
   this.sender = null
@@ -1697,7 +1707,8 @@ pulse.EventManager = PClass.extend({init:function(params) {
   this.owner = params.owner;
   this.masterCallback = params.masterCallback;
   this._private = {};
-  this._private.events = {}
+  this._private.events = {};
+  this._private.touchDown = false
 }, bind:function(type, callback) {
   var evtName = this.checkType(type);
   if(!this._private.events.hasOwnProperty(evtName)) {
@@ -1726,29 +1737,39 @@ pulse.EventManager = PClass.extend({init:function(params) {
   }
   return false
 }, raiseEvent:function(type, evt) {
-  var evtName = this.checkType(type);
-  if(this.hasEvent(evtName)) {
-    for(var e = 0;e < this._private.events[evtName].length;e++) {
-      this._private.events[evtName][e](evt)
+  if(type === "touchstart" && this._private.touchDown === false) {
+    this._private.touchDown = true
+  }else {
+    if(type === "touchend" && this._private.touchDown === true) {
+      this.raiseEvent("touchclick", evt)
+    }else {
+      if(type === "touchclick" || type === "mouseout") {
+        this._private.touchDown = false
+      }
+    }
+  }
+  if(this.hasEvent(type)) {
+    for(var e = 0;e < this._private.events[type].length;e++) {
+      this._private.events[type][e](evt)
     }
   }
   if(typeof this.masterCallback === "function") {
     if(this.owner) {
-      this.masterCallback.call(this.owner, evtName, evt)
+      this.masterCallback.call(this.owner, type, evt)
     }else {
-      this.masterCallback(evtName, evt)
+      this.masterCallback(type, evt)
     }
   }
 }, checkType:function(type) {
+  if(type === "click" && pulse.util.eventSupported("touchend")) {
+    return"touchclick"
+  }
   for(var t in pulse.eventtranslations) {
     if(type === pulse.eventtranslations[t] && this.eventSupported(t)) {
       return t
     }
   }
   return type
-}, eventSupported:function(type) {
-  var el = document.createElement("canvas");
-  return"on" + type in el
 }});
 pulse.EventManager.DraggedItems = {};
 var pulse = pulse || {};
