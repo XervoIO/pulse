@@ -6,6 +6,7 @@ java -jar compiler.jar \
 --js=../lib/core/error.js \
 --js=../lib/core/util.js \
 --js=../lib/core/point.js \
+--js=../lib/core/support.js \
 --js=../lib/core/event/eventproperties.js \
 --js=../lib/core/event/eventmanager.js \
 --js=../lib/core/node.js \
@@ -37,6 +38,7 @@ java -jar compiler.jar \
 --js=../lib/core/error.js \
 --js=../lib/core/util.js \
 --js=../lib/core/point.js \
+--js=../lib/core/support.js \
 --js=../lib/core/event/eventproperties.js \
 --js=../lib/core/event/eventmanager.js \
 --js=../lib/core/node.js \
