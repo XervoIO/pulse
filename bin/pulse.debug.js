@@ -1516,6 +1516,8 @@ pulse.plugins = pulse.plugins || new pulse.plugin.PluginCollection;
 var pulse = pulse || {};
 pulse.error = {DuplicateName:function(name) {
   throw"There is already an object with the name " + name + " on this layer.";
+}, InvalidSource:function() {
+  throw"Invalid source for pulse image.";
 }};
 var pulse = pulse || {};
 pulse.util = pulse.util || {};
@@ -1765,7 +1767,7 @@ pulse.EventManager = PClass.extend({init:function(params) {
     return"touchclick"
   }
   for(var t in pulse.eventtranslations) {
-    if(type === pulse.eventtranslations[t] && this.eventSupported(t)) {
+    if(type === pulse.eventtranslations[t] && pulse.util.eventSupported(t)) {
       return t
     }
   }
@@ -1828,7 +1830,7 @@ var pulse = pulse || {};
 pulse.Texture = pulse.Asset.extend({init:function(params) {
   this._super(params);
   if(params.filename === "") {
-    throw"Invalid source for pulse image.";
+    pulse.error.InvalidSource()
   }
   this._private.image = new Image;
   this._private.imgCanvas = document.createElement("canvas");
