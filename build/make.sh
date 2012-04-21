@@ -28,7 +28,7 @@ java -jar compiler.jar \
 --js=../src/scene.js \
 --js=../src/scenemanager.js \
 --js=../src/engine.js \
---js_output_file=../bin/pulse.js
+--js_output_file=bin/pulse.js
 
 java -jar compiler.jar \
 --js=../src/main.js \
@@ -60,7 +60,7 @@ java -jar compiler.jar \
 --js=../src/scene.js \
 --js=../src/scenemanager.js \
 --js=../src/engine.js \
---js_output_file=../bin/pulse.debug.js \
+--js_output_file=bin/pulse.debug.js \
 --compilation_level WHITESPACE_ONLY \
 --formatting PRETTY_PRINT
 
