@@ -1,6 +1,6 @@
 java -jar compiler.jar \
 --js=../src/main.js \
---js=../src/other/soundmanager2.js \
+--js=../src/asset/soundmanager2.js \
 --js=../src/plugin/plugin.js \
 --js=../src/plugin/plugincollection.js \
 --js=../src/error.js \
@@ -32,7 +32,7 @@ java -jar compiler.jar \
 
 java -jar compiler.jar \
 --js=../src/main.js \
---js=../src/other/soundmanager2.js \
+--js=../src/asset/soundmanager2.js \
 --js=../src/plugin/plugin.js \
 --js=../src/plugin/plugincollection.js \
 --js=../src/error.js \
