@@ -1953,7 +1953,11 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
   this.base = 0;
   this.size = {width:0, height:0};
   this.characters = {};
-  var pathParts = window.location.href.split("/");
+  var pathParts = window.location.href;
+  if(pathParts.indexOf("?") !== -1) {
+    pathParts = pathParts.substr(0, pathParts.indexOf("?"))
+  }
+  pathParts = pathParts.split("/");
   var fileParts = this.filename.split("/");
   pathParts.pop();
   fileParts.pop();
@@ -2207,7 +2211,7 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
 }, initFlashPlayer:function() {
   if(pulse.Sound.FlashInitialized === false) {
     pulse.Sound.FlashInitialized = true;
-    window.soundManager = new SoundManager(pulse.libsrc + "/other/");
+    window.soundManager = new SoundManager(pulse.libsrc + "/asset/");
     soundManager.beginDelayedInit();
     soundManager.flashVersion = 8;
     soundManager.useFlashBlock = false;
