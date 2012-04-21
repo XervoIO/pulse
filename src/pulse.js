@@ -125,7 +125,7 @@ if (typeof pulse == 'undefined') {
     },
 
     coreFiles: [
-      'other/soundmanager2',
+      'asset/soundmanager2',
       'plugin/plugin',
       'plugin/plugincollection',
       'error',

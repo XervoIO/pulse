@@ -237,7 +237,7 @@ pulse.Sound = pulse.Asset.extend(
   initFlashPlayer : function() {
     if(pulse.Sound.FlashInitialized === false) {
       pulse.Sound.FlashInitialized = true;
-      window.soundManager = new SoundManager(pulse.libsrc + '/other/');
+      window.soundManager = new SoundManager(pulse.libsrc + '/asset/');
       soundManager.beginDelayedInit();
       soundManager.flashVersion = 8;
       soundManager.useFlashBlock = false;
