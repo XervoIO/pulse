@@ -59,7 +59,7 @@
                 spec.suite.startTime = spec.startTime;
             }
 
-            this.log(spec.suite.description + ' : ' + spec.description + ' ... ');
+            this.log(spec.suite.getFullName() + ' : ' + spec.description + ' ... ');
         },
 
         reportSpecResults: function(spec) {

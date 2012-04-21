@@ -1,7 +1,7 @@
 var queryString = getUrlVars();
 if(queryString['demo'] !== undefined && queryString['demo'].length > 0) {
   pulse.addGameFile(queryString['demo'] + '.js');
-  pulse.init('../src');
+  pulse.init('../../src');
 }
 
 /* 
