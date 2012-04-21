@@ -14,10 +14,10 @@ pulse.ready(function() {
     var sprite = null;
 
     if(/*count++ % 2 == 0*/true) {
-      sprite = new pulse.physics.Sprite( { src: '../img/physics_circle.png ', shape: 'circle'});
+      sprite = new pulse.physics.Sprite( { src: '../../img/physics_circle.png ', shape: 'circle'});
     }
     else {
-      sprite = new pulse.physics.Sprite( { src: '../img/physics_square.png' });
+      sprite = new pulse.physics.Sprite( { src: '../../img/physics_square.png' });
     }
 
     sprite.size = { width: 12, height: 12 };
@@ -25,13 +25,13 @@ pulse.ready(function() {
     layer.addNode(sprite);
   };
 
-  var ground = new pulse.physics.Sprite( { src: '../img/physics_ground.png ', isStatic: true });
+  var ground = new pulse.physics.Sprite( { src: '../../img/physics_ground.png ', isStatic: true });
   ground.position = { x: 280, y: 300 };
 
-  var wallA = new pulse.physics.Sprite( { src: '../img/physics_wall.png ', isStatic: true });
+  var wallA = new pulse.physics.Sprite( { src: '../../img/physics_wall.png ', isStatic: true });
   wallA.position = { x: 30, y: 300 };
 
-  var wallB = new pulse.physics.Sprite( { src: '../img/physics_wall.png ', isStatic: true });
+  var wallB = new pulse.physics.Sprite( { src: '../../img/physics_wall.png ', isStatic: true });
   wallB.position = { x: 530, y: 300 };
 
 	layer.anchor = {x:0, y:0};

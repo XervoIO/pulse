@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script type="text/javascript" src="../../src/other/require.js"></script>
-        <script type="text/javascript" src="../../src/pulse.js"></script>
+        <script type="text/javascript" src="../../../src/other/require.js"></script>
+        <script type="text/javascript">
+          requirejs.config({ paths: { order: "../../../src/other/order" }});
+        </script>
+        <script type="text/javascript" src="../../../src/pulse.js"></script>
         <script type="text/javascript">
 
-            pulse.init('../../src');
+            pulse.init('../../../src');
 
             var engine = null;
             var sprites = [];

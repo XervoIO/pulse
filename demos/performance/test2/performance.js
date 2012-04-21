@@ -1,12 +1,12 @@
 pulse.ready(function() {
-  var ballTexture = new pulse.Image({src:'../pong/ball.png'});
+  var ballTexture = new pulse.Texture({filename:'ball.png'});
   
   var world = new pulse.Layer({name: 'layer', x : 320, y : 240});
   world.zindex = 2;
   
   var bg = new pulse.Layer({name: 'bg', x : 320, y : 240});
   var bgs = new pulse.Sprite({
-    src: '../img/gray_bg.jpg', 
+    src: '../../img/gray_bg.jpg', 
     name: 'bg'
   });
   bgs.position = {x: 320, y: 240};
