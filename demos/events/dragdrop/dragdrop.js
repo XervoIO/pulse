@@ -14,7 +14,7 @@ pulse.ready(function(){
     debugKey.innerText = evt.key + '[' + evt.keyCode + ']';
   });
 
-  var dropArea = new pulse.Sprite({src: '../img/grid.png'});
+  var dropArea = new pulse.Sprite({src: '../../img/grid.png'});
   dropArea.dropAcceptEnabled = true;
   dropArea.events.bind('dragenter', function(evt) {
     var console = document.getElementById('console2');
@@ -29,7 +29,7 @@ pulse.ready(function(){
     console.innerText = "Drag Exit - " + evt.world.x + " " + evt.world.y;
   });
 
-  var dragBox = new pulse.Sprite({src: '../img/blue_square.png'});
+  var dragBox = new pulse.Sprite({src: '../../img/blue_square.png'});
   dragBox.dragDropEnabled = true;
   dragBox.events.bind('dragstart', function(evt) {
     var console = document.getElementById('console');
@@ -40,8 +40,8 @@ pulse.ready(function(){
     console.innerText = "Drag Drop - " + evt.world.x + " " + evt.world.y;
   });
 
-  var dragAccept = new pulse.Sprite({src: '../img/green_square.png'});
-  var dragRevoke = new pulse.Sprite({src: '../img/red_square.png'});
+  var dragAccept = new pulse.Sprite({src: '../../img/green_square.png'});
+  var dragRevoke = new pulse.Sprite({src: '../../img/red_square.png'});
 
   function loop(sceneManager)
   {
