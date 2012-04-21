@@ -126,7 +126,14 @@ pulse.BitmapFont = pulse.Asset.extend(
     this.characters = {};
 
     // Parse the directory from the font file
-    var pathParts = window.location.href.split('/');
+    var pathParts = window.location.href;
+    
+    //Remove any query string in the URL
+    if(pathParts.indexOf('?') !== -1) {
+      pathParts = pathParts.substr(0, pathParts.indexOf('?'));
+    }
+    
+    pathParts = pathParts.split('/');
     var fileParts = this.filename.split('/');
     pathParts.pop();
     fileParts.pop();
