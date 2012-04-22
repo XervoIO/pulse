@@ -67,8 +67,8 @@ pulse.Sprite = pulse.Visual.extend(
    */
 
   /**
-   * Event rose when mouse whe.
-   * @name pulse.Sprite#mousemove
+   * Event rose when mouse wheel is scrolled while pointer is over this node.
+   * @name pulse.Sprite#mousewheel
    * @event
    * @param {pulse.MouseEvent} evt The mouse event.
    */
@@ -121,21 +121,21 @@ pulse.Sprite = pulse.Visual.extend(
    * @config {pulse.Sprite} target The target is set to the node being dropped
    * upon.
    */
-  
+
   /**
    * Event rose when the user presses down on the node.
    * @name pulse.Sprite#touchstart
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user scrolls while tapping on the node.
    * @name pulse.Sprite#touchmove
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user releases their touch on the node.
    * @name pulse.Sprite#touchend

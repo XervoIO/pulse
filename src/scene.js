@@ -49,7 +49,7 @@ pulse.Scene = pulse.Node.extend(
 
   /**
    * Event rose when mouse wheel is scrolled while this scene is active.
-   * @name pulse.Scene#mousemove
+   * @name pulse.Scene#mousewheel
    * @event
    * @param {pulse.MouseEvent} evt The mouse event.
    */
@@ -77,21 +77,21 @@ pulse.Scene = pulse.Node.extend(
 
   /**
    * Event rose when the user presses down on the node.
-   * @name pulse.Sprite#touchstart
+   * @name pulse.Scene#touchstart
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user scrolls while tapping on the node.
-   * @name pulse.Sprite#touchmove
+   * @name pulse.Scene#touchmove
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user releases their touch on the node.
-   * @name pulse.Sprite#touchend
+   * @name pulse.Scene#touchend
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
@@ -422,7 +422,7 @@ pulse.Scene = pulse.Node.extend(
 
         if(this.layers[l].pointInBounds(evt.world))
         {
-          if((type === 'mousemove' || type === 'touchmove') 
+          if((type === 'mousemove' || type === 'touchmove')
             && this.layers[l].mousein === false) {
             this.layers[l].mousein = true;
             this.layers[l].events.raiseEvent('mouseover', evt);

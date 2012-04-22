@@ -291,7 +291,7 @@ ul.inheritsList
 				The layer object.
 				
 				
-					<br /><i>Defined in: </i> &lt;../src\visual\layer.js&gt;.
+					<br /><i>Defined in: </i> &lt;../src/visual/layer.js&gt;.
 				
 			</p>
 
@@ -312,7 +312,8 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Layer.html#constructor">pulse.Layer</a></b>(params)
 							</div>
-							<div class="description">Layers are the heart of the engine, as they are base canvas for drawingobjects.</div>
+							<div class="description">Layers are the heart of the engine, as they are base canvas for drawing
+objects.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -339,7 +340,8 @@ ul.inheritsList
 								<div class="fixedFont">
 								<b><a href="../symbols/pulse.Layer.html#events">events</a></b>
 								</div>
-								<div class="description">Event manager for this layer, handles passing events down to it'schildren.</div>
+								<div class="description">Event manager for this layer, handles passing events down to it's
+children.</div>
 							</td>
 						</tr>
 					
@@ -488,7 +490,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Layer.html#event:mousedown">mousedown</a></b>(evt)
 								</div>
-								<div class="description">Event rose when mouse button is pressed down while pointer is overthis layer.</div>
+								<div class="description">Event rose when mouse button is pressed down while pointer is over
+this layer.</div>
 							</td>
 						</tr>
 					
@@ -528,6 +531,42 @@ ul.inheritsList
 							</td>
 						</tr>
 					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Layer.html#event:mousewheel">mousewheel</a></b>(evt)
+								</div>
+								<div class="description">Event rose when mouse wheel is scrolled while pointer is over this layer.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Layer.html#event:touchend">touchend</a></b>(evt)
+								</div>
+								<div class="description">Event rose when the user releases their touch on the node.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Layer.html#event:touchmove">touchmove</a></b>(evt)
+								</div>
+								<div class="description">Event rose when the user scrolls while tapping on the node.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/pulse.Layer.html#event:touchstart">touchstart</a></b>(evt)
+								</div>
+								<div class="description">Event rose when the user presses down on the node.</div>
+							</td>
+						</tr>
+					
 					</tbody>
 				</table>
 				
@@ -551,7 +590,9 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Layers are the heart of the engine, as they are base canvas for drawingobjects. Tney are literally a collection of sprites that are drawn withina specific area. A collection of layers make up each scene.
+					Layers are the heart of the engine, as they are base canvas for drawing
+objects. Tney are literally a collection of sprites that are drawn within
+a specific area. A collection of layers make up each scene.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -566,7 +607,8 @@ ul.inheritsList
 								<span class="light fixedFont">{object}</span>  <b>params</b>
 								
 							</dt>
-								<dd>parameters that can be set as initialized optionson the node</dd>
+								<dd>parameters that can be set as initialized options
+on the node</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string}</span>  <b>params.name</b>
@@ -584,13 +626,15 @@ ul.inheritsList
 								 <b>params.(number)</b>
 								
 							</dt>
-								<dd>[x] the horizontal position of the layer, relative to thescene bounds.</dd>
+								<dd>[x] the horizontal position of the layer, relative to the
+scene bounds.</dd>
 						
 							<dt>
 								<span class="light fixedFont">{number}</span>  <b>params.y</b>
 								<i>Optional</i>
 							</dt>
-								<dd>the vertical position of the layer, relative to thescene.</dd>
+								<dd>the vertical position of the layer, relative to the
+scene.</dd>
 						
 						</dl>
 					
@@ -618,7 +662,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event manager for this layer, handles passing events down to it'schildren.
+						Event manager for this layer, handles passing events down to it's
+children.
 						
 						
 					</div>
@@ -706,7 +751,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Draws all the visual nodes to the layer's canvas. Then draw's this layerto the passed in context.
+						Draws all the visual nodes to the layer's canvas. Then draw's this layer
+to the passed in context.
 						
 						
 					</div>
@@ -721,7 +767,8 @@ ul.inheritsList
 									<span class="light fixedFont">{CanvasRenderingContext2D}</span> <b>ctx</b>
 									
 								</dt>
-								<dd>the context in which to draw thiscanvas on</dd>
+								<dd>the context in which to draw this
+canvas on</dd>
 							
 							</dl>
 						
@@ -742,7 +789,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Handles all events sent to this layer. It will check to see if any of thechild sprites need to be notified about the event. If so it will pass itto them.
+						Handles all events sent to this layer. It will check to see if any of the
+child sprites need to be notified about the event. If so it will pass it
+to them.
 						
 						
 					</div>
@@ -957,7 +1006,8 @@ ul.inheritsList
 									<span class="light fixedFont">{number}</span> <b>elapsed</b>
 									
 								</dt>
-								<dd>time elapsed since last update call inmilliseconds</dd>
+								<dd>time elapsed since last update call in
+milliseconds</dd>
 							
 							</dl>
 						
@@ -1022,7 +1072,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when mouse button is pressed down while pointer is overthis layer.
+						Event rose when mouse button is pressed down while pointer is over
+this layer.
 						
 						
 					</div>
@@ -1192,6 +1243,150 @@ ul.inheritsList
 						
 						
 
+					<hr />
+				
+					<a name="event:mousewheel"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>mousewheel</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when mouse wheel is scrolled while pointer is over this layer.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.MouseEvent.html">pulse.MouseEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The mouse event.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:touchend"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>touchend</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when the user releases their touch on the node.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.TouchEvent.html">pulse.TouchEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The touch event for dropped node.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:touchmove"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>touchmove</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when the user scrolls while tapping on the node.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.TouchEvent.html">pulse.TouchEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The touch event for dropped node.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="event:touchstart"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>touchstart</b>(evt)
+					
+					</div>
+					<div class="description">
+						Event rose when the user presses down on the node.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{<a href="../symbols/pulse.TouchEvent.html">pulse.TouchEvent</a>}</span> <b>evt</b>
+									
+								</dt>
+								<dd>The touch event for dropped node.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
 					
 				
 			
@@ -1203,7 +1398,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Paranoid Ferret Productions 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sat Apr 21 2012 15:21:53 GMT-0700 (MST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Sun Apr 22 2012 01:32:56 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>

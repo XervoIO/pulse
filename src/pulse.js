@@ -107,13 +107,13 @@ if (typeof pulse == 'undefined') {
       'gesturechange': 'touchgesture',
       'gestureend': 'touchgesture'
     },
-    
+
     eventtranslations: {
       'touchstart': 'mousedown',
       'touchmove': 'mousemove',
       'touchend': 'mouseup'
     },
-    
+
     customevents: {
       'dragstart' : 'drag',
       'dragdrop' : 'drag',

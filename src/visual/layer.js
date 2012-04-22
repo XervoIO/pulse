@@ -70,7 +70,7 @@ pulse.Layer = pulse.Visual.extend(
 
   /**
    * Event rose when mouse wheel is scrolled while pointer is over this layer.
-   * @name pulse.Layer#mousemove
+   * @name pulse.Layer#mousewheel
    * @event
    * @param {pulse.MouseEvent} evt The mouse event.
    */
