@@ -77,21 +77,21 @@ pulse.Layer = pulse.Visual.extend(
 
   /**
    * Event rose when the user presses down on the node.
-   * @name pulse.Sprite#touchstart
+   * @name pulse.Layer#touchstart
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user scrolls while tapping on the node.
-   * @name pulse.Sprite#touchmove
+   * @name pulse.Layer#touchmove
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
-  
+
   /**
    * Event rose when the user releases their touch on the node.
-   * @name pulse.Sprite#touchend
+   * @name pulse.Layer#touchend
    * @event
    * @param {pulse.TouchEvent} evt The touch event for dropped node.
    */
@@ -188,7 +188,7 @@ pulse.Layer = pulse.Visual.extend(
     if(name instanceof pulse.Visual) {
       spriteName = name.name;
     }
-    
+
     if(this.objects.hasOwnProperty(spriteName)) {
       if(this.objects[spriteName] instanceof pulse.Visual) {
         var clear = this.objects[spriteName].boundsPrevious;
