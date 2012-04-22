@@ -123,12 +123,12 @@ Pulse supports many types of mouse and keyboard events. Each object has an insta
     });
 
 #More Information
-You can find full documentation at [http://www.withpulse.com/docs/][6].
+You can find full documentation at [http://www.withpulse.com/docs/][5].
 
 If, in the course of using Pulse, you find bugs or would like to see a new feature, please send specific details to [support@withpulse.com][6].
 
 
-  [1]: http://requirejs.org/docs/download.html#order
+  [1]: http://www.withpulse.com/
   [2]: http://requirejs.org/docs/download.html#requirejs
   [3]: http://requirejs.org/docs/download.html#order
   [4]: https://github.com/onmodulus/pulse-demos
