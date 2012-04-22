@@ -63,6 +63,8 @@ The go function also accepts an optional callback that will be invoked on each u
 ##Visual Hierarchy
 Visual elements (nodes) in Pulse are organized into Layers, Scenes, and an Engine. Each game can have only one Engine. Each Engine can include multiple Scenes, however only one scene can be active at any given time. Each scene can contain multiple layers and each layer can include multiple nodes (sprites, text, etc).
 
+![Pulse Visual Diagram][7]
+
 The minimum amount of code required to display something to the screen is:
 
     pulse.ready(function() {
@@ -132,3 +134,4 @@ If, in the course of using Pulse, you find bugs or would like to see a new featu
   [4]: https://github.com/onmodulus/pulse-demos
   [5]: http://www.withpulse.com/docs/
   [6]: mailto:support@withpulse.com
+  [7]: http://www.withpulse.com/_/img/visual_tree.png
