@@ -49,6 +49,17 @@ These are typically DIV elements, but can be other types if needed.
       var engine = new pulse.Engine( { gameWindow: “myDivElementId” } );
     });
 
+##Starting the Engine
+After the game has been configured and is ready to begin, call go on the Engine class. The only required argument is the frames per second the game will run at. For example:
+
+    pulse.ready(function() {
+      //The game is all setup here.
+      ...
+      engine.go(33);
+    });
+
+The go function also accepts an optional callback that will be invoked on each update loop. This callback can be used to control game logic, animations, etc. For sufficiently advanced games, however, it is recommended to extend the base Pulse classes.
+
 ##Visual Hierarchy
 Visual elements (nodes) in Pulse are organized into Layers, Scenes, and an Engine. Each game can have only one Engine. Each Engine can include multiple Scenes, however only one scene can be active at any given time. Each scene can contain multiple layers and each layer can include multiple nodes (sprites, text, etc).
 
@@ -67,18 +78,9 @@ The minimum amount of code required to display something to the screen is:
       var diamond = new pulse.Sprite({ src: 'img/diamond.png' });
       diamond.position = { x: 320, y: 240 };
       layer.addNode(diamond);
-    });
 
-##Starting the Engine
-After the game has been configured and is ready to begin, call go on the Engine class. For example:
-
-    pulse.ready(function() {
-      //The game is all setup here.
-      ...
       engine.go(33);
     });
-
-The go function also accepts an optional callback that will be invoked on each update loop. This callback can be used to control game logic, animations, etc. For sufficiently advanced games, however, it is recommended to extend the base Pulse classes.
 
 ##Extending Pulse Classes
 All Pulse classes are implemented using a classical approach to inheritance, which makes extending them very easy. To extend the update logic of sprite, you would use the following code:
@@ -121,7 +123,7 @@ Pulse supports many types of mouse and keyboard events. Each object has an insta
 #More Information
 You can find full documentation at [http://www.withpulse.com/docs/][6].
 
-If in the course of using the Pulse developer preview, bugs or features requests are encountered, please send specific details to [support@withpulse.com][6].
+If, in the course of using Pulse, you find bugs or would like to see a new feature, please send specific details to [support@withpulse.com][6].
 
 
   [1]: http://requirejs.org/docs/download.html#order
