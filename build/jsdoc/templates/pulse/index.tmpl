@@ -3,7 +3,7 @@
 
 	<for each="thisClass" in="data">
 	<div>
-		<h2>{+(new Link().toSymbol(thisClass.alias))+}</h2>
+		<h2><a href='/docs/symbols/{+thisClass.alias+}'>{+thisClass.alias+}</a></h2>
 		<p>{+resolveLinks(summarize(thisClass.classDesc))+}</p>
 	</div>
 	</for>
