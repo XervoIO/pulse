@@ -227,6 +227,7 @@ pulse.Engine = PClass.extend(
     if(loop) {
       this.loopLogic = loop;
     }
+
     requestAnimFrame(function(){eng.loop.call(eng);}, this._private.mainDiv);
   },
 
@@ -245,7 +246,7 @@ pulse.Engine = PClass.extend(
 
     var eng = this;
 
-    if(autoContinue || (autoContinue == undefined)) {
+    if(autoContinue || (autoContinue === undefined)) {
       requestAnimFrame(function(){eng.loop.call(eng);}, this._private.mainDiv);
     }
 
@@ -276,12 +277,8 @@ pulse.Engine = PClass.extend(
           this.loopLogic(this.scenes, elapsed);
         }
 
-        var activeScenes = this.scenes.getScenes(true);
-
-        for(var s = 0; s < activeScenes.length; s++)
-        {
-          activeScenes[s].update(elapsed);
-        }
+        this.update(elapsed);
+        this.draw();
 
         this.masterTime += elapsed;
       }
@@ -293,6 +290,52 @@ pulse.Engine = PClass.extend(
     pulse.plugins.invoke(
       'pulse.Engine',
       'loop',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
+  },
+
+  update : function(elapsed) {
+    pulse.plugins.invoke(
+      'pulse.Engine',
+      'update',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
+    var activeScenes = this.scenes.getScenes(true);
+
+    for(var s = 0; s < activeScenes.length; s++)
+    {
+      activeScenes[s].update(elapsed);
+    }
+
+    pulse.plugins.invoke(
+      'pulse.Engine',
+      'update',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
+  },
+
+  draw : function() {
+    pulse.plugins.invoke(
+      'pulse.Engine',
+      'draw',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
+    var activeScenes = this.scenes.getScenes(true);
+
+    for(var s = 0; s < activeScenes.length; s++)
+    {
+      activeScenes[s].draw();
+    }
+
+    pulse.plugins.invoke(
+      'pulse.Engine',
+      'draw',
       pulse.plugin.PluginCallbackTypes.onExit,
       this,
       arguments);

@@ -340,7 +340,7 @@ pulse.Scene = pulse.Node.extend(
   },
 
   /**
-   * Updates the layers and then draws them.
+   * Updates the layers.
    * @param {number} elapsed time elapsed since last update call in
    * milliseconds
    */
@@ -376,6 +376,29 @@ pulse.Scene = pulse.Node.extend(
       this.layers[ul].update(elapsed);
     }
 
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'update',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
+  },
+
+
+  /**
+   * Draws any layers that are live and have been updated.
+   */
+  draw : function() {
+
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'draw',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     // draw layers
     for(var o = 0; o < this._private.orderedKeys.length; o++) {
       var layer = this.layers[this._private.orderedKeys[o]];
@@ -393,7 +416,7 @@ pulse.Scene = pulse.Node.extend(
     // Plugin support.
     pulse.plugins.invoke(
       'pulse.Scene',
-      'update',
+      'draw',
       pulse.plugin.PluginCallbackTypes.onExit,
       this,
       arguments);
