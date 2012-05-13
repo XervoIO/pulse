@@ -409,7 +409,11 @@ pulse.Scene = pulse.Node.extend(
         var ctx = this._private.liveLayers[layer.name].context;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        layer.draw(ctx);
+        if(layer.visible === true) {
+          layer.draw(ctx);
+        } else {
+          layer.updated = false;
+        }
       }
     }
 
