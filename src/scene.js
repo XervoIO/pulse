@@ -223,6 +223,7 @@ pulse.Scene = pulse.Node.extend(
         layer.size.height = this._private.defaultSize.height;
       }
 
+      layer.parent = this;
       this.layers[layer.name] = layer;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers);
 
