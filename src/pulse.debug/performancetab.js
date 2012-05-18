@@ -47,7 +47,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
 
     // the canvas size
     var w = window.innerWidth;
-    var h = 150;
+    var h = 118;
 
     /**
      * The canvas for the stats graph.
@@ -91,7 +91,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
      */
     this._private.updateLabel = document.createElement('div');
     this._private.updateLabel.className = 'debug-perf-label';
-    this.container.appendChild(this._private.updateLabel);
+    //this.container.appendChild(this._private.updateLabel);
 
     /**
      * @private
@@ -103,6 +103,10 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.updateMarker.style.backgroundColor = '#61E561';
     this._private.updateLabel.appendChild(this._private.updateMarker);
 
+    this._private.stats = document.createElement('div');
+    this._private.stats.style.cssText = 'height: 20px;';
+    this.container.appendChild(this._private.stats);
+
     /**
      * @private
      * The update text label for the legend for the graph.
@@ -111,7 +115,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.updateText = document.createElement('span');
     this._private.updateText.className = 'debug-perf-labeltext';
     this._private.updateText.innerHTML = 'Update';
-    this._private.updateLabel.appendChild(this._private.updateText);
+    this._private.stats.appendChild(this._private.updateText);
 
     /**
      * @private
@@ -120,7 +124,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
      */
     this._private.drawLabel = document.createElement('div');
     this._private.drawLabel.className = 'debug-perf-label';
-    this.container.appendChild(this._private.drawLabel);
+    //this.container.appendChild(this._private.drawLabel);
 
     /**
      * @private
@@ -130,7 +134,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.drawMarker = document.createElement('div');
     this._private.drawMarker.className = 'debug-perf-marker';
     this._private.drawMarker.style.backgroundColor = '#CC22EE';
-    this._private.drawLabel.appendChild(this._private.drawMarker);
+    //this._private.drawLabel.appendChild(this._private.drawMarker);
 
     /**
      * @private
@@ -140,7 +144,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.drawText = document.createElement('span');
     this._private.drawText.className = 'debug-perf-labeltext';
     this._private.drawText.innerHTML = 'Draw';
-    this._private.drawLabel.appendChild(this._private.drawText);
+    this._private.stats.appendChild(this._private.drawText);
 
     /**
      * @private
@@ -149,7 +153,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
      */
     this._private.browserLabel = document.createElement('div');
     this._private.browserLabel.className = 'debug-perf-label';
-    this.container.appendChild(this._private.browserLabel);
+    //this.container.appendChild(this._private.browserLabel);
 
     /**
      * @private
@@ -159,7 +163,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.browserMarker = document.createElement('div');
     this._private.browserMarker.className = 'debug-perf-marker';
     this._private.browserMarker.style.backgroundColor = '#F7Fd4A';
-    this._private.browserLabel.appendChild(this._private.browserMarker);
+    //this._private.browserLabel.appendChild(this._private.browserMarker);
 
     /**
      * @private
@@ -169,7 +173,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.browserText = document.createElement('span');
     this._private.browserText.className = 'debug-perf-labeltext';
     this._private.browserText.innerHTML = 'Browser';
-    this._private.browserLabel.appendChild(this._private.browserText);
+    this._private.stats.appendChild(this._private.browserText);
   },
 
   /**
