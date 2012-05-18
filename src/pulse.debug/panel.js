@@ -22,16 +22,6 @@ pulse.debug.Panel = PClass.extend(
 
     var _self = this;
 
-    // insert debug css
-    // var head = document.getElementsByTagName("head")[0];
-    // var css = document.createElement('link');
-    // css.type = 'text/css';
-    // css.rel = 'stylesheet';
-    // // Add the css directly
-    // css.href = '../../lib/core/debug/debugpanel.css';
-    // css.media = 'screen';
-    // head.appendChild(css);
-
     /**
      * Panel container element.
      * @type {DOMElement}
@@ -65,12 +55,6 @@ pulse.debug.Panel = PClass.extend(
         contentHeight = contentHeight.substr(0, contentHeight.length - 2);
         contentHeight = parseInt(contentHeight, 10);
         _self.tabholder.style.height = (contentHeight - d.y) + 'px';
-
-        //var top = parseInt(_self.panel.offsetTop, 10);
-        //var left = parseInt(_self.panel.offsetLeft, 10);
-        //pulse.debug.log(d.x + ':' + d.y);
-        //_self.panel.style.left = (left + d.x) + "px";
-        //_self.panel.style.top = (top + d.y) + "px";
         ec = {x : e.pageX, y : e.pageY};
       };
       window.addEventListener('mousemove', mm, false);

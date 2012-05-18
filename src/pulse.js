@@ -166,9 +166,6 @@ if (typeof pulse == 'undefined') {
       'pulse.debug/consoletab',
       'pulse.debug/inspecttab',
       'pulse.debug/debugmanager',
-      //'pulse.debug/engine',
-      //'pulse.debug/visual',
-      //'pulse.debug/layer',
       'pulse.debug/debug',
 
       /* physics module */
