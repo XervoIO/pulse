@@ -480,28 +480,6 @@ pulse.Visual = pulse.Node.extend(
 
     ctx.save();
 
-    if(pulse.DEBUG || this.debugging === true) {
-      ctx.save();
-      ctx.fillStyle = "#CCDE42";
-      ctx.beginPath();
-      ctx.arc(
-        this.positionTopLeft.x + this.canvas.width / 2,
-        this.positionTopLeft.y + this.canvas.height / 2,
-        3, 0, Math.PI * 2, true
-      );
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-
-    if(pulse.DEBUG || this.debugging === true) {
-      ctx.strokeStyle = "#0022FF";
-      ctx.strokeRect(
-        this.positionTopLeft.x, this.positionTopLeft.y,
-        this.size.width, this.size.height
-      );
-    }
-
     // apply the alpha for this visual node
     ctx.globalAlpha = this.alpha / 100;
 
@@ -543,26 +521,7 @@ pulse.Visual = pulse.Node.extend(
       py
     );
 
-    if(pulse.DEBUG || this.debugging === true) {
-      ctx.strokeStyle = "#22FF33";
-      ctx.strokeRect(
-        this.positionTopLeft.x / Math.abs(this.scale.x),
-        this.positionTopLeft.y / Math.abs(this.scale.y),
-        this.size.width,
-        this.size.height
-      );
-    }
     ctx.restore();
-
-    if(pulse.DEBUG || this.debugging === true) {
-      ctx.save();
-      ctx.fillStyle = "#FF3300";
-      ctx.beginPath();
-      ctx.arc(this.position.x, this.position.y, 3, 0, Math.PI * 2, true);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
 
     this.updated = false;
 

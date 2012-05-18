@@ -173,7 +173,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
 
       nameSpan.onclick = function() {
         iTab.selectNode(node);
-      }; 
+      };
     } else {
       nodeDiv.appendChild(nameSpan);
     }
@@ -182,6 +182,8 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
   },
 
   addNode : function(node) {
+    node.debugging = false;
+
     var parentElm = null;
     if(node.parent !== null) {
       parentElm = document.getElementById('inspector-' + node.parent.name + '-children');

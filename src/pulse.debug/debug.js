@@ -1,3 +1,12 @@
+pulse.debug.visualDebug = false;
+pulse.debug.visualDebugColors = [
+	'000000', //Default/Undefined
+	'808080', //Layer
+	'800080', //Sprite
+	'FF0000', //CanvasLabel
+	'FFFF00'  //BitmapLabel
+];
+
 pulse.debug.plugin = new pulse.plugin.Plugin();
 pulse.debug.manager = new pulse.debug.DebugManager();
 pulse.debug.log = function(message, type) {
@@ -9,7 +18,6 @@ pulse.debug.log = function(message, type) {
 		pulse.debug.manager.logDebug(message);
 	}
 };
-
 
 pulse.debug.plugin.subscribe(
 	'pulse.Engine',
@@ -66,10 +74,55 @@ pulse.debug.plugin.subscribe(
 	'pulse.Visual',
 	'draw',
 	pulse.plugin.PluginCallbackTypes.onEnter,
-	function(params) {
+	function(ctx) {
 		if(this.updated === true) {
 			pulse.debug.manager.incrementDraws();
 		}
+	}
+);
+
+pulse.debug.plugin.subscribe(
+	'pulse.Visual',
+	'draw',
+	pulse.plugin.PluginCallbackTypes.onExit,
+	function(ctx) {
+		var color = '#';
+		if(this instanceof pulse.Layer) {
+			color += pulse.debug.visualDebugColors[1];
+		} else if(this instanceof pulse.Sprite) {
+			color += pulse.debug.visualDebugColors[2];
+		} else if(this instanceof pulse.CanvasLabel) {
+			color += pulse.debug.visualDebugColors[3];
+		} else if(this instanceof pulse.BitmapLabel) {
+			color += pulse.debug.visualDebugColors[4];
+		} else {
+			color += pulse.debug.visualDebugColors[0];
+		}
+
+		if(this.debugging === true || pulse.debug.visualDebug === true){
+			//Draw a dot on the anchor point
+			ctx.save();
+			ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.arc(
+				this.positionTopLeft.x + this.canvas.width / 2,
+				this.positionTopLeft.y + this.canvas.height / 2,
+				3, 0, Math.PI * 2, true
+			);
+			ctx.closePath();
+			ctx.fill();
+			ctx.restore();
+
+			//Draw a bounding box
+			ctx.strokeStyle = color;
+			ctx.strokeRect(
+				this.positionTopLeft.x / Math.abs(this.scale.x),
+				this.positionTopLeft.y / Math.abs(this.scale.y),
+				this.size.width,
+				this.size.height
+			);
+		}
+		
 	}
 );
 
@@ -130,5 +183,5 @@ pulse.debug.plugin.subscribe(
 pulse.plugins.add(pulse.debug.plugin);
 
 pulse.ready(function(){
-	
+
 });
