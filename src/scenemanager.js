@@ -43,6 +43,14 @@ pulse.SceneManager = PClass.extend(
    * @param {pulse.Scene} scene the scene to add
    */
   addScene : function(scene) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.SceneManager',
+      'addScene',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     if(scene instanceof pulse.Scene &&
       !this.scenes.hasOwnProperty(scene.name))
     {
@@ -61,6 +69,14 @@ pulse.SceneManager = PClass.extend(
 
       this.scenes[scene.name] = scene;
     }
+
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.SceneManager',
+      'addScene',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**
@@ -68,6 +84,14 @@ pulse.SceneManager = PClass.extend(
    * @param {string} name the scene name
    */
   removeScene : function(name) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.SceneManager',
+      'removeScene',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     if(name instanceof pulse.Scene) {
       name = name.name;
     }
@@ -75,6 +99,14 @@ pulse.SceneManager = PClass.extend(
     if(this.scenes.hasOwnProperty(name)) {
       delete this.scenes[name];
     }
+
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.SceneManager',
+      'removeScene',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**

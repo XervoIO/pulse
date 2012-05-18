@@ -128,7 +128,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.Layer',
-	'addnode',
+	'addNode',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.addNode(params);
@@ -137,7 +137,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.Layer',
-	'removenode',
+	'removeNode',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.removeNode(params);
@@ -146,7 +146,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.Scene',
-	'addlayer',
+	'addLayer',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.addNode(params);
@@ -155,7 +155,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.Scene',
-	'removelayer',
+	'removeLayer',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.removeNode(params);
@@ -164,7 +164,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.SceneManager',
-	'addscene',
+	'addScene',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.addNode(params);
@@ -173,7 +173,7 @@ pulse.debug.plugin.subscribe(
 
 pulse.debug.plugin.subscribe(
 	'pulse.SceneManager',
-	'removescene',
+	'removeScene',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(params) {
 		pulse.debug.manager.removeNode(params);

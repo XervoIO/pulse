@@ -197,6 +197,14 @@ pulse.Scene = pulse.Node.extend(
    * @param {number} zindex the zindex of the new layer
    */
   addLayer : function(layer, zindex) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'addLayer',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     if(layer instanceof pulse.Layer &&
        !this.layers.hasOwnProperty(layer.name))
     {
@@ -240,6 +248,14 @@ pulse.Scene = pulse.Node.extend(
         }
       }
     }
+
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'addLayer',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**
@@ -247,10 +263,26 @@ pulse.Scene = pulse.Node.extend(
    * @param {string} name the name of the layer to remove
    */
   removeLayer : function(name) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'removeLayer',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     if(typeof name === 'string' && this.layers.hasOwnProperty(name)) {
       delete this.layers[name];
       delete this._private.liveLayers[name];
     }
+
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Scene',
+      'removeLayer',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**

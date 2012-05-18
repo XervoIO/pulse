@@ -165,7 +165,7 @@ pulse.Layer = pulse.Visual.extend(
     // Plugin support.
     pulse.plugins.invoke(
       'pulse.Layer',
-      'addnode',
+      'addNode',
       pulse.plugin.PluginCallbackTypes.onEnter,
       this,
       arguments);
@@ -189,7 +189,7 @@ pulse.Layer = pulse.Visual.extend(
 
     pulse.plugins.invoke(
       'pulse.Layer',
-      'addnode',
+      'addNode',
       pulse.plugin.PluginCallbackTypes.onExit,
       this,
       arguments);
@@ -203,7 +203,7 @@ pulse.Layer = pulse.Visual.extend(
     // Plugin support.
     pulse.plugins.invoke(
       'pulse.Layer',
-      'removenode',
+      'removeNode',
       pulse.plugin.PluginCallbackTypes.onEnter,
       this,
       arguments);
@@ -227,7 +227,7 @@ pulse.Layer = pulse.Visual.extend(
 
     pulse.plugins.invoke(
       'pulse.Layer',
-      'removenode',
+      'removeNode',
       pulse.plugin.PluginCallbackTypes.onExit,
       this,
       arguments);
