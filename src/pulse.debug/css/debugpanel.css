@@ -1,0 +1,134 @@
+#pulse-debug-panel {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 500px; height: 302px;
+  margin: 0; padding: 0;
+  border: 1px solid #ABABAB;
+  font: 10px Arial;
+}
+
+#pulse-debug-panel div {
+  padding: 0; margin: 0;
+}
+
+#pulse-debug-panel div.debug-topbar {
+  height: 24px;
+  background: #E1E1E1 url('../img/topbar_bg.png') repeat-x;
+  font-size: 13px;
+  line-height: 24px;
+  padding: 0 5px;
+}
+
+.debug-tabbar {
+  width: 48px; height: 260px;
+  float: left;
+  background: #333 url('../img/tabbar_bg.png') repeat-y;
+  overflow: hidden;
+}
+
+.debug-tabbar a {
+  display: block;
+  width: 45px; height: 45px;
+  margin: 0 0 2px;
+  text-indent: -9999px;
+  background: url('tab_icon.png');
+}
+
+#pulse-tab-link-perf {
+  background-image: url('../img/perf_icon.png');
+}
+
+#pulse-tab-link-console {
+  background-image: url('../img/console_icon.png');
+}
+
+.debug-tabbar a.selected {
+  background-position: 0 -45px;
+}
+
+.debug-tabholder {
+  width: 452px; height: 260px;
+  background: #333;
+  float: left;
+}
+
+#pulse-debug-panel div.debug-statusbar {
+  height: 16px;
+  background: #F1F1F1;
+  clear: both;
+  border-top: 1px solid #ABABAB;
+  line-height: 16px;
+  padding: 0 5px 0 0;
+}
+
+.debug-statusbar span {
+  display: block;
+  float: right;
+  margin: 0 0 0 10px;
+}
+
+#pulse-debug-panel div.debug-tab {
+  margin: 0; padding: 10px;
+  display: none;
+  font-size: 11px;
+  color: #F5F5F5;
+}
+
+#pulse-debug-panel div.debug-tab.selected {
+  display: block;
+}
+
+#pulse-perf-graph {
+  border: 1px solid #DBDBDB;
+  margin: 0 0 10px;
+}
+
+#pulse-debug-panel div.debug-perf-label {
+  height: 15px;
+  margin: 0 0 5px;
+  line-height: 15px;
+}
+
+#pulse-debug-panel div.debug-perf-marker {
+  width: 15px; height: 15px;
+  float: left;
+  margin: 0 5px 0 0;
+}
+
+.debug-console-toolbar {
+  height: 20px;
+}
+
+.debug-console-toolbar a {
+  margin: 0 10px 0 0;
+  text-decoration: none;
+  font-size: 12px;
+  color: #F5F5F5;
+}
+
+.debug-console-toolbar a.selected {
+  color: #3DBFF6;
+}
+
+.pulse-debug-log {
+  height: 220px;
+  overflow: auto;
+}
+
+#pulse-debug-panel div.debug-log-message {
+  padding: 3px;
+  border-bottom: 1px dotted #E1E1E1;
+}
+
+div.debug-log-message span.timestamp {
+  margin: 0 5px 0 0;
+  font-size: 10px;
+}
+
+div.debug-log-message.warning span.text {
+  color: #FFF479;
+}
+
+div.debug-log-message.error span.text {
+  color: #CA3333;
+}

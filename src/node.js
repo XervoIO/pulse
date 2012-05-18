@@ -48,6 +48,13 @@ pulse.Node = PClass.extend(
     this.parent = null;
 
     /**
+     * Determines whether or not this node should run in debug mode. This allows
+     * debugging on a node by node basis rather than just globally.
+     * @type {boolean}
+     */
+    this.debugging = false;
+
+    /**
      * @private
      * Private properties of the node. Should not need or use these.
      * @type {object}

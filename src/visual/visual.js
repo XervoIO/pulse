@@ -480,7 +480,7 @@ pulse.Visual = pulse.Node.extend(
 
     ctx.save();
 
-    if(pulse.DEBUG) {
+    if(pulse.DEBUG || this.debugging === true) {
       ctx.save();
       ctx.fillStyle = "#CCDE42";
       ctx.beginPath();
@@ -494,7 +494,7 @@ pulse.Visual = pulse.Node.extend(
       ctx.restore();
     }
 
-    if(pulse.DEBUG) {
+    if(pulse.DEBUG || this.debugging === true) {
       ctx.strokeStyle = "#0022FF";
       ctx.strokeRect(
         this.positionTopLeft.x, this.positionTopLeft.y,
@@ -543,7 +543,7 @@ pulse.Visual = pulse.Node.extend(
       py
     );
 
-    if(pulse.DEBUG) {
+    if(pulse.DEBUG || this.debugging === true) {
       ctx.strokeStyle = "#22FF33";
       ctx.strokeRect(
         this.positionTopLeft.x / Math.abs(this.scale.x),
@@ -554,7 +554,7 @@ pulse.Visual = pulse.Node.extend(
     }
     ctx.restore();
 
-    if(pulse.DEBUG) {
+    if(pulse.DEBUG || this.debugging === true) {
       ctx.save();
       ctx.fillStyle = "#FF3300";
       ctx.beginPath();

@@ -378,7 +378,7 @@ pulse.Engine = PClass.extend(
     var y = rawEvt.clientY - offset.y + scrollY;
     
     var isTouch = false;
-    if(pulse.events[etype] === 'touch' 
+    if(pulse.events[etype] === 'touch'
       || pulse.events[etype] === 'touchgesture') {
       isTouch = true;
       

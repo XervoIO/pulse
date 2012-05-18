@@ -153,6 +153,25 @@ if (typeof pulse == 'undefined') {
       'scene',
       'scenemanager',
       'engine',
+
+      /* debug module */
+      'pulse.debug/define',
+      'pulse.debug/logger',
+      'pulse.debug/timer',
+      'pulse.debug/fps',
+      'pulse.debug/counter',
+      'pulse.debug/paneltab',
+      'pulse.debug/performancetab',
+      'pulse.debug/panel',
+      'pulse.debug/consoletab',
+      'pulse.debug/inspecttab',
+      'pulse.debug/debugmanager',
+      //'pulse.debug/engine',
+      //'pulse.debug/visual',
+      //'pulse.debug/layer',
+      'pulse.debug/debug',
+
+      /* physics module */
       'pulse.physics/box2d',
       'pulse.physics/sprite',
       'pulse.physics/layer'

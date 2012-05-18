@@ -162,6 +162,15 @@ pulse.Layer = pulse.Visual.extend(
    * @param {object} obj the object to add
    */
   addNode : function(obj) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Layer',
+      'addnode',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
+
     if(obj instanceof pulse.Visual) {
       // z-index was not set, set it to the number of items + 1.
       if(isNaN(obj.zindex)) {
@@ -177,6 +186,13 @@ pulse.Layer = pulse.Visual.extend(
         pulse.error.DuplicateName(obj.name);
       }
     }
+
+    pulse.plugins.invoke(
+      'pulse.Layer',
+      'addnode',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**
@@ -184,6 +200,14 @@ pulse.Layer = pulse.Visual.extend(
    * @param {string} name the name of the node to remove
    */
   removeNode : function(name) {
+    // Plugin support.
+    pulse.plugins.invoke(
+      'pulse.Layer',
+      'removenode',
+      pulse.plugin.PluginCallbackTypes.onEnter,
+      this,
+      arguments);
+
     var spriteName = name;
     if(name instanceof pulse.Visual) {
       spriteName = name.name;
@@ -200,6 +224,13 @@ pulse.Layer = pulse.Visual.extend(
       this.objects[spriteName].parent = null;
       delete this.objects[spriteName];
     }
+
+    pulse.plugins.invoke(
+      'pulse.Layer',
+      'removenode',
+      pulse.plugin.PluginCallbackTypes.onExit,
+      this,
+      arguments);
   },
 
   /**
