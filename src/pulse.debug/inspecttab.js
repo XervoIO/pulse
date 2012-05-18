@@ -32,8 +32,9 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     this.container.appendChild(this._private.nodeList);
 
     this._private.nodePropsDiv = document.createElement('div');
+    this._private.nodePropsDiv.style.cssText = 'overflow: auto;';
     this._private.nodePropsDiv.style.width = '30%';
-    this._private.nodePropsDiv.style.height = '100%';
+    this._private.nodePropsDiv.style.height = '130px';
     this._private.nodePropsDiv.style.cssFloat = 'right';
     this._private.nodePropsDiv.style.styleFloat = 'right';
     //this._private.nodePropsDiv.style.clear = 'both';
@@ -289,5 +290,14 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
 
     return value;
+  },
+
+  /**
+   * Resizes the console when the container is resized.
+   * @param {number} newSize the new size of the container
+   */
+  resize : function(newSize) {
+    this._private.nodeList.style.height = newSize + 'px';
+    this._private.nodePropsDiv.style.height = newSize + 'px';
   }
 });

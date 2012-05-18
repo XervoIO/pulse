@@ -53,19 +53,18 @@ pulse.debug.Logger = PClass.extend(
   },
 
   scrollDiv : function() {
-    var scrollDiv = document.getElementById(this.scrollContainerId);
-        var currentHeight = 0;
+    var currentHeight = 0;
 
-        if (this.container.scrollHeight > 0) {
-          currentHeight = this.container.scrollHeight;
-        } else {
-          if (this.container.offsetHeight > 0) {
-            currentHeight = scrollDiv.offsetHeight;
-          }
-           
-          if (currentHeight - this.container.scrollTop - this.container.offsetHeight < 20) {
-              this.container.scrollTop = currentHeight;
-          }
+    if (this.container.scrollHeight > 0) {
+      currentHeight = this.container.scrollHeight;
+    } else {
+      if (this.container.offsetHeight > 0) {
+        currentHeight = scrollDiv.offsetHeight;
+      }
+       
+      if (currentHeight - this.container.scrollTop - this.container.offsetHeight < 20) {
+          this.container.scrollTop = currentHeight;
+      }
         }
   },
 

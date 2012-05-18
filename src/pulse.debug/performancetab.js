@@ -197,6 +197,14 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
   },
 
   /**
+   * Resizes the console when the container is resized.
+   * @param {number} newSize the new size of the container
+   */
+  resize : function(newSize) {
+    this.canvas.height = newSize - 20;
+  },
+
+  /**
    * Updates the graph to show the frame elapsed time, update time, and
    * draw time. It will also update the labels to show the actual values.
    */

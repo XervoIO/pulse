@@ -54,7 +54,7 @@ pulse.debug.Panel = PClass.extend(
         var contentHeight = _self.tabholder.style.height;
         contentHeight = contentHeight.substr(0, contentHeight.length - 2);
         contentHeight = parseInt(contentHeight, 10);
-        _self.tabholder.style.height = (contentHeight - d.y) + 'px';
+        _self.resize(contentHeight - d.y);
         ec = {x : e.pageX, y : e.pageY};
       };
       window.addEventListener('mousemove', mm, false);
@@ -246,7 +246,10 @@ pulse.debug.Panel = PClass.extend(
   },
 
   resize : function(newSize) {
-    for(var tid in this.tabbarLinks) {
+    this.tabholder.style.height = newSize + 'px';
+
+    for(var tid in this.tabs) {
+      this.tabs[tid].resize(newSize);
     }
   },
 

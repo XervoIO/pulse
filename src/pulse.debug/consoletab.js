@@ -26,6 +26,7 @@ pulse.debug.ConsoleTab = pulse.debug.PanelTab.extend(
      */
     this.toolbar = document.createElement('div');
     this.toolbar.className = 'debug-console-toolbar';
+    this.toolbar.style.height = '20px;';
     this.container.appendChild(this.toolbar);
 
     /**
@@ -119,5 +120,13 @@ pulse.debug.ConsoleTab = pulse.debug.PanelTab.extend(
    */
   clearFilter : function() {
     this.logger.clearFilter();
+  },
+
+  /**
+   * Resizes the console when the container is resized.
+   * @param {number} newSize the new size of the container
+   */
+  resize : function(newSize) {
+    this.logger.container.style.height = (newSize - 20) + 'px';
   }
 });
