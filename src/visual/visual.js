@@ -644,6 +644,15 @@ pulse.Visual = pulse.Node.extend(
   },
 
   /**
+   * Convenience function that will bind a callback to an event type.
+   * @param {string} type the event type to bind
+   * @param {function} callback the function callback to bind to the event
+   */
+  on : function (type, callback) {
+    this.events.bind(type, callback);
+  },
+
+  /**
    * Handles all events sent to this visual object. This base callback is
    * meant to be overridden and does nothing by default.
    * @param {string} type the type of event raised
