@@ -14,8 +14,8 @@ var pulse = pulse || {};
  * @config {string|DOMElement} gameWindow the dom element to use as the main
  * game window, if a string it will pull the element by id, if it's a element
  * it will simply use it as is
- * @config {number} [width] width of the base game window
- * @config {number} [height] height of the base game window
+ * @config {size} [size] initial size width and height
+ * to use for the engine's game window.
  * @class Main engine class
  * @author PFP
  * @copyright 2012 Paranoid Ferret Productions
