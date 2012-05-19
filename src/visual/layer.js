@@ -138,16 +138,6 @@ pulse.Layer = pulse.Visual.extend(
      */
     this._private.orderedKeys = [];
 
-    /**
-     * Event manager for this layer, handles passing events down to it's
-     * children.
-     * @type {pulse.EventManager}
-     */
-    this.events = new pulse.EventManager({
-      owner : this,
-      masterCallback : this.eventsCallback
-    });
-
     // Plugin support.
     pulse.plugins.invoke(
       'pulse.Layer',

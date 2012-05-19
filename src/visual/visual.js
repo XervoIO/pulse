@@ -300,6 +300,16 @@ pulse.Visual = pulse.Node.extend(
     this.updated = true;
 
     /**
+     * Event manager for this visual, handles passing events down to it's
+     * children.
+     * @type {pulse.EventManager}
+     */
+    this.events = new pulse.EventManager({
+      owner : this,
+      masterCallback : this.eventsCallback
+    });
+
+    /**
      * Whether this visual has the mouse pointer over it.
      * @type {boolean}
      */
@@ -631,5 +641,15 @@ pulse.Visual = pulse.Node.extend(
     };
 
     this.invalidProperties = false;
+  },
+
+  /**
+   * Handles all events sent to this visual object. This base callback is
+   * meant to be overridden and does nothing by default.
+   * @param {string} type the type of event raised
+   * @param {object} evt the event object with properties on the event
+   */
+  eventsCallback : function(type, evt) {
+    //Nothing by default
   }
 });
