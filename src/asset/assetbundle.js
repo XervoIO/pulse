@@ -76,7 +76,7 @@ pulse.AssetBundle = PClass.extend(
    * Adds an asset to the bundle.
    * @param {pulse.Asset} asset The Asset to add.
    */
-  addAsset: function(asset) {
+  addAsset : function(asset) {
     if(asset instanceof pulse.Asset)
     {
       var _self = this;
@@ -92,6 +92,25 @@ pulse.AssetBundle = PClass.extend(
 
       this.assets.push(asset);
     }
+  },
+
+  /**
+   * Removes an asset from the bundle.
+   * @param {string|pulse.Asset} asset The asset or name of the asset to remove.
+   */
+  removeAsset: function(asset) {
+    var assetName = asset;
+    if(asset instanceof pulse.Asset) {
+      assetName = asset.name;
+    }
+
+    for(var a in this.assets) {
+      if(this.assets[a].name === assetName) {
+        this.assets.splice(a, 1);
+      }
+    }
+
+    this.updatePercent();
   },
 
   /**
@@ -123,10 +142,14 @@ pulse.AssetBundle = PClass.extend(
    * assets that have been loaded.
    */
   updatePercent: function() {
-    this.percentLoaded =
-      this._private.numberLoaded / this.assets.length * 100;
+    if(this.assets.length === 0) {
+      this.percentLoaded = 100;
+    } else {
+      this.percentLoaded =
+        this._private.numberLoaded / this.assets.length * 100;
 
-    this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+      this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+    }
 
     this.events.raiseEvent('progressChanged', {});
 
