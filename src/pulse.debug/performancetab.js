@@ -15,7 +15,7 @@
  */
 
 pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
-/** @lends pulse.debug.PerformanceTab.prototype */
+/** @lends pulse.debug.tabs.Performance.prototype */
 {
   /** @constructs */
   init : function (params) {

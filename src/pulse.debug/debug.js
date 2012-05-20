@@ -1,4 +1,14 @@
+/**
+ * Whether or not to globally draw debug information
+ * on visual nodes.
+ * @type {boolean}
+ */
 pulse.debug.visualDebug = false;
+
+/**
+ * The colors to use for visual debugging.
+ * @type {array}
+ */
 pulse.debug.visualDebugColors = [
 	'000000', //Default/Undefined
 	'808080', //Layer
@@ -7,27 +17,18 @@ pulse.debug.visualDebugColors = [
 	'FFFF00'  //BitmapLabel
 ];
 
-pulse.debug.plugin = new pulse.plugin.Plugin();
 pulse.debug.manager = new pulse.debug.DebugManager();
-pulse.debug.log = function(message, type) {
-	if(type === 'error') {
-		pulse.debug.manager.logError(message);
-	} else if(type === 'warning') {
-		pulse.debug.manager.logWarning(message);
-	} else {
-		pulse.debug.manager.logDebug(message);
-	}
-};
+pulse.debug.plugin = new pulse.plugin.Plugin();
 
-pulse.debug.plugin.subscribe(
+var loopCallback = pulse.debug.plugin.subscribe(
 	'pulse.Engine',
 	'loop',
 	pulse.plugin.PluginCallbackTypes.onEnter,
 	function(params) {
-		if(pulse.debug.manager.running === false) {
-			pulse.debug.manager.setEngine(this);
-			pulse.debug.manager.running = true;
-		}
+		pulse.debug.manager.setEngine(this);
+
+		//Only need to set the engine once.
+		pulse.debug.plugin.unsubscribe(loopCallback);
 	}
 );
 
@@ -86,20 +87,21 @@ pulse.debug.plugin.subscribe(
 	'draw',
 	pulse.plugin.PluginCallbackTypes.onExit,
 	function(ctx) {
-		var color = '#';
-		if(this instanceof pulse.Layer) {
-			color += pulse.debug.visualDebugColors[1];
-		} else if(this instanceof pulse.Sprite) {
-			color += pulse.debug.visualDebugColors[2];
-		} else if(this instanceof pulse.CanvasLabel) {
-			color += pulse.debug.visualDebugColors[3];
-		} else if(this instanceof pulse.BitmapLabel) {
-			color += pulse.debug.visualDebugColors[4];
-		} else {
-			color += pulse.debug.visualDebugColors[0];
-		}
-
+		//Draw the visual debugging information if requested
 		if(this.debugging === true || pulse.debug.visualDebug === true){
+			var color = '#';
+			if(this instanceof pulse.Layer) {
+				color += pulse.debug.visualDebugColors[1];
+			} else if(this instanceof pulse.Sprite) {
+				color += pulse.debug.visualDebugColors[2];
+			} else if(this instanceof pulse.CanvasLabel) {
+				color += pulse.debug.visualDebugColors[3];
+			} else if(this instanceof pulse.BitmapLabel) {
+				color += pulse.debug.visualDebugColors[4];
+			} else {
+				color += pulse.debug.visualDebugColors[0];
+			}
+
 			//Draw a dot on the anchor point
 			ctx.save();
 			ctx.fillStyle = color;
@@ -126,6 +128,7 @@ pulse.debug.plugin.subscribe(
 	}
 );
 
+//Add nodes to the inspector as they are added to the game
 pulse.debug.plugin.subscribe(
 	'pulse.Layer',
 	'addNode',
@@ -182,6 +185,13 @@ pulse.debug.plugin.subscribe(
 
 pulse.plugins.add(pulse.debug.plugin);
 
-pulse.ready(function(){
-
-});
+//Convenience function for logging messages to the console
+pulse.debug.log = function(message, type) {
+	if(type === 'error') {
+		pulse.debug.manager.logError(message);
+	} else if(type === 'warning') {
+		pulse.debug.manager.logWarning(message);
+	} else {
+		pulse.debug.manager.logDebug(message);
+	}
+};

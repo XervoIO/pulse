@@ -11,8 +11,8 @@
  * @copyright 2011 Paranoid Ferret Productions
  */
 
-pulse.debug.ConsoleTab = pulse.debug.PanelTab.extend(
-/** @lends pulse.debug.ConsoleTab.prototype */
+pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
+/** @lends pulse.debug.tabs.Console.prototype */
 {
   /** @constructs */
   init : function(params) {

@@ -45,6 +45,7 @@ pulse.debug.Panel = PClass.extend(
 
     this.panel.appendChild(this.topbar);
 
+    //Resize the panel when the header is dragged.
     this.topbar.onmousedown = function(e) {
       var ec = {x : e.pageX, y : e.pageY};
 
@@ -156,7 +157,7 @@ pulse.debug.Panel = PClass.extend(
     this.nodeCounter = params.nodeCounter;
 
     if(params.useDefault) {
-      var consoleTab = new pulse.debug.ConsoleTab({
+      var consoleTab = new pulse.debug.tabs.Console({
         name : 'Console',
         id : 'console'
       });
@@ -245,6 +246,11 @@ pulse.debug.Panel = PClass.extend(
     tab.show();
   },
 
+
+  /**
+   * Resizes each tab when the panel is resized.
+   * @param {number} newSize the new size of the panel's content.
+   */
   resize : function(newSize) {
     this.tabholder.style.height = newSize + 'px';
 
@@ -286,7 +292,7 @@ pulse.debug.Panel = PClass.extend(
 
   /**
    * Removes a node to the inspector panel.
-   * @param {pulse.Node} engine the engine to reference
+   * @param {pulse.Node} node the node to add
    */
   removeNode : function(node) {
     if(this.tabs['inspector']) {

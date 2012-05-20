@@ -23,7 +23,7 @@ pulse.debug.Logger = PClass.extend(
      */
     this.container = params.container;
     this.container.className = 'pulse-debug-log';
-    this.container.style.cssText = 'height: 120px; overflow: auto;';
+    this.container.style.cssText = 'height: 118px; overflow: auto;';
   },
 
   /**

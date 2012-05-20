@@ -1,6 +1,6 @@
 /**
- * Performance tab for debugging panel.
- * @class The debug performance tab class
+ * Inspector tab for debugging panel.
+ * @class The debug inspector tab class
  * @param {object} [params] parameters that can be set as initialized options
  * on the performance tab
  * @config {string} [name] the name of the tab will be used for name of link
@@ -12,56 +12,83 @@
  */
 
 pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
-/** @lends pulse.debug.PerformanceTab.prototype */
+/** @lends pulse.debug.tabs.PerformanceTab.prototype */
 {
   /** @constructs */
   init : function (params) {
     this._super(params);
 
+    /**
+     * The node that is currently being inspected.
+     * @type {pulse.Node}
+     */
     this.selectedNode = null;
 
-    this._private = {};
-
+    /**
+     * @private
+     * The list of nodes in the game being inspected.
+     * @type {DOMElement}
+     */
     this._private.nodeList = document.createElement('div');
-    this._private.nodeList.style.cssText = 'overflow: auto;';
-    this._private.nodeList.style.width = '70%';
-    this._private.nodeList.style.height = '130px';
-    this._private.nodeList.style.cssFloat = 'left';
-    this._private.nodeList.style.styleFloat = 'left';
-    //this._private.nodeList.style.clear = 'both';
+    this._private.nodeList.style.cssText = 'overflow: auto; ' +
+      'width: 70%; height: 130px; float: left;';
     this.container.appendChild(this._private.nodeList);
 
+    /**
+     * @private
+     * The list of properties for the selected node.
+     * @type {DOMElement}
+     */
     this._private.nodePropsDiv = document.createElement('div');
-    this._private.nodePropsDiv.style.cssText = 'overflow: auto;';
-    this._private.nodePropsDiv.style.width = '30%';
-    this._private.nodePropsDiv.style.height = '130px';
-    this._private.nodePropsDiv.style.cssFloat = 'right';
-    this._private.nodePropsDiv.style.styleFloat = 'right';
-    //this._private.nodePropsDiv.style.clear = 'both';
+    this._private.nodePropsDiv.style.cssText = 'overflow: auto;' +
+      'width: 30%; height: 130px; float: right;';
+    this.container.appendChild(this._private.nodePropsDiv);
 
-    var iTab = this;
+    var _self = this;
 
+    /**
+     * @private
+     * The actions available for the selected node.
+     * @type {DOMElement}
+     */
     var actionsDiv = document.createElement('div');
     actionsDiv.id = 'inspector-node-actions';
 
+    /**
+     * @private
+     * Button to toggle visibilty of the selected node.
+     * @type {DOMElement}
+     */
     var visibilityAction = document.createElement('a');
     visibilityAction.innerHTML = 'Show/Hide';
     visibilityAction.onclick = function() {
-        iTab.toggleNode(iTab.selectedNode);
+        _self.toggleNode(_self.selectedNode);
     };
     actionsDiv.appendChild(visibilityAction);
 
+    /**
+     * @private
+     * Button to toggle drawing the outline and anchor point
+     * on the selected node.
+     * @type {DOMElement}
+     */
     var outlineAction = document.createElement('a');
     outlineAction.innerHTML = 'Outline';
     outlineAction.onclick = function() {
-        iTab.toggleDebug(iTab.selectedNode);
+        _self.toggleDebug(_self.selectedNode);
     };
     actionsDiv.appendChild(outlineAction);
 
     this._private.nodePropsDiv.appendChild(actionsDiv);
 
+    /**
+     * @private
+     * The properties to show for the selected node.
+     * @type {array}
+     */
     this._private.nodeProps = ['Name', 'Size', 'Position', 'Anchor', 'ZIndex'];
 
+    //Build the containers for the properites.
     var propDiv, propName, valueSpan;
     for(var p in this._private.nodeProps) {
       propName = this._private.nodeProps[p];
@@ -76,9 +103,8 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       this._private.nodePropsDiv.appendChild(propDiv);
     }
 
-    this.container.appendChild(this._private.nodePropsDiv);
-
     /**
+     * @private
      * The engine for the current game
      * @type {pulse.Engine}
      */
@@ -111,29 +137,21 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
   /**
    * Updates the graph to show the frame elapsed time, update time, and
    * draw time. It will also update the labels to show the actual values.
+   * @param {pulse.Engine} engine the engine used in the current game.
    */
   setEngine : function(engine) {
     this._private.engine = engine;
-    //this.setupNodes();
   },
 
-  setupNodes : function() {
-    if(this._private.engine === null) {
-      return;
-    }
-
-    var scenes = this._private.engine.scenes.getScenes(false);
-    var sceneTmp, layerTmp, nodeTmp;
-    var tab =  this;
-    for(var s in scenes) {
-      this.addNode(scenes[s]);
-    }
-
-    if(scenes.length > 0) {
-      this.selectNode(scenes[0]);
-    }
-  },
-
+  /**
+   * Builds and returns all the necessary HTML for a node in
+   * node list.
+   * @param {pulse.Node} node the node being referenced
+   * @param {boolean} addContainer whether or not to add a container
+   * for the node's children.
+   * @param {number} containerIndent the number of pixels to indent
+   * the child container.
+   */
   getNodeDiv : function(node, addContainer, containerIndent) {
     var nodeDiv = document.createElement('div');
     nodeDiv.id = 'inspector-node-' + node.name;
@@ -142,11 +160,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     nameSpan.className = 'name';
     nameSpan.innerHTML = node.name;
 
+    var _self = this;
+
     nameSpan.onclick = function() {
-      iTab.selectNode(node);
+      _self.selectNode(node);
     };
     
-    var iTab = this;
     var container = null;
     if(addContainer === true) {
       container = document.createElement('div');
@@ -155,10 +174,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       container.style.display = 'none';
 
       var containerToggle = document.createElement('div');
-      containerToggle.style.cssText = 'display: inline-block; width: 20px; height: 20px; font-size: 14px; cursor: pointer;';
+      containerToggle.style.cssText =
+        'display: inline-block; width: 20px; height: 20px; ' +
+        'font-size: 14px; cursor: pointer;';
 
       containerToggle.onclick = function() {
-        iTab.toggleVisibility(container);
+        _self.toggleVisibility(container);
         if(container.style.display === 'block') {
           containerToggle.innerHTML = '&#9660;';
         } else {
@@ -173,7 +194,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       nodeDiv.appendChild(container);
 
       nameSpan.onclick = function() {
-        iTab.selectNode(node);
+        _self.selectNode(node);
       };
     } else {
       nodeDiv.appendChild(nameSpan);
@@ -182,6 +203,10 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     return { div: nodeDiv, container: container };
   },
 
+  /**
+   * Adds a node to the node listing.
+   * @param {pulse.Node} node the node to reference
+   */
   addNode : function(node) {
     node.debugging = false;
 
@@ -212,6 +237,10 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
   },
 
+  /**
+   * Removes a node from the listing
+   * @param {pulse.Node} node the node to remove
+   */
   removeNode : function(node) {
     var nodeName = node;
     if(node instanceof pulse.Node) {
@@ -224,9 +253,15 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
   },
 
+  /**
+   * Selects a node to inspect.
+   * @param {pulse.Node} node the node to inspect
+   */
   selectNode : function(node) {
     this.selectedNode = node;
 
+    //Check each property and display the value(s) if the
+    //node has that property.
     var propName, propValueSpan;
     for(var p in this._private.nodeProps) {
       propName = this._private.nodeProps[p];
@@ -241,6 +276,10 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
   },
 
+  /**
+   * Toggles the visibility (or activity for scenes) of a node.
+   * @param {pulse.Node} node the node to show/hide
+   */
   toggleNode : function(node) {
     if(node instanceof pulse.Scene && this._private.engine instanceof pulse.Engine) {
       if(node.active === true) {
@@ -259,6 +298,11 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
   },
 
+  /**
+   * Toggles whether or not to draw debugging information
+   * on a visual node. This function will do nothing for scenes.
+   * @param {pulse.Node} node the node to toggle
+   */
   toggleDebug : function(node) {
     if(node.debugging === true) {
         node.debugging = false;
@@ -267,6 +311,10 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       }
   },
 
+  /**
+   * Shows/Hides a DOM element.
+   * @param {DOMElement} elm the element to show/hide
+   */
   toggleVisibility : function(elm) {
     if(elm.style.display !== 'none') {
       elm.style.display = 'none';
@@ -275,6 +323,11 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
   },
 
+  /**
+   * Gets a string concatenation of the values in an object
+   * or a string representation of an object's value.
+   * @param {object} object the object to get a value string for
+   */
   getValueString : function(object) {
     var value = '';
     if(typeof object === 'object') {
@@ -293,7 +346,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
   },
 
   /**
-   * Resizes the console when the container is resized.
+   * Resizes the node list and properties container when the panel is resized.
    * @param {number} newSize the new size of the container
    */
   resize : function(newSize) {
