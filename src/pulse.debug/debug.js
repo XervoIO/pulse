@@ -186,7 +186,7 @@ pulse.debug.plugin.subscribe(
 pulse.plugins.add(pulse.debug.plugin);
 
 //Convenience function for logging messages to the console
-pulse.debug.log = function(message, type) {
+pulse.log = function(message, type) {
 	if(type === 'error') {
 		pulse.debug.manager.logError(message);
 	} else if(type === 'warning') {
