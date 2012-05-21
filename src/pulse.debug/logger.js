@@ -24,6 +24,16 @@ pulse.debug.Logger = PClass.extend(
     this.container = params.container;
     this.container.className = 'pulse-debug-log';
     this.container.style.cssText = 'height: 118px; overflow: auto;';
+
+    /**
+     * The colors for the different message types;
+     * @type {object}
+     */
+    this.colors = {
+      'error': 'ff5c5c',
+      'warning': 'ffcc66',
+      'debug': 'ccc'
+    };
   },
 
   /**
@@ -34,6 +44,8 @@ pulse.debug.Logger = PClass.extend(
   addMessage : function(text, type) {
     var now = new Date();
     var logelement = document.createElement('div');
+    logelement.style.color = '#' + this.colors[type];
+
     logelement.className = 'debug-log-message ' + type;
     logelement.setAttribute('data-type', type);
     this.container.appendChild(logelement);

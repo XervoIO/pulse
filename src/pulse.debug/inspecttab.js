@@ -53,6 +53,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
      */
     var actionsDiv = document.createElement('div');
     actionsDiv.id = 'inspector-node-actions';
+    actionsDiv.style.cssText = 'float: right;';
 
     /**
      * @private
@@ -141,6 +142,14 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    */
   setEngine : function(engine) {
     this._private.engine = engine;
+
+    //Set the visiblity styling for all active scenes
+    //as they are always added in an unactive state.
+    var scenes = engine.scenes.getScenes(true);
+    for(var s = 0; s < scenes.length; s++)
+    {
+      this.styleVisibility(scenes[s]);
+    }
   },
 
   /**
@@ -155,10 +164,13 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
   getNodeDiv : function(node, addContainer, containerIndent) {
     var nodeDiv = document.createElement('div');
     nodeDiv.id = 'inspector-node-' + node.name;
+    nodeDiv.style.cssText = 'padding: 0 2px;';
 
     var nameSpan = document.createElement('span');
     nameSpan.className = 'name';
+    nameSpan.style.cssText = 'cursor: pointer; padding: 2px;';
     nameSpan.innerHTML = node.name;
+
 
     var _self = this;
 
@@ -223,18 +235,21 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       for(var l in node.layers) {
         this.addNode(node.layers[l]);
       }
+
     } else if(node instanceof pulse.Layer && parentElm !== null) {
-      divTmp = this.getNodeDiv(node, true, 20);
+      divTmp = this.getNodeDiv(node, true, 30);
       parentElm.appendChild(divTmp.div);
 
       for(var o in node.objects) {
         this.addNode(node.objects[o]);
       }
-
+      
     } else if(parentElm !== null) {
       divTmp = this.getNodeDiv(node, false);
       parentElm.appendChild(divTmp.div);
     }
+
+    this.styleVisibility(node);
   },
 
   /**
@@ -258,7 +273,28 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    * @param {pulse.Node} node the node to inspect
    */
   selectNode : function(node) {
+    var nodeDiv;
+    if(this.selectedNode !== null) {
+      nodeDiv = document.getElementById('inspector-node-' + this.selectedNode.name);
+      if(nodeDiv !== null) {
+        if(nodeDiv.children[0].className !== 'name') {
+          nodeDiv.children[1].style.border = '';
+        } else {
+          nodeDiv.children[0].style.border = '';
+        }
+      }
+    }
+
     this.selectedNode = node;
+
+    nodeDiv = document.getElementById('inspector-node-' + node.name);
+    if(nodeDiv !== null) {
+      if(nodeDiv.children[0].className !== 'name') {
+        nodeDiv.children[1].style.border = '1px solid ' + nodeDiv.style.color;
+      } else {
+        nodeDiv.children[0].style.border = '1px solid ' + nodeDiv.style.color;
+      }
+    }
 
     //Check each property and display the value(s) if the
     //node has that property.
@@ -295,6 +331,29 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       } else {
         node.visible = true;
       }
+    }
+
+    this.styleVisibility(node);
+
+    //Forces a redraw of the selection styling
+    this.selectNode(node);
+  },
+
+  /**
+   * Styles the node's HTML in the node list based on its
+   * visibility.
+   * @param {pulse.Node} node the node being referenced
+   */
+  styleVisibility : function(node) {
+    var nodeDiv = document.getElementById('inspector-node-' + node.name);
+
+    if(nodeDiv !== null) {
+      var color = '#ccc';
+      if(node.visible === false || node.active === false) {
+        color = '#555';
+      }
+
+      nodeDiv.style.color = color;
     }
   },
 

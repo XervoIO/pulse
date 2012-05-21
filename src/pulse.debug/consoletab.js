@@ -21,6 +21,12 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
     var self = this;
 
     /**
+     * The background color of the selected filter.
+     * @type {string}
+     */
+    this.selectedBGColor = '555';
+
+    /**
      * The filter toolbar for this console tab.
      * @type {DOMElement}
      */
@@ -35,6 +41,7 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
      */
     this.allButton = this.addFilterButton('All', 'none');
     this.allButton.className = 'selected';
+    this.allButton.style.backgroundColor = '#' + this.selectedBGColor;
 
     /**
      * Button to display all console messages of type error.
@@ -80,10 +87,11 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
     var button = document.createElement('a');
     button.onclick = function() {
       if(_self._private.currentFilterLink) {
-        _self._private.currentFilterLink.className = '';
+        _self._private.currentFilterLink.style.backgroundColor = '';
       }
       _self._private.currentFilterLink = this;
       this.className = 'selected';
+      this.style.backgroundColor = '#' + _self.selectedBGColor;
       if(type == 'none') {
         _self.clearFilter();
       } else {
@@ -94,6 +102,8 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
     button.id = 'filter-' + type;
     button.href = '#';
     button.innerHTML = name;
+    button.style.cssText = 'text-decoration: none; color: #ccc; padding: 3px;';
+
     this.toolbar.appendChild(button);
     return button;
   },
