@@ -1,13 +1,13 @@
 <h2>Classes</h2>
-<div class="classListLink"><a href="/docs">index</a></div>
+<div class="classListLink"><a href="/docs/api">index</a></div>
 <ul class="classList">
 	<for each="thisClass" in="data">
 	<li>{!
 		if (thisClass.alias == "_global_") {
-			output += "<span class='em'><a href='/docs/symbols/"+thisClass.alias+"'>"+thisClass.alias+"</a></span>";
+			output += "<span class='em'><a href='/docs/api/symbols/"+thisClass.alias+"'>"+thisClass.alias+"</a></span>";
 		}
 		else {
-			output += "<a href='/docs/symbols/"+thisClass.alias+"'>"+thisClass.alias+"</a>";
+			output += "<a href='/docs/api/symbols/"+thisClass.alias+"'>"+thisClass.alias+"</a>";
 		}
 	!}</li>
 	</for>
