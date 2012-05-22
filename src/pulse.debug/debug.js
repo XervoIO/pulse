@@ -162,7 +162,12 @@ pulse.debug.plugin.subscribe(
 
 pulse.plugins.add(pulse.debug.plugin);
 
-//Convenience function for logging messages to the console
+/**
+* Convenience function for logging messages to the console
+* @param {string} message the message to log
+* @param {string} type the type of message to display.
+* If omitted, an info type message is logged.
+*/
 pulse.log = function(message, type) {
 	if(type === 'error') {
 		pulse.debug.manager.logError(message);
@@ -171,4 +176,28 @@ pulse.log = function(message, type) {
 	} else {
 		pulse.debug.manager.logDebug(message);
 	}
+};
+
+/**
+* Convenience function for logging info messages to the console
+* @param {string} message the message to log
+*/
+pulse.info = function(message) {
+	pulse.debug.manager.logDebug(message);
+};
+
+/**
+* Convenience function for logging warnings messages to the console
+* @param {string} message the message to log
+*/
+pulse.warn = function(message) {
+	pulse.debug.manager.logWarning(message);
+};
+
+/**
+* Convenience function for logging errors messages to the console
+* @param {string} message the message to log
+*/
+pulse.error = function(message) {
+	pulse.debug.manager.logError(message);
 };
