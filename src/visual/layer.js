@@ -332,7 +332,7 @@ pulse.Layer = pulse.Visual.extend(
       }
     }
 
-    // If anything needs updated - just updated everything.
+    // If anything needs updated - just update everything.
     if(isDirty) {
       this._private.context.clearRect(0, 0, this.size.width, this.size.height);
 
