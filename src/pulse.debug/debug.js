@@ -5,18 +5,6 @@
  */
 pulse.debug.visualDebug = false;
 
-/**
- * The colors to use for visual debugging.
- * @type {array}
- */
-pulse.debug.visualDebugColors = [
-	'000000', //Default/Undefined
-	'808080', //Layer
-	'800080', //Sprite
-	'FF0000', //CanvasLabel
-	'FFFF00'  //BitmapLabel
-];
-
 pulse.debug.manager = new pulse.debug.DebugManager();
 pulse.debug.plugin = new pulse.plugin.Plugin();
 
@@ -89,18 +77,7 @@ pulse.debug.plugin.subscribe(
 	function(ctx) {
 		//Draw the visual debugging information if requested
 		if(this.debugging === true || pulse.debug.visualDebug === true){
-			var color = '#';
-			if(this instanceof pulse.Layer) {
-				color += pulse.debug.visualDebugColors[1];
-			} else if(this instanceof pulse.Sprite) {
-				color += pulse.debug.visualDebugColors[2];
-			} else if(this instanceof pulse.CanvasLabel) {
-				color += pulse.debug.visualDebugColors[3];
-			} else if(this instanceof pulse.BitmapLabel) {
-				color += pulse.debug.visualDebugColors[4];
-			} else {
-				color += pulse.debug.visualDebugColors[0];
-			}
+			var color = '#' + pulse.debug.getTypeColor(this);
 
 			//Draw a dot on the anchor point
 			ctx.save();

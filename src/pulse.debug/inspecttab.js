@@ -348,12 +348,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     var nodeDiv = document.getElementById('inspector-node-' + node.name);
 
     if(nodeDiv !== null) {
-      var color = '#ccc';
+      var color =  pulse.debug.getTypeColor(node);
       if(node.visible === false || node.active === false) {
-        color = '#555';
+        color = this.disableColor(color);
       }
 
-      nodeDiv.style.color = color;
+      nodeDiv.style.color = '#' + color;
     }
   },
 
@@ -402,6 +402,30 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
 
     return value;
+  },
+
+  /**
+   * Shifts a color slightly darker
+   * http://stackoverflow.com/questions/3403882/javascript-one-shade-darker
+   * @param {string} color the color to shift
+   */
+  disableColor : function(color) {
+    var colorInt = parseInt(color, 16);
+
+    var R = (colorInt & 0xFF0000) >> 16;
+    var G = (colorInt & 0x00FF00) >> 8;
+    var B = (colorInt & 0x0000FF) >> 0;
+
+    //Controls on much darker to make the color
+    var shade = -100;
+
+    R = R + Math.floor((shade / 255) * R);
+    G = G + Math.floor((shade / 255) * G);
+    B = B + Math.floor((shade / 255) * B);
+
+    var newColorInt = (R << 16) + (G << 8) + (B);
+
+    return newColorInt.toString(16);
   },
 
   /**
