@@ -83,6 +83,11 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
      */
     this._private.msRatio = this._private.msHeight / h;
 
+    //The graph colors
+    this.updateColor = '61E561';
+    this.drawColor = 'CC22EE';
+    this.browserColor = 'F7Fd4A';
+
     // Setup labels
     /**
      * @private
@@ -104,76 +109,58 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.updateLabel.appendChild(this._private.updateMarker);
 
     this._private.stats = document.createElement('div');
-    this._private.stats.style.cssText = 'height: 20px;';
+    this._private.stats.style.cssText = 'height: 24px;';
     this.container.appendChild(this._private.stats);
+
+    var labelStyle = 'line-height: 20px; margin: 0 10px 0 5px';
+
+    //Add the color block for update
+    this._private.stats.appendChild(this.getLegendListing(this.updateColor));
 
     /**
      * @private
-     * The update text label for the legend for the graph.
+     * The update label for the legend for the graph.
      * @type {DOMElement}
      */
     this._private.updateText = document.createElement('span');
-    this._private.updateText.className = 'debug-perf-labeltext';
+    this._private.updateText.style.cssText = labelStyle;
     this._private.updateText.innerHTML = 'Update';
     this._private.stats.appendChild(this._private.updateText);
 
-    /**
-     * @private
-     * The draw label for graph legend.
-     * @type {DOMElement}
-     */
-    this._private.drawLabel = document.createElement('div');
-    this._private.drawLabel.className = 'debug-perf-label';
-    //this.container.appendChild(this._private.drawLabel);
+    //Add the color block for draw
+    this._private.stats.appendChild(this.getLegendListing(this.drawColor));
 
     /**
      * @private
-     * The draw legend marker for the graph.
+     * The draw label for the legend for the graph.
      * @type {DOMElement}
      */
-    this._private.drawMarker = document.createElement('div');
-    this._private.drawMarker.className = 'debug-perf-marker';
-    this._private.drawMarker.style.backgroundColor = '#CC22EE';
-    //this._private.drawLabel.appendChild(this._private.drawMarker);
-
-    /**
-     * @private
-     * The draw text label for the legend for the graph.
-     * @type {DOMElement}
-     */
+    
     this._private.drawText = document.createElement('span');
-    this._private.drawText.className = 'debug-perf-labeltext';
+    this._private.drawText.style.cssText = labelStyle;
     this._private.drawText.innerHTML = 'Draw';
     this._private.stats.appendChild(this._private.drawText);
 
-    /**
-     * @private
-     * The browser label for graph legend.
-     * @type {DOMElement}
-     */
-    this._private.browserLabel = document.createElement('div');
-    this._private.browserLabel.className = 'debug-perf-label';
-    //this.container.appendChild(this._private.browserLabel);
+    //Add the color block for browser
+    this._private.stats.appendChild(this.getLegendListing(this.browserColor));
 
     /**
      * @private
-     * The browser legend marker for the graph.
-     * @type {DOMElement}
-     */
-    this._private.browserMarker = document.createElement('div');
-    this._private.browserMarker.className = 'debug-perf-marker';
-    this._private.browserMarker.style.backgroundColor = '#F7Fd4A';
-    //this._private.browserLabel.appendChild(this._private.browserMarker);
-
-    /**
-     * @private
-     * The browser text label for the legend for the graph.
+     * The browser label for the legend for the graph.
      * @type {DOMElement}
      */
     this._private.browserText = document.createElement('span');
-    this._private.browserText.className = 'debug-perf-labeltext';
+    this._private.browserText.style.cssText = labelStyle;
     this._private.browserText.innerHTML = 'Browser';
     this._private.stats.appendChild(this._private.browserText);
+  },
+
+  getLegendListing : function(color) {
+    var colorBlock = document.createElement('span');
+    colorBlock.style.cssText = 'font-size: 16px; padding-left: 16px;' +
+      'background-color: #' + color + ';';
+
+    return colorBlock;
   },
 
   /**
@@ -239,14 +226,14 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     if(this.fpsTimer) {
       e = Math.round(this.fpsTimer.markCurrent);
       h = e / this._private.msRatio;
-      this._private.context.fillStyle = "#F7Fd4A";
+      this._private.context.fillStyle = '#' + this.browserColor;
       this._private.context.fillRect(nx, y-h, 1, h);
       b = e;
     }
     if(this.updateTimer) {
       e = Math.round(this.updateTimer.markCurrent);
       h = e / this._private.msRatio;
-      this._private.context.fillStyle = "#61E561";
+      this._private.context.fillStyle = '#' + this.updateColor;
       this._private.context.fillRect(nx, y-h, 1, h);
       b -= e;
       this._private.updateText.innerHTML = 'Update : ' + e + 'ms';
@@ -255,7 +242,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
       e = Math.round(this.drawTimer.markCurrent);
       var hp = h;
       h = e / this._private.msRatio;
-      this._private.context.fillStyle = "#CC22EE";
+      this._private.context.fillStyle = '#' + this.drawColor;
       this._private.context.fillRect(nx, y-h-hp, 1, h);
       b -= e;
       this._private.drawText.innerHTML = 'Draw : ' + e + 'ms';
