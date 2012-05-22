@@ -205,7 +205,20 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
    * @param {number} newSize the new size of the container
    */
   resize : function(newSize) {
+    //Create a temporary canvas obj to cache the pixel data
+    var tmpCan = document.createElement('canvas');
+    var tmpCtx = tmpCan.getContext('2d');
+
+    //draw the current canvas data into the temp canvas
+    tmpCan.width = this.canvas.width;
+    tmpCan.height = this.canvas.height;
+    tmpCtx.fillStyle = "#333";
+    tmpCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    tmpCtx.drawImage(this.canvas, 0, 0);
+
+    var diff = newSize - this.canvas.height;
     this.canvas.height = newSize - 20;
+    this._private.context.drawImage(tmpCan, 0, 0, this.canvas.width, newSize - 20);
   },
 
   /**
@@ -215,6 +228,10 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
   drawGraph : function() {
     var nx = this.canvas.width - 1;
     var y = this.canvas.height;
+
+    //Recalculate the ms ratio with the current canvas height
+    this._private.msRatio = this._private.msHeight / y;
+
     this._private.context.drawImage(this.canvas, -1, 0);
     this._private.context.fillStyle = "#333";
     this._private.context.fillRect(nx, 0, 1, this.canvas.height);
