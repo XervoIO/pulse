@@ -321,10 +321,8 @@ pulse.Visual = pulse.Node.extend(
    * @param {number} y the value to add to the y position.
    */
   move : function(x, y) {
-    this.position = {
-      x : this.position.x + x,
-      y : this.position.y + y
-    };
+    this.position.x += x;
+    this.position.y += y;
   },
 
   /**
