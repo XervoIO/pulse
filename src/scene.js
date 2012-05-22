@@ -460,6 +460,15 @@ pulse.Scene = pulse.Node.extend(
   },
 
   /**
+   * Convenience function that will bind a callback to an event type.
+   * @param {string} type the event type to bind
+   * @param {function} callback the function callback to bind to the event
+   */
+  on : function (type, callback) {
+    this.events.bind(type, callback);
+  },
+  
+  /**
    * Handles all events sent to this scene. It will check to see if any of the
    * events occur inside of one of it's layers and if so then passes the event
    * to that layer.

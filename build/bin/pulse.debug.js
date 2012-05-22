@@ -2252,6 +2252,17 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
     });
     this.assets.push(asset)
   }
+}, removeAsset:function(asset) {
+  var assetName = asset;
+  if(asset instanceof pulse.Asset) {
+    assetName = asset.name
+  }
+  for(var a in this.assets) {
+    if(this.assets[a].name === assetName) {
+      this.assets.splice(a, 1)
+    }
+  }
+  this.updatePercent()
 }, getAsset:function(name) {
   for(var a = 0;a < this.assets.length;a++) {
     if(this.assets[a].name === name) {
@@ -2264,8 +2275,12 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
     this.assets[a].load()
   }
 }, updatePercent:function() {
-  this.percentLoaded = this._private.numberLoaded / this.assets.length * 100;
-  this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2));
+  if(this.assets.length === 0) {
+    this.percentLoaded = 100
+  }else {
+    this.percentLoaded = this._private.numberLoaded / this.assets.length * 100;
+    this.percentLoaded = parseFloat(this.percentLoaded.toFixed(2))
+  }
   this.events.raiseEvent("progressChanged", {});
   if(this.percentLoaded === 100) {
     this.events.raiseEvent("complete", {})
@@ -2308,6 +2323,14 @@ pulse.AssetManager = PClass.extend({init:function() {
         this.loadedBundles--
       }
     }
+  }
+}, removeAsset:function(asset, bundle) {
+  if(typeof bundle === "string") {
+    if(this.bundles.hasOwnProperty(bundle)) {
+      this.bundles[bundle].removeAsset(asset)
+    }
+  }else {
+    this.bundles["global"].removeAsset(asset)
   }
 }, getAsset:function(name, bundle) {
   if(bundle) {
@@ -2374,6 +2397,7 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.actions = {};
   this.runningActions = {};
   this.updated = true;
+  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
   this.mousein = false;
   pulse.plugins.invoke("pulse.Visual", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, move:function(x, y) {
@@ -2530,6 +2554,9 @@ pulse.Visual = pulse.Node.extend({init:function(params) {
   this.boundsPrevious = this.bounds;
   this.bounds = {x:this.positionTopLeft.x, y:this.positionTopLeft.y, width:this.size.width * Math.abs(this.scale.x), height:this.size.height * Math.abs(this.scale.y)};
   this.invalidProperties = false
+}, on:function(type, callback) {
+  this.events.bind(type, callback)
+}, eventsCallback:function(type, evt) {
 }});
 var pulse = pulse || {};
 pulse.Action = pulse.Node.extend({init:function(params) {
@@ -2739,7 +2766,6 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   this.dropAcceptEnabled = false;
   this.draggedOverItems = {};
   this.handleAllEvents = false;
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
   var self = this;
   this.itemDroppedCallback = function(e) {
     e.target = self;
@@ -3073,7 +3099,6 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   this.canvas.style.position = "absolute";
   this.objects = {};
   this._private.orderedKeys = [];
-  this.events = new pulse.EventManager({owner:this, masterCallback:this.eventsCallback});
   pulse.plugins.invoke("pulse.Layer", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, addNode:function(obj) {
   if(obj instanceof pulse.Visual) {
@@ -3343,6 +3368,8 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
     }
   }
   pulse.plugins.invoke("pulse.Scene", "update", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
+}, on:function(type, callback) {
+  this.events.bind(type, callback)
 }, eventsCallback:function(type, evt) {
   for(var l in this.layers) {
     if(pulse.events[type] === "mouse" || pulse.events[type] === "touch") {

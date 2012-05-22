@@ -71,7 +71,7 @@ describe('Sprite', function() {
     for(var e in pulse.events) {
       (function (evtName) {
         it('should be able to bind "' + evtName + '"', function() {
-          sprite.events.bind(evtName, eventFunct);
+          sprite.on(evtName, eventFunct);
           expect(sprite.events._private.events[evtName]).toBeDefined();
         });
       }(e));

@@ -139,6 +139,26 @@ pulse.AssetManager = PClass.extend(
   },
 
   /**
+   * Removes an asset from the bundle provided. If no bundle name is provided,
+   * the asset with be removed from the default ("global") bundle.
+   * @param {string|pulse.Asset} asset The asset or name of the asset to remove.
+   * @param {string} [bundle] The name of the bundle to remove the asset from. If a
+   * bundle name is not provided, the asset is removed from the default bundle.
+   */
+  removeAsset: function(asset, bundle) {
+    if(typeof bundle === 'string')
+    {
+      if(this.bundles.hasOwnProperty(bundle)) {
+        this.bundles[bundle].removeAsset(asset);
+      }
+    }
+    else
+    {
+      this.bundles['global'].removeAsset(asset);
+    }
+  },
+
+  /**
    * Gets an asset from the bundle with the bundle name provided, or from
    * the default bundle if no bundle name is provided.
    * @param {string} name The name of the Asset to get.

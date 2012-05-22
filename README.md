@@ -134,4 +134,4 @@ If, in the course of using Pulse, you find bugs or would like to see a new featu
   [4]: https://github.com/onmodulus/pulse-demos
   [5]: http://www.withpulse.com/docs/
   [6]: mailto:support@withpulse.com
-  [7]: http://www.withpulse.com/_/img/visual_tree.png
+  [7]: http://www.withpulse.com/img/visual_tree.png

@@ -6,7 +6,9 @@ var pulse = pulse || {};
 
 /**
  * Raw 2d image, represented as a canvas object.
- * @param {string} filename the path to the raw image.
+ * @param {object} params parameters that can be set as initialized options
+ * on the texture.
+ * @config {string} filename the path to the raw image.
  * @author PFP
  * @class Basic 2d image
  * @constructor

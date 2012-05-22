@@ -270,15 +270,6 @@ pulse.Sprite = pulse.Visual.extend(
      */
     this.handleAllEvents = false;
 
-    /**
-     * Event handler for this sprite.
-     * @type {pulse.EventManager}
-     */
-    this.events = new pulse.EventManager({
-      owner : this,
-      masterCallback : this.eventsCallback
-    });
-
     // TODO: Hate this implementation of handling dropped items
     var self = this;
     /**
