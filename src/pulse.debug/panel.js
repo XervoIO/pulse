@@ -95,14 +95,17 @@ pulse.debug.Panel = PClass.extend(
      */
     this.statusbar = document.createElement('div');
     this.statusbar.className = 'debug-statusbar';
-    this.statusbar.style.cssText = 'height: 24px; overflow: hidden;';
+    this.statusbar.style.cssText = 'height: 24px; font-size: 16px; padding: 2px 0px; overflow: hidden;';
     this.panel.appendChild(this.statusbar);
+
+    var statStyle = 'margin-right: 5px; padding-right: 5px; border-right: 1px solid #ccc;';
 
     /**
      * Number of nodes in the current scene.
      * @type {DOMElement}
      */
     this.statusNodes = document.createElement('span');
+    this.statusNodes.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusNodes);
 
     /**
@@ -110,6 +113,7 @@ pulse.debug.Panel = PClass.extend(
      * @type {DOMElement}
      */
     this.statusDraws = document.createElement('span');
+    this.statusDraws.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusDraws);
 
     /**
@@ -117,6 +121,7 @@ pulse.debug.Panel = PClass.extend(
      * @type {DOMElement}
      */
     this.statusFPS = document.createElement('span');
+    this.statusFPS.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusFPS);
 
     /**
@@ -124,6 +129,7 @@ pulse.debug.Panel = PClass.extend(
      * @type {DOMElement}
      */
     this.statusMS = document.createElement('span');
+    this.statusMS.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusMS);
 
     /**
