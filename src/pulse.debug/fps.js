@@ -32,7 +32,7 @@ pulse.debug.FPS = pulse.debug.Timer.extend(
      * the frames per second.
      * @type {number}
      */
-    this.fpsUpdateInterval = 100;
+    this.fpsUpdateInterval = 10;
 
     /**
      * Current number of frames per second.
@@ -87,17 +87,17 @@ pulse.debug.FPS = pulse.debug.Timer.extend(
         this._private.timeLastSecond + this.fpsUpdateInterval) {
       var cfps = Math.round((this.frames * 1000) /
                             (this.timeCurrent - this._private.timeLastSecond));
-      var pfps1 = this.fpsMarks[this.fpsMarks.length - 1] || 0;
-      var pfps2 = this.fpsMarks[this.fpsMarks.length - 2] || 0;
-      var pfps3 = this.fpsMarks[this.fpsMarks.length - 3] || 0;
-      var pfps4 = this.fpsMarks[this.fpsMarks.length - 4] || 0;
-      this.fps = Math.round(
-        cfps * 0.6 +
-        pfps1 * 0.2 +
-        pfps2 * 0.1 +
-        pfps3 * 0.05 +
-        pfps4 * 0.05
-      );
+      var total = 0;
+      var terms = 9;
+      for(var i = 0; i < terms; i++) {
+        if(i === 0) {
+          total += cfps / terms;
+        } else {
+          var term = this.fpsMarks[this.fpsMarks.length - 1] || 0;
+          total += term / terms;
+        }
+      }
+      this.fps = Math.round(total);
       if(this.fpsMarks.length >= this.marksMax) {
         this.fpsMarks.shift();
       }
