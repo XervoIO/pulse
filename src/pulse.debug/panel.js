@@ -41,13 +41,18 @@ pulse.debug.Panel = PClass.extend(
      */
     this.topbar = document.createElement('div');
     this.topbar.className = 'debug-topbar';
-    this.topbar.style.cssText = 'height: 14px; line-height: 14px; font-size: 14px; padding: 5px; background-color: #222;';
+    this.topbar.style.cssText = 'height: 14px; line-height: 14px; font-size: 14px; padding: 5px;' +
+      'background-color: #222;';
 
     this.panel.appendChild(this.topbar);
 
     //Resize the panel when the header is dragged.
     this.topbar.onmousedown = function(e) {
       var ec = {x : e.pageX, y : e.pageY};
+      var body = document.getElementsByTagName('body')[0];
+      var bodyStyle = body.style.cssText;
+      body.style.cssText = bodyStyle + '-webkit-touch-callout: none; -webkit-user-select: none;' +
+        '-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;';
 
       var mm = function(e){
         var d = {x : e.pageX - ec.x, y : e.pageY - ec.y};
@@ -62,6 +67,7 @@ pulse.debug.Panel = PClass.extend(
       window.addEventListener('mouseup', function(){
         this.removeEventListener('mousemove', mm, false);
         this.removeEventListener('mouseup', arguments.callee, false);
+        body.style.cssText = bodyStyle;
       }, false);
     };
 
