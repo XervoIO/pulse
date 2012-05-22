@@ -31,7 +31,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
      */
     this._private.nodeList = document.createElement('div');
     this._private.nodeList.style.cssText = 'overflow: auto; ' +
-      'width: 70%; height: 130px; float: left;';
+      'width: 70%; height: 120px; float: left; padding: 5px 0;';
     this.container.appendChild(this._private.nodeList);
 
     /**
@@ -41,7 +41,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
      */
     this._private.nodePropsDiv = document.createElement('div');
     this._private.nodePropsDiv.style.cssText = 'overflow: auto;' +
-      'width: 30%; height: 130px; float: right;';
+      'width: 30%; height: 130px; float: right; padding: 5px 0; background: #3C3C3C';
     this.container.appendChild(this._private.nodePropsDiv);
 
     var _self = this;
@@ -56,29 +56,37 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     actionsDiv.style.cssText = 'float: right;';
 
     /**
-     * @private
      * Button to toggle visibilty of the selected node.
      * @type {DOMElement}
      */
-    var visibilityAction = document.createElement('a');
-    visibilityAction.innerHTML = 'Show/Hide';
-    visibilityAction.onclick = function() {
+    this.visibilityAction = document.createElement('a');
+    this.visibilityAction.innerHTML = 'HIDE';
+    this.visibilityAction.href = '#';
+    this.visibilityAction.style.cssText = 'float: left; margin: 0 5px; font-size: 12px; height: 16px; line-height: 16px; padding: 2px 6px; text-decoration: none; color: #EEE; display:block; border-radius: 3px; border: 1px solid #888; background: #666;';
+    this.visibilityAction.onclick = function() {
+      if(_self.selectedNode) {
         _self.toggleNode(_self.selectedNode);
+      }
+      return false;
     };
-    actionsDiv.appendChild(visibilityAction);
+    actionsDiv.appendChild(this.visibilityAction);
 
     /**
-     * @private
      * Button to toggle drawing the outline and anchor point
      * on the selected node.
      * @type {DOMElement}
      */
-    var outlineAction = document.createElement('a');
-    outlineAction.innerHTML = 'Outline';
-    outlineAction.onclick = function() {
+    this.outlineAction = document.createElement('a');
+    this.outlineAction.innerHTML = 'OUTLINE';
+    this.outlineAction.href = '#';
+    this.outlineAction.style.cssText = 'float: left; margin: 0 5px; font-size: 12px; height: 16px; line-height: 16px; padding: 2px 6px; text-decoration: none; color: #EEE; display:block; border-radius: 3px; border: 1px solid #888; background: #666;';
+    this.outlineAction.onclick = function() {
+      if(_self.selectedNode) {
         _self.toggleDebug(_self.selectedNode);
+      }
+      return false;
     };
-    actionsDiv.appendChild(outlineAction);
+    actionsDiv.appendChild(this.outlineAction);
 
     this._private.nodePropsDiv.appendChild(actionsDiv);
 
@@ -95,10 +103,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       propName = this._private.nodeProps[p];
       propDiv = document.createElement('div');
       propDiv.id = 'inspector-props-' + propName.toLowerCase();
+      propDiv.style.cssText = 'padding: 2px 10px; color: #AAA;';
       propDiv.innerHTML = propName + ': ';
 
       valueSpan = document.createElement('span');
       valueSpan.id = 'inspector-prop-' + propName.toLowerCase() + '-value';
+      valueSpan.style.cssText = 'color: #CCC;';
 
       propDiv.appendChild(valueSpan);
       this._private.nodePropsDiv.appendChild(propDiv);
@@ -132,7 +142,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    * milliseconds
    */
   update : function(elapsed) {
-    
+
   },
 
   /**
@@ -171,13 +181,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     nameSpan.style.cssText = 'cursor: pointer; padding: 2px;';
     nameSpan.innerHTML = node.name;
 
-
     var _self = this;
 
     nameSpan.onclick = function() {
       _self.selectNode(node);
     };
-    
+
     var container = null;
     if(addContainer === true) {
       container = document.createElement('div');
@@ -243,7 +252,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       for(var o in node.objects) {
         this.addNode(node.objects[o]);
       }
-      
+
     } else if(parentElm !== null) {
       divTmp = this.getNodeDiv(node, false);
       parentElm.appendChild(divTmp.div);
@@ -277,11 +286,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     if(this.selectedNode !== null) {
       nodeDiv = document.getElementById('inspector-node-' + this.selectedNode.name);
       if(nodeDiv !== null) {
+        var childu = nodeDiv.children[0];
         if(nodeDiv.children[0].className !== 'name') {
-          nodeDiv.children[1].style.border = '';
-        } else {
-          nodeDiv.children[0].style.border = '';
+          childu = nodeDiv.children[1];
         }
+        childu.style.color = nodeDiv.style.color;
+        childu.style.background = 'transparent';
       }
     }
 
@@ -289,11 +299,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
 
     nodeDiv = document.getElementById('inspector-node-' + node.name);
     if(nodeDiv !== null) {
+      var childs = nodeDiv.children[0];
       if(nodeDiv.children[0].className !== 'name') {
-        nodeDiv.children[1].style.border = '1px solid ' + nodeDiv.style.color;
-      } else {
-        nodeDiv.children[0].style.border = '1px solid ' + nodeDiv.style.color;
+        childs = nodeDiv.children[1];
       }
+      childs.style.background = nodeDiv.style.color;
+      childs.style.color = '#222';
     }
 
     //Check each property and display the value(s) if the
@@ -309,6 +320,20 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
           propValueSpan.innerHTML = 'N/A';
         }
       }
+    }
+
+    // Update Visibility Button
+    if(node.visible) {
+      this.visibilityAction.innerHTML = 'HIDE';
+    } else {
+      this.visibilityAction.innerHTML = 'SHOW';
+    }
+
+    // Update Outline Button
+    if(node.debugging) {
+      this.outlineAction.style.cssText += "background: #444;";
+    } else {
+      this.outlineAction.style.cssText += "background: #666;";
     }
   },
 
@@ -352,7 +377,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       if(node.visible === false || node.active === false) {
         color = this.disableColor(color);
       }
-
+      nodeDiv.highlightColor = '#' + color;
       nodeDiv.style.color = '#' + color;
     }
   },
@@ -364,10 +389,13 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    */
   toggleDebug : function(node) {
     if(node.debugging === true) {
-        node.debugging = false;
-      } else {
-        node.debugging = true;
-      }
+      node.debugging = false;
+    } else {
+      node.debugging = true;
+    }
+
+    //Forces a redraw of the selection styling
+    this.selectNode(node);
   },
 
   /**
@@ -391,10 +419,10 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     var value = '';
     if(typeof object === 'object') {
       for(var a in object) {
-        value += this.getValueString(object[a]) + ',';
+        value += this.getValueString(object[a]) + ', ';
       }
 
-      value = value.substring(0, value.length - 1);
+      value = value.substring(0, value.length - 2);
     } else if(typeof object === 'number') {
       value += object.toFixed(2);
     } else {

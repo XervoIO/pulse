@@ -32,7 +32,7 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
      */
     this.toolbar = document.createElement('div');
     this.toolbar.className = 'debug-console-toolbar';
-    this.toolbar.style.height = '20px;';
+    this.toolbar.style.cssText = 'padding: 0 5px;line-height:20px;border-bottom: 1px solid #555;';
     this.container.appendChild(this.toolbar);
 
     /**
@@ -102,7 +102,7 @@ pulse.debug.tabs.Console = pulse.debug.PanelTab.extend(
     button.id = 'filter-' + type;
     button.href = '#';
     button.innerHTML = name;
-    button.style.cssText = 'text-decoration: none; color: #ccc; padding: 3px;';
+    button.style.cssText = 'text-decoration: none; color: #ccc; padding:2px 5px;';
 
     this.toolbar.appendChild(button);
     return button;

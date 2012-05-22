@@ -34,6 +34,8 @@ pulse.debug.Logger = PClass.extend(
       'warning': 'ffcc66',
       'debug': 'ccc'
     };
+
+    this.even = false;
   },
 
   /**
@@ -44,13 +46,17 @@ pulse.debug.Logger = PClass.extend(
   addMessage : function(text, type) {
     var now = new Date();
     var logelement = document.createElement('div');
+    logelement.style.cssText = 'padding: 2px 0; border-bottom: 1px solid #555; padding:2px 5px;';
     logelement.style.color = '#' + this.colors[type];
-
+    if(this.even) {
+      logelement.style.background = '#2C2C2C';
+    }
     logelement.className = 'debug-log-message ' + type;
     logelement.setAttribute('data-type', type);
     this.container.appendChild(logelement);
-    var timeelement = document.createElement('span');
+    var timeelement = document.createElement('div');
     timeelement.className = 'timestamp';
+    timeelement.style.cssText = 'float:left; width: 50px; margin-right: 5px;';
     var h = now.getHours() % 12;
     timeelement.innerHTML = (h === 0 ? 12 : h) +
                             ':' + now.getMinutes() +
@@ -60,6 +66,8 @@ pulse.debug.Logger = PClass.extend(
     textelement.className = 'text';
     textelement.innerHTML = text;
     logelement.appendChild(textelement);
+
+    this.even = !this.even;
 
     this.scrollDiv();
   },
@@ -73,7 +81,7 @@ pulse.debug.Logger = PClass.extend(
       if (this.container.offsetHeight > 0) {
         currentHeight = scrollDiv.offsetHeight;
       }
-       
+
       if (currentHeight - this.container.scrollTop - this.container.offsetHeight < 20) {
           this.container.scrollTop = currentHeight;
       }

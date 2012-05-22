@@ -89,30 +89,11 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this.browserColor = 'F7Fd4A';
 
     // Setup labels
-    /**
-     * @private
-     * The update label for graph legend.
-     * @type {DOMElement}
-     */
-    this._private.updateLabel = document.createElement('div');
-    this._private.updateLabel.className = 'debug-perf-label';
-    //this.container.appendChild(this._private.updateLabel);
-
-    /**
-     * @private
-     * The update legend marker for the graph.
-     * @type {DOMElement}
-     */
-    this._private.updateMarker = document.createElement('div');
-    this._private.updateMarker.className = 'debug-perf-marker';
-    this._private.updateMarker.style.backgroundColor = '#61E561';
-    this._private.updateLabel.appendChild(this._private.updateMarker);
-
     this._private.stats = document.createElement('div');
-    this._private.stats.style.cssText = 'height: 24px;';
+    this._private.stats.style.cssText = 'height: 14px;line-height:14px;padding:3px 5px;margin-top:-3px;';
     this.container.appendChild(this._private.stats);
 
-    var labelStyle = 'line-height: 20px; margin: 0 10px 0 5px';
+    var labelStyle = 'margin: 0 10px 0 5px';
 
     //Add the color block for update
     this._private.stats.appendChild(this.getLegendListing(this.updateColor));
@@ -135,7 +116,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
      * The draw label for the legend for the graph.
      * @type {DOMElement}
      */
-    
+
     this._private.drawText = document.createElement('span');
     this._private.drawText.style.cssText = labelStyle;
     this._private.drawText.innerHTML = 'Draw';
@@ -157,7 +138,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
 
   getLegendListing : function(color) {
     var colorBlock = document.createElement('span');
-    colorBlock.style.cssText = 'font-size: 16px; padding-left: 16px;' +
+    colorBlock.style.cssText = 'font-size: 14px; padding-left: 14px;' +
       'background-color: #' + color + ';';
 
     return colorBlock;
@@ -203,7 +184,6 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     tmpCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     tmpCtx.drawImage(this.canvas, 0, 0);
 
-    var diff = newSize - this.canvas.height;
     this.canvas.height = newSize - 20;
     this._private.context.drawImage(tmpCan, 0, 0, this.canvas.width, newSize - 20);
   },

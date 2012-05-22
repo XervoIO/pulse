@@ -16,16 +16,16 @@ pulse.debug.tabs = pulse.debug.tabs || {};
 */
 pulse.debug.getTypeColor = function(node) {
 	if(node instanceof pulse.Scene) {
-		return 'FF00FF';
+		return '248A8A';
 	} else if(node instanceof pulse.Layer) {
-		return '808080';
+		return 'F2572A';
 	} else if(node instanceof pulse.Sprite) {
-		return '800080';
+		return 'F9E555';
 	} else if(node instanceof pulse.CanvasLabel) {
-		return 'FF0000';
+		return 'FAAC38';
 	} else if(node instanceof pulse.BitmapLabel) {
-		return 'FFFF00';
+		return 'C9FA58';
 	} else {
-		return '000000';
+		return 'CCCCCC';
 	}
 };

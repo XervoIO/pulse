@@ -31,8 +31,9 @@ pulse.debug.Panel = PClass.extend(
 
     this.panel.style.cssText =
       'width: 100%; background-color: #333; color: #00FF00;' +
-      'position: absolute; left: 0px; bottom: 0px; color: #ccc;';
-    
+      'position: absolute; left: 0px; bottom: 0px; color: #ccc; ' +
+      'font: 12px Helvetica,arial,freesans,clean,sans-serif';
+
     params.container.appendChild(this.panel);
 
     /**
@@ -41,7 +42,7 @@ pulse.debug.Panel = PClass.extend(
      */
     this.topbar = document.createElement('div');
     this.topbar.className = 'debug-topbar';
-    this.topbar.style.cssText = 'height: 14px; line-height: 14px; font-size: 14px; padding: 5px;' +
+    this.topbar.style.cssText = 'height: 13px; line-height: 13px; font-size: 13px; padding: 5px;' +
       'background-color: #222;';
 
     this.panel.appendChild(this.topbar);
@@ -56,7 +57,7 @@ pulse.debug.Panel = PClass.extend(
 
       var mm = function(e){
         var d = {x : e.pageX - ec.x, y : e.pageY - ec.y};
-        
+
         var contentHeight = _self.tabholder.style.height;
         contentHeight = contentHeight.substr(0, contentHeight.length - 2);
         contentHeight = parseInt(contentHeight, 10);
@@ -81,7 +82,7 @@ pulse.debug.Panel = PClass.extend(
      */
     this.tabbar = document.createElement('div');
     this.tabbar.className = 'debug-tabbar';
-    this.tabbar.style.cssText = 'height: 40px; background-color: #222; font-size: 16px;';
+    this.tabbar.style.cssText = 'height: 30px; background-color: #222; font-size: 14px;';
     this.panel.appendChild(this.tabbar);
 
     /**
@@ -89,7 +90,7 @@ pulse.debug.Panel = PClass.extend(
      * @type {DOMElement}
      */
     this.globalActions = document.createElement('div');
-    this.globalActions.style.cssText = 'float: right;';
+    this.globalActions.style.cssText = 'line-height: 30px; float: right;';
     this.tabbar.appendChild(this.globalActions);
 
     /**
@@ -97,15 +98,17 @@ pulse.debug.Panel = PClass.extend(
      * @type {DOMElement}
      */
     var toggleVisualDebug = document.createElement('a');
-    toggleVisualDebug.style.cssText = 'padding: 5px; text-decoration: none; color: #ccc;';
-    toggleVisualDebug.innerHTML = 'Visual Debug';
+    toggleVisualDebug.style.cssText = 'margin: 2px 5px; font-size: 12px; height: 16px; line-height: 16px; padding: 2px 6px; text-decoration: none; color: #EEE; display:block; border-radius: 3px; border: 1px solid #888; background: #666;';
+    toggleVisualDebug.innerHTML = 'VISUAL DEBUG';
     toggleVisualDebug.href = '#';
     toggleVisualDebug.onclick = function() {
       if(pulse.debug && pulse.debug.visualDebug !== undefined) {
         if(pulse.debug.visualDebug === false) {
           pulse.debug.visualDebug = true;
+          this.style.cssText += "background: #444;";
         } else {
           pulse.debug.visualDebug = false;
+          this.style.cssText += "background: #666;";
         }
       }
     };
@@ -127,16 +130,16 @@ pulse.debug.Panel = PClass.extend(
      */
     this.statusbar = document.createElement('div');
     this.statusbar.className = 'debug-statusbar';
-    this.statusbar.style.cssText = 'height: 24px; font-size: 16px; padding: 2px 0px; overflow: hidden;';
+    this.statusbar.style.cssText = 'height: 16px; line-height: 16px; padding: 2px 5px; overflow: hidden; background: #555;';
     this.panel.appendChild(this.statusbar);
 
-    var statStyle = 'margin-right: 5px; padding-right: 5px; border-right: 1px solid #ccc;';
+    var statStyle = 'float: left; margin-right: 5px; padding-right: 5px; border-right: 1px solid #ccc;';
 
     /**
      * Number of nodes in the current scene.
      * @type {DOMElement}
      */
-    this.statusNodes = document.createElement('span');
+    this.statusNodes = document.createElement('div');
     this.statusNodes.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusNodes);
 
@@ -144,7 +147,7 @@ pulse.debug.Panel = PClass.extend(
      * Number of draws per frame status text.
      * @type {DOMElement}
      */
-    this.statusDraws = document.createElement('span');
+    this.statusDraws = document.createElement('div');
     this.statusDraws.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusDraws);
 
@@ -152,7 +155,7 @@ pulse.debug.Panel = PClass.extend(
      * Frame per second status text.
      * @type {DOMElement}
      */
-    this.statusFPS = document.createElement('span');
+    this.statusFPS = document.createElement('div');
     this.statusFPS.style.cssText = statStyle;
     this.statusbar.appendChild(this.statusFPS);
 
@@ -160,8 +163,8 @@ pulse.debug.Panel = PClass.extend(
      * Frame time status text.
      * @type {DOMElement}
      */
-    this.statusMS = document.createElement('span');
-    this.statusMS.style.cssText = statStyle;
+    this.statusMS = document.createElement('div');
+    this.statusMS.style.cssText = statStyle + 'border:0;';
     this.statusbar.appendChild(this.statusMS);
 
     /**
@@ -237,7 +240,7 @@ pulse.debug.Panel = PClass.extend(
     }
     link.id = 'pulse-tab-link-' + tab.id;
     link.name = tab.name;
-    link.style.cssText = 'padding: 10px; display: inline-block; text-decoration: none; color: #ccc;';
+    link.style.cssText = 'height: 30px; padding: 0px 10px; line-height: 30px; display: inline-block; text-decoration: none; color: #ccc;';
 
     tab.container.style.display = 'none';
     this.tabbarLinks[tab.id] = link;
@@ -279,7 +282,7 @@ pulse.debug.Panel = PClass.extend(
     var link = this.tabbarLinks[id];
     link.className = 'selected';
     link.style.backgroundColor = '#333';
-    link.style.color = '#00FF00';
+    link.style.color = '#CCFF00';
     tab.container.className = 'debug-tab selected';
     tab.show();
   },
