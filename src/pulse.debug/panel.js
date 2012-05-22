@@ -43,7 +43,7 @@ pulse.debug.Panel = PClass.extend(
     this.topbar = document.createElement('div');
     this.topbar.className = 'debug-topbar';
     this.topbar.style.cssText = 'height: 13px; line-height: 13px; font-size: 13px; padding: 5px;' +
-      'background-color: #222;';
+      'background-color: #222;cursor:ns-resize;';
 
     this.panel.appendChild(this.topbar);
 
