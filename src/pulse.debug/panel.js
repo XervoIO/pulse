@@ -320,7 +320,7 @@ pulse.debug.Panel = PClass.extend(
 
   /**
    * Adds a node to the inspector panel.
-   * @param {pulse.Node} engine the engine to reference
+   * @param {pulse.Node} node the node to add
    */
   addNode : function(node) {
     if(this.tabs['inspector']) {
