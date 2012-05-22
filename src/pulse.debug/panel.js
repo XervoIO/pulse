@@ -76,8 +76,34 @@ pulse.debug.Panel = PClass.extend(
     this.tabbar = document.createElement('div');
     this.tabbar.className = 'debug-tabbar';
     this.tabbar.style.cssText = 'height: 40px; background-color: #222; font-size: 16px;';
-
     this.panel.appendChild(this.tabbar);
+
+    /**
+     * Global actions available for the current game.
+     * @type {DOMElement}
+     */
+    this.globalActions = document.createElement('div');
+    this.globalActions.style.cssText = 'float: right;';
+    this.tabbar.appendChild(this.globalActions);
+
+    /**
+     * Toggles global visual debugging for the game.
+     * @type {DOMElement}
+     */
+    var toggleVisualDebug = document.createElement('a');
+    toggleVisualDebug.style.cssText = 'padding: 5px; text-decoration: none; color: #ccc;';
+    toggleVisualDebug.innerHTML = 'Visual Debug';
+    toggleVisualDebug.href = '#';
+    toggleVisualDebug.onclick = function() {
+      if(pulse.debug && pulse.debug.visualDebug !== undefined) {
+        if(pulse.debug.visualDebug === false) {
+          pulse.debug.visualDebug = true;
+        } else {
+          pulse.debug.visualDebug = false;
+        }
+      }
+    };
+    this.globalActions.appendChild(toggleVisualDebug);
 
     /**
      * Panel tab holder, will contain all custom panels.
