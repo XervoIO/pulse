@@ -50,10 +50,9 @@ pulse.debug.Panel = PClass.extend(
     //Resize the panel when the header is dragged.
     this.topbar.onmousedown = function(e) {
       var ec = {x : e.pageX, y : e.pageY};
-      var body = document.getElementsByTagName('body')[0];
-      var bodyStyle = body.style.cssText;
-      body.style.cssText = bodyStyle + '-webkit-touch-callout: none; -webkit-user-select: none;' +
-        '-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;';
+      var panelStyle = _self.panel.style.cssText;
+      _self.panel.style.cssText = '-webkit-touch-callout: none; -webkit-user-select: none;' +
+        '-khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;' + panelStyle;
 
       var mm = function(e){
         var d = {x : e.pageX - ec.x, y : e.pageY - ec.y};
@@ -66,9 +65,9 @@ pulse.debug.Panel = PClass.extend(
       };
       window.addEventListener('mousemove', mm, false);
       window.addEventListener('mouseup', function(){
+        _self.panel.style.cssText = panelStyle;
         this.removeEventListener('mousemove', mm, false);
         this.removeEventListener('mouseup', arguments.callee, false);
-        body.style.cssText = bodyStyle;
       }, false);
     };
 
