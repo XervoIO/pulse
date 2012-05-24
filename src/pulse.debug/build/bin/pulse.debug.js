@@ -805,7 +805,9 @@ pulse.debug.DebugManager = PClass.extend({init:function() {
   this.panel.update(elapsed)
 }});
 pulse.debug.visualDebug = false;
-pulse.debug.manager = new pulse.debug.DebugManager;
+pulse.ready(function() {
+  pulse.debug.manager = new pulse.debug.DebugManager
+});
 pulse.debug.plugin = new pulse.plugin.Plugin;
 var loopCallback = pulse.debug.plugin.subscribe("pulse.Engine", "loop", pulse.plugin.PluginCallbackTypes.onEnter, function(params) {
   pulse.debug.manager.setEngine(this);
