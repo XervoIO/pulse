@@ -234,12 +234,15 @@ pulse.debug.Panel = PClass.extend(
       _self.showTab(tab.id);
       return false;
     };
-    if(tab.icon !== '') {
-      link.style.backgroundImage = 'url(' + tab.icon + ')';
-    }
+    
     link.id = 'pulse-tab-link-' + tab.id;
     link.name = tab.name;
     link.style.cssText = 'height: 30px; padding: 0px 10px; line-height: 30px; display: inline-block; text-decoration: none; color: #ccc;';
+
+    if(tab.icon !== '') {
+      link.style.cssText += 'background: transparent url(\'' + tab.icon + '\') no-repeat 10px center;' +
+        'padding-left: 35px';
+    }
 
     tab.container.style.display = 'none';
     this.tabbarLinks[tab.id] = link;
