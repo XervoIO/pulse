@@ -26,7 +26,7 @@ pulse.debug.Logger = PClass.extend(
     this.container.style.cssText = 'height: 118px; overflow: auto;';
 
     /**
-     * The colors for the different message types;
+     * The colors for the different message types
      * @type {object}
      */
     this.colors = {
@@ -68,24 +68,6 @@ pulse.debug.Logger = PClass.extend(
     logelement.appendChild(textelement);
 
     this.even = !this.even;
-
-    this.scrollDiv();
-  },
-
-  scrollDiv : function() {
-    var currentHeight = 0;
-
-    if (this.container.scrollHeight > 0) {
-      currentHeight = this.container.scrollHeight;
-    } else {
-      if (this.container.offsetHeight > 0) {
-        currentHeight = scrollDiv.offsetHeight;
-      }
-
-      if (currentHeight - this.container.scrollTop - this.container.offsetHeight < 20) {
-          this.container.scrollTop = currentHeight;
-      }
-        }
   },
 
   /**
