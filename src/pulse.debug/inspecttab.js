@@ -329,6 +329,12 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
       this.visibilityAction.innerHTML = 'SHOW';
     }
 
+    if(node instanceof pulse.Scene) {
+      this.outlineAction.style.display = 'none';
+    } else {
+      this.outlineAction.style.display = 'block';
+    }
+
     // Update Outline Button
     if(node.debugging) {
       this.outlineAction.style.cssText += "background: #444;";
