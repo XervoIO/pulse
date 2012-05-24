@@ -197,11 +197,6 @@ pulse.debug.Panel = PClass.extend(
     this.nodeCounter = params.nodeCounter;
 
     if(params.useDefault) {
-      var consoleTab = new pulse.debug.tabs.Console({
-        name : 'Console',
-        id : 'console'
-      });
-      this.addTab(consoleTab);
       var perfTab = new pulse.debug.tabs.Performance({
         name : 'Performance',
         id : 'perf',
@@ -215,6 +210,11 @@ pulse.debug.Panel = PClass.extend(
         id : 'inspector'
       });
       this.addTab(specTab);
+      var consoleTab = new pulse.debug.tabs.Console({
+        name : 'Console',
+        id : 'console'
+      });
+      this.addTab(consoleTab);
 
       this.showTab(perfTab.id);
     }
