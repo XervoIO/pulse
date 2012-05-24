@@ -185,7 +185,8 @@ pulse.debug.DebugManager = PClass.extend(
   },
 
   /**
-   * Increment the number of nodes.
+   * Adds a node to the panel.
+   * @param {pulse.Node} node the node to add
    */
   addNode : function(node) {
     this._private.nodeCounter.increment();
@@ -193,7 +194,8 @@ pulse.debug.DebugManager = PClass.extend(
   },
 
   /**
-   * Decrement the number of nodes.
+   * Removes a node from the panel.
+   * @param {pulse.Node} node the node to remove
    */
   removeNode : function(node) {
     this._private.nodeCounter.decrement();

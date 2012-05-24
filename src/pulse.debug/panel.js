@@ -303,7 +303,7 @@ pulse.debug.Panel = PClass.extend(
   },
 
   /**
-   * Adds log entry to the console.
+   * Adds a log entry to the console.
    * @param {string} text the message text for the log entry
    * @param {string} type the type of the message
    */

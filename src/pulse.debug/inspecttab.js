@@ -142,14 +142,14 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    * milliseconds
    */
   update : function(elapsed) {
+    //If the selected node has been updated, update the properties by reselecting it
     if(this.selectedNode instanceof pulse.Visual && this.selectedNode.updated === true) {
       this.selectNode(this.selectedNode);
     }
   },
 
   /**
-   * Updates the graph to show the frame elapsed time, update time, and
-   * draw time. It will also update the labels to show the actual values.
+   * Set the engine to use for getting game information.
    * @param {pulse.Engine} engine the engine used in the current game.
    */
   setEngine : function(engine) {

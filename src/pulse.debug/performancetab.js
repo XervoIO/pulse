@@ -51,7 +51,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
 
     /**
      * @private
-     * The interval the graph will resize
+     * The interval at which the graph will resize
      * @type {number}
      */
     this._private.heightIncrement = 59;
@@ -150,6 +150,10 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     this._private.stats.appendChild(this._private.browserText);
   },
 
+  /**
+   * Returns a colored box to use in the graph legend.
+   * @param {string} color the hex color of the box, without a #
+   */
   getLegendListing : function(color) {
     var colorBlock = document.createElement('span');
     colorBlock.style.cssText = 'font-size: 14px; padding-left: 14px;' +
@@ -178,7 +182,6 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
    * milliseconds
    */
   update : function(elapsed) {
-    // Nothing is updated by default
     this.drawGraph();
   },
 
