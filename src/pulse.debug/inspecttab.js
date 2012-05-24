@@ -142,7 +142,9 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
    * milliseconds
    */
   update : function(elapsed) {
-
+    if(this.selectedNode instanceof pulse.Visual && this.selectedNode.updated === true) {
+      this.selectNode(this.selectedNode);
+    }
   },
 
   /**

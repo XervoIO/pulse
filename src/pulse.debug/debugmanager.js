@@ -146,6 +146,7 @@ pulse.debug.DebugManager = PClass.extend(
    */
   stopUpdate : function() {
     this._private.updateTimer.mark();
+    this.panel.gameUpdated();
   },
 
   /**

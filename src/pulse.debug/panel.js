@@ -344,6 +344,15 @@ pulse.debug.Panel = PClass.extend(
   },
 
   /**
+   * Function called after each update but before draw.
+   */
+  gameUpdated : function() {
+    if(this.tabs['inspector']) {
+      this.tabs['inspector'].update();
+    }
+  },
+
+  /**
    * Update function called on each loop in the engine
    * @param {number} elapsed the elapsed time since last call in
    * milliseconds
