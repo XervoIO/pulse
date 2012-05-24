@@ -323,7 +323,7 @@ pulse.debug.tabs.Inspector = pulse.debug.PanelTab.extend(
     }
 
     // Update Visibility Button
-    if(node.visible) {
+    if(node.visible === true || node.active === true) {
       this.visibilityAction.innerHTML = 'HIDE';
     } else {
       this.visibilityAction.innerHTML = 'SHOW';
