@@ -50,6 +50,20 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
     var h = 118;
 
     /**
+     * @private
+     * The interval the graph will resize
+     * @type {number}
+     */
+    this._private.heightIncrement = 59;
+
+    /**
+     * @private
+     * The current size of the graph
+     * @type {number}
+     */
+    this._private.lastResize = 118;
+
+    /**
      * The canvas for the stats graph.
      * @type {HTMLCanvasElement}
      */
@@ -173,19 +187,47 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
    * @param {number} newSize the new size of the container
    */
   resize : function(newSize) {
+    newSize = Math.round(newSize - 20);
+
     //Create a temporary canvas obj to cache the pixel data
     var tmpCan = document.createElement('canvas');
     var tmpCtx = tmpCan.getContext('2d');
 
     //draw the current canvas data into the temp canvas
     tmpCan.width = this.canvas.width;
-    tmpCan.height = this.canvas.height;
+    tmpCan.height = newSize;
     tmpCtx.fillStyle = "#333";
-    tmpCtx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    tmpCtx.drawImage(this.canvas, 0, 0);
+    tmpCtx.fillRect(0, 0, this.canvas.width, newSize);
 
-    this.canvas.height = newSize - 20;
-    this._private.context.drawImage(tmpCan, 0, 0, this.canvas.width, newSize - 20);
+    //Only scale the chart if the canvas size has changed enough
+    //to reach the next or previous increment.
+    var h = newSize - (newSize % this._private.heightIncrement);
+    if(h !== this._private.lastResize) {
+      if(this.canvas.height < h) {
+        var offset = h - this.canvas.height;
+
+        tmpCtx.drawImage(
+          this.canvas,
+          0, h - this._private.lastResize - offset,
+          this.canvas.width,
+          this._private.lastResize,
+          0, newSize - h, this.canvas.width, h
+        );
+      } else {
+        tmpCtx.drawImage(
+          this.canvas,
+          0, newSize - h, this.canvas.width, h
+        );
+      }
+
+      this._private.lastResize = h;
+    } else {
+      tmpCtx.drawImage(this.canvas, 0, newSize - this.canvas.height);
+    }
+    
+    //Resize the canvas and draw the temp canvas
+    this.canvas.height = newSize;
+    this._private.context.drawImage(tmpCan, 0, 0);
   },
 
   /**
@@ -194,7 +236,8 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
    */
   drawGraph : function() {
     var nx = this.canvas.width - 1;
-    var y = this.canvas.height;
+    var y = this._private.lastResize;
+    var o = this.canvas.height - this._private.lastResize;
 
     //Recalculate the ms ratio with the current canvas height
     this._private.msRatio = this._private.msHeight / y;
@@ -207,14 +250,14 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
       e = Math.round(this.fpsTimer.markCurrent);
       h = e / this._private.msRatio;
       this._private.context.fillStyle = '#' + this.browserColor;
-      this._private.context.fillRect(nx, y-h, 1, h);
+      this._private.context.fillRect(nx, y - h + o, 1, h);
       b = e;
     }
     if(this.updateTimer) {
       e = Math.round(this.updateTimer.markCurrent);
       h = e / this._private.msRatio;
       this._private.context.fillStyle = '#' + this.updateColor;
-      this._private.context.fillRect(nx, y-h, 1, h);
+      this._private.context.fillRect(nx, y - h + o, 1, h);
       b -= e;
       this._private.updateText.innerHTML = 'Update : ' + e + 'ms';
     }
@@ -223,7 +266,7 @@ pulse.debug.tabs.Performance = pulse.debug.PanelTab.extend(
       var hp = h;
       h = e / this._private.msRatio;
       this._private.context.fillStyle = '#' + this.drawColor;
-      this._private.context.fillRect(nx, y-h-hp, 1, h);
+      this._private.context.fillRect(nx, y - h - hp + o, 1, h);
       b -= e;
       this._private.drawText.innerHTML = 'Draw : ' + e + 'ms';
     }
