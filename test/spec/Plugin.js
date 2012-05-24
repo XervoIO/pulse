@@ -33,6 +33,8 @@ describe("Plugin", function () {
     expect(exceptionThrown).toEqual(false);
 
     plugin.unsubscribe(callback);
+
+    pulse.plugins.remove(plugin);
   });
 
   it("should invoke subscribed init callback", function () {
@@ -49,6 +51,8 @@ describe("Plugin", function () {
 
     expect(callbackInvoked).toEqual(true);
     plugin.unsubscribe(callback);
+
+    pulse.plugins.remove(plugin);
   });
 
   it("should invoke subscribed init callback with correct arguments", function () {
@@ -69,6 +73,8 @@ describe("Plugin", function () {
     expect(callbackInvoked).toEqual(true);
 
     plugin.unsubscribe(callback);
+
+    pulse.plugins.remove(plugin);
   });
 
   it("should invoke subscribed init callback with correct this variable", function () {
@@ -93,6 +99,8 @@ describe("Plugin", function () {
     expect(callbackInvoked).toEqual(true);
 
     plugin.unsubscribe(callback);
+
+    pulse.plugins.remove(plugin);
   });
 
   it("should be able to unsubscribe callback", function () {
@@ -111,6 +119,26 @@ describe("Plugin", function () {
 
     plugin.unsubscribe(callback);
 
+    sprite = new pulse.Sprite({ src: 'dummy/path.png' });
+
+    expect(callbackInvokeCount).toEqual(1);
+
+    pulse.plugins.remove(plugin);
+  });
+
+  it("should be able to remove a plugin", function() {
+    var callbackInvokeCount = 0;
+
+    var plugin = new pulse.plugin.Plugin();
+    pulse.plugins.add(plugin);
+    plugin.subscribe('pulse.Sprite', 'init', 
+      pulse.plugin.PluginCallbackTypes.onEnter, 
+      function (params) {
+        callbackInvokeCount++;
+      });
+
+    var sprite = new pulse.Sprite({ src: 'dummy/path.png' });
+    pulse.plugins.remove(plugin);
     sprite = new pulse.Sprite({ src: 'dummy/path.png' });
 
     expect(callbackInvokeCount).toEqual(1);

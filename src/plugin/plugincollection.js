@@ -39,6 +39,18 @@ pulse.plugin.PluginCollection = PClass.extend(
   },
 
   /**
+   * Removes a plugin from the collection.
+   * @param {pulse.Plugin} plugin The plugin to remove.
+   */
+  remove: function(plugin) {
+    for(var key in this._private.plugins) {
+      if(this._private.plugins[key] === plugin) {
+        this._private.plugins.splice(key, 1);
+      }
+    }
+  },
+
+  /**
    * Invokes every plugin with the supplied arguments.
    * @private
    */

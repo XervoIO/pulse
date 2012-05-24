@@ -5,7 +5,10 @@
  */
 pulse.debug.visualDebug = false;
 
-pulse.debug.manager = new pulse.debug.DebugManager();
+pulse.ready(function() {
+	pulse.debug.manager = new pulse.debug.DebugManager();
+});
+
 pulse.debug.plugin = new pulse.plugin.Plugin();
 
 var loopCallback = pulse.debug.plugin.subscribe(
