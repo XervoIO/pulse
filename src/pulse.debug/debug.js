@@ -28,7 +28,6 @@ pulse.debug.plugin.subscribe(
 	'update',
 	pulse.plugin.PluginCallbackTypes.onEnter,
 	function(params) {
-		pulse.debug.manager.markFPS();
 		pulse.debug.manager.startUpdate();
 	}
 );
@@ -47,6 +46,7 @@ pulse.debug.plugin.subscribe(
 	'draw',
 	pulse.plugin.PluginCallbackTypes.onEnter,
 	function(params) {
+		pulse.debug.manager.markFPS();
 		pulse.debug.manager.resetDraws();
 		pulse.debug.manager.startDraw();
 	}
