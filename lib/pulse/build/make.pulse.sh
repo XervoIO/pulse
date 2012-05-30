@@ -84,5 +84,5 @@ java -jar $BUILD_DIR/jsdoc/jsrun.jar $BUILD_DIR/jsdoc/app/run.js -c=doc.pulse.ej
 # Copy docs to main docs folder.
 mkdir $DOCS_DIR/pulse
 
-cp -r bin/docs/HTML $DOCS_DIR/pulse
-cp -r bin/docs/EJS $DOCS_DIR/pulse
+cp -r ../docs/HTML $DOCS_DIR/pulse
+cp -r ../docs/EJS $DOCS_DIR/pulse

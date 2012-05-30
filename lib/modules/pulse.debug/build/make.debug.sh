@@ -50,5 +50,5 @@ cp bin/pulse.debug.js ../../../../build/bin/modules/
 # Copy docs to main docs folder.
 mkdir $DOCS_DIR/modules/pulse.debug
 
-cp -r bin/docs/HTML $DOCS_DIR/modules/pulse.debug
-cp -r bin/docs/EJS $DOCS_DIR/modules/pulse.debug
+cp -r ../docs/HTML $DOCS_DIR/modules/pulse.debug
+cp -r ../docs/EJS $DOCS_DIR/modules/pulse.debug
