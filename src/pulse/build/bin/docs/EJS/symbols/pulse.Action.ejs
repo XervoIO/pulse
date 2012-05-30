@@ -1,0 +1,523 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.Action
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		Extends
+			<a href="../symbols/pulse.Node">pulse.Node</a>.<br />
+		
+
+		base action
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/action/action.js">/src/action/action.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.Action.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#constructor">pulse.Action</a></b>(params)
+					</div>
+					<div class="description">The base class for actions.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Action.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#events">events</a></b>
+						</div>
+						<div class="description">Event manager for action.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#isComplete">isComplete</a></b>
+						</div>
+						<div class="description">Whether this action is completed or not.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#isPaused">isPaused</a></b>
+						</div>
+						<div class="description">Whether this action is currently paused or not.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#isRunning">isRunning</a></b>
+						</div>
+						<div class="description">Whether this action is currently running or not.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Action#target">target</a></b>
+						</div>
+						<div class="description">The target node for the action.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		<dt>Fields borrowed from class <a href="../symbols/pulse.Node">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node#name">name</a>, <a href="../symbols/pulse.Node#parent">parent</a></dd>
+		</dl>
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.Action.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Action#complete">complete</a></b>()
+						</div>
+						<div class="description">Called when the action is complete.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Action#pause">pause</a></b>()
+						</div>
+						<div class="description">Pauses the action.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Action#start">start</a></b>()
+						</div>
+						<div class="description">Starts the action.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Action#stop">stop</a></b>()
+						</div>
+						<div class="description">Stops the action.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		<dt>Methods borrowed from class <a href="../symbols/pulse.Node">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node#update">update</a></dd>
+		</dl>
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the events documented in the class pulse.Action.">
+			<caption>Event Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Event Attributes</th>
+					<th scope="col">Event Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Action#event:complete">complete</a></b>(data)
+						</div>
+						<div class="description">Event rose when action has completed.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		
+		</dl>
+		
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.Action</b>(params)
+		</div>
+
+		<div class="description">
+			The base class for actions.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{<a href="../symbols/pulse.Sprite">pulse.Sprite</a>}</span>  <b>params.target</b>
+						
+					</dt>
+						<dd>the sprite for the action to be performed on</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.name</b>
+						<i>Optional</i>
+					</dt>
+						<dd>name of the node</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="events"> </a>
+			<div class="fixedFont">
+
+			
+			<b>events</b>
+
+			</div>
+			<div class="description">
+				Event manager for action. Used to raise events such as complete.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="isComplete"> </a>
+			<div class="fixedFont">
+
+			
+			<b>isComplete</b>
+
+			</div>
+			<div class="description">
+				Whether this action is completed or not.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="isPaused"> </a>
+			<div class="fixedFont">
+
+			
+			<b>isPaused</b>
+
+			</div>
+			<div class="description">
+				Whether this action is currently paused or not.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="isRunning"> </a>
+			<div class="fixedFont">
+
+			
+			<b>isRunning</b>
+
+			</div>
+			<div class="description">
+				Whether this action is currently running or not.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="target"> </a>
+			<div class="fixedFont">
+
+			
+			<b>target</b>
+
+			</div>
+			<div class="description">
+				The target node for the action.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="complete"> </a>
+			<div class="fixedFont">
+
+			
+			<b>complete</b>()
+
+			</div>
+			<div class="description">
+				Called when the action is complete.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="pause"> </a>
+			<div class="fixedFont">
+
+			
+			<b>pause</b>()
+
+			</div>
+			<div class="description">
+				Pauses the action.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="start"> </a>
+			<div class="fixedFont">
+
+			
+			<b>start</b>()
+
+			</div>
+			<div class="description">
+				Starts the action.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="stop"> </a>
+			<div class="fixedFont">
+
+			
+			<b>stop</b>()
+
+			</div>
+			<div class="description">
+				Stops the action.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+		<div class="sectionTitle">
+			Event Detail
+		</div>
+		
+			<a name="event:complete"> </a>
+			<div class="fixedFont">
+
+			
+			<b>complete</b>(data)
+
+			</div>
+			<div class="description">
+				Event rose when action has completed.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>data</b>
+							
+						</dt>
+						<dd>Object with action that rose the event.</dd>
+					
+						<dt>
+							<span class="light fixedFont">{<a href="../symbols/pulse.Action">pulse.Action</a>}</span> <b>data.action</b>
+							
+						</dt>
+						<dd>The action that rose the event.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+</div>

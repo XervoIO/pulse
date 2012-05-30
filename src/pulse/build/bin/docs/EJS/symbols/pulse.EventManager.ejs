@@ -1,0 +1,539 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.EventManager
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		scene manager class
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/event/eventmanager.js">/src/event/eventmanager.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.EventManager.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.EventManager#constructor">pulse.EventManager</a></b>(params)
+					</div>
+					<div class="description">Event manager which handles binding and calling event callbacks to event
+types.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.EventManager.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&lt;static&gt; &nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						pulse.EventManager.<b><a href="../symbols/pulse.EventManager#.DraggedItems">DraggedItems</a></b>
+						</div>
+						<div class="description">Static property to hold the currently dragged objects</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.EventManager#masterCallback">masterCallback</a></b>
+						</div>
+						<div class="description">The master callback for this event manager.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.EventManager#owner">owner</a></b>
+						</div>
+						<div class="description">The owner of this event manager and handler of any master callback.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.EventManager.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#bind">bind</a></b>(type, callback)
+						</div>
+						<div class="description">Binds a callback to an event type.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#checkType">checkType</a></b>(type)
+						</div>
+						<div class="description">Checks the browser support of the event, and translates the event name to
+an event that is supported in necessary and available.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#hasEvent">hasEvent</a></b>(type)
+						</div>
+						<div class="description">Checks to see if an event type has a callback currently.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#raiseEvent">raiseEvent</a></b>(type, the)
+						</div>
+						<div class="description">Raises an event from this event manager.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#unbind">unbind</a></b>(type)
+						</div>
+						<div class="description">Unbinds any callbacks from and event type.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#unbindFunction">unbindFunction</a></b>(type, callback)
+						</div>
+						<div class="description">Unbinds a specific callback from event type.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.EventManager</b>(params)
+		</div>
+
+		<div class="description">
+			Event manager which handles binding and calling event callbacks to event
+types.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						<i>Optional</i>
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params.owner</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the owner of this event manager</dd>
+				
+					<dt>
+						<span class="light fixedFont">{function}</span>  <b>params.masterCallback</b>
+						<i>Optional</i>
+					</dt>
+						<dd>callback for all events raised</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name=".DraggedItems"> </a>
+			<div class="fixedFont">&lt;static&gt; 
+
+			
+			<span class="light">pulse.EventManager.</span><b>DraggedItems</b>
+
+			</div>
+			<div class="description">
+				Static property to hold the currently dragged objects
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="masterCallback"> </a>
+			<div class="fixedFont">
+
+			
+			<b>masterCallback</b>
+
+			</div>
+			<div class="description">
+				The master callback for this event manager. This function will be
+called for any events raised.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="owner"> </a>
+			<div class="fixedFont">
+
+			
+			<b>owner</b>
+
+			</div>
+			<div class="description">
+				The owner of this event manager and handler of any master callback.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="bind"> </a>
+			<div class="fixedFont">
+
+			
+			<b>bind</b>(type, callback)
+
+			</div>
+			<div class="description">
+				Binds a callback to an event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to bind</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>the function callback to bind to the event</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="checkType"> </a>
+			<div class="fixedFont">
+
+			
+			<b>checkType</b>(type)
+
+			</div>
+			<div class="description">
+				Checks the browser support of the event, and translates the event name to
+an event that is supported in necessary and available.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to check</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="hasEvent"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{boolean}</span>
+			<b>hasEvent</b>(type)
+
+			</div>
+			<div class="description">
+				Checks to see if an event type has a callback currently.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to check</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{boolean}</span> true if there is a callback attached to the event type</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="raiseEvent"> </a>
+			<div class="fixedFont">
+
+			
+			<b>raiseEvent</b>(type, the)
+
+			</div>
+			<div class="description">
+				Raises an event from this event manager. This will call the callback
+(if one exists) for the event type. It will also call the master callback
+if it is set.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to raise</dd>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>the</b>
+							
+						</dt>
+						<dd>event object to raise</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="unbind"> </a>
+			<div class="fixedFont">
+
+			
+			<b>unbind</b>(type)
+
+			</div>
+			<div class="description">
+				Unbinds any callbacks from and event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to unbind from</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="unbindFunction"> </a>
+			<div class="fixedFont">
+
+			
+			<b>unbindFunction</b>(type, callback)
+
+			</div>
+			<div class="description">
+				Unbinds a specific callback from event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to unbind from</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>the function callback to unbind</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

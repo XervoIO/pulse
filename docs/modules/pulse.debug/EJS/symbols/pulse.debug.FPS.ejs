@@ -1,0 +1,369 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.debug.FPS
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		The debug fps class
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/fps.js">/src/fps.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.debug.FPS.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#constructor">pulse.debug.FPS</a></b>(params)
+					</div>
+					<div class="description">Frame per second class that handles tracking frames per second</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.debug.FPS.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#fps">fps</a></b>
+						</div>
+						<div class="description">Current number of frames per second.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#fpsMarks">fpsMarks</a></b>
+						</div>
+						<div class="description">Array of fps marks for the samples taken.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#fpsUpdateInterval">fpsUpdateInterval</a></b>
+						</div>
+						<div class="description">Frames per second update interval.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#frames">frames</a></b>
+						</div>
+						<div class="description">Number of frames recorded.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.FPS#timeStart">timeStart</a></b>
+						</div>
+						<div class="description">The time that we started calculating frames per second.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.debug.FPS.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.FPS#mark">mark</a></b>()
+						</div>
+						<div class="description">Marks the current time elapsed since last mark or start.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.FPS#start">start</a></b>()
+						</div>
+						<div class="description">Starts the timer.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.debug.FPS</b>(params)
+		</div>
+
+		<div class="description">
+			Frame per second class that handles tracking frames per second
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						<i>Optional</i>
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.name</b>
+						<i>Optional</i>
+					</dt>
+						<dd>name of the fps tracker</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="fps"> </a>
+			<div class="fixedFont">
+
+			
+			<b>fps</b>
+
+			</div>
+			<div class="description">
+				Current number of frames per second.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="fpsMarks"> </a>
+			<div class="fixedFont">
+
+			
+			<b>fpsMarks</b>
+
+			</div>
+			<div class="description">
+				Array of fps marks for the samples taken. A max number of samples will
+be kept.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="fpsUpdateInterval"> </a>
+			<div class="fixedFont">
+
+			
+			<b>fpsUpdateInterval</b>
+
+			</div>
+			<div class="description">
+				Frames per second update interval. This is how often it will recalculate
+the frames per second.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="frames"> </a>
+			<div class="fixedFont">
+
+			
+			<b>frames</b>
+
+			</div>
+			<div class="description">
+				Number of frames recorded.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="timeStart"> </a>
+			<div class="fixedFont">
+
+			
+			<b>timeStart</b>
+
+			</div>
+			<div class="description">
+				The time that we started calculating frames per second.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="mark"> </a>
+			<div class="fixedFont">
+
+			
+			<b>mark</b>()
+
+			</div>
+			<div class="description">
+				Marks the current time elapsed since last mark or start.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="start"> </a>
+			<div class="fixedFont">
+
+			
+			<b>start</b>()
+
+			</div>
+			<div class="description">
+				Starts the timer.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

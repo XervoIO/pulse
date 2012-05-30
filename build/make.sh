@@ -1,8 +1,5 @@
 # Make Pulse Core
-sh make.pulse.sh
+sh ../src/pulse/build/make.pulse.sh
 
 # Make Debug Module
-sh ../src/pulse.debug/build/make.debug.sh
-
-# Build documentation
-java -jar jsdoc/jsrun.jar jsdoc/app/run.js -c=jsdoc/pulse.conf
+sh ../src/modules/pulse.debug/build/make.debug.sh

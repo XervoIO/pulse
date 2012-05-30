@@ -1,0 +1,1697 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.Visual
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		Extends
+			<a href="../symbols/pulse.Node">pulse.Node</a>.<br />
+		
+
+		visual node
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/visual/visual.js">/src/visual/visual.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.Visual.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#constructor">pulse.Visual</a></b>(params)
+					</div>
+					<div class="description">The base type for all visual elements added to the world.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Visual.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#actions">actions</a></b>
+						</div>
+						<div class="description">Object to act as associative array of the actions for this visual.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#alpha">alpha</a></b>
+						</div>
+						<div class="description">The alpha transparency of the visual from 0-100.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#alphaPrevious">alphaPrevious</a></b>
+						</div>
+						<div class="description">The previous alpha transparency of the visual from 0-100.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#anchor">anchor</a></b>
+						</div>
+						<div class="description">The current position anchor of the visual node, the position on the
+visual node sets the position of the anchor.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#anchorAngle">anchorAngle</a></b>
+						</div>
+						<div class="description">The angle of the anchor to the center of the visual node in degrees.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#anchorPrevious">anchorPrevious</a></b>
+						</div>
+						<div class="description">The previous position anchor of the visual node, previous anchor gets
+updated in the update function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#anchorRadius">anchorRadius</a></b>
+						</div>
+						<div class="description">The radius from the center of the visual node to the anchor point.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#bounds">bounds</a></b>
+						</div>
+						<div class="description">The bounds of this visual node, updated based on size and position.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#boundsPrevious">boundsPrevious</a></b>
+						</div>
+						<div class="description">The previous bounds of this visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#canvas">canvas</a></b>
+						</div>
+						<div class="description">The html canvas element that represents this visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#events">events</a></b>
+						</div>
+						<div class="description">Event manager for this visual, handles passing events down to it's
+children.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#invalidProperties">invalidProperties</a></b>
+						</div>
+						<div class="description">This signifies whether the visual node needs to have certain size
+properties recalculated.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#mousein">mousein</a></b>
+						</div>
+						<div class="description">Whether this visual has the mouse pointer over it.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#position">position</a></b>
+						</div>
+						<div class="description">The current position of the visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#positionPrevious">positionPrevious</a></b>
+						</div>
+						<div class="description">The previous position of the visual node, previous position gets
+updated in the update function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#positionTopLeft">positionTopLeft</a></b>
+						</div>
+						<div class="description">The position of the upper left of the visual node based on the
+position and anchor.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#positionTopLeftPrevious">positionTopLeftPrevious</a></b>
+						</div>
+						<div class="description">The previous position of the upper left of the visual node, previous
+top left gets updated in update function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#rotation">rotation</a></b>
+						</div>
+						<div class="description">The rotation of the visual node, in degrees.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#rotationPrevious">rotationPrevious</a></b>
+						</div>
+						<div class="description">The previous rotation of the visual node, in degrees.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#runningActions">runningActions</a></b>
+						</div>
+						<div class="description">Actions being run on this visual at this time.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#scale">scale</a></b>
+						</div>
+						<div class="description">The current scale of the visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#scalePrevious">scalePrevious</a></b>
+						</div>
+						<div class="description">The previous scale of the visual node, this is updated in the update
+function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowBlur">shadowBlur</a></b>
+						</div>
+						<div class="description">The shadow blur value for this visual's shadow if enabled.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowColor">shadowColor</a></b>
+						</div>
+						<div class="description">The shadow color for this visual's shadow, if enabled.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowEnabled">shadowEnabled</a></b>
+						</div>
+						<div class="description">Whether the shadow this visual is enabled.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowEnabledPrevious">shadowEnabledPrevious</a></b>
+						</div>
+						<div class="description">The previous state of shadow enabled.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowOffsetX">shadowOffsetX</a></b>
+						</div>
+						<div class="description">The x offset for the shadow for this visual.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shadowOffsetY">shadowOffsetY</a></b>
+						</div>
+						<div class="description">The y offset for the shadow for this visual.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#shuffled">shuffled</a></b>
+						</div>
+						<div class="description">This signifies that the visual node has changed sort order.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#size">size</a></b>
+						</div>
+						<div class="description">The current size of the visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#sizePrevious">sizePrevious</a></b>
+						</div>
+						<div class="description">The previous size of the visual node, previous size gets
+updated in the update function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#updated">updated</a></b>
+						</div>
+						<div class="description">This signifies whether the object needs to be redrawn on next draw phase.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#visible">visible</a></b>
+						</div>
+						<div class="description">This signifies whether the visual node is visible at the time, if false
+the node's draw function will not be called.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#visiblePrevious">visiblePrevious</a></b>
+						</div>
+						<div class="description">The previous state of visible, this value is updated in the
+update function.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#zindex">zindex</a></b>
+						</div>
+						<div class="description">The zindex of the visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#zindexPrevious">zindexPrevious</a></b>
+						</div>
+						<div class="description">The previous zindex of the visual node.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		<dt>Fields borrowed from class <a href="../symbols/pulse.Node">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node#name">name</a>, <a href="../symbols/pulse.Node#parent">parent</a></dd>
+		</dl>
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.Visual.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#addAction">addAction</a></b>(action)
+						</div>
+						<div class="description">Adds an action to this visual.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#calculateProperties">calculateProperties</a></b>()
+						</div>
+						<div class="description">Calculates new anchor radius and angle based on the size of the
+visual node and anchor position.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#draw">draw</a></b>(ctx)
+						</div>
+						<div class="description">Draws this visual node to passed in context.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#eventsCallback">eventsCallback</a></b>(type, evt)
+						</div>
+						<div class="description">Handles all events sent to this visual object.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#getAction">getAction</a></b>(name)
+						</div>
+						<div class="description">Returns an animation from the collection by name.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#move">move</a></b>(x, y)
+						</div>
+						<div class="description">Moves the visual node by adding passed in parameters to the
+current position.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#on">on</a></b>(type, callback)
+						</div>
+						<div class="description">Convenience function that will bind a callback to an event type.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#runAction">runAction</a></b>(name, oframe)
+						</div>
+						<div class="description">Starts and returns an action.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#update">update</a></b>(elapsed)
+						</div>
+						<div class="description">Updates visual node properities by checking to see if they have
+changed.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		
+		</dl>
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.Visual</b>(params)
+		</div>
+
+		<div class="description">
+			The base type for all visual elements added to the world.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						<i>Optional</i>
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.name</b>
+						<i>Optional</i>
+					</dt>
+						<dd>name of the visual node</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="actions"> </a>
+			<div class="fixedFont">
+
+			
+			<b>actions</b>
+
+			</div>
+			<div class="description">
+				Object to act as associative array of the actions for this visual.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="alpha"> </a>
+			<div class="fixedFont">
+
+			
+			<b>alpha</b>
+
+			</div>
+			<div class="description">
+				The alpha transparency of the visual from 0-100.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="alphaPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>alphaPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous alpha transparency of the visual from 0-100.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="anchor"> </a>
+			<div class="fixedFont">
+
+			
+			<b>anchor</b>
+
+			</div>
+			<div class="description">
+				The current position anchor of the visual node, the position on the
+visual node sets the position of the anchor.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="anchorAngle"> </a>
+			<div class="fixedFont">
+
+			
+			<b>anchorAngle</b>
+
+			</div>
+			<div class="description">
+				The angle of the anchor to the center of the visual node in degrees.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="anchorPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>anchorPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous position anchor of the visual node, previous anchor gets
+updated in the update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="anchorRadius"> </a>
+			<div class="fixedFont">
+
+			
+			<b>anchorRadius</b>
+
+			</div>
+			<div class="description">
+				The radius from the center of the visual node to the anchor point.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="bounds"> </a>
+			<div class="fixedFont">
+
+			
+			<b>bounds</b>
+
+			</div>
+			<div class="description">
+				The bounds of this visual node, updated based on size and position.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="boundsPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>boundsPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous bounds of this visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="canvas"> </a>
+			<div class="fixedFont">
+
+			
+			<b>canvas</b>
+
+			</div>
+			<div class="description">
+				The html canvas element that represents this visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="events"> </a>
+			<div class="fixedFont">
+
+			
+			<b>events</b>
+
+			</div>
+			<div class="description">
+				Event manager for this visual, handles passing events down to it's
+children.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="invalidProperties"> </a>
+			<div class="fixedFont">
+
+			
+			<b>invalidProperties</b>
+
+			</div>
+			<div class="description">
+				This signifies whether the visual node needs to have certain size
+properties recalculated.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="mousein"> </a>
+			<div class="fixedFont">
+
+			
+			<b>mousein</b>
+
+			</div>
+			<div class="description">
+				Whether this visual has the mouse pointer over it.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="position"> </a>
+			<div class="fixedFont">
+
+			
+			<b>position</b>
+
+			</div>
+			<div class="description">
+				The current position of the visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="positionPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>positionPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous position of the visual node, previous position gets
+updated in the update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="positionTopLeft"> </a>
+			<div class="fixedFont">
+
+			
+			<b>positionTopLeft</b>
+
+			</div>
+			<div class="description">
+				The position of the upper left of the visual node based on the
+position and anchor.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="positionTopLeftPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>positionTopLeftPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous position of the upper left of the visual node, previous
+top left gets updated in update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="rotation"> </a>
+			<div class="fixedFont">
+
+			
+			<b>rotation</b>
+
+			</div>
+			<div class="description">
+				The rotation of the visual node, in degrees.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="rotationPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>rotationPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous rotation of the visual node, in degrees. This is updated in
+the update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="runningActions"> </a>
+			<div class="fixedFont">
+
+			
+			<b>runningActions</b>
+
+			</div>
+			<div class="description">
+				Actions being run on this visual at this time.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="scale"> </a>
+			<div class="fixedFont">
+
+			
+			<b>scale</b>
+
+			</div>
+			<div class="description">
+				The current scale of the visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="scalePrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>scalePrevious</b>
+
+			</div>
+			<div class="description">
+				The previous scale of the visual node, this is updated in the update
+function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowBlur"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowBlur</b>
+
+			</div>
+			<div class="description">
+				The shadow blur value for this visual's shadow if enabled.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowColor"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowColor</b>
+
+			</div>
+			<div class="description">
+				The shadow color for this visual's shadow, if enabled.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowEnabled"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowEnabled</b>
+
+			</div>
+			<div class="description">
+				Whether the shadow this visual is enabled.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowEnabledPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowEnabledPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous state of shadow enabled.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowOffsetX"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowOffsetX</b>
+
+			</div>
+			<div class="description">
+				The x offset for the shadow for this visual.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shadowOffsetY"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shadowOffsetY</b>
+
+			</div>
+			<div class="description">
+				The y offset for the shadow for this visual.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="shuffled"> </a>
+			<div class="fixedFont">
+
+			
+			<b>shuffled</b>
+
+			</div>
+			<div class="description">
+				This signifies that the visual node has changed sort order.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="size"> </a>
+			<div class="fixedFont">
+
+			
+			<b>size</b>
+
+			</div>
+			<div class="description">
+				The current size of the visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="sizePrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>sizePrevious</b>
+
+			</div>
+			<div class="description">
+				The previous size of the visual node, previous size gets
+updated in the update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="updated"> </a>
+			<div class="fixedFont">
+
+			
+			<b>updated</b>
+
+			</div>
+			<div class="description">
+				This signifies whether the object needs to be redrawn on next draw phase.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="visible"> </a>
+			<div class="fixedFont">
+
+			
+			<b>visible</b>
+
+			</div>
+			<div class="description">
+				This signifies whether the visual node is visible at the time, if false
+the node's draw function will not be called.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="visiblePrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>visiblePrevious</b>
+
+			</div>
+			<div class="description">
+				The previous state of visible, this value is updated in the
+update function.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="zindex"> </a>
+			<div class="fixedFont">
+
+			
+			<b>zindex</b>
+
+			</div>
+			<div class="description">
+				The zindex of the visual node. Higher zindex means the visual object
+is on top of lower zindex nodes.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="zindexPrevious"> </a>
+			<div class="fixedFont">
+
+			
+			<b>zindexPrevious</b>
+
+			</div>
+			<div class="description">
+				The previous zindex of the visual node. Higher zindex means the
+visual object is on top of lower zindex nodes.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="addAction"> </a>
+			<div class="fixedFont">
+
+			
+			<b>addAction</b>(action)
+
+			</div>
+			<div class="description">
+				Adds an action to this visual.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{<a href="../symbols/pulse.Action">pulse.Action</a>}</span> <b>action</b>
+							
+						</dt>
+						<dd>the action to be added to this visual</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="calculateProperties"> </a>
+			<div class="fixedFont">
+
+			
+			<b>calculateProperties</b>()
+
+			</div>
+			<div class="description">
+				Calculates new anchor radius and angle based on the size of the
+visual node and anchor position. It will then calculate a new top left
+position for this node by calculating canvas width and height based on
+the rotation of this node and position. Lastly, it sets the
+width and height of this node's canvas.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="draw"> </a>
+			<div class="fixedFont">
+
+			
+			<b>draw</b>(ctx)
+
+			</div>
+			<div class="description">
+				Draws this visual node to passed in context. This is draw the canvas
+for this visual node on the context applying rotation, scale, and
+alpha.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{CanvasRenderingContext2D}</span> <b>ctx</b>
+							
+						</dt>
+						<dd>the context in which to draw
+visual on</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="eventsCallback"> </a>
+			<div class="fixedFont">
+
+			
+			<b>eventsCallback</b>(type, evt)
+
+			</div>
+			<div class="description">
+				Handles all events sent to this visual object. This base callback is
+meant to be overridden and does nothing by default.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the type of event raised</dd>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>evt</b>
+							
+						</dt>
+						<dd>the event object with properties on the event</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getAction"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{object}</span>
+			<b>getAction</b>(name)
+
+			</div>
+			<div class="description">
+				Returns an animation from the collection by name.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>The name of the action to return.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{object}</span> the action.</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="move"> </a>
+			<div class="fixedFont">
+
+			
+			<b>move</b>(x, y)
+
+			</div>
+			<div class="description">
+				Moves the visual node by adding passed in parameters to the
+current position.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>x</b>
+							
+						</dt>
+						<dd>the value to add to the x position.</dd>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>y</b>
+							
+						</dt>
+						<dd>the value to add to the y position.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="on"> </a>
+			<div class="fixedFont">
+
+			
+			<b>on</b>(type, callback)
+
+			</div>
+			<div class="description">
+				Convenience function that will bind a callback to an event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to bind</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>the function callback to bind to the event</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="runAction"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{<a href="../symbols/pulse.Action">pulse.Action</a>}</span>
+			<b>runAction</b>(name, oframe)
+
+			</div>
+			<div class="description">
+				Starts and returns an action. Setting the target of the action to
+this visual.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>The name of the action to start</dd>
+					
+						<dt>
+							<span class="light fixedFont">{rect}</span> <b>oframe</b>
+							<i>Optional</i>
+						</dt>
+						<dd>original frame to return to</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{<a href="../symbols/pulse.Action">pulse.Action</a>}</span> The action that was started</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="update"> </a>
+			<div class="fixedFont">
+
+			
+			<b>update</b>(elapsed)
+
+			</div>
+			<div class="description">
+				Updates visual node properities by checking to see if they have
+changed.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>elapsed</b>
+							
+						</dt>
+						<dd>time elapsed since last update call in
+milliseconds</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

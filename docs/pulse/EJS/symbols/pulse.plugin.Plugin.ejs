@@ -1,0 +1,228 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.plugin.Plugin
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		Plugin
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/plugin/plugin.js">/src/plugin/plugin.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.plugin.Plugin.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.plugin.Plugin#constructor">pulse.plugin.Plugin</a></b>()
+					</div>
+					<div class="description">Manages the subscribing and invoking of plugin callbacks.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.plugin.Plugin.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.plugin.Plugin#subscribe">subscribe</a></b>(objectType, functionName, callbackType, callback)
+						</div>
+						<div class="description">Subscribes a callback to a function and type.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.plugin.Plugin#unsubscribe">unsubscribe</a></b>(pluginCallback)
+						</div>
+						<div class="description">Unscribes a callback.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.plugin.Plugin</b>()
+		</div>
+
+		<div class="description">
+			Manages the subscribing and invoking of plugin callbacks.
+		</div>
+
+		
+
+
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="subscribe"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{<a href="../symbols/pulse.plugin.PluginCallback">pulse.plugin.PluginCallback</a>}</span>
+			<b>subscribe</b>(objectType, functionName, callbackType, callback)
+
+			</div>
+			<div class="description">
+				Subscribes a callback to a function and type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>objectType</b>
+							
+						</dt>
+						<dd>The object type to subscribe functions
+callbacks to (e.g. 'pulse.Sprite')</dd>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>functionName</b>
+							
+						</dt>
+						<dd>The name of the function, that when called,
+will invoke the specified callback</dd>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>callbackType</b>
+							
+						</dt>
+						<dd>The type of callback to hook.  Callbacks can
+occur when the function enters or immediately before it exits.
+Available types are defined in pulse.plugin.PluginCallbackTypes.</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>The callback to invoke whenever the specified
+function is called on the specified object type</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{<a href="../symbols/pulse.plugin.PluginCallback">pulse.plugin.PluginCallback</a>}</span> A callback object that can be used to manage the callback.</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="unsubscribe"> </a>
+			<div class="fixedFont">
+
+			
+			<b>unsubscribe</b>(pluginCallback)
+
+			</div>
+			<div class="description">
+				Unscribes a callback.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{<a href="../symbols/pulse.plugin.PluginCallback">pulse.plugin.PluginCallback</a>}</span> <b>pluginCallback</b>
+							
+						</dt>
+						<dd>The callback to unsubscribe.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

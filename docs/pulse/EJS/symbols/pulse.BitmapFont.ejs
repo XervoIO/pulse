@@ -1,0 +1,525 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.BitmapFont
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		Bitmap font
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/asset/bitmapfont.js">/src/asset/bitmapfont.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.BitmapFont.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#constructor">pulse.BitmapFont</a></b>(params)
+					</div>
+					<div class="description">Bitmap font definition.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.BitmapFont.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#base">base</a></b>
+						</div>
+						<div class="description">Base height for the character set.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#characters">characters</a></b>
+						</div>
+						<div class="description">Associative array (object) of characters for this font.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#fileDirectory">fileDirectory</a></b>
+						</div>
+						<div class="description">Font image and descriptor file directory.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#image">image</a></b>
+						</div>
+						<div class="description">Font bitmap image.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#imageFilename">imageFilename</a></b>
+						</div>
+						<div class="description">Font image filename.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#lineHeight">lineHeight</a></b>
+						</div>
+						<div class="description">Line height for the font.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.BitmapFont#size">size</a></b>
+						</div>
+						<div class="description">Size of the bitmap font.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.BitmapFont.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.BitmapFont#getStringBitmapChars">getStringBitmapChars</a></b>(text)
+						</div>
+						<div class="description">Gets the bitmap chars for a passed in string.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.BitmapFont#getStringWidth">getStringWidth</a></b>(text)
+						</div>
+						<div class="description">Gets the width for a string</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.BitmapFont#load">load</a></b>()
+						</div>
+						<div class="description">Begins loading the font file for this bitmap font.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.BitmapFont#parse">parse</a></b>(lines)
+						</div>
+						<div class="description">Parses the bitmap font definition file.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.BitmapFont</b>(params)
+		</div>
+
+		<div class="description">
+			Bitmap font definition. Can be used for creating text using font.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.filename</b>
+						
+					</dt>
+						<dd>the name of the bitmap font definition file</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="base"> </a>
+			<div class="fixedFont">
+
+			
+			<b>base</b>
+
+			</div>
+			<div class="description">
+				Base height for the character set.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="characters"> </a>
+			<div class="fixedFont">
+
+			
+			<b>characters</b>
+
+			</div>
+			<div class="description">
+				Associative array (object) of characters for this font. Key is char code
+and value is pulse.BitmapChar.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="fileDirectory"> </a>
+			<div class="fixedFont">
+
+			
+			<b>fileDirectory</b>
+
+			</div>
+			<div class="description">
+				Font image and descriptor file directory.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="image"> </a>
+			<div class="fixedFont">
+
+			
+			<b>image</b>
+
+			</div>
+			<div class="description">
+				Font bitmap image.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="imageFilename"> </a>
+			<div class="fixedFont">
+
+			
+			<b>imageFilename</b>
+
+			</div>
+			<div class="description">
+				Font image filename.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="lineHeight"> </a>
+			<div class="fixedFont">
+
+			
+			<b>lineHeight</b>
+
+			</div>
+			<div class="description">
+				Line height for the font.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="size"> </a>
+			<div class="fixedFont">
+
+			
+			<b>size</b>
+
+			</div>
+			<div class="description">
+				Size of the bitmap font. This is the actual size of the incoming image.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="getStringBitmapChars"> </a>
+			<div class="fixedFont">
+
+			
+			<b>getStringBitmapChars</b>(text)
+
+			</div>
+			<div class="description">
+				Gets the bitmap chars for a passed in string.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>text</b>
+							
+						</dt>
+						<dd>the string to get the chars for</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getStringWidth"> </a>
+			<div class="fixedFont">
+
+			
+			<b>getStringWidth</b>(text)
+
+			</div>
+			<div class="description">
+				Gets the width for a string
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>text</b>
+							
+						</dt>
+						<dd>the string to get the width of</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="load"> </a>
+			<div class="fixedFont">
+
+			
+			<b>load</b>()
+
+			</div>
+			<div class="description">
+				Begins loading the font file for this bitmap font.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="parse"> </a>
+			<div class="fixedFont">
+
+			
+			<b>parse</b>(lines)
+
+			</div>
+			<div class="description">
+				Parses the bitmap font definition file.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{array}</span> <b>lines</b>
+							
+						</dt>
+						<dd>the lines in the definition file</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

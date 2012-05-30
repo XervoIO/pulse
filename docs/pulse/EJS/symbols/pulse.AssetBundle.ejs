@@ -1,0 +1,477 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.AssetBundle
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		An asset bundle that holds a collection of assets.
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/asset/assetbundle.js">/src/asset/assetbundle.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.AssetBundle.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.AssetBundle#constructor">pulse.AssetBundle</a></b>()
+					</div>
+					<div class="description">An asset bundle holds a collection of assets and provides management
+functions to load and use assets.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.AssetBundle.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.AssetBundle#assets">assets</a></b>
+						</div>
+						<div class="description">The collection of assets</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.AssetBundle#events">events</a></b>
+						</div>
+						<div class="description">Event handler for the asset bundle.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.AssetBundle#percentLoaded">percentLoaded</a></b>
+						</div>
+						<div class="description">The precentage of loaded assets in the bundle.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.AssetBundle.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#addAsset">addAsset</a></b>(asset)
+						</div>
+						<div class="description">Adds an asset to the bundle.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#getAsset">getAsset</a></b>(name)
+						</div>
+						<div class="description">Retrieves an asset with the name provided from the bundle.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#load">load</a></b>()
+						</div>
+						<div class="description">Forces all assets in the bundle to load.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#removeAsset">removeAsset</a></b>(asset)
+						</div>
+						<div class="description">Removes an asset from the bundle.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#updatePercent">updatePercent</a></b>()
+						</div>
+						<div class="description">Updates the percent loaded of the bundle, based on the number of
+assets that have been loaded.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the events documented in the class pulse.AssetBundle.">
+			<caption>Event Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Event Attributes</th>
+					<th scope="col">Event Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AssetBundle#event:complete">complete</a></b>()
+						</div>
+						<div class="description">Event rose when bundle has loaded all its assets.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.AssetBundle</b>()
+		</div>
+
+		<div class="description">
+			An asset bundle holds a collection of assets and provides management
+functions to load and use assets.
+		</div>
+
+		
+
+
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="assets"> </a>
+			<div class="fixedFont">
+
+			
+			<b>assets</b>
+
+			</div>
+			<div class="description">
+				The collection of assets
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="events"> </a>
+			<div class="fixedFont">
+
+			
+			<b>events</b>
+
+			</div>
+			<div class="description">
+				Event handler for the asset bundle.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="percentLoaded"> </a>
+			<div class="fixedFont">
+
+			
+			<b>percentLoaded</b>
+
+			</div>
+			<div class="description">
+				The precentage of loaded assets in the bundle.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="addAsset"> </a>
+			<div class="fixedFont">
+
+			
+			<b>addAsset</b>(asset)
+
+			</div>
+			<div class="description">
+				Adds an asset to the bundle.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{<a href="../symbols/pulse.Asset">pulse.Asset</a>}</span> <b>asset</b>
+							
+						</dt>
+						<dd>The Asset to add.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getAsset"> </a>
+			<div class="fixedFont">
+
+			
+			<b>getAsset</b>(name)
+
+			</div>
+			<div class="description">
+				Retrieves an asset with the name provided from the bundle.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>The name of the Asset to retrieve.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="load"> </a>
+			<div class="fixedFont">
+
+			
+			<b>load</b>()
+
+			</div>
+			<div class="description">
+				Forces all assets in the bundle to load.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="removeAsset"> </a>
+			<div class="fixedFont">
+
+			
+			<b>removeAsset</b>(asset)
+
+			</div>
+			<div class="description">
+				Removes an asset from the bundle.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string|<a href="../symbols/pulse.Asset">pulse.Asset</a>}</span> <b>asset</b>
+							
+						</dt>
+						<dd>The asset or name of the asset to remove.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="updatePercent"> </a>
+			<div class="fixedFont">
+
+			
+			<b>updatePercent</b>()
+
+			</div>
+			<div class="description">
+				Updates the percent loaded of the bundle, based on the number of
+assets that have been loaded.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+		<div class="sectionTitle">
+			Event Detail
+		</div>
+		
+			<a name="event:complete"> </a>
+			<div class="fixedFont">
+
+			
+			<b>complete</b>()
+
+			</div>
+			<div class="description">
+				Event rose when bundle has loaded all its assets.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+</div>

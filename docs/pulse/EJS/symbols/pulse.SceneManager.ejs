@@ -1,0 +1,485 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.SceneManager
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		scene manager class
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/scenemanager.js">/src/scenemanager.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.SceneManager.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.SceneManager#constructor">pulse.SceneManager</a></b>(params)
+					</div>
+					<div class="description">Scene manager for adding, activating, and deactivating scenes.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.SceneManager.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.SceneManager#gameWindow">gameWindow</a></b>
+						</div>
+						<div class="description">The game window element in the html dom.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.SceneManager#scenes">scenes</a></b>
+						</div>
+						<div class="description">Associative array (object) of scenes available.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.SceneManager.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#activateScene">activateScene</a></b>(name)
+						</div>
+						<div class="description">Activates a scene in this scene manager by name.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#addScene">addScene</a></b>(scene)
+						</div>
+						<div class="description">Adds a scene to the scene manager.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#deactivateScene">deactivateScene</a></b>(name)
+						</div>
+						<div class="description">Deactivate a scene in this scene manager by name.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#getScene">getScene</a></b>(name)
+						</div>
+						<div class="description">Returns a scene from the scene manager by name.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#getScenes">getScenes</a></b>(active)
+						</div>
+						<div class="description">Gets scenes from the scene manager by whether they are active.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.SceneManager#removeScene">removeScene</a></b>(name)
+						</div>
+						<div class="description">Removes a scene from this scene manager by name.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.SceneManager</b>(params)
+		</div>
+
+		<div class="description">
+			Scene manager for adding, activating, and deactivating scenes.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						<i>Optional</i>
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{DOMElement}</span>  <b>params.gameWindow</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the game window element to use</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="gameWindow"> </a>
+			<div class="fixedFont">
+
+			
+			<b>gameWindow</b>
+
+			</div>
+			<div class="description">
+				The game window element in the html dom.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="scenes"> </a>
+			<div class="fixedFont">
+
+			
+			<b>scenes</b>
+
+			</div>
+			<div class="description">
+				Associative array (object) of scenes available.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="activateScene"> </a>
+			<div class="fixedFont">
+
+			
+			<b>activateScene</b>(name)
+
+			</div>
+			<div class="description">
+				Activates a scene in this scene manager by name.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>the scene name</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="addScene"> </a>
+			<div class="fixedFont">
+
+			
+			<b>addScene</b>(scene)
+
+			</div>
+			<div class="description">
+				Adds a scene to the scene manager.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{<a href="../symbols/pulse.Scene">pulse.Scene</a>}</span> <b>scene</b>
+							
+						</dt>
+						<dd>the scene to add</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="deactivateScene"> </a>
+			<div class="fixedFont">
+
+			
+			<b>deactivateScene</b>(name)
+
+			</div>
+			<div class="description">
+				Deactivate a scene in this scene manager by name.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>the scene name</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getScene"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{<a href="../symbols/pulse.Scene">pulse.Scene</a>}</span>
+			<b>getScene</b>(name)
+
+			</div>
+			<div class="description">
+				Returns a scene from the scene manager by name.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>the scene name</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{<a href="../symbols/pulse.Scene">pulse.Scene</a>}</span> scene from the scenes object by name</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="getScenes"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{array}</span>
+			<b>getScenes</b>(active)
+
+			</div>
+			<div class="description">
+				Gets scenes from the scene manager by whether they are active.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{boolean}</span> <b>active</b>
+							
+						</dt>
+						<dd>the active state to retrieve</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{array}</span> array of the active scenes</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="removeScene"> </a>
+			<div class="fixedFont">
+
+			
+			<b>removeScene</b>(name)
+
+			</div>
+			<div class="description">
+				Removes a scene from this scene manager by name.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>name</b>
+							
+						</dt>
+						<dd>the scene name</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

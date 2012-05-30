@@ -1,0 +1,532 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.debug.tabs.Performance
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		The debug performance tab class
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/performancetab.js">/src/performancetab.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.debug.tabs.Performance.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.tabs.Performance#constructor">pulse.debug.tabs.Performance</a></b>(params)
+					</div>
+					<div class="description">Performance tab for debugging panel.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.debug.tabs.Performance.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.tabs.Performance#canvas">canvas</a></b>
+						</div>
+						<div class="description">The canvas for the stats graph.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.tabs.Performance#drawTimer">drawTimer</a></b>
+						</div>
+						<div class="description">The draw loop timer we want to use for this performance tab.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.tabs.Performance#fpsTimer">fpsTimer</a></b>
+						</div>
+						<div class="description">The frames per second timer to use for this performance tab.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.debug.tabs.Performance#updateTimer">updateTimer</a></b>
+						</div>
+						<div class="description">The update loop timer we want to use for this performance tab.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.debug.tabs.Performance.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#drawGraph">drawGraph</a></b>()
+						</div>
+						<div class="description">Updates the graph to show the frame elapsed time, update time, and
+draw time.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#getLegendListing">getLegendListing</a></b>(color)
+						</div>
+						<div class="description">Returns a colored box to use in the graph legend.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#hide">hide</a></b>()
+						</div>
+						<div class="description">Called when this tab is hidden.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#resize">resize</a></b>(newSize)
+						</div>
+						<div class="description">Resizes the console when the container is resized.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#show">show</a></b>()
+						</div>
+						<div class="description">Called when this tab is shown.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.debug.tabs.Performance#update">update</a></b>(elapsed)
+						</div>
+						<div class="description">Update function called on each loop in the engine</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.debug.tabs.Performance</b>(params)
+		</div>
+
+		<div class="description">
+			Performance tab for debugging panel.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						<i>Optional</i>
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the performance tab</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.name</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the name of the tab will be used for name of link</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.icon</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the icon url to use as image for the tab, should be
+45x90 with off state on top (45x45) and on state on bottom (45x45)</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.id</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the machine readable id for the tab</dd>
+				
+					<dt>
+						<span class="light fixedFont">{<a href="../symbols/pulse.debug.FPS">pulse.debug.FPS</a>}</span>  <b>params.fpsTimer</b>
+						<i>Optional</i>
+					</dt>
+						<dd>fps tracker for this tab</dd>
+				
+					<dt>
+						<span class="light fixedFont">{<a href="../symbols/pulse.debug.Timer">pulse.debug.Timer</a>}</span>  <b>params.updateTimer</b>
+						<i>Optional</i>
+					</dt>
+						<dd>update timer for this tab</dd>
+				
+					<dt>
+						<span class="light fixedFont">{pulse.debug.timer}</span>  <b>params.drawTimer</b>
+						<i>Optional</i>
+					</dt>
+						<dd>draw timer for this tab</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="canvas"> </a>
+			<div class="fixedFont">
+
+			
+			<b>canvas</b>
+
+			</div>
+			<div class="description">
+				The canvas for the stats graph.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="drawTimer"> </a>
+			<div class="fixedFont">
+
+			
+			<b>drawTimer</b>
+
+			</div>
+			<div class="description">
+				The draw loop timer we want to use for this performance tab.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="fpsTimer"> </a>
+			<div class="fixedFont">
+
+			
+			<b>fpsTimer</b>
+
+			</div>
+			<div class="description">
+				The frames per second timer to use for this performance tab.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="updateTimer"> </a>
+			<div class="fixedFont">
+
+			
+			<b>updateTimer</b>
+
+			</div>
+			<div class="description">
+				The update loop timer we want to use for this performance tab.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="drawGraph"> </a>
+			<div class="fixedFont">
+
+			
+			<b>drawGraph</b>()
+
+			</div>
+			<div class="description">
+				Updates the graph to show the frame elapsed time, update time, and
+draw time. It will also update the labels to show the actual values.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getLegendListing"> </a>
+			<div class="fixedFont">
+
+			
+			<b>getLegendListing</b>(color)
+
+			</div>
+			<div class="description">
+				Returns a colored box to use in the graph legend.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>color</b>
+							
+						</dt>
+						<dd>the hex color of the box, without a #</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="hide"> </a>
+			<div class="fixedFont">
+
+			
+			<b>hide</b>()
+
+			</div>
+			<div class="description">
+				Called when this tab is hidden.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="resize"> </a>
+			<div class="fixedFont">
+
+			
+			<b>resize</b>(newSize)
+
+			</div>
+			<div class="description">
+				Resizes the console when the container is resized.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>newSize</b>
+							
+						</dt>
+						<dd>the new size of the container</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="show"> </a>
+			<div class="fixedFont">
+
+			
+			<b>show</b>()
+
+			</div>
+			<div class="description">
+				Called when this tab is shown.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="update"> </a>
+			<div class="fixedFont">
+
+			
+			<b>update</b>(elapsed)
+
+			</div>
+			<div class="description">
+				Update function called on each loop in the engine
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>elapsed</b>
+							
+						</dt>
+						<dd>the elapsed time since last call in
+milliseconds</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>

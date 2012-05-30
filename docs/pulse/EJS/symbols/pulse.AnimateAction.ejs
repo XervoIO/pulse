@@ -1,0 +1,541 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.AnimateAction
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		Extends
+			<a href="../symbols/pulse.Action">pulse.Action</a>.<br />
+		
+
+		animation action
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src/action/animateaction.js">/src/action/animateaction.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.AnimateAction.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.AnimateAction#constructor">pulse.AnimateAction</a></b>(params)
+					</div>
+					<div class="description">Animations are a collection of rectangles that represent pieces of
+a larger rectangle, which change at a given rate, IE the frame
+changes at a given interval.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.AnimateAction.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.AnimateAction#size">size</a></b>
+						</div>
+						<div class="description">The size of the frame for the animation.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		<dt>Fields borrowed from class <a href="../symbols/pulse.Action">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action#events">events</a>, <a href="../symbols/pulse.Action#isComplete">isComplete</a>, <a href="../symbols/pulse.Action#isPaused">isPaused</a>, <a href="../symbols/pulse.Action#isRunning">isRunning</a>, <a href="../symbols/pulse.Action#target">target</a></dd><dt>Fields borrowed from class <a href="../symbols/pulse.Node">pulse.Node</a>: </dt><dd><a href="../symbols/pulse.Node#name">name</a>, <a href="../symbols/pulse.Node#parent">parent</a></dd>
+		</dl>
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.AnimateAction.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#bounds">bounds</a></b>(newBounds)
+						</div>
+						<div class="description">Gets or Sets the current outer bounds for the animation.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#complete">complete</a></b>()
+						</div>
+						<div class="description">Complete handler when the animation is complete.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#getFrame">getFrame</a></b>(index)
+						</div>
+						<div class="description">Gets a frame of the animation based on the passed in index or
+the current frame.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#pause">pause</a></b>()
+						</div>
+						<div class="description">Pauses the animation.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#start">start</a></b>(oframe)
+						</div>
+						<div class="description">Starts the animation.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#stop">stop</a></b>()
+						</div>
+						<div class="description">Stops the animation.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.AnimateAction#update">update</a></b>(elapsed)
+						</div>
+						<div class="description">This is the master update function for the animation.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+		<dl class="inheritsList">
+		
+		</dl>
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+		
+		
+
+		
+		<dl class="inheritsList">
+		<dt>Events borrowed from class <a href="../symbols/pulse.Action">pulse.Action</a>: </dt><dd><a href="../symbols/pulse.Action#event:complete">complete</a></dd>
+		</dl>
+		
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.AnimateAction</b>(params)
+		</div>
+
+		<div class="description">
+			Animations are a collection of rectangles that represent pieces of
+a larger rectangle, which change at a given rate, IE the frame
+changes at a given interval.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{<a href="../symbols/pulse.Sprite">pulse.Sprite</a>}</span>  <b>params.target</b>
+						
+					</dt>
+						<dd>the sprite for the action to be performed on</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.name</b>
+						<i>Optional</i>
+					</dt>
+						<dd>name of the node</dd>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params.size</b>
+						<i>Optional</i>
+					</dt>
+						<dd>a point object that represents the size of the
+animation frames</dd>
+				
+					<dt>
+						<span class="light fixedFont">{number|array}</span>  <b>params.frames</b>
+						<i>Optional</i>
+					</dt>
+						<dd>a number representing the number of frames
+or an array of frames representing the sequence in which to play the
+frames</dd>
+				
+					<dt>
+						<span class="light fixedFont">{number}</span>  <b>params.frameRate</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the number of frames per second</dd>
+				
+					<dt>
+						<span class="light fixedFont">{point}</span>  <b>params.offset</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the pixel offset of the animation in respect to the
+sprite sheet</dd>
+				
+					<dt>
+						<span class="light fixedFont">{size}</span>  <b>params.bounds</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the phyiscal bounds in which all frames must lie</dd>
+				
+					<dt>
+						<span class="light fixedFont">{number}</span>  <b>params.plays</b>
+						<i>Optional</i>
+					</dt>
+						<dd>the number of times the animation should loop, if
+less than 0 it will loop continuously</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="size"> </a>
+			<div class="fixedFont">
+
+			
+			<b>size</b>
+
+			</div>
+			<div class="description">
+				The size of the frame for the animation.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="bounds"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{object}</span>
+			<b>bounds</b>(newBounds)
+
+			</div>
+			<div class="description">
+				Gets or Sets the current outer bounds for the animation. The bounds
+determine when to wrap frames to the next "line." Frames will always be
+forced to lie without the set bounds.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>newBounds</b>
+							
+						</dt>
+						<dd>the new bounds of the animation</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{object}</span> the current bounds of the animation</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="complete"> </a>
+			<div class="fixedFont">
+
+			
+			<b>complete</b>()
+
+			</div>
+			<div class="description">
+				Complete handler when the animation is complete.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="getFrame"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{object}</span>
+			<b>getFrame</b>(index)
+
+			</div>
+			<div class="description">
+				Gets a frame of the animation based on the passed in index or
+the current frame.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>index</b>
+							
+						</dt>
+						<dd>the frame to retrieve</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{object}</span> a rectangle that represents the frame</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="pause"> </a>
+			<div class="fixedFont">
+
+			
+			<b>pause</b>()
+
+			</div>
+			<div class="description">
+				Pauses the animation.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="start"> </a>
+			<div class="fixedFont">
+
+			
+			<b>start</b>(oframe)
+
+			</div>
+			<div class="description">
+				Starts the animation.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{rect}</span> <b>oframe</b>
+							<i>Optional</i>
+						</dt>
+						<dd>original frame to return to</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="stop"> </a>
+			<div class="fixedFont">
+
+			
+			<b>stop</b>()
+
+			</div>
+			<div class="description">
+				Stops the animation.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="update"> </a>
+			<div class="fixedFont">
+
+			
+			<b>update</b>(elapsed)
+
+			</div>
+			<div class="description">
+				This is the master update function for the animation. This will
+update the target's texture with the correct frame.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{number}</span> <b>elapsed</b>
+							
+						</dt>
+						<dd>the elapsed time since last update call in
+milliseconds</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>
