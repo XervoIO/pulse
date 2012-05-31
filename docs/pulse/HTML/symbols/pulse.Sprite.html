@@ -291,7 +291,7 @@ ul.inheritsList
 				The sprite object.
 				
 				
-					<br /><i>Defined in: </i> &lt;../src\visual\sprite.js&gt;.
+					<br /><i>Defined in: </i> &lt;../src/visual/sprite.js&gt;.
 				
 			</p>
 
@@ -312,7 +312,8 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/pulse.Sprite.html#constructor">pulse.Sprite</a></b>(params)
 							</div>
-							<div class="description">Sprites are the basic object for moving, animated graphics onthe screen.</div>
+							<div class="description">Sprites are the basic object for moving, animated graphics on
+the screen.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -548,7 +549,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#inCurrentBounds">inCurrentBounds</a></b>(x, y)
 								</div>
-								<div class="description">Checks if the x and y position passed in is a point inside of thissprite.</div>
+								<div class="description">Checks if the x and y position passed in is a point inside of this
+sprite.</div>
 							</td>
 						</tr>
 					
@@ -584,7 +586,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#update">update</a></b>(time)
 								</div>
-								<div class="description">Sprite's update function calculates the size based on currentimage or animation and then calls the super update.</div>
+								<div class="description">Sprite's update function calculates the size based on current
+image or animation and then calls the super update.</div>
 							</td>
 						</tr>
 					
@@ -635,7 +638,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#event:dragenter">dragenter</a></b>(evt)
 								</div>
-								<div class="description">Event rose when a dragged node is just beginning to be on top of thisnode.</div>
+								<div class="description">Event rose when a dragged node is just beginning to be on top of this
+node.</div>
 							</td>
 						</tr>
 					
@@ -680,7 +684,8 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/pulse.Sprite.html#event:mousedown">mousedown</a></b>(evt)
 								</div>
-								<div class="description">Event rose when mouse button is pressed down while pointer is overthis node.</div>
+								<div class="description">Event rose when mouse button is pressed down while pointer is over
+this node.</div>
 							</td>
 						</tr>
 					
@@ -779,7 +784,10 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					Sprites are the basic object for moving, animated graphics onthe screen. They have an image, the sprite sheet, which is acollection of "frames" that can be played in succession toproduce an animation.
+					Sprites are the basic object for moving, animated graphics on
+the screen. They have an image, the sprite sheet, which is a
+collection of "frames" that can be played in succession to
+produce an animation.
 					<br /><i>Author: </i>PFP.
 				</div>
 				
@@ -794,13 +802,15 @@ ul.inheritsList
 								<span class="light fixedFont">{object}</span>  <b>params</b>
 								
 							</dt>
-								<dd>parameters that can be set as initialized optionson the node</dd>
+								<dd>parameters that can be set as initialized options
+on the node</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string|<a href="../symbols/pulse.Texture.html">pulse.Texture</a>}</span>  <b>params.src</b>
 								
 							</dt>
-								<dd>the texture filename to use or apulse.Texture to use</dd>
+								<dd>the texture filename to use or a
+pulse.Texture to use</dd>
 						
 							<dt>
 								<span class="light fixedFont">{string}</span>  <b>params.name</b>
@@ -994,7 +1004,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						The points to check against for checking if point is in bounds. Ifrectangular points order is top left, bottom right. If convexshape start in upper left and move clockwise.
+						The points to check against for checking if point is in bounds. If
+rectangular points order is top left, bottom right. If convex
+shape start in upper left and move clockwise.
 						
 						
 					</div>
@@ -1156,7 +1168,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Adds an action to this sprite. The params passed in must either bean Action or the constructor params for an AnimateAction.See the AnimateAction object for more information.
+						Adds an action to this sprite. The params passed in must either be
+an Action or the constructor params for an AnimateAction.
+See the AnimateAction object for more information.
 						
 						
 					</div>
@@ -1232,7 +1246,8 @@ ul.inheritsList
 									<span class="light fixedFont">{CanvasRenderingContext2D}</span> <b>ctx</b>
 									
 								</dt>
-								<dd>the context in which to draw thisvisual on</dd>
+								<dd>the context in which to draw this
+visual on</dd>
 							
 							</dl>
 						
@@ -1253,7 +1268,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Handles all events sent to this object. If event is mousedown then apotential drag and drop action is handled.
+						Handles all events sent to this object. If event is mousedown then a
+potential drag and drop action is handled.
 						
 						
 					</div>
@@ -1327,7 +1343,15 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Checks if the x and y position passed in is a point inside of thissprite. This function will calculate the inclusion using one threemethods based on the hitTestType property on this object. If the typeis set to "rect" then will check the x and y against a rectangle ofeither the 2 corners set in hitTestPoints or the bounds of this objectif there are no points set. The second type "convex" will be tested usingPNPOLY (Point Inclusion in Polygon Test) from W. Randolph Franklin (WRF).See http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.htmlfor more information on the algorithm.
+						Checks if the x and y position passed in is a point inside of this
+sprite. This function will calculate the inclusion using one three
+methods based on the hitTestType property on this object. If the type
+is set to "rect" then will check the x and y against a rectangle of
+either the 2 corners set in hitTestPoints or the bounds of this object
+if there are no points set. The second type "convex" will be tested using
+PNPOLY (Point Inclusion in Polygon Test) from W. Randolph Franklin (WRF).
+See http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+for more information on the algorithm.
 						
 						
 					</div>
@@ -1480,7 +1504,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Sprite's update function calculates the size based on currentimage or animation and then calls the super update.
+						Sprite's update function calculates the size based on current
+image or animation and then calls the super update.
 						
 						
 					</div>
@@ -1596,7 +1621,9 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when a dragged node is just beginning to be on top of thisnode. In order to recieve these events a node must have dropEnabledset to true.
+						Event rose when a dragged node is just beginning to be on top of this
+node. In order to recieve these events a node must have dropEnabled
+set to true.
 						
 						
 					</div>
@@ -1632,7 +1659,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when a dragged node is no longer over top of this node. Inorder to recieve these events a node must have dropEnabled set to true.
+						Event rose when a dragged node is no longer over top of this node. In
+order to recieve these events a node must have dropEnabled set to true.
 						
 						
 					</div>
@@ -1668,7 +1696,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when a dragged node is over top of this node. In order torecieve these events a node must have dropEnabled set to true.
+						Event rose when a dragged node is over top of this node. In order to
+recieve these events a node must have dropEnabled set to true.
 						
 						
 					</div>
@@ -1740,7 +1769,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when a node is dropped on top of this node. In order torecieve these events a node must have dropEnabled set to true.
+						Event rose when a node is dropped on top of this node. In order to
+recieve these events a node must have dropEnabled set to true.
 						
 						
 					</div>
@@ -1761,7 +1791,8 @@ ul.inheritsList
 									<span class="light fixedFont">{<a href="../symbols/pulse.Sprite.html">pulse.Sprite</a>}</span> <b>evt.target</b>
 									
 								</dt>
-								<dd>The target is set to the node being droppedupon.</dd>
+								<dd>The target is set to the node being dropped
+upon.</dd>
 							
 							</dl>
 						
@@ -1782,7 +1813,8 @@ ul.inheritsList
 					
 					</div>
 					<div class="description">
-						Event rose when mouse button is pressed down while pointer is overthis node.
+						Event rose when mouse button is pressed down while pointer is over
+this node.
 						
 						
 					</div>
@@ -2107,7 +2139,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			&copy;Modulus 2012<br />
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed May 30 2012 21:02:33 GMT-0700 (MST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu May 31 2012 00:53:38 GMT-0400 (EDT)
 		</div>
 	</body>
 </html>
