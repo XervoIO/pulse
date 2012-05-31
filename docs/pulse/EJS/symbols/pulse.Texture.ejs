@@ -1,0 +1,443 @@
+<div id="docs-content">
+<!-- ============================== class title ============================ -->
+	<h1 class="classTitle">
+		
+		Class pulse.Texture
+	</h1>
+
+<!-- ============================== class summary ========================== -->
+	<p class="description">
+		
+		
+
+		Basic 2d image
+
+		
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/src\asset\texture.js">/src\asset\texture.js</a>
+		
+	</p>
+
+<!-- ============================== constructor summary ==================== -->
+	
+	<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class pulse.Texture.">
+		<caption>Class Summary</caption>
+		<thead>
+			<tr>
+				<th scope="col">Constructor Attributes</th>
+				<th scope="col">Constructor Name and Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="attributes">&nbsp;</td>
+				<td class="nameDescription" >
+					<div class="fixedFont">
+						<b><a href="../symbols/pulse.Texture#constructor">pulse.Texture</a></b>(params)
+					</div>
+					<div class="description">Raw 2d image, represented as a canvas object.</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+
+<!-- ============================== properties summary ===================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class pulse.Texture.">
+			<caption>Field Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Field Attributes</th>
+					<th scope="col">Field Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Texture#alpha">alpha</a></b>
+						</div>
+						<div class="description">The transparency of the image, on a scale from 0 to 100, 100 beingcompletely opaque.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Texture#rotation">rotation</a></b>
+						</div>
+						<div class="description">The rotation of the image.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Texture#scaleX">scaleX</a></b>
+						</div>
+						<div class="description">The x-axis scale factor.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Texture#scaleY">scaleY</a></b>
+						</div>
+						<div class="description">The y-axis scale factor.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+
+<!-- ============================== methods summary ======================== -->
+	
+		
+		
+		<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class pulse.Texture.">
+			<caption>Method Summary</caption>
+			<thead>
+				<tr>
+					<th scope="col">Method Attributes</th>
+					<th scope="col">Method Name and Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Texture#height">height</a></b>()
+						</div>
+						<div class="description">Get the calculated height of the raw image.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Texture#load">load</a></b>()
+						</div>
+						<div class="description"></div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Texture#slice">slice</a></b>(x, y, width, height)
+						</div>
+						<div class="description"></div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Texture#width">width</a></b>()
+						</div>
+						<div class="description">Get the calculated width of the raw image.</div>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+		
+
+		
+	
+<!-- ============================== events summary ======================== -->
+	
+
+<!-- ============================== constructor details ==================== -->
+	
+	<div class="details"><a name="constructor"> </a>
+		<div class="sectionTitle">
+			Class Detail
+		</div>
+
+		<div class="fixedFont">
+				<b>pulse.Texture</b>(params)
+		</div>
+
+		<div class="description">
+			Raw 2d image, represented as a canvas object.
+		</div>
+
+		
+
+
+			
+				<dl class="detailList">
+				<dt class="heading">Parameters:</dt>
+				
+					<dt>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						
+					</dt>
+						<dd>parameters that can be set as initialized optionson the texture.</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.filename</b>
+						
+					</dt>
+						<dd>the path to the raw image.</dd>
+				
+				</dl>
+			
+			
+			
+			
+			
+			
+			
+
+	</div>
+	
+
+<!-- ============================== field details ========================== -->
+	
+		<div class="sectionTitle">
+			Field Detail
+		</div>
+		
+			<a name="alpha"> </a>
+			<div class="fixedFont">
+
+			
+			<b>alpha</b>
+
+			</div>
+			<div class="description">
+				The transparency of the image, on a scale from 0 to 100, 100 beingcompletely opaque.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="rotation"> </a>
+			<div class="fixedFont">
+
+			
+			<b>rotation</b>
+
+			</div>
+			<div class="description">
+				The rotation of the image. 360 represents a full rotation.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="scaleX"> </a>
+			<div class="fixedFont">
+
+			
+			<b>scaleX</b>
+
+			</div>
+			<div class="description">
+				The x-axis scale factor. 1 represents normal scale.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="scaleY"> </a>
+			<div class="fixedFont">
+
+			
+			<b>scaleY</b>
+
+			</div>
+			<div class="description">
+				The y-axis scale factor. 1 represents normal scale.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== method details ========================= -->
+	
+		<div class="sectionTitle">
+			Method Detail
+		</div>
+		
+			<a name="height"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{number}</span>
+			<b>height</b>()
+
+			</div>
+			<div class="description">
+				Get the calculated height of the raw image.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{number}</span> The height of the raw image</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name="load"> </a>
+			<div class="fixedFont">
+
+			
+			<b>load</b>()
+
+			</div>
+			<div class="description">
+				
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="slice"> </a>
+			<div class="fixedFont">
+
+			
+			<b>slice</b>(x, y, width, height)
+
+			</div>
+			<div class="description">
+				
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<b>x</b>
+							
+						</dt>
+						<dd></dd>
+					
+						<dt>
+							<b>y</b>
+							
+						</dt>
+						<dd></dd>
+					
+						<dt>
+							<b>width</b>
+							
+						</dt>
+						<dd></dd>
+					
+						<dt>
+							<b>height</b>
+							
+						</dt>
+						<dd></dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="width"> </a>
+			<div class="fixedFont">
+
+			<span class="light">{number}</span>
+			<b>width</b>()
+
+			</div>
+			<div class="description">
+				Get the calculated width of the raw image.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{number}</span> The width of the raw image</dd>
+					
+					</dl>
+				
+				
+				
+
+			
+		
+	
+
+<!-- ============================== event details ========================= -->
+	
+</div>
