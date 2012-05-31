@@ -857,13 +857,25 @@ pulse.debug.plugin.subscribe("pulse.Engine", "draw", pulse.plugin.PluginCallback
   pulse.debug.manager.stopDraw();
   pulse.debug.manager.update(this.masterTime)
 });
+pulse.debug.plugin.subscribe("pulse.Visual", "update", pulse.plugin.PluginCallbackTypes.onExit, function(params) {
+  pulse.debug.manager.stopUpdate();
+  if(this.debugDrawn === undefined) {
+    this.debugDrawn = false
+  }
+  if((this.debugging === true || pulse.debug.visualDebug === true) && this.debugDrawn === false || this.debugging === false && pulse.debug.visualDebug === false && this.debugDrawn === true) {
+    this.updated = true
+  }
+});
 pulse.debug.plugin.subscribe("pulse.Visual", "draw", pulse.plugin.PluginCallbackTypes.onEnter, function(ctx) {
   if(this.updated === true) {
+    if(this.debugging === true || pulse.debug.visualDebug === true) {
+      this.debugDrawn = false
+    }
     pulse.debug.manager.incrementDraws()
   }
 });
 pulse.debug.plugin.subscribe("pulse.Visual", "draw", pulse.plugin.PluginCallbackTypes.onExit, function(ctx) {
-  if(this.debugging === true || pulse.debug.visualDebug === true) {
+  if((this.debugging === true || pulse.debug.visualDebug === true) && this.debugDrawn === false) {
     var color = "#" + pulse.debug.getTypeColor(this);
     ctx.save();
     ctx.fillStyle = color;
@@ -873,7 +885,12 @@ pulse.debug.plugin.subscribe("pulse.Visual", "draw", pulse.plugin.PluginCallback
     ctx.fill();
     ctx.restore();
     ctx.strokeStyle = color;
-    ctx.strokeRect(this.positionTopLeft.x / Math.abs(this.scale.x), this.positionTopLeft.y / Math.abs(this.scale.y), this.size.width, this.size.height)
+    ctx.strokeRect(this.positionTopLeft.x / Math.abs(this.scale.x), this.positionTopLeft.y / Math.abs(this.scale.y), this.size.width, this.size.height);
+    this.debugDrawn = true
+  }else {
+    if(this.debugDrawn === true) {
+      this.debugDrawn = false
+    }
   }
 });
 pulse.debug.plugin.subscribe("pulse.Layer", "addNode", pulse.plugin.PluginCallbackTypes.onExit, function(params) {
