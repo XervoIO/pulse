@@ -14,43 +14,45 @@
   <script type="text/javascript" src="lib/jasmine-dom-matchers.js"></script>
 
   <!-- include source files here... -->
-  <script type="text/javascript" src="../src/pulse.js"></script>
-  <script type="text/javascript" src="../src/asset/soundmanager2.js"></script>
-  <script type="text/javascript" src="../src/plugin/plugin.js"></script>
-  <script type="text/javascript" src="../src/plugin/plugincollection.js"></script>
-  <script type="text/javascript" src="../src/error.js"></script>
-  <script type="text/javascript" src="../src/util.js"></script>
-  <script type="text/javascript" src="../src/point.js"></script>
-  <script type="text/javascript" src="../src/support.js"></script>
-  <script type="text/javascript" src="../src/event/eventproperties.js"></script>
-  <script type="text/javascript" src="../src/event/eventmanager.js"></script>
-  <script type="text/javascript" src="../src/node.js"></script>
-  <script type="text/javascript" src="../src/asset/asset.js"></script>
-  <script type="text/javascript" src="../src/asset/textfile.js"></script>
-  <script type="text/javascript" src="../src/asset/texture.js"></script>
-  <script type="text/javascript" src="../src/asset/bitmapfont.js"></script>
-  <script type="text/javascript" src="../src/asset/sound.js"></script>
-  <script type="text/javascript" src="../src/asset/assetbundle.js"></script>
-  <script type="text/javascript" src="../src/asset/assetmanager.js"></script>
-  <script type="text/javascript" src="../src/visual/visual.js"></script>
-  <script type="text/javascript" src="../src/action/action.js"></script>
-  <script type="text/javascript" src="../src/action/animateaction.js"></script>
-  <script type="text/javascript" src="../src/action/moveaction.js"></script>
-  <script type="text/javascript" src="../src/visual/sprite.js"></script>
-  <script type="text/javascript" src="../src/visual/bitmaplabel.js"></script>
-  <script type="text/javascript" src="../src/visual/canvaslabel.js"></script>
-  <script type="text/javascript" src="../src/visual/layer.js"></script>
-  <script type="text/javascript" src="../src/scene.js"></script>
-  <script type="text/javascript" src="../src/scenemanager.js"></script>
-  <script type="text/javascript" src="../src/engine.js"></script>
-  <script type="text/javascript" src="../src/pulse.physics/box2d.js"></script>
-  <script type="text/javascript" src="../src/pulse.physics/sprite.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/pulse.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/soundmanager2.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/plugin/plugin.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/plugin/plugincollection.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/error.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/util.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/point.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/support.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/event/eventproperties.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/event/eventmanager.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/node.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/asset.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/textfile.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/texture.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/bitmapfont.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/sound.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/assetbundle.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/asset/assetmanager.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/visual/visual.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/action/action.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/action/animateaction.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/action/moveaction.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/visual/sprite.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/visual/bitmaplabel.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/visual/canvaslabel.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/visual/layer.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/scene.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/scenemanager.js"></script>
+  <script type="text/javascript" src="../lib/pulse/src/engine.js"></script>
+
+  <!-- Physics Module -->
+  <script type="text/javascript" src="../lib/modules/pulse.physics/src/Box2dWeb-2.1.a.3.min.js"></script>
+  <script type="text/javascript" src="../lib/modules/pulse.physics/src/physics.js"></script>
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/Plugin.js"></script>
   <script type="text/javascript" src="spec/Engine.js"></script>
   <script type="text/javascript" src="spec/Sprite.js"></script>
-  
+  <script type="text/javascript" src="spec/Physics.js"></script>
 
   <script type="text/javascript">
     (function() {
