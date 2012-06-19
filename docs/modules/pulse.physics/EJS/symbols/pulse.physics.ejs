@@ -109,6 +109,16 @@
 					<td class="attributes">&lt;static&gt; &nbsp;</td>
 					<td class="nameDescription">
 						<div class="fixedFont">
+						pulse.physics.<b><a href="../symbols/pulse.physics#.minStepTime">minStepTime</a></b>
+						</div>
+						<div class="description">The minimum amount of milliseconds that the physics world should be stepped.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&lt;static&gt; &nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
 						pulse.physics.<b><a href="../symbols/pulse.physics#.restitution">restitution</a></b>
 						</div>
 						<div class="description">Restitution applied to every new object.</div>
@@ -270,6 +280,28 @@ pulse.physics.world.SetGravity(new Box2D.Common.Math.b2Vec2(x, y)).
 			</div>
 			<div class="description">
 				Enables or disables physics globally for the entire application.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name=".minStepTime"> </a>
+			<div class="fixedFont">&lt;static&gt; 
+
+			
+			<span class="light">pulse.physics.</span><b>minStepTime</b>
+
+			</div>
+			<div class="description">
+				The minimum amount of milliseconds that the physics world should be stepped.
+If the update elapsed time exceeds this value, the physics world will be
+stepped multiple times per update loop.
 			</div>
 
 			

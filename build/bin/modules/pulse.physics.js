@@ -9393,11 +9393,16 @@ pulse.physics.GRAVITY = new Box2D.Common.Math.b2Vec2(0, 9.8);
 pulse.physics.friction = 0.5;
 pulse.physics.density = 1;
 pulse.physics.restitution = 0.3;
+pulse.physics.minStepTime = 16;
 pulse.physics.WORLD = new Box2D.Dynamics.b2World(pulse.physics.GRAVITY, true);
 pulse.physics.plugin = new pulse.plugin.Plugin;
 pulse.physics.plugin.subscribe("pulse.Engine", "update", "onEnter", function(elapsed) {
   if(pulse.physics.isEnabled) {
-    pulse.physics.WORLD.Step(elapsed / 1E3, 8, 3);
+    var steps = Math.ceil(elapsed / pulse.physics.minStepTime);
+    elapsed /= steps;
+    for(var stepIdx = 0;stepIdx < steps;stepIdx++) {
+      pulse.physics.WORLD.Step(elapsed / 1E3, 8, 3)
+    }
     pulse.physics.WORLD.ClearForces()
   }
 });
