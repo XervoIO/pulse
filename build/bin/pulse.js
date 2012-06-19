@@ -3493,6 +3493,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.mainDiv.style.width = this.size.width + "px";
   this._private.mainDiv.style.height = this.size.height + "px";
   this._private.mainDiv.style.overflow = "hidden";
+  this._private.mainDiv.tabIndex = 1;
   this.gameWindow.appendChild(this._private.mainDiv);
   this.scenes = new pulse.SceneManager({gameWindow:this._private.mainDiv});
   this.masterTime = 0;
