@@ -1478,7 +1478,7 @@ pulse.plugin.Plugin = PClass.extend({init:function() {
   this._private.types[objectType][functionName][callbackType].push(pluginCallback);
   return pluginCallback
 }, invoke:function(objectType, functionName, callbackType, sender, params) {
-  if(this._private.types[objectType] != undefined && this._private.types[objectType][functionName] != undefined && this._private.types[objectType][functionName][callbackType] != undefined) {
+  if(typeof this._private.types[objectType] !== pulse.plugin._UNDEFINED && typeof this._private.types[objectType][functionName] !== pulse.plugin._UNDEFINED && typeof this._private.types[objectType][functionName][callbackType] !== pulse.plugin._UNDEFINED) {
     var len = this._private.types[objectType][functionName][callbackType].length;
     for(var i = 0;i < len;i++) {
       this._private.types[objectType][functionName][callbackType][i].callback.apply(sender, params)
@@ -1501,6 +1501,7 @@ pulse.plugin.PluginCallback = PClass.extend({init:function(params) {
   this.callback = params.callback
 }});
 pulse.plugin.PluginCallbackTypes = {onEnter:"onEnter", onExit:"onExit"};
+pulse.plugin._UNDEFINED = "undefined";
 var pulse = pulse || {};
 pulse.plugin = pulse.plugin || {};
 pulse.plugin.PluginCollection = PClass.extend({init:function() {
@@ -3173,7 +3174,14 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
     }
   }
   if(isDirty) {
-    this._private.context.clearRect(0, 0, this.size.width, this.size.height);
+    var engine = this.parent;
+    while(engine !== null && !(engine instanceof pulse.Engine)) {
+      engine = engine.parent
+    }
+    if(engine === null) {
+      return
+    }
+    this._private.context.clearRect(-this.positionTopLeft.x, -this.positionTopLeft.y, engine.size.width, engine.size.height);
     for(var ok = 0;ok < this._private.orderedKeys.length;ok++) {
       var obj = this.objects[this._private.orderedKeys[ok]];
       if(obj instanceof pulse.Visual) {
@@ -3427,10 +3435,12 @@ var pulse = pulse || {};
 pulse.SceneManager = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {gameWindow:document.getElementsByTagName("body")[0]});
   this.scenes = {};
+  this.parent = null;
   this.gameWindow = params.gameWindow
 }, addScene:function(scene) {
   pulse.plugins.invoke("pulse.SceneManager", "addScene", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   if(scene instanceof pulse.Scene && !this.scenes.hasOwnProperty(scene.name)) {
+    scene.parent = this.parent;
     var width = this.gameWindow.clientWidth;
     var height = this.gameWindow.clientHeight;
     if(width === 0 && this.gameWindow.style.width) {
@@ -3523,6 +3533,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   this._private.mainDiv.tabIndex = 1;
   this.gameWindow.appendChild(this._private.mainDiv);
   this.scenes = new pulse.SceneManager({gameWindow:this._private.mainDiv});
+  this.scenes.parent = this;
   this.masterTime = 0;
   this.tick = 100;
   this.loopLogic = null;

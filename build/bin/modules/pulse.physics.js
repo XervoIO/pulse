@@ -843,7 +843,7 @@ Box2D.postDefs = [];
       x = M.s_edgeBO[0];
       if(!(C > v)) {
         var J = 0, T = 0;
-        if(C > 0.98 * t + 0.0010) {
+        if(C > 0.98 * t + 0.001) {
           t = m;
           m = e;
           e = r;
@@ -3148,7 +3148,7 @@ Box2D.postDefs = [];
     Box2D.Common.b2Settings.b2_aabbExtension = 0.1;
     Box2D.Common.b2Settings.b2_aabbMultiplier = 2;
     Box2D.Common.b2Settings.b2_polygonRadius = 2 * G.b2_linearSlop;
-    Box2D.Common.b2Settings.b2_linearSlop = 0.0050;
+    Box2D.Common.b2Settings.b2_linearSlop = 0.005;
     Box2D.Common.b2Settings.b2_angularSlop = 2 / 180 * G.b2_pi;
     Box2D.Common.b2Settings.b2_toiSlop = 8 * G.b2_linearSlop;
     Box2D.Common.b2Settings.b2_maxTOIContactsPerIsland = 32;
