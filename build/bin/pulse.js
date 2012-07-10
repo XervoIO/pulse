@@ -3096,7 +3096,6 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   this.canvas.height = this.size.height;
   this.canvas.style.position = "absolute";
   this.objects = {};
-  this._private.objectArray = [];
   this._private.orderedKeys = [];
   pulse.plugins.invoke("pulse.Layer", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, addNode:function(obj) {
@@ -3107,7 +3106,6 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
     }
     if(!this.objects.hasOwnProperty(obj.name)) {
       this.objects[obj.name] = obj;
-      this._private.objectArray.push(obj);
       obj.parent = this;
       obj.updated = true;
       this._private.orderedKeys = pulse.util.getOrderedKeys(this.objects)
@@ -3144,16 +3142,14 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 }, update:function(elapsed) {
   pulse.plugins.invoke(pulse.Layer.PLUGIN_TYPE, pulse.Layer.PLUGIN_UPDATE, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var reorder = false;
-  var len = this._private.objectArray.length;
-  for(var i = 0;i < len;i++) {
-    var node = this._private.objectArray[i];
-    if(node instanceof pulse.Visual) {
-      if(node.shuffled === true) {
-        node.shuffled = false;
+  for(var s in this.objects) {
+    if(this.objects[s] instanceof pulse.Visual) {
+      if(this.objects[s].shuffled === true) {
+        this.objects[s].shuffled = false;
         reorder = true
       }
-      node.update(elapsed);
-      if(node.updated) {
+      this.objects[s].update(elapsed);
+      if(this.objects[s].updated) {
         this.updated = true
       }
     }
@@ -3166,9 +3162,8 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
 }, draw:function(ctx) {
   pulse.plugins.invoke(pulse.Layer.PLUGIN_TYPE, pulse.Layer.PLUGIN_DRAW, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var isDirty = false;
-  var len = this._private.objectArray.length;
-  for(var i = 0;i < len;i++) {
-    if(this._private.objectArray[i].updated) {
+  for(var s in this.objects) {
+    if(this.objects[s].updated) {
       isDirty = true;
       break
     }
