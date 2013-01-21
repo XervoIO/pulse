@@ -20,6 +20,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/node.js \
 --js=../src/asset/asset.js \
 --js=../src/asset/textfile.js \
+--js=../src/asset/scriptfile.js \
 --js=../src/asset/texture.js \
 --js=../src/asset/bitmapfont.js \
 --js=../src/asset/sound.js \
@@ -53,6 +54,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/node.js \
 --js=../src/asset/asset.js \
 --js=../src/asset/textfile.js \
+--js=../src/asset/scriptfile.js \
 --js=../src/asset/texture.js \
 --js=../src/asset/bitmapfont.js \
 --js=../src/asset/sound.js \

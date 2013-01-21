@@ -1838,6 +1838,35 @@ pulse.TextFile = pulse.Asset.extend({init:function(params) {
   txtFile.send(null)
 }});
 var pulse = pulse || {};
+pulse.ScriptFile = pulse.Asset.extend({init:function(params) {
+  this._super(params);
+  this.scriptTag = document.createElement("script");
+  this.scriptTag.type = "text/javascript";
+  document.getElementsByTagName("head")[0].appendChild(this.scriptTag);
+  if(this.autoLoad) {
+    this.load()
+  }
+}, load:function() {
+  var _self = this;
+  var loadComplete = function() {
+    _self.percentLoaded = 100;
+    _self.complete()
+  };
+  if(this.scriptTag.readyState) {
+    this.scriptTag.onreadystatechange = function() {
+      if(_self.scriptTag.readyState == "loaded" || _self.scriptTag.readyState == "complete") {
+        _self.scriptTag.onreadystatechange = null;
+        loadComplete()
+      }
+    }
+  }else {
+    _self.scriptTag.onload = function() {
+      loadComplete()
+    }
+  }
+  this.scriptTag.src = this.filename
+}});
+var pulse = pulse || {};
 pulse.Texture = pulse.Asset.extend({init:function(params) {
   this._super(params);
   if(params.filename === "") {
@@ -3309,9 +3338,16 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   pulse.plugins.invoke("pulse.Scene", "addLayer", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, removeLayer:function(name) {
   pulse.plugins.invoke("pulse.Scene", "removeLayer", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
-  if(typeof name === "string" && this.layers.hasOwnProperty(name)) {
-    delete this.layers[name];
-    delete this._private.liveLayers[name]
+  var layerName = name;
+  if(name instanceof pulse.Layer) {
+    layerName = name.name
+  }
+  if(typeof layerName === "string" && this.layers.hasOwnProperty(layerName)) {
+    delete this.layers[layerName];
+    var liveCanvas = this._private.liveLayers[layerName].canvas;
+    liveCanvas.parentNode.removeChild(liveCanvas);
+    delete this._private.liveLayers[layerName];
+    this._private.orderedKeys = pulse.util.getOrderedKeys(this.layers)
   }
   pulse.plugins.invoke("pulse.Scene", "removeLayer", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, getLayer:function(name) {

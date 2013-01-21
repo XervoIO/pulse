@@ -13,7 +13,7 @@
 		Holds functionality related to the Pulse Physics module.
 
 		
-			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/lib/modules/pulse.physicssrc\physics.js">/src\physics.js</a>
+			<br /><span class="em">Defined in: </span> <a href="https://github.com/onmodulus/pulse/blob/master/lib/modules/pulse.physicssrc/physics.js">/src/physics.js</a>
 		
 	</p>
 
@@ -220,7 +220,9 @@
 
 			</div>
 			<div class="description">
-				Density applied to every new object.  Density can be changed on a per-object bases by passing a Fixture definition through the constructor params.Changing this property after an object has been created will have no affect.
+				Density applied to every new object.  Density can be changed on a 
+per-object bases by passing a Fixture definition through the constructor params.
+Changing this property after an object has been created will have no affect.
 			</div>
 
 			
@@ -240,7 +242,11 @@
 
 			</div>
 			<div class="description">
-				Factor between Pulse coordinates and Box2D coordinates.  Pulse uses largernumbers (pixels) whereas Box2D works best with much smaller numbers.  Any positioning information supplied/retrieved from Box2D must be adjusted bythis factor.  Numbers supplied to Box2D must be multiplied and numbers retrieved from Box2D must be divided.
+				Factor between Pulse coordinates and Box2D coordinates.  Pulse uses larger
+numbers (pixels) whereas Box2D works best with much smaller numbers.  Any 
+positioning information supplied/retrieved from Box2D must be adjusted by
+this factor.  Numbers supplied to Box2D must be multiplied and numbers 
+retrieved from Box2D must be divided.
 			</div>
 
 			
@@ -260,7 +266,9 @@
 
 			</div>
 			<div class="description">
-				Friction applied to every new object.  Friction can be changed on a per-object bases by passing a Fixture definition through the constructor params.Changing this property after an object has been created will have no affect.
+				Friction applied to every new object.  Friction can be changed on a 
+per-object bases by passing a Fixture definition through the constructor params.
+Changing this property after an object has been created will have no affect.
 			</div>
 
 			
@@ -280,7 +288,8 @@
 
 			</div>
 			<div class="description">
-				The default gravity.  The gravity can be changed at any time by callingpulse.physics.world.SetGravity(new Box2D.Common.Math.b2Vec2(x, y)).
+				The default gravity.  The gravity can be changed at any time by calling
+pulse.physics.world.SetGravity(new Box2D.Common.Math.b2Vec2(x, y)).
 			</div>
 
 			
@@ -320,7 +329,9 @@
 
 			</div>
 			<div class="description">
-				The minimum amount of milliseconds that the physics world should be stepped.If the update elapsed time exceeds this value, the physics world will bestepped multiple times per update loop.
+				The minimum amount of milliseconds that the physics world should be stepped.
+If the update elapsed time exceeds this value, the physics world will be
+stepped multiple times per update loop.
 			</div>
 
 			
@@ -340,7 +351,9 @@
 
 			</div>
 			<div class="description">
-				Restitution applied to every new object.  Restitution can be changed on aper-object bases by passing a Fixture definition through the constructor params.Changing this property after an object has been created will have no affect.
+				Restitution applied to every new object.  Restitution can be changed on a
+per-object bases by passing a Fixture definition through the constructor params.
+Changing this property after an object has been created will have no affect.
 			</div>
 
 			
@@ -360,7 +373,10 @@
 
 			</div>
 			<div class="description">
-				The global physics world.  All visuals will be added to this world bydefault.  Visuals can be added to a custom world by passing it throughthe constructor in the physics params e.g. new Sprite({ physics: { world: customWorld }})
+				The global physics world.  All visuals will be added to this world by
+default.  Visuals can be added to a custom world by passing it through
+the constructor in the physics params e.g. 
+new Sprite({ physics: { world: customWorld }})
 			</div>
 
 			
