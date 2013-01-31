@@ -43,6 +43,7 @@ if(typeof pulse == "undefined") {
 var pulse = pulse || {};
 pulse.readyCallbacks = [];
 pulse.isReady = false;
+pulse.libsrc = "";
 pulse.ready = function(callback) {
   if(document.readyState === "complete") {
     pulse.isReady = true
