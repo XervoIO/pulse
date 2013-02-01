@@ -2159,7 +2159,7 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
       }});
       break;
     case "html5":
-      var audio = document.createElement("audio");
+      var audio = new Audio;
       if(audio.canPlayType) {
         audio.setAttribute("preload", "auto");
         if(!!audio.canPlayType && "" !== audio.canPlayType("audio/mpeg")) {
@@ -2169,15 +2169,9 @@ pulse.Sound = pulse.Asset.extend({init:function(params) {
             audio.setAttribute("src", this.filename + ".ogg")
           }
         }
-        audio.addEventListener("progress", function(e) {
-          if(audio.buffered.end.length > 0) {
-            _self.percentLoaded = audio.buffered.end(0) / audio.duration * 100
-          }else {
-            _self.percentLoaded = 0
-          }
-          if(_self.percentLoaded >= 100) {
-            _self.complete()
-          }
+        audio.addEventListener("canplaythrough", function(e) {
+          _self.percentLoaded = 100;
+          _self.complete()
         });
         audio.addEventListener("ended", function() {
           _self.finished()
