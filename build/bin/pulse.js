@@ -2648,13 +2648,13 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   if(this._private.frames instanceof Array) {
     frame = this._private.frames[this._private.currentFrame]
   }
-  var x = (frame + this._private.offset.x) * this.size.width;
-  var y = this._private.offset.y;
+  var x = frame * this.size.width + this._private.offset.x;
+  var y = 0;
   while(x >= this._private.bounds.width) {
     x = x - this._private.bounds.width;
     y++
   }
-  y = y * this.size.height;
+  y = y * this.size.height + this._private.offset.y;
   if(y >= this._private.bounds.height) {
     y = this._private.bounds.height - this.size.height
   }
