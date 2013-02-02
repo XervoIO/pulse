@@ -2722,7 +2722,7 @@ pulse.MoveAction = pulse.Action.extend({init:function(params) {
   this._private.playTime = 0;
   this._private.startPosition = null;
   this._private.positionDiff = null
-}, start:function(oframe) {
+}, start:function() {
   this._super();
   if(!this.target) {
     return
@@ -2744,14 +2744,13 @@ pulse.MoveAction = pulse.Action.extend({init:function(params) {
     return
   }
   this._private.playTime += elapsed;
-  var newPosition = {};
   if(this._private.playTime > this.duration) {
     this._private.playTime = this.duration;
     this.stop();
     this.complete()
   }
-  newPosition = {x:this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration), y:this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)};
-  this.target.position = newPosition
+  this.target.position.x = this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration);
+  this.target.position.y = this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)
 }});
 var pulse = pulse || {};
 pulse.Sprite = pulse.Visual.extend({init:function(params) {
