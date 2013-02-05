@@ -8,7 +8,7 @@ DOCS_DIR=../../../docs
 # Minified
 java -jar $BUILD_DIR/compiler.jar \
 --js=../src/main.js \
---js=../src/asset/soundmanager2.js \
+--js=../src/asset/audio/audio.flash.js \
 --js=../src/plugin/plugin.js \
 --js=../src/plugin/plugincollection.js \
 --js=../src/error.js \
@@ -23,6 +23,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/asset/scriptfile.js \
 --js=../src/asset/texture.js \
 --js=../src/asset/bitmapfont.js \
+--js=../src/asset/audio/audio.native.js \
 --js=../src/asset/sound.js \
 --js=../src/asset/assetbundle.js \
 --js=../src/asset/assetmanager.js \
@@ -42,7 +43,7 @@ java -jar $BUILD_DIR/compiler.jar \
 # Full
 java -jar $BUILD_DIR/compiler.jar \
 --js=../src/main.js \
---js=../src/asset/soundmanager2.js \
+--js=../src/asset/audio/audio.flash.js \
 --js=../src/plugin/plugin.js \
 --js=../src/plugin/plugincollection.js \
 --js=../src/error.js \
@@ -57,6 +58,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/asset/scriptfile.js \
 --js=../src/asset/texture.js \
 --js=../src/asset/bitmapfont.js \
+--js=../src/asset/audio/audio.native.js \
 --js=../src/asset/sound.js \
 --js=../src/asset/assetbundle.js \
 --js=../src/asset/assetmanager.js \
