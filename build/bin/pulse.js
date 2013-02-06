@@ -2829,12 +2829,14 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   this._private.bounds = params.bounds;
   this._private.frames = params.frames;
   this._private.frameRate = params.frameRate;
+  this._private.loopDelay = params.loopDelay;
   this._private.offset = params.offset;
   this._private.plays = params.plays;
   this._private.currentPlay = 1;
   this._private.currentFrame = 0;
   this._private.start = 0;
-  this._private.playTime = 0
+  this._private.playTime = 0;
+  this._private.delayTime = 0
 }, bounds:function(newBounds) {
   if(typeof newBounds === "undefined" || newBounds === null) {
     return this._private.bounds
@@ -2866,6 +2868,7 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
   this._super();
   this._private.currentPlay = 1;
   this._private.playTime = 1 / this._private.frameRate * 1E3;
+  this._private.delayTime = 0;
   if(oframe) {
     this._private.frameOriginal = oframe
   }else {
@@ -2893,6 +2896,10 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
     return
   }
   var updated = false;
+  if(this._private.currentPlay > 1 && this._private.delayTime <= this._private.loopDelay) {
+    this._private.delayTime += elapsed;
+    return
+  }
   this._private.playTime += elapsed;
   if(this._private.playTime >= 1 / this._private.frameRate * 1E3) {
     this._private.currentFrame++;
@@ -2900,6 +2907,7 @@ pulse.AnimateAction = pulse.Action.extend({init:function(params) {
     if(this._private.currentFrame >= length) {
       this._private.currentFrame = 0;
       this._private.currentPlay++;
+      this._private.delayTime = 0;
       if(this._private.plays > 0 && this._private.currentPlay > this._private.plays) {
         this.stop();
         this.complete();
@@ -2999,7 +3007,9 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   }else {
     newAction = new pulse.AnimateAction({target:this, name:params.name, size:params.size, frames:params.frames, frameRate:params.frameRate, offset:params.offset})
   }
-  newAction.bounds({x:this.texture.width(), y:this.texture.height()});
+  if(newAction.hasOwnProperty("bounds")) {
+    newAction.bounds({x:this.texture.width(), y:this.texture.height()})
+  }
   this.actions[newAction.name] = newAction
 }, inCurrentBounds:function(x, y) {
   x -= this.bounds.x;
