@@ -1889,6 +1889,7 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
     pulse.error.InvalidSource()
   }
   this._private.image = new Image;
+  this.cache = {};
   this._private.imgCanvas = document.createElement("canvas");
   if(this.autoLoad === true) {
     this._private.image.src = this.filename
@@ -1916,12 +1917,18 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   return this._private.image.width * this.scaleX
 }, height:function() {
   return this._private.image.height * this.scaleY
+}, getCacheKey:function(x, y, width, height, rotation, alpha) {
+  return x.toString() + ":" + y.toString() + ":" + width.toString() + ":" + height.toString() + ":" + rotation.toString() + ":" + alpha.toString()
 }, slice:function(x, y, width, height) {
   if(this.percentLoaded !== 100) {
     return null
   }
   if(x === this._private.lastSlice.x && y === this._private.lastSlice.y && width === this._private.lastSlice.width && height === this._private.lastSlice.height && this.rotation === this._private.lastSlice.rotation && this.alpha === this._private.lastSlice.alpha) {
     return this._private.imgCanvas
+  }
+  var cacheKey = this.getCacheKey(x, y, width, height, this.rotation, this.alpha);
+  if(this.cache[cacheKey]) {
+    return this.cache[cacheKey]
   }
   this._private.lastSlice = {x:x, y:y, width:width * this.scaleX, height:height * this.scaleY, rotation:this.rotation, alpha:this.alpha};
   if(x === null || x < 0) {
@@ -1958,6 +1965,9 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
     cWidth = iWidth * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + iHeight * Math.abs(Math.sin(Math.PI * this.rotation / 180));
     cHeight = iHeight * Math.abs(Math.cos(Math.PI * this.rotation / 180)) + iWidth * Math.abs(Math.sin(Math.PI * this.rotation / 180))
   }
+  var canvas = document.createElement("canvas");
+  this.cache[cacheKey] = canvas;
+  this._private.imgCanvas = canvas;
   this._private.imgCanvas.width = cWidth;
   this._private.imgCanvas.height = cHeight;
   var ctx = this._private.imgCanvas.getContext("2d");
@@ -2957,11 +2967,8 @@ pulse.MoveAction = pulse.Action.extend({init:function(params) {
   this._private.playTime += elapsed;
   if(this._private.playTime > this.duration) {
     this._private.playTime = this.duration;
-    this.target.position.x = this.position.x;
-    this.target.position.y = this.position.y;
     this.stop();
-    this.complete();
-    return
+    this.complete()
   }
   this.target.position.x = this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration);
   this.target.position.y = this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)
