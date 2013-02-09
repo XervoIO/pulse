@@ -1779,8 +1779,11 @@ pulse.EventManager = PClass.extend({init:function(params) {
     }
   }
   if(this.hasEvent(type)) {
-    for(var e = 0;e < this._private.events[type].length;e++) {
-      this._private.events[type][e](evt)
+    var len = this._private.events[type].length;
+    for(var e = 0;e < len;e++) {
+      if(this._private.events[type].hasOwnProperty(e)) {
+        this._private.events[type][e](evt)
+      }
     }
   }
   if(typeof this.masterCallback === "function") {
