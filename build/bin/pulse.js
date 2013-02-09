@@ -2967,8 +2967,11 @@ pulse.MoveAction = pulse.Action.extend({init:function(params) {
   this._private.playTime += elapsed;
   if(this._private.playTime > this.duration) {
     this._private.playTime = this.duration;
+    this.target.position.x = this.position.x;
+    this.target.position.y = this.position.y;
     this.stop();
-    this.complete()
+    this.complete();
+    return
   }
   this.target.position.x = this.easingFunction(this._private.playTime, this._private.startPosition.x, this._private.positionDiff.x, this.duration);
   this.target.position.y = this.easingFunction(this._private.playTime, this._private.startPosition.y, this._private.positionDiff.y, this.duration)
