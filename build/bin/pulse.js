@@ -3947,6 +3947,9 @@ pulse.Engine = PClass.extend({init:function(params) {
     evtProps.parent.y = evtProps.window.y;
     evtProps.position.x = x;
     evtProps.position.y = y;
+    if(evtProps.cancelled) {
+      break
+    }
     if(eventInsideGame) {
       if(rawEvt.preventDefault && isTouch === false) {
         rawEvt.preventDefault()
