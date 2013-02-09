@@ -3947,7 +3947,7 @@ pulse.Engine = PClass.extend({init:function(params) {
     evtProps.parent.y = evtProps.window.y;
     evtProps.position.x = x;
     evtProps.position.y = y;
-    if(evtProps.cancelled) {
+    if(evtProps.canceled) {
       break
     }
     if(eventInsideGame) {
