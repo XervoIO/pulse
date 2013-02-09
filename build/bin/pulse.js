@@ -1710,7 +1710,10 @@ pulse.ready(function() {
 });
 var pulse = pulse || {};
 pulse.Event = PClass.extend({init:function() {
-  this.sender = null
+  this.sender = null;
+  this.canceled = false
+}, stopPropagation:function() {
+  this.canceled = true
 }});
 pulse.MouseEvent = pulse.Event.extend({init:function() {
   this._super();
@@ -3456,6 +3459,9 @@ pulse.Layer = pulse.Visual.extend({init:function(params) {
   var sprites = this.getNodesByType(pulse.Sprite);
   var sprite;
   for(var s in sprites) {
+    if(evt.canceled) {
+      break
+    }
     sprite = sprites[s];
     if(!sprite.visible) {
       continue
@@ -3660,6 +3666,9 @@ pulse.Scene = pulse.Node.extend({init:function(params) {
   this.events.bind(type, callback)
 }, eventsCallback:function(type, evt) {
   for(var l in this.layers) {
+    if(evt.canceled) {
+      break
+    }
     if(pulse.events[type] === "mouse" || pulse.events[type] === "touch") {
       var lBounds = this.layers[l].bounds;
       evt.parent.x = evt.position.x;
