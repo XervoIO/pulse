@@ -3092,7 +3092,7 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
     this.textureUpdated = true;
     this.updated = true
   }
-  if(this.texture.percentLoaded === 100) {
+  if(this.texture && this.texture.percentLoaded && this.texture.percentLoaded === 100) {
     if(this.size === null) {
       this.size = {}
     }
@@ -3115,7 +3115,7 @@ pulse.Sprite = pulse.Visual.extend({init:function(params) {
   pulse.plugins.invoke(pulse.Sprite.PLUGIN_TYPE, pulse.Sprite.PLUGIN_UPDATE, pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function(ctx) {
   pulse.plugins.invoke(pulse.Sprite.PLUGIN_TYPE, pulse.Sprite.PLUGIN_DRAW, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
-  if(this.texture.percentLoaded < 100 || this.size.width === 0 || this.size.height === 0) {
+  if(this.texture === null || this.texture.percentLoaded < 100 || this.size.width === 0 || this.size.height === 0) {
     return
   }
   if(this.textureUpdated) {
