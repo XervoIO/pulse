@@ -2175,7 +2175,11 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
   for(var i = 0;i < text.length;i++) {
     charcode = text.charCodeAt(i);
     character = this.characters[charcode];
-    width += character.xAdvance
+    if(i !== text.length - 1) {
+      width += character.xAdvance
+    }else {
+      width += character.size.width
+    }
   }
   return width
 }});
