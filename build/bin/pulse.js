@@ -1677,9 +1677,20 @@ pulse.util.easeOutCubic = function(t, b, c, d) {
   t--;
   return c * (t * t * t + 1) + b
 };
+pulse.util._eventsSupported = {};
 pulse.util.eventSupported = function(type) {
-  var el = document.createElement("canvas");
-  return"on" + type in el
+  if(!pulse.util._eventsSupported.hasOwnProperty(type)) {
+    var el = document.createElement("div");
+    pulse.util._eventsSupported[type] = "on" + type in el
+  }
+  return pulse.util._eventsSupported[type]
+};
+pulse.util._isMobile = null;
+pulse.util.isMobile = function() {
+  if(pulse.util._isMobile === null) {
+    pulse.util._isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
+  }
+  return pulse.util._isMobile
 };
 var pulse = pulse || {};
 pulse.Point = PClass.extend({init:function(params) {
@@ -1794,11 +1805,11 @@ pulse.EventManager = PClass.extend({init:function(params) {
     }
   }
 }, checkType:function(type) {
-  if(type === "click" && pulse.util.eventSupported("touchend")) {
+  if(type === "click" && pulse.util.eventSupported("touchend") && pulse.util.isMobile()) {
     return"touchclick"
   }
   for(var t in pulse.eventtranslations) {
-    if(type === pulse.eventtranslations[t] && pulse.util.eventSupported(t)) {
+    if(type === pulse.eventtranslations[t] && pulse.util.eventSupported(t) && pulse.util.isMobile()) {
       return t
     }
   }
@@ -2028,13 +2039,20 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
   if(pathParts.indexOf("?") !== -1) {
     pathParts = pathParts.substr(0, pathParts.indexOf("?"))
   }
+  if(this.filename.indexOf("http") === 0) {
+    pathParts = ""
+  }
   pathParts = pathParts.split("/");
   var fileParts = this.filename.split("/");
   pathParts.pop();
   fileParts.pop();
   this.fileDirectory = pathParts.join("/");
   if(fileParts.length > 0) {
-    this.fileDirectory += "/" + fileParts.join("/")
+    if(this.fileDirectory !== "") {
+      this.fileDirectory += "/" + fileParts.join("/")
+    }else {
+      this.fileDirectory = fileParts.join("/")
+    }
   }
   if(this.autoLoad) {
     this.load()
