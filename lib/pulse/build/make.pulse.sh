@@ -18,6 +18,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/event/eventproperties.js \
 --js=../src/event/eventmanager.js \
 --js=../src/node.js \
+--js=../src/asset/ajaxloader.js \
 --js=../src/asset/asset.js \
 --js=../src/asset/textfile.js \
 --js=../src/asset/scriptfile.js \
@@ -53,6 +54,7 @@ java -jar $BUILD_DIR/compiler.jar \
 --js=../src/event/eventproperties.js \
 --js=../src/event/eventmanager.js \
 --js=../src/node.js \
+--js=../src/asset/ajaxloader.js \
 --js=../src/asset/asset.js \
 --js=../src/asset/textfile.js \
 --js=../src/asset/scriptfile.js \
