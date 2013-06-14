@@ -74,7 +74,12 @@ if(document.readyState !== "complete") {
   }
 }
 pulse.DEBUG = false;
-/*
+if(!Date.now) {
+  Date.now = function now() {
+    return+new Date
+  }
+}
+;/*
 
 
  SoundManager 2: JavaScript Sound for the Web
@@ -1551,14 +1556,8 @@ pulse.util.find = function(collection, name) {
   return found
 };
 pulse.util.intersects = function(box1, box2) {
-  var points = [{x:box1.x, y:box1.y}, {x:box1.x, y:box1.y + box1.height}, {x:box1.x + box1.width, y:box1.y}, {x:box1.x + box1.width, y:box1.y + box1.height}];
-  for(var p = 0;p < 4;p++) {
-    var pnt = points[p];
-    if(pnt.x < box2.width && pnt.x > box2.x) {
-      if(pnt.y < box2.height && pnt.y > box2.y) {
-        return true
-      }
-    }
+  if(box1.x < box2.x + box2.width && box1.x + box1.width > box2.x && box1.y < box2.y + box2.height && box1.y + box1.height > box2.y) {
+    return true
   }
   return false
 };
@@ -1691,6 +1690,36 @@ pulse.util.isMobile = function() {
     pulse.util._isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
   }
   return pulse.util._isMobile
+};
+pulse.util.drawPerfTest = function(t, size) {
+  if(typeof size !== "object") {
+    size = {width:300, height:300}
+  }
+  if(!size.hasOwnProperty("width")) {
+    size.width = 300
+  }
+  if(!size.hasOwnProperty("height")) {
+    size.height = 300
+  }
+  var drawPerSecond, period, startTime = new Date, runs = 0, cnv = document.createElement("canvas"), ctx = cnv.getContext("2d");
+  cnv.width = size.width;
+  cnv.height = size.height;
+  do {
+    cnv.width = cnv.width;
+    ctx.beginPath();
+    ctx.rect(0, 0, cnv.width, cnv.height);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.lineWidth = 7;
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+    runs++;
+    totalTime = new Date - startTime
+  }while(totalTime < t);
+  totalTime /= 1E3;
+  period = totalTime / runs;
+  drawPerSecond = 1 / period;
+  return drawPerSecond
 };
 var pulse = pulse || {};
 pulse.Point = PClass.extend({init:function(params) {
@@ -1925,6 +1954,7 @@ pulse.Asset = pulse.Node.extend({init:function(params) {
 }, load:function() {
 }, complete:function() {
   this.events.raiseEvent("complete", {asset:this})
+}, dispose:function() {
 }});
 var pulse = pulse || {};
 pulse.TextFile = pulse.Asset.extend({init:function(params) {
@@ -2095,6 +2125,8 @@ pulse.Texture = pulse.Asset.extend({init:function(params) {
   }
   ctx.restore();
   return this._private.imgCanvas
+}, dispose:function() {
+  this._private.image.src = "data:image/gif;base64," + "R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 }});
 var pulse = pulse || {};
 pulse.BitmapChar = PClass.extend({init:function() {
@@ -2228,6 +2260,9 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
     }
   }
   var _self = this;
+  if(this.image !== null) {
+    this.dispose()
+  }
   this.image = new Image;
   this.image.src = this.fileDirectory + "/" + this.imageFilename;
   this.image.onload = function() {
@@ -2256,6 +2291,8 @@ pulse.BitmapFont = pulse.Asset.extend({init:function(params) {
     }
   }
   return width
+}, dispose:function() {
+  this.image.src = "data:image/gif;base64," + "R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
 }});
 var pulse = pulse || {};
 pulse.Audio = pulse.Audio || {};
@@ -2665,6 +2702,14 @@ pulse.AssetBundle = PClass.extend({init:function(params) {
   for(var a = 0;a < this.assets.length;a++) {
     this.assets[a].load()
   }
+}, unload:function() {
+  for(var a = 0;a < this.assets.length;a++) {
+    this.assets[a].events.unbind("complete");
+    this.assets[a].dispose()
+  }
+  this.assets.length = 0;
+  this.percentLoaded = 0;
+  this._private.numberLoaded = 0
 }, updatePercent:function() {
   if(this.assets.length === 0) {
     this.percentLoaded = 100
@@ -2696,6 +2741,16 @@ pulse.AssetManager = PClass.extend({init:function() {
       _self.events.raiseEvent("assetLoaded", evt)
     });
     this.bundles[name] = bundle
+  }
+}, removeBundle:function(bundle) {
+  if(bundle instanceof pulse.AssetBundle) {
+    bundle.events.unbind("progressChanged");
+    bundle.events.unbind("assetLoaded");
+    for(var name in this.bundles) {
+      if(this.bundles[name] === bundle) {
+        delete this.bundles[name]
+      }
+    }
   }
 }, addAsset:function(asset, bundle) {
   if(asset instanceof pulse.Asset) {
@@ -3843,7 +3898,8 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   params = pulse.util.checkParams(params, {gameWindow:document.getElementsByTagName("body")[0]});
   this.scenes = {};
   this.parent = null;
-  this.gameWindow = params.gameWindow
+  this.gameWindow = params.gameWindow;
+  this.activeScenes = null
 }, addScene:function(scene) {
   pulse.plugins.invoke("pulse.SceneManager", "addScene", pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   if(scene instanceof pulse.Scene && !this.scenes.hasOwnProperty(scene.name)) {
@@ -3851,10 +3907,10 @@ pulse.SceneManager = PClass.extend({init:function(params) {
     var width = this.gameWindow.clientWidth;
     var height = this.gameWindow.clientHeight;
     if(width === 0 && this.gameWindow.style.width) {
-      width = parseInt(this.gameWindow.style.width)
+      width = parseInt(this.gameWindow.style.width, 10)
     }
     if(height === 0 && this.gameWindow.style.height) {
-      height = parseInt(this.gameWindow.style.height)
+      height = parseInt(this.gameWindow.style.height, 10)
     }
     scene.setDefaultSize(width, height);
     this.scenes[scene.name] = scene
@@ -3866,6 +3922,7 @@ pulse.SceneManager = PClass.extend({init:function(params) {
     name = name.name
   }
   if(this.scenes.hasOwnProperty(name)) {
+    this.deactivateScene(this.scenes[name]);
     delete this.scenes[name]
   }
   pulse.plugins.invoke("pulse.SceneManager", "removeScene", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
@@ -3875,7 +3932,8 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   }
   if(this.scenes.hasOwnProperty(name)) {
     this.scenes[name].active = true;
-    this.gameWindow.appendChild(this.scenes[name].getSceneContainer())
+    this.gameWindow.appendChild(this.scenes[name].getSceneContainer());
+    this.activeScenes = null
   }
 }, deactivateScene:function(name) {
   if(name instanceof pulse.Scene) {
@@ -3883,22 +3941,26 @@ pulse.SceneManager = PClass.extend({init:function(params) {
   }
   if(this.scenes.hasOwnProperty(name) && this.scenes[name].active) {
     this.scenes[name].active = false;
-    this.gameWindow.removeChild(this.scenes[name].getSceneContainer())
+    this.gameWindow.removeChild(this.scenes[name].getSceneContainer());
+    this.activeScenes = null
   }
 }, getScene:function(name) {
   return this.scenes[name]
 }, getScenes:function(active) {
-  var scenes = [];
+  if(this.activeScenes) {
+    return this.activeScenes
+  }
+  this.activeScenes = [];
   for(var s in this.scenes) {
     if(active === true) {
       if(this.scenes[s].active === true) {
-        scenes.push(this.scenes[s])
+        this.activeScenes.push(this.scenes[s])
       }
     }else {
-      scenes.push(this.scenes[s])
+      this.activeScenes.push(this.scenes[s])
     }
   }
-  return scenes
+  return this.activeScenes
 }});
 var pulse = pulse || {};
 pulse.Engine = PClass.extend({init:function(params) {
@@ -3944,7 +4006,7 @@ pulse.Engine = PClass.extend({init:function(params) {
   this.masterTime = 0;
   this.tick = 100;
   this.loopLogic = null;
-  this._private.currentTime = (new Date).getTime();
+  this._private.currentTime = Date.now();
   this._private.lastTime = this._private.currentTime;
   pulse.plugins.invoke("pulse.Engine", "init", pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, getWindowOffset:function() {
@@ -3977,18 +4039,17 @@ pulse.Engine = PClass.extend({init:function(params) {
   if(loop) {
     this.loopLogic = loop
   }
-  requestAnimFrame(function() {
+  this._private.loopFunc = function() {
     eng.loop.call(eng)
-  }, this._private.mainDiv)
+  };
+  requestAnimFrame(this._private.loopFunc, this._private.mainDiv)
 }, loop:function(autoContinue) {
   pulse.plugins.invoke(pulse.Engine.PLUGIN_TYPE, pulse.Engine.PLUGIN_LOOP, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var eng = this;
   if(autoContinue || autoContinue === undefined) {
-    requestAnimFrame(function() {
-      eng.loop.call(eng)
-    }, this._private.mainDiv)
+    requestAnimFrame(this._private.loopFunc, this._private.mainDiv)
   }
-  this._private.currentTime = (new Date).getTime();
+  this._private.currentTime = Date.now();
   var elapsed = this._private.currentTime - this._private.lastTime;
   if(elapsed < this.tick) {
     return
@@ -4013,14 +4074,14 @@ pulse.Engine = PClass.extend({init:function(params) {
 }, update:function(elapsed) {
   pulse.plugins.invoke(pulse.Engine.PLUGIN_TYPE, pulse.Engine.PLUGIN_UPDATE, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var activeScenes = this.scenes.getScenes(true);
-  for(var s = 0;s < activeScenes.length;s++) {
+  for(var s = 0, len = activeScenes.length;s < len;s++) {
     activeScenes[s].update(elapsed)
   }
   pulse.plugins.invoke(pulse.Engine.PLUGIN_TYPE, pulse.Engine.PLUGIN_UPDATE, pulse.plugin.PluginCallbackTypes.onExit, this, arguments)
 }, draw:function() {
   pulse.plugins.invoke(pulse.Engine.PLUGIN_TYPE, pulse.Engine.PLUGIN_DRAW, pulse.plugin.PluginCallbackTypes.onEnter, this, arguments);
   var activeScenes = this.scenes.getScenes(true);
-  for(var s = 0;s < activeScenes.length;s++) {
+  for(var s = 0, len = activeScenes.length;s < len;s++) {
     activeScenes[s].draw()
   }
   pulse.plugins.invoke(pulse.Engine.PLUGIN_TYPE, pulse.Engine.PLUGIN_DRAW, pulse.plugin.PluginCallbackTypes.onExit, this, arguments)

@@ -101,6 +101,16 @@ higher.</div>
 				<tr>
 					<td class="attributes">&lt;static&gt; &nbsp;</td>
 					<td class="nameDescription">
+						<div class="fixedFont">pulse.util.<b><a href="../symbols/pulse.util#.drawPerfTest">drawPerfTest</a></b>(t, size)
+						</div>
+						<div class="description">A performance test that calculates the number of canvas draws that can be
+done in a specific amount of time.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&lt;static&gt; &nbsp;</td>
+					<td class="nameDescription">
 						<div class="fixedFont">pulse.util.<b><a href="../symbols/pulse.util#.easeInOutQuad">easeInOutQuad</a></b>(t, b, c, d)
 						</div>
 						<div class="description">Easing function to ease numeric progression using quadratic in and out
@@ -446,6 +456,56 @@ higher.
 					<dt class="heading">Returns:</dt>
 					
 						<dd><span class="light fixedFont">{number}</span> 0 if they are equal, 1 if objA is higher and -1 if objB is</dd>
+					
+					</dl>
+				
+				
+				
+
+			<hr />
+		
+			<a name=".drawPerfTest"> </a>
+			<div class="fixedFont">&lt;static&gt; 
+
+			<span class="light">{Number}</span>
+			<span class="light">pulse.util.</span><b>drawPerfTest</b>(t, size)
+
+			</div>
+			<div class="description">
+				A performance test that calculates the number of canvas draws that can be
+done in a specific amount of time. The test draws a solid rectangle filling a
+canvas element.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{Number}</span> <b>t</b>
+							
+						</dt>
+						<dd>the length of the test to run in milliseconds</dd>
+					
+						<dt>
+							<span class="light fixedFont">{Object}</span> <b>size</b>
+							<i>Optional</i>
+						</dt>
+						<dd>the size of the canvas to test, defaults to
+  { width: 300, height: 300 }</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+					<dl class="detailList">
+					<dt class="heading">Returns:</dt>
+					
+						<dd><span class="light fixedFont">{Number}</span> the number of draws done per second</dd>
 					
 					</dl>
 				
