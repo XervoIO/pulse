@@ -110,7 +110,7 @@ types.</div>
 				<tr>
 					<td class="attributes">&nbsp;</td>
 					<td class="nameDescription">
-						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#bind">bind</a></b>(type, callback)
+						<div class="fixedFont"><b><a href="../symbols/pulse.EventManager#bind">bind</a></b>(type, callback, owner)
 						</div>
 						<div class="description">Binds a callback to an event type.</div>
 					</td>
@@ -304,7 +304,7 @@ called for any events raised.
 			<div class="fixedFont">
 
 			
-			<b>bind</b>(type, callback)
+			<b>bind</b>(type, callback, owner)
 
 			</div>
 			<div class="description">
@@ -328,6 +328,12 @@ called for any events raised.
 							
 						</dt>
 						<dd>the function callback to bind to the event</dd>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>owner</b>
+							<i>Optional</i>
+						</dt>
+						<dd>the owner of the scope when the callback is called</dd>
 					
 					</dl>
 				
